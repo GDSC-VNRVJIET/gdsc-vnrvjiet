@@ -28,6 +28,10 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Analysis from "./pages/leaderboard/analysis";
 import Blog from "./pages/Events/Blog";
 import AddBlog from "./pages/Events/admin/AddBlog";
+import Contactus from "./pages/Contactus";
+import TermsAndConditions from "./pages/TermsandConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import RefundPolicy from "./pages/RefundPolicy";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -105,6 +109,10 @@ function Root() {
         <Route path="/solution-challenge" element={<SolutionChallenge />} />
         <Route path="/community-guidelines" element={<CommunityGuidelines />} />
         <Route path="/add-blog" element={<AddBlog />} />
+        <Route path="/contact-us" element={<Contactus />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route
           path="/leaderboard"
           element={

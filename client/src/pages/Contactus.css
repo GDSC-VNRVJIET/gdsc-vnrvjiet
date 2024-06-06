@@ -1,0 +1,41 @@
+.contact-input {
+    width: 100% !important;
+    outline: none !important;
+    border: 2px solid #fafafa !important;
+    background: none !important;
+    padding: 0.6rem 1.2rem !important;
+    color: #fff !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    letter-spacing: 0.5px !important;
+    border-radius: 25px !important;
+  }
+  
+  .contact-btn{
+  width: 100%;
+    outline: none;
+    border: 2px solid #fafafa;
+    background: white !important;
+    padding: 0.6rem 1.2rem;
+    color: green;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    border-radius: 25px;
+  }
+  .contact-input::placeholder{
+  color:white;
+  }
+  .contact-input:focus{
+    background: #fafafa !important;
+    color: black !important;
+  }
+  .contact-input:focus::placeholder{
+  color:green;
+  
+  }
+  .contact-btn:hover{
+  border: 2px solid #fafafa;
+  background: none !important;
+  color: #fff;
+  }

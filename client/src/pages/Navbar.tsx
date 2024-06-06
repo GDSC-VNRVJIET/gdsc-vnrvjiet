@@ -7,6 +7,7 @@ function Navbar() {
   
   const [isOpen, setIsOpen] = useState(false);
   const [dropOpen, setDropOpen] = useState(false);
+  const [policiesOpen, setPoliciesOpen] = useState(false);
   const [showSignout, setShowSignout] = useState(false);
   const userObjGDSC = localStorage.getItem("userObjGDSC");
   const userId = userObjGDSC ? JSON.parse(userObjGDSC).userId : null;
@@ -133,6 +134,42 @@ function Navbar() {
           <button className="pl-5">
             <a href="/Forum">Forum</a>
           </button>
+          <button className="pl-5">
+            <a href="/contact-us">Contact Us</a>
+          </button>
+          <div className="relative">
+            <button
+              className="pl-5 pt-2"
+              onClick={() => setPoliciesOpen(!policiesOpen)}
+            >
+              Policies <span className="text-lg">&#9662;</span>
+            </button>
+            {policiesOpen && (
+              <div
+                className="absolute right-0 mt-4 w-max bg-white shadow-lg border-2 border-grey"
+                onBlur={() => setPoliciesOpen(false)}
+              >
+                <a
+                  href="/terms-and-conditions"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Terms and Conditions
+                </a>
+                <a
+                  href="/privacy-policy"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Privacy Policy
+                </a>
+                <a
+                  href="/refund-policy"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Refund Policy
+                </a>
+              </div>
+            )}
+          </div>  
           {userObjGDSC == null ? (
             <button className="pl-5 relative">
               <a href="/login">Login</a>

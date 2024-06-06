@@ -10,6 +10,9 @@ const crypto = require("crypto")
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const QRCode = require('qrcode');
+const cors = require("cors");
+const creds = require("../config");
+
 
 mailApp.use(exp.urlencoded({ extended:false }));
 mailApp.use(bodyParser.json({ limit: '10mb', extended: true }))
@@ -54,6 +57,129 @@ const sendEmail = async (email, orderId, paymentId , rollno) => {
     }
   }
   
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    auth: {
+    user: creds.USER,
+    pass: creds.PASS
+  }
+})
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Server is ready to take messages');
+  }
+});
+
+  const sendContactEmail = async (name, email, message) => {
+    const content = `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <style>
+      .header {
+        text-align: center;
+        padding: 10px;
+        background-color: #f2f2f2;
+      }
+      .content {
+        padding: 20px;
+        font-family: Arial, sans-serif;
+      }
+      .logo {
+        height: 50px;
+      }
+      .footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img src="https://upload.wikimedia.org/wikipedia/en/4/47/VNRVJIETLogo.png" class="logo" alt="VNR Logo">
+      <img src="https://cdn-images-1.medium.com/max/578/1*vZVM7utCuRiZ6-HDsNeYUA@2x.png" class="logo" alt="GDSC Logo">
+    </div>
+    <div class="content">
+      <p>You have received a new message from the contact form. Here are the details:</p>
+      <ul>
+        <li><strong>Name:</strong> ${name}</li>
+        <li><strong>Email:</strong> ${email}</li>
+        <li><strong>Message:</strong> ${message}</li>
+      </ul>
+    </div>
+    <div class="footer">
+      <p>&copy; 2024 VNR & GDSC. All rights reserved.</p>
+    </div>
+  </body>
+  </html>
+  `;
+  
+    const mail = {
+      from: name,
+      to: "laksita2004@gmail.com", // GDSC email
+      subject: "New Message from Contact Form",
+      html: content,
+    };
+  
+    await transporter.sendMail(mail);
+  
+    await transporter.sendMail({
+      from: "<your email address>",
+      to: email,
+      subject: "Submission was successful",
+      html: `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <style>
+      .header, .footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #f2f2f2;
+      }
+      .content {
+        padding: 20px;
+        font-family: Arial, sans-serif;
+      }
+      .logo {
+        height: 50px;
+      }
+      .footer-logo {
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img src="https://upload.wikimedia.org/wikipedia/en/4/47/VNRVJIETLogo.png" class="logo" alt="VNR Logo">
+      <img src="https://cdn-images-1.medium.com/max/578/1*vZVM7utCuRiZ6-HDsNeYUA@2x.png" class="logo" alt="GDSC Logo">
+    </div>
+    <div class="content">
+      <p>Dear ${name},</p>
+      <p>Thank you for getting in touch with us. We have received your submission successfully. Below are the details of your submission:</p>
+      <ul>
+        <li><strong>Name:</strong> ${name}</li>
+        <li><strong>Email:</strong> ${email}</li>
+        <li><strong>Message:</strong> ${message}</li>
+      </ul>
+      <p>We appreciate your interest and will get back to you shortly.</p>
+      <p>Best regards,<br>The VNR & GDSC Team</p>
+    </div>
+    <div class="footer">
+      <p>&copy; 2024 VNR & GDSC. All rights reserved.</p>
+    </div>
+  </body>
+  </html>
+  `,
+    });
+  };
+
+  
   mailApp.post("/order", async(req, res) => {
     try {
         const razorpay = new Razorpay({
@@ -94,5 +220,14 @@ const sendEmail = async (email, orderId, paymentId , rollno) => {
     await sendEmail(email, razorpay_order_id, razorpay_payment_id , rollno);
     res.json({msg: " Transaction is legit!", orderId: razorpay_order_id,paymentId: razorpay_payment_id});
   })
+
+  mailApp.post("/contactus", expressAsyncHandler(async (req, res) => {
+    //console.log("worked");
+    const { firstName, lastName, email, msg } = req.body;
+    const name = `${firstName} ${lastName}`;
+    await sendContactEmail(name, email, msg);
+    res.json({ status: "success" });
+  }));
+  mailApp.use(cors())
 
 module.exports = mailApp;
