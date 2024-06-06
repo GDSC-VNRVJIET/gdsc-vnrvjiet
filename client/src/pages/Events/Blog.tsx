@@ -1,6 +1,6 @@
 import React ,{useState} from 'react'
-import AddBlog from './admin/AddBlog';
-import ShowBlogs from './user/ShowBlogs';
+import AdminShowBlogs from './admin/AdminShowBlogs';
+import UserShowBlogs from './user/UserShowBlogs';
 function Blog() {
 
     const [user, setUser] = useState(
@@ -10,9 +10,9 @@ function Blog() {
       );
 
       if (user && user.role === "admin") {
-        return <AddBlog />;
+        return <AdminShowBlogs/>;
       } else {
-        return <ShowBlogs />;
+        return <UserShowBlogs />;
       }
 }
 

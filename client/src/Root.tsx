@@ -27,6 +27,7 @@ import deniedAccess from "./images/deniedaccess.png";
 import ForgotPassword from "./pages/ForgotPassword";
 import Analysis from "./pages/leaderboard/analysis";
 import Blog from "./pages/Events/Blog";
+import AddBlog from "./pages/Events/admin/AddBlog";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -103,6 +104,7 @@ function Root() {
         <Route path="/leads" element={<Leads />} />
         <Route path="/solution-challenge" element={<SolutionChallenge />} />
         <Route path="/community-guidelines" element={<CommunityGuidelines />} />
+        <Route path="/add-blog" element={<AddBlog />} />
         <Route
           path="/leaderboard"
           element={
