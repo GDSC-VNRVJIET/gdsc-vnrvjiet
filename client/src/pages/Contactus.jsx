@@ -3,12 +3,11 @@ import axios from 'axios';
 import { CiLocationOn } from "react-icons/ci";
 import { GoMail } from "react-icons/go";
 import { useForm } from 'react-hook-form';
-import { Modal, Button } from 'react-bootstrap';
-import './Contactus.css';
+import './Contactus.css'
 
 const API_URL = process.env.REACT_APP_BACK_URL;
 
-function Contactus() {
+const Contactus = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [showSuccess, setShowSuccess] = useState(false);
   const [showFailure, setShowFailure] = useState(false);
@@ -30,6 +29,34 @@ function Contactus() {
     }
   };
 
+  const TailwindModal = ({ show, handleClose, title, body }) => {
+    return (
+      <>
+        {show && (
+          <div className="fixed z-10 inset-0 overflow-y-auto">
+            <div className="flex items-center justify-center min-h-screen">
+              <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+              </div>
+              <div className="relative bg-white rounded-lg p-8 max-w-md w-full">
+                <h3 className="text-xl font-bold mb-4">{title}</h3>
+                <p>{body}</p>
+                <div className="mt-4 flex justify-end">
+                  <button
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+                    onClick={handleClose}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  };
+
   return (
     <div className='container w-75 h-75 my-auto bg-light'>
       <div className='p-1'></div>
@@ -46,7 +73,7 @@ function Contactus() {
               <br />
               <li className='d-flex'>
                 <GoMail className='me-1 mt-2' />
-                <p> gdscvnrvjiet@gmail.com</p>
+                <p> gdsc.vnrvjiet@gmail.com</p>
               </li>
             </ul>
             <br />
@@ -89,32 +116,22 @@ function Contactus() {
       </div>
 
       {/* Success Modal */}
-      <Modal show={showSuccess} onHide={handleCloseSuccess} >
-        <Modal.Header closeButton>
-          <Modal.Title>Message Sent</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Your message has been sent successfully!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="success" onClick={handleCloseSuccess}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
+      <TailwindModal 
+        show={showSuccess} 
+        handleClose={handleCloseSuccess} 
+        title="Message Sent"
+        body="Your message has been sent successfully!"
+      />
+      
       {/* Failure Modal */}
-      <Modal show={showFailure} onHide={handleCloseFailure}>
-        <Modal.Header closeButton>
-          <Modal.Title>Message Failed</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>There was an error sending your message. Please try again later.</Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleCloseFailure}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <TailwindModal 
+        show={showFailure} 
+        handleClose={handleCloseFailure} 
+        title="Message Failed"
+        body="There was an error sending your message. Please try again later."
+      />
     </div>
   );
-}
+};
 
 export default Contactus;

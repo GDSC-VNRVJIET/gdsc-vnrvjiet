@@ -121,7 +121,7 @@ transporter.verify((error, success) => {
   
     const mail = {
       from: name,
-      to: "laksita2004@gmail.com", // GDSC email
+      to: "gdsc.vnrvjiet@gmail.com", // GDSC email
       subject: "New Message from Contact Form",
       html: content,
     };
