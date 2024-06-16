@@ -1,6 +1,7 @@
 import React from 'react';
 
-const RefundPolicy = () => {
+// RefundPolicy component written in TypeScript
+const RefundPolicy: React.FC = () => {
   return (
     <div className="container mx-auto my-16 p-8">
       <h1 className="text-4xl font-bold mb-8">Refund Policy for GDSC VNRVJIET</h1>

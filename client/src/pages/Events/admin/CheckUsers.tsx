@@ -62,7 +62,7 @@ function CheckUsers() {
           <p className="block text-center mt-4"> {eventname} </p>
         </div>
       ) : (
-        <div id="reader"></div>
+        <div id="reader" style={{marginTop:"200px"}}></div>
       )}
     </div>
   );

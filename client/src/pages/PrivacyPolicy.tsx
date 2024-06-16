@@ -1,6 +1,7 @@
 import React from 'react';
 
-const PrivacyPolicy = () => {
+// PrivacyPolicy component written in TypeScript
+const PrivacyPolicy: React.FC = () => {
   return (
     <div className="container mx-auto my-16 p-8">
       <h1 className="text-4xl font-bold mb-8">Privacy Policy for GDSC VNRVJIET</h1>

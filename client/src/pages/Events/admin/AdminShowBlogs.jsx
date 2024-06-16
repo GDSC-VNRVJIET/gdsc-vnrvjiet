@@ -6,21 +6,17 @@ function AdminShowBlogs() {
   const [showModal, setShowModal] = useState(false);
   const [blogTitle, setBlogTitle] = useState('');
   const [blogImage, setBlogImage] = useState(null);
-  const [avatar, setAvatar] = useState("");  
+  const [base64Image1, setBase64Image1] = useState('');
+  const [base64Image2, setBase64Image2] = useState('');
   const navigate = useNavigate();
-  const [thumbnail, setThumbnail] = useState('');
-  const [blogs, setBlogs] = useState([]); // Ensure this is an empty array initially
+  const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/blogs');
-        console.log('Fetched blogs:', response.data); // Log the response
-        if (Array.isArray(response.data)) {
-          setBlogs(response.data);
-        } else {
-          console.error('Fetched data is not an array:', response.data);
-        }
+        const response = await axios.get(`${process.env.REACT_APP_BACK_URL}/addblog/getblogs`);
+        console.log('Fetched blogs:', response.payload); 
+        setBlogs(response.data.payload);
       } catch (error) {
         console.error('Error fetching blogs:', error);
       }
@@ -35,8 +31,32 @@ function AdminShowBlogs() {
   const handleAddBlog = () => {
     console.log('Blog Title:', blogTitle);
     console.log('Blog Image:', blogImage);
-    navigate('/add-blog'); 
+    navigate('/add-blog',{state:[base64Image1,base64Image2]}); 
     setShowModal(false);
+  };
+  const handleImageChange1 = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setBase64Image1(reader.result);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+  const handleImageChange2 = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setBase64Image2(reader.result);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -60,7 +80,7 @@ function AdminShowBlogs() {
                   className="hidden"
                   type="file"
                   id="authorimages"
-                  onChange={(e) => setAvatar(e.target.files[0])}
+                  onChange={ handleImageChange2}
                   accept="image/png, image/jpg, image/jpeg"
                 />
               </label>
@@ -71,7 +91,7 @@ function AdminShowBlogs() {
                   type="file"
                   id="images"
                   accept="image/png, image/jpg, image/jpeg"
-                  onChange={(e) => setThumbnail(e.target.files[0])}
+                  onChange={ handleImageChange1}
                 />
               </label>
               <button type="button" onClick={handleAddBlog} className="bg-blue-600 text-white py-2 rounded cursor-pointer hover:bg-blue-700">
@@ -87,7 +107,7 @@ function AdminShowBlogs() {
           {blogs.length > 0 ? (
             blogs.map((blog, index) => (
               <div key={index} className="border border-gray-300 rounded-lg shadow-md overflow-hidden w-72 transition-transform transform hover:-translate-y-2">
-                <img src={`http://localhost:4000/uploads/${blog.thumbnail}`} alt={blog.title} className="w-full h-40 object-cover"/>
+                <img src={blog.avatar} alt={blog.title} className="w-full h-40 object-cover"/>
                 <div className="p-4">
                   <h3 className="font-bold text-lg mb-2">{blog.title}</h3>
                   <p className="text-sm text-gray-600 mb-2">{blog.date}</p>
