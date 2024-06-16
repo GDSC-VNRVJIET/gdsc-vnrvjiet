@@ -185,7 +185,6 @@ transporter.verify((error, success) => {
         const razorpay = new Razorpay({
             key_id: process.env.RAZORPAY_KEY_ID,
             key_secret: process.env.RAZORPAY_SECRET
-
         })
         if(!req.body) {
             return res.status(400).send("Bad Request");
