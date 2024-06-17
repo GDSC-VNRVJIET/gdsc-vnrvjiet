@@ -173,6 +173,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
           <FacebookShareButton className="mr-2" url={window.location.href}>
             <FacebookIcon round></FacebookIcon>
           </FacebookShareButton>
+          
           <LinkedinShareButton url={window.location.href}>
             <LinkedinIcon round></LinkedinIcon>
           </LinkedinShareButton>
