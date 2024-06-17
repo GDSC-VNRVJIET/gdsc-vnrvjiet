@@ -90,7 +90,7 @@ const AddBlog: React.FC = () => {
     formData.append("authorname", authorname);
     formData.append("thumbnail", state[1]);
     formData.append("avatar", state[0]);
-    createBlog(formData as any, false); // 'as any' to handle FormData type mismatch
+    createBlog(formData as any, false);
   };
 
   const onSave: SubmitHandler<FormData> = (data) => {
@@ -102,7 +102,7 @@ const AddBlog: React.FC = () => {
     formData.append("thumbnail", state[1]);
     formData.append("avatar", state[0]);
     console.log(formData);
-    createBlog(formData as any, true); // 'as any' to handle FormData type mismatch
+    createBlog(formData as any, true);
   };
 
   return (

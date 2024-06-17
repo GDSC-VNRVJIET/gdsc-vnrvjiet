@@ -20,7 +20,6 @@ blogApp.post('/add',expressAsyncHandler(async(req,res)=>{
 blogApp.get('/getblogs',expressAsyncHandler(async(req,res)=>{
     let blogCollection = await getDBObj("blogCollectionObject");
     let blogs = await  blogCollection.find().toArray();
-    // console.log(blogs);
     res.send({ message: "Blogs", payload: blogs });
 }))
 

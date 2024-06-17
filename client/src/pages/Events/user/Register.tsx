@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation , useParams } from "react-router-dom";
+import {WhatsappShareButton,WhatsappIcon,LinkedinIcon,LinkedinShareButton,TwitterIcon,TwitterShareButton,FacebookIcon,FacebookShareButton} from 'react-share'
+import { FaShare } from "react-icons/fa";
 import axios from "axios";
 import {
   createEvent,
@@ -8,10 +10,6 @@ import {
   getEventById,
   getUpcomingEvents,
 } from "../../../Apis/events";
-// import { BrowserRouter as Router } from "react-router-dom";
-// interface UserState {
-//   email: string;
-// }
 interface Event {
   eventId: number;
   name: string;
@@ -19,7 +17,6 @@ interface Event {
   endDate: string;
   venue: string;
   description: string;
-  // image: string;
 }
 
 interface FormData {
@@ -36,6 +33,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
 
   const [states, setStates] = useState<Event>();
   const [events, setEvents] = useState<Event[]>([]);
+  const [modal,setModal] = useState<Boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,9 +73,6 @@ const PaymentGatewayRazorpay: React.FC = () => {
     formData.event = states.name;
     paymentHandler(formData);
   };
-  // const [user, setUser] = useState<UserState>({
-  //   email: "",
-  // });
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -90,16 +85,10 @@ const PaymentGatewayRazorpay: React.FC = () => {
     };
   }, []);
 
-  // const handleInputs = (e: React.ChangeEvent<HTMLInputElement>): void => {
-  //   const { name, value } = e.target;
-  //   setUser({ ...user, [name]: value });
-  // };
-
   const paymentHandler = async (
-    // event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     formdata : FormData
   ) => {
-    // event.preventDefault();
+
 
     const amount = 500.0;
     const currency = "INR";
@@ -169,8 +158,35 @@ const PaymentGatewayRazorpay: React.FC = () => {
   return (
     <>
     
+    {
+      modal && <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md relative">
+        <span className="absolute top-4 right-4 text-2xl cursor-pointer text-gray-500 hover:text-gray-900" onClick={() => setModal(false)}>&times;</span>
+        <h2 className="text-center text-xl mb-4">Share through</h2>
+        <div className="flex justify-center">
+          <WhatsappShareButton className="mr-2" url={window.location.href}>
+            <WhatsappIcon round></WhatsappIcon>
+          </WhatsappShareButton>
+          <TwitterShareButton className="mr-2" url={window.location.href}>
+            <TwitterIcon round></TwitterIcon>
+          </TwitterShareButton>
+          <FacebookShareButton className="mr-2" url={window.location.href}>
+            <FacebookIcon round></FacebookIcon>
+          </FacebookShareButton>
+          <LinkedinShareButton url={window.location.href}>
+            <LinkedinIcon round></LinkedinIcon>
+          </LinkedinShareButton>
+        </div>
+        </div>
+      </div>
+    }
       <div className="product ml-3 mt-3">
-        <h1 className="text-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">{states?.name}</h1>
+        <div className="flex justify-center">
+        <h1 className="ml-3 mt-0 text-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">{states?.name}</h1>
+        <div className="ml-3 mt-3 sm:mt-4 md:mt-8 lg:mt-16">
+        <button className="flex text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-3 py-2.5 text-center me-2 mb-2" onClick={()=>setModal(true)}>Share <FaShare className="mt-1 ml-2"/> </button>
+        </div>
+        </div>
         <p className="text-center mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-blue-400">{states?.description}</p>
         <form  onSubmit={handleSubmit(handleFormSubmit)} className="max-w-sm mx-auto">
         <div className="w-72 mt-3 ml-3">
@@ -255,13 +271,13 @@ const PaymentGatewayRazorpay: React.FC = () => {
         <div className="mt-3 ml-3">
           <button
             className="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-            // onClick={handleBothEvents}
             type="submit"
           >
             Pay Now
           </button>
         </div>
         </form>
+        
       </div>
     </>
   );
