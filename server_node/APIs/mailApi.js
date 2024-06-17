@@ -183,8 +183,8 @@ transporter.verify((error, success) => {
   mailApp.post("/order", async(req, res) => {
     try {
         const razorpay = new Razorpay({
-            key_id: "rzp_test_8KuaEG6YpYMWAp",
-            key_secret: "q8KEghPtcWSoLFVyz586NDRz"
+            key_id: process.env.RAZORPAY_KEY_ID,
+            key_secret: process.env.RAZORPAY_SECRET
         })
         if(!req.body) {
             return res.status(400).send("Bad Request");
