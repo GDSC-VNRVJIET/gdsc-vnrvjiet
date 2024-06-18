@@ -7,6 +7,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import CheckUsers from "./pages/Events/admin/CheckUsers";
+import SingleBlog from "./pages/Events/admin/SingleBlog";
 import Register from "./pages/Events/user/Register";
 import Signup from "./pages/SignIn";
 import Home from "./pages/Home";
@@ -113,6 +114,7 @@ function Root() {
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/blogs/single-blog" element={<SingleBlog />} />
         <Route
           path="/leaderboard"
           element={
