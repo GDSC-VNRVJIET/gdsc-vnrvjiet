@@ -59,14 +59,28 @@ function AdminShowBlogs() {
 
   return (
     <div>
-      <div className="text-right mb-4">
-        <button
+      <div className="bg-gray-100 p-4 flex items-center justify-between">
+            
+            <div className="flex items-center ml-6">
+                <div className="bg-white rounded-lg p-2 shadow-md flex items-center justify-center h-20">
+                    <img src="https://cdn-images-1.medium.com/max/578/1*vZVM7utCuRiZ6-HDsNeYUA@2x.png" alt="GDSC Logo" className="h-10 w-15" />
+                </div>
+                <div className="ml-4">
+                    
+                    <h1 className="text-xl font-bold">Blogs</h1>
+                    
+                    <p className="text-gray-600">Blogs by GDSC achievers</p>
+                </div>
+            </div>
+            
+            <button
           className="bg-blue-600 text-white py-2 px-4 rounded cursor-pointer"
           onClick={() => setShowModal(true)}
         >
           + Add Blog
         </button>
-      </div>
+        </div>
+      
 
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
