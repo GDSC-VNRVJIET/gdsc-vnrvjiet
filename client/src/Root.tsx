@@ -7,6 +7,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import CheckUsers from "./pages/Events/admin/CheckUsers";
+import Dashboard from "./pages/Events/admin/Dashboard";
 import SingleBlog from "./pages/Events/admin/SingleBlog";
 import Register from "./pages/Events/user/Register";
 import Signup from "./pages/SignIn";
@@ -137,6 +138,7 @@ function Root() {
           path="/checkuser"
           element={<ProtectedRoute element={<CheckUsers />} path="/checkuser" />}
         />
+        <Route path="/dashboard" element={<Dashboard />}></Route>
       </Routes>
     </Router>
   );
