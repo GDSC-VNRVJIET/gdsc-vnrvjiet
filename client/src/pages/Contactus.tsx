@@ -78,6 +78,7 @@ const Contactus: React.FC = () => {
       <div className='rounded-lg'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 mt-5'>
           <div className='p-5 rounded bg-white mt-5'>
+            
             <h3 className='text-3xl'>Contact us</h3>
             <p className='text-xl'>Our Details</p>
             <ul className='list-none'>
