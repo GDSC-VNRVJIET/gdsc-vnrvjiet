@@ -48,51 +48,52 @@ const Dashboard = () => {
       .catch((err) => console.log(err));
   };
 
-  // Ensure to always return a valid JSX element
   if (!user || user.role !== "admin") {
     return (
-      <div className="container">
-        <h2 className="text-red-600 text-center">Access Denied</h2>
-        <p className="text-center">You do not have permission to view this page.</p>
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="text-center">
+          <h2 className="text-red-600 text-3xl font-bold">Access Denied</h2>
+          <p className="text-gray-700 mt-4">You do not have permission to view this page.</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container">
-      <h1 className="heading">Team Details Dashboard</h1>
-      <form className="form" onSubmit={handleSubmit}>
-        <div>
+    <div className="container mx-auto p-6">
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">Team Details Dashboard</h1>
+      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+        <div className="mb-4">
           <input
             type="text"
             placeholder="Name of the team"
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
             required
-            className="input"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div>
+        <div className="mb-4">
           <input
             type="text"
             placeholder="Team Leader Name"
             value={teamLeader}
             onChange={(e) => setTeamLeader(e.target.value)}
             required
-            className="input"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div>
+        <div className="mb-4">
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="input"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div>
+        <div className="mb-4">
           <input
             type="tel"
             pattern="[0-9]{10}"
@@ -100,23 +101,23 @@ const Dashboard = () => {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             required
-            className="input"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div>
+        <div className="mb-4">
           <input
             type="text"
             placeholder="Jury"
             value={jury}
             onChange={(e) => setJury(e.target.value)}
-            className="input"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div>
+        <div className="mb-4">
           <select
             value={timeslot}
             onChange={(e) => setTimeslot(e.target.value)}
-            className="input"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
             <option value="">Select timeslot</option>
             <option value="slot1">10:00 AM - 11:00 AM</option>
@@ -126,17 +127,22 @@ const Dashboard = () => {
             <option value="slot5">3:00 PM - 4:00 PM</option>
           </select>
         </div>
-        <div>
+        <div className="mb-4">
           <input
             type="text"
             placeholder="Room Number"
             value={roomNumber}
             onChange={(e) => setRoomNumber(e.target.value)}
-            className="input"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div>
-          <button type="submit" className="button">Submit</button>
+        <div className="flex items-center justify-between">
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>

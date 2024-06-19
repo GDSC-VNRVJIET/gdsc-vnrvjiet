@@ -65,6 +65,7 @@ const AddBlog: React.FC = () => {
       );
 
       if (response.data === "Sent successfully") {
+        window.alert("Blog Added Successfully");
         navigate("/");
       }
       console.log(response);
@@ -101,7 +102,6 @@ const AddBlog: React.FC = () => {
           className=""
         >
           <ReactQuill
-
             modules={modules}
             formats={formats}
             style={{ height: '600px' }}
