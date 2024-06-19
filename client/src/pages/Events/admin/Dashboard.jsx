@@ -7,9 +7,13 @@ const Dashboard = () => {
   const [teamLeader, setTeamLeader] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [jury, setjury] = useState("");
-  const[timeslot, settimeslot] = useState("");
-  const [roomnumber, setroomnumber] = useState("");
+  const [jury, setJury] = useState("");
+  const [timeslot, setTimeslot] = useState("");
+  const [roomNumber, setRoomNumber] = useState("");
+
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("userObjGDSC") || "null")
+  );
 
   useEffect(() => {
     axios
@@ -17,11 +21,6 @@ const Dashboard = () => {
       .then((res) => setTeam(res.data))
       .catch((err) => console.log(err));
   }, []);
-
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("userObjGDSC") || "null")
-  );
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +32,7 @@ const Dashboard = () => {
         phone,
         jury,
         timeslot,
-        roomnumber,
+        roomNumber,
       })
       .then((res) => {
         setTeam([...team, res.data]);
@@ -41,14 +40,24 @@ const Dashboard = () => {
         setTeamLeader("");
         setEmail("");
         setPhone("");
-        setjury("");
-        settimeslot("");
-        setroomnumber("");
+        setJury("");
+        setTimeslot("");
+        setRoomNumber("");
         alert("Team added successfully!");
       })
       .catch((err) => console.log(err));
   };
-  if (user && user.role === "admin")
+
+  // Ensure to always return a valid JSX element
+  if (!user || user.role !== "admin") {
+    return (
+      <div className="container">
+        <h2 className="text-red-600 text-center">Access Denied</h2>
+        <p className="text-center">You do not have permission to view this page.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <h1 className="heading">Team Details Dashboard</h1>
@@ -60,6 +69,7 @@ const Dashboard = () => {
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
             required
+            className="input"
           />
         </div>
         <div>
@@ -69,6 +79,7 @@ const Dashboard = () => {
             value={teamLeader}
             onChange={(e) => setTeamLeader(e.target.value)}
             required
+            className="input"
           />
         </div>
         <div>
@@ -78,6 +89,7 @@ const Dashboard = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            className="input"
           />
         </div>
         <div>
@@ -88,20 +100,23 @@ const Dashboard = () => {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             required
+            className="input"
           />
         </div>
         <div>
-        <input
+          <input
             type="text"
             placeholder="Jury"
             value={jury}
-            onChange={(e) => setjury(e.target.value)}
+            onChange={(e) => setJury(e.target.value)}
+            className="input"
           />
         </div>
         <div>
           <select
             value={timeslot}
-            onChange={(e) => settimeslot(e.target.value)}
+            onChange={(e) => setTimeslot(e.target.value)}
+            className="input"
           >
             <option value="">Select timeslot</option>
             <option value="slot1">10:00 AM - 11:00 AM</option>
@@ -115,12 +130,13 @@ const Dashboard = () => {
           <input
             type="text"
             placeholder="Room Number"
-            value={roomnumber}
-            onChange={(e) => setroomnumber(e.target.value)}
+            value={roomNumber}
+            onChange={(e) => setRoomNumber(e.target.value)}
+            className="input"
           />
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit" className="button">Submit</button>
         </div>
       </form>
     </div>
