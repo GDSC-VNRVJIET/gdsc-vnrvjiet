@@ -58,7 +58,7 @@ const Contactus: React.FC = () => {
                 <p>{body}</p>
                 <div className="mt-4 flex justify-end">
                   <button
-                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+                    className="bg-green-500 hover text-white font-bold py-2 px-4 rounded"
                     onClick={handleClose}
                   >
                     Close
@@ -73,7 +73,7 @@ const Contactus: React.FC = () => {
   };
 
   return (
-    <div className='container mx-auto my-auto bg-light'>
+    <div style={{marginTop:"100px",marginLeft:"8px",marginRight:"8px"}} className='container mx-auto my-auto bg-light'>
       <div className='p-1'></div>
       <div className='rounded-lg'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 mt-5'>
@@ -101,13 +101,13 @@ const Contactus: React.FC = () => {
               </a>
             </div>
           </div>
-          <div className='p-5 mt-5 bg-green-600 rounded'>
+          <div className='p-5 mt-5 rounded bg-blue-600'>
             <form onSubmit={handleSubmit(sendQuery)}>
               <div className='flex space-x-3'>
                 <div className="form-group mt-4 mb-1">
                   <input 
                     type="text" 
-                    className="form-control w-full outline-none border-2 border-gray-200 bg-green-600 p-2 text-black font-medium text-sm placeholder-light-black rounded-full focus:bg-gray-200 focus:text-black" 
+                    className="form-control w-full outline-none border-2 border-gray-200 p-2 text-black font-medium text-sm placeholder-light-black rounded-full focus:bg-gray-200 focus:text-black" 
                     id="firstName" 
                     placeholder="First Name" 
                     {...register('firstName', { required: true })} 
@@ -117,7 +117,7 @@ const Contactus: React.FC = () => {
                 <div className="form-group mt-4 mb-1">
                   <input 
                     type="text" 
-                    className="form-control w-full outline-none border-2 border-gray-200 bg-green-600 p-2 text-black font-medium text-sm placeholder-light-black rounded-full focus:bg-gray-200 focus:text-black" 
+                    className="form-control w-full outline-none border-2 border-gray-200 p-2 text-black font-medium text-sm placeholder-light-black rounded-full focus:bg-gray-200 focus:text-black" 
                     id="lastName" 
                     placeholder="Last Name" 
                     {...register('lastName', { required: true })} 
@@ -128,7 +128,7 @@ const Contactus: React.FC = () => {
               <div className="form-group mt-4 mb-1">
                 <input 
                   type="email" 
-                  className="form-control w-full outline-none border-2 border-gray-200 bg-green-600 p-2 text-black font-medium text-sm placeholder-light-black rounded-full focus:bg-gray-200 focus:text-black" 
+                  className="form-control w-full outline-none border-2 border-gray-200 p-2 text-black font-medium text-sm placeholder-light-black rounded-full focus:bg-gray-200 focus:text-black" 
                   id="email" 
                   placeholder="Enter email" 
                   {...register('email', { required: true })} 
@@ -137,12 +137,12 @@ const Contactus: React.FC = () => {
               </div>
               <div className="form-group mt-4 mb-1">
                 <textarea 
-                  className="form-control w-full outline-none border-2 border-gray-200 bg-green-600 p-2 text-black font-medium text-sm placeholder-light-black focus:bg-gray-200 focus:text-black" 
+                  className="form-control w-full outline-none border-2 border-gray-200 p-2 text-black font-medium text-sm placeholder-light-black focus:bg-gray-200 focus:text-black" 
                   id="exampleFormControlTextarea1" 
                   rows={5}
                   placeholder='Your Message' 
-                  {...register('msg', { required: true, minLength: 5 })}>
-                </textarea>
+                  {...register('msg', { required: true, minLength: 5 })}
+                ></textarea>
                 {errors.msg?.type === 'required' && <p className='text-red-600'>Cannot be blank</p>}
                 {errors.msg?.type === 'minLength' && <p className='text-yellow-500'>At least 5 characters</p>}
               </div>
