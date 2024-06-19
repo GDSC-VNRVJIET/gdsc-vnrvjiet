@@ -65,8 +65,10 @@ const AddBlog: React.FC = () => {
       );
 
       if (response.data === "Sent successfully") {
-        navigate("/");
+        
       }
+      alert("Blog added successfully");
+      navigate("/blogs");
       console.log(response);
     } catch (error) {
       console.log(error);
