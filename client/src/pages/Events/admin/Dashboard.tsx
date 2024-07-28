@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Dashboard = () => {
-  const [team, setTeam] = useState([]);
-  const [teamName, setTeamName] = useState("");
-  const [teamLeader, setTeamLeader] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [jury, setJury] = useState("");
-  const [timeslot, setTimeslot] = useState("");
-  const [roomNumber, setRoomNumber] = useState("");
+interface Team {
+  teamName: string;
+  teamLeader: string;
+  email: string;
+  phone: string;
+  jury: string;
+  timeslot: string;
+  roomNumber: string;
+}
 
-  const [user, setUser] = useState(
+interface User {
+  role: string;
+  [key: string]: any;
+}
+
+const Dashboard: React.FC = () => {
+  const [team, setTeam] = useState<Team[]>([]);
+  const [teamName, setTeamName] = useState<string>("");
+  const [teamLeader, setTeamLeader] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [jury, setJury] = useState<string>("");
+  const [timeslot, setTimeslot] = useState<string>("");
+  const [roomNumber, setRoomNumber] = useState<string>("");
+
+  const [user, setUser] = useState<User | null>(
     JSON.parse(localStorage.getItem("userObjGDSC") || "null")
   );
 
@@ -22,7 +37,7 @@ const Dashboard = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
       .post("http://localhost:3000/post", {

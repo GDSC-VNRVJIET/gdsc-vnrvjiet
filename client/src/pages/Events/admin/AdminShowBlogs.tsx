@@ -2,14 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function AdminShowBlogs() {
-  const [showModal, setShowModal] = useState(false);
-  const [blogTitle, setBlogTitle] = useState("");
-  const [base64Image1, setBase64Image1] = useState("");
-  const [categories, setCategories] = useState([""]);
+interface Blog {
+  thumbnail: string;
+  title: string;
+  description: string;
+  category: string;
+  [key: string]: any; // In case there are other fields not mentioned
+}
+
+const AdminShowBlogs: React.FC = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [blogTitle, setBlogTitle] = useState<string>("");
+  const [base64Image1, setBase64Image1] = useState<string>("");
+  const [categories, setCategories] = useState<string[]>([""]);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   const navigate = useNavigate();
-  const [blogs, setBlogs] = useState([]);
-  const [smalldesc, setSmalldesc] = useState([]);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -35,7 +42,8 @@ function AdminShowBlogs() {
     fetchBlogs();
   }, []);
 
-  const handleTitleChange = (e) => setBlogTitle(e.target.value);
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setBlogTitle(e.target.value);
 
   const handleAddBlog = () => {
     console.log("Blog Title:", blogTitle);
@@ -43,12 +51,12 @@ function AdminShowBlogs() {
     setShowModal(false);
   };
 
-  const handleImageChange1 = (e) => {
-    const file = e.target.files[0];
+  const handleImageChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      setBase64Image1(reader.result);
+      setBase64Image1(reader.result as string);
     };
 
     if (file) {
@@ -56,7 +64,7 @@ function AdminShowBlogs() {
     }
   };
 
-  const handleCategoryChange = (index, value) => {
+  const handleCategoryChange = (index: number, value: string) => {
     const newCategories = [...categories];
     newCategories[index] = value;
     setCategories(newCategories);
@@ -68,7 +76,7 @@ function AdminShowBlogs() {
     }
   };
 
-  const removeCategoryField = (index) => {
+  const removeCategoryField = (index: number) => {
     const newCategories = categories.filter((_, i) => i !== index);
     setCategories(newCategories);
   };
@@ -121,9 +129,7 @@ function AdminShowBlogs() {
                   <input
                     type="text"
                     value={category}
-                    onChange={(e) =>
-                      handleCategoryChange(index, e.target.value)
-                    }
+                    onChange={(e) => handleCategoryChange(index, e.target.value)}
                     placeholder="Category"
                     className="w-full p-2 border border-gray-300 rounded"
                   />
@@ -174,24 +180,20 @@ function AdminShowBlogs() {
                 key={index}
                 onClick={() => navigate("/blogs/single-blog", { state: blog })}
               >
-                <li class="relative bg-white flex flex-col justify-between border rounded shadow-md hover:shadow-primary-400">
-                 
-                    <div class="relative w-full aspect-video">
-                      <img
+                <li className="relative bg-white flex flex-col justify-between border rounded shadow-md hover:shadow-primary-400">
+                  <div className="relative w-full aspect-video">
+                    <img
+                      className="rounded object-cover mx-auto w-full"
+                      src={blog.thumbnail}
                       style={{height:"19rem"}}
-                        className="rounded object-cover mx-auto"
-                        src={blog.thumbnail}
-                        alt={blog.title}
-                        loading="lazy"
-                      />
-
-                      <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-b from-gray-800 to-gray-500 text-white">
-                        <h2 class="text-xl font-semibold">{blog.title}</h2>
-                      </div>
+                      alt={blog.title}
+                      loading="lazy"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-b from-gray-800 to-gray-500 text-white">
+                      <h2 className="text-xl font-semibold">{blog.title}</h2>
                     </div>
-                 
-
-                  <div class="flex flex-col justify-beetween gap-3 px-4 py-2">
+                  </div>
+                  <div className="flex flex-col justify-between gap-3 px-4 py-2">
                     {blog.description.length < 140 ? (
                       <p
                         className="text-gray-600 two-lines"
@@ -205,11 +207,11 @@ function AdminShowBlogs() {
                         }}
                       ></p>
                     )}
-
-                    <ul class="flex flex-wrap items-center justify-start text-sm gap-2">
+                    <ul className="flex flex-wrap items-center justify-start text-sm gap-2">
                       {blog.category.split(",").map((cat, idx) => (
                         <li
-                          class="flex items-center cursor-pointer gap-0.5 bg-gray-100 text-black px-2 py-0.5 rounded-full"
+                          key={idx}
+                          className="flex items-center cursor-pointer gap-0.5 bg-gray-100 text-black px-2 py-0.5 rounded-full"
                         >
                           <span>{cat.trim()}</span>
                         </li>
@@ -226,6 +228,6 @@ function AdminShowBlogs() {
       </div>
     </div>
   );
-}
+};
 
 export default AdminShowBlogs;
