@@ -138,9 +138,9 @@ const PaymentGatewayRazorpay: React.FC = () => {
           }
       },
       prefill: {
-        name: "Jakka Vignesh",
-        email: "jakkavignesh2002@gmail.com",
-        contact: "9502844394",
+        name: "Sri Manikanta",
+        email: "srimanikantabattu04@gmail.com",
+        contact: "7075659983",
       },
       notes: {
         address: "Razorpay Corporate Office",

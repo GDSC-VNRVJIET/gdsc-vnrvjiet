@@ -41,7 +41,7 @@ function Hero() {
         <div className="mt-6">
           <SocialIcon
             url="https://www.linkedin.com/company/gdsc-vnrvjiet/"
-            style={{ height: 30, width: 30, marginRight: "8px" }}
+            style={{ height: 30, width: 30, marginRight: "8px" , zIndex:"0" }}
           />
           <SocialIcon
             url="https://www.instagram.com/gdsc.vnrvjiet/"

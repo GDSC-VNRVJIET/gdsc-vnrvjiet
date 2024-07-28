@@ -28,14 +28,14 @@ const sendEmail = async (email, orderId, paymentId , rollno) => {
             port: 587,
             secure: false,
             auth: {
-              user: "b15productpricetracker@gmail.com",
-              pass: "nucvokqwzbgmkogp",
+              user: process.env.USER,
+              pass: process.env.PASS,
             },
         });
         const mailOptions = {
             from: {
                 name: "GDSC WORKSHOP REGISTERED",
-                address: "b15productpricetracker@gmail.com"
+                address: process.env.USER
             },
             to: `${email}`,
             subject: "Order Confirmation",
@@ -53,7 +53,7 @@ const sendEmail = async (email, orderId, paymentId , rollno) => {
         console.log('Email sent successfully');
     }
     catch (err) {
-        console.error('Error sending email:', error);
+        console.error('Error sending email:', err);
     }
   }
   
@@ -62,8 +62,8 @@ const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
     auth: {
-    user: creds.USER,
-    pass: creds.PASS
+    user: process.env.USER,
+    pass: process.env.PASS
   }
 })
 transporter.verify((error, success) => {
