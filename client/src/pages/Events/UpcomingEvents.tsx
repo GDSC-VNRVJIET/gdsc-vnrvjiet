@@ -10,7 +10,7 @@ function UpcomingEvents() {
       role: string;
     } | null
   );
-
+  console.log(user)
   // useEffect(() => {
   //   const fetchUser = async () => {
   //     if (!user) {

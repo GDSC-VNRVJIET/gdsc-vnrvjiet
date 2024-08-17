@@ -11,13 +11,18 @@ interface FormData {
   description: string;
   category: string;
   thumbnail: string;
+  show: boolean;
 }
-
 const AddBlog: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [description, setDescription] = useState<string>('');
-
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("userObjGDSC") || "null") as {
+      userId: number,
+      role : string
+    } | null
+  );
   const {
     register,
     handleSubmit,
@@ -53,18 +58,14 @@ const AddBlog: React.FC = () => {
     ],
   };
 
-  const createBlog = async (formData: FormData, saved: boolean = false) => {
-    formData.description = description;
-    
-    console.log(formData);
-
+  const createBlog = async (formData: FormData) => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BACK_URL}/addblog/add`,
         formData,
       );
 
-      if (response.data === "Sent successfully") {
+      if (response.data.status === "Sent successfully") {
         window.alert("Blog Added Successfully");
         navigate("/");
       }
@@ -80,17 +81,9 @@ const AddBlog: React.FC = () => {
     formData.append("description", description);
     formData.append("category", state[2]);
     formData.append("thumbnail", state[0]);
-    createBlog(formData as any, false);
-  };
-
-  const onSave: SubmitHandler<FormData> = (data) => {
-    const formData = new FormData();
-    formData.append("title", state[1]);
-    formData.append("description", description);
-    formData.append("category", state[2]);
-    formData.append("thumbnail", state[0]);
+    formData.append("show", false.toString());
     console.log(formData);
-    createBlog(formData as any, true);
+    createBlog(formData as any);
   };
 
   return (
@@ -112,13 +105,6 @@ const AddBlog: React.FC = () => {
             <button
               type="submit"
               className="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 mt-5"
-            >
-              Post
-            </button>
-            <button
-              type="button"
-              className="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 mt-5"
-              onClick={handleSubmit(onSave)}
             >
               Save
             </button>

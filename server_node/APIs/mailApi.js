@@ -1,7 +1,9 @@
 const exp = require("express");
 const mailApp = exp.Router();
+const getDBObj = require("./DBConnection");
 const expressAsyncHandler = require("express-async-handler");
 require("dotenv").config();
+const { getUserByMail, resetPw } = require("./userApi");
 
 mailApp.use(exp.json());
 
@@ -57,6 +59,38 @@ const sendEmail = async (email, orderId, paymentId , rollno) => {
     }
   }
   
+function sendGiveAccessEmail(email) {
+    try {
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: false,
+            auth: {
+              user: process.env.USER,
+              pass: process.env.PASS,
+            },
+        });
+        const mailOptions = {
+            from: {
+                name: "ACCESS GRANTED",
+                address: process.env.USER
+            },
+            to: `${email}`,
+            subject: "Access Granted",
+            html: `
+                <h1>Access Granted</h1>
+                <p>Now you can add blogs in our website</p>
+                <p>Best regards</p>
+            ` 
+        } 
+        transporter.sendMail(mailOptions);
+        console.log('Email sent successfully');
+    } 
+    catch (err) {
+        console.error('Error sending email:', err);
+    }
+}
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -229,5 +263,42 @@ transporter.verify((error, success) => {
     res.json({ status: "success" });
   }));
   mailApp.use(cors())
+
+// code for to send a mail
+mailApp.post("/give-access-mail", expressAsyncHandler(async (req, res) => {
+  const { mail } = req.body;
+
+  try {
+      // Log the incoming email for reference
+      console.log("Processing access grant for:", mail);
+
+      // Send the access email
+      sendGiveAccessEmail(mail);
+
+      // Get the user collection object from the database
+      let userCollectionObject = await getDBObj("userCollectionObject");
+
+      // Perform the update operation and await its result
+      const updateResult = await userCollectionObject.updateOne(
+          { email: mail },
+          { $set: { access: true } }
+      );
+
+      // Log the MongoDB update result
+      console.log("MongoDB Update Result:", updateResult);
+
+      // Check if the update was successful
+      if (updateResult.matchedCount === 0) {
+          console.error("No user found with the provided email.");
+          res.json({ status: "Error", message: "No user found with the provided email." });
+      } else {
+          res.json({ status: "success" });
+      }
+  } catch (error) {
+      console.error("Error during access grant:", error.message);
+      res.json({ status: "Error", message: error.message });
+  }
+}));
+
 
 module.exports = mailApp;

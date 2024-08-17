@@ -188,6 +188,7 @@ userApp.post(
     const userCollectionObject = await getDBObj("userCollectionObject");
 
     let newUserObj = request.body;
+   
 
     const userOfDB = await userCollectionObject.findOne({
       email: newUserObj.email,
@@ -201,6 +202,7 @@ userApp.post(
     } else {
       const hashedPassword = await bcryptjs.hash(newUserObj.password, 6);
       newUserObj.password = hashedPassword;
+      newUserObj.access = false;
       await userCollectionObject.insertOne(newUserObj);
       response.send({ message: "New User created" });
     }
@@ -259,9 +261,9 @@ userApp.post(
 
         const hashedPassword = await bcryptjs.hash(user.password, 6);
         user.password = hashedPassword;
-
+        user.access=false;
         user.userId = userId;
-
+       
         await userCollectionObject.insertOne(user);
       }
 

@@ -11,18 +11,25 @@ interface Blog {
 }
 
 const AdminShowBlogs: React.FC = () => {
+  // when we press the give access button then a modal should be opened to send a mail to the user
+
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [mailModal,setMailModal] = useState<boolean>(false);
   const [blogTitle, setBlogTitle] = useState<string>("");
+  const [mail,setMail] = useState("");
   const [base64Image1, setBase64Image1] = useState<string>("");
   const [categories, setCategories] = useState<string[]>([""]);
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const navigate = useNavigate();
 
+  function handleAccess(){
+    setMailModal(true);
+  }
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACK_URL}/addblog/getblogs`
+          `${process.env.REACT_APP_BACK_URL}/addblog/gettrueblogs`
         );
         console.log("Fetched blogs:", response.data.payload);
 
@@ -44,6 +51,8 @@ const AdminShowBlogs: React.FC = () => {
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setBlogTitle(e.target.value);
+  const handleMailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setMail(e.target.value);
 
   const handleAddBlog = () => {
     console.log("Blog Title:", blogTitle);
@@ -80,6 +89,23 @@ const AdminShowBlogs: React.FC = () => {
     const newCategories = categories.filter((_, i) => i !== index);
     setCategories(newCategories);
   };
+  const handleBlogClick = (blogId: string) => {
+    navigate(`/blogs/${blogId}`);
+  };
+  async function handleGiveAccess() {
+    try {
+        const res = await axios.post(`${process.env.REACT_APP_BACK_URL}/sendmail/give-access-mail`, { mail });
+        console.log(res.data);
+        if(res.data.status==="success")
+        {
+          console.log(res.data); // To ensure the response is logged and debugged
+          setMailModal(false);  // Close the modal upon successful email sending
+        }
+    } catch (error) {
+        console.error("Error sending email:", error);
+    }
+}
+
 
   return (
     <div>
@@ -97,12 +123,17 @@ const AdminShowBlogs: React.FC = () => {
             <p className="text-gray-600">Blogs by GDSC achievers</p>
           </div>
         </div>
+        <div className="flex justify-center">
         <button
-          className="bg-blue-600 text-white py-2 px-4 rounded cursor-pointer"
+          className="bg-blue-600 text-white py-2 px-4 rounded cursor-pointer mr-3"
           onClick={() => setShowModal(true)}
         >
           + Add Blog
         </button>
+        {/* Change the button colour */}
+
+        <button onClick={handleAccess} className="bg-gray-800 text-white py-2 px-4 rounded cursor-pointer">Give Access</button>
+        </div>
       </div>
 
       {showModal && (
@@ -129,7 +160,9 @@ const AdminShowBlogs: React.FC = () => {
                   <input
                     type="text"
                     value={category}
-                    onChange={(e) => handleCategoryChange(index, e.target.value)}
+                    onChange={(e) =>
+                      handleCategoryChange(index, e.target.value)
+                    }
                     placeholder="Category"
                     className="w-full p-2 border border-gray-300 rounded"
                   />
@@ -172,20 +205,51 @@ const AdminShowBlogs: React.FC = () => {
           </div>
         </div>
       )}
+      {mailModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md relative">
+            <span
+              className="absolute top-4 right-4 text-2xl cursor-pointer text-gray-500 hover:text-gray-900"
+              onClick={() => setMailModal(false)}
+            >
+              &times;
+            </span>
+            <h2 className="text-center font-bold text-xl mb-4">Give Access</h2>
+            <form className="flex flex-col gap-4">
+              <input
+                type="mail"
+                value={mail}
+                onChange={handleMailChange}
+                required
+                placeholder="Email"
+                className="p-2 border border-gray-300 rounded"
+              />
+              <button
+                type="button"
+                onClick={handleGiveAccess}
+                className="bg-blue-600 text-white py-2 rounded cursor-pointer hover:bg-blue-700"
+              >
+                Share
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+      
       <div>
         <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
           {blogs.length > 0 ? (
             blogs.map((blog, index) => (
               <div
                 key={index}
-                onClick={() => navigate("/blogs/single-blog", { state: blog })}
+                onClick={() => handleBlogClick(blog._id)}
               >
                 <li className="relative bg-white flex flex-col justify-between border rounded shadow-md hover:shadow-primary-400">
                   <div className="relative w-full aspect-video">
                     <img
                       className="rounded object-cover mx-auto w-full"
                       src={blog.thumbnail}
-                      style={{height:"19rem"}}
+                      style={{ height: "19rem" }}
                       alt={blog.title}
                       loading="lazy"
                     />
@@ -203,7 +267,7 @@ const AdminShowBlogs: React.FC = () => {
                       <p
                         className="text-gray-600 two-lines"
                         dangerouslySetInnerHTML={{
-                          __html: blog.description.substr(0, 136) + "...",
+                          __html: blog.description.substring(0, 136) + "...",
                         }}
                       ></p>
                     )}

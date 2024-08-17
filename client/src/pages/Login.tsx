@@ -7,7 +7,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const [inputErrors, setInputErrors] = useState({
     email: false,
     password: false,
@@ -35,6 +35,7 @@ const Login = () => {
 
     try {
       const loggedInUser = await getUserByMail(formData);
+      console.log(loggedInUser.payload);
       setUser(loggedInUser.userObj);
       setFormData({
         email: "",
@@ -46,6 +47,7 @@ const Login = () => {
         const userObj = {
           userId: loggedInUser.userObj.userId,
           role: loggedInUser.userObj.role,
+          token: loggedInUser.payload
         };
         const userObjString = JSON.stringify(userObj);
         localStorage.setItem("userObjGDSC", userObjString);
