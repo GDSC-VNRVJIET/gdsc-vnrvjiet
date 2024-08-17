@@ -68,7 +68,6 @@ const PaymentGatewayRazorpay: React.FC = () => {
   } = useForm<FormData>();
 
   const handleFormSubmit = (formData: FormData) => {
-    console.log(formData);
     if(states)
     formData.event = states.name;
     paymentHandler(formData);
@@ -138,9 +137,9 @@ const PaymentGatewayRazorpay: React.FC = () => {
           }
       },
       prefill: {
-        name: "Sri Manikanta",
-        email: "srimanikantabattu04@gmail.com",
-        contact: "7075659983",
+        name: formdata.name,
+        email: formdata.email,
+        contact: formdata.whatsapp,
       },
       notes: {
         address: "Razorpay Corporate Office",

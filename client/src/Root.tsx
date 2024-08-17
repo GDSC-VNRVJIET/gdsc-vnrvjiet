@@ -8,8 +8,6 @@ import {
 } from "react-router-dom";
 import CheckUsers from "./pages/Events/admin/CheckUsers";
 import EditBlog from "./pages/Events/user/EditBlog";
-import Dashboard from "./pages/Events/admin/Dashboard";
-import SingleBlog from "./pages/Events/admin/SingleBlog";
 import Register from "./pages/Events/user/Register";
 import Signup from "./pages/SignIn";
 import Home from "./pages/Home";
@@ -35,6 +33,11 @@ import Contactus from "./pages/Contactus";
 import TermsAndConditions from "./pages/TermsandConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
+import SingleBlog from "./pages/Events/admin/SingleBlog";
+import WebDev from "./pages/Domain Info/Management";
+import CompetitiveProgramming from "./pages/Domain Info/CompetitiveProgramming";
+import ML from "./pages/Domain Info/ML";
+import Management from "./pages/Domain Info/Management";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -103,7 +106,6 @@ function Root() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/upcoming-events/:eventname" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/blogs" element={<Blog />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/upcoming-events" element={<UpcomingEvents />} />
         <Route path="/past-events" element={<PastEvents />} />
@@ -140,7 +142,6 @@ function Root() {
           path="/checkuser"
           element={<ProtectedRoute element={<CheckUsers />} path="/checkuser" />}
         />
-        <Route path="/dashboard" element={<Dashboard />}></Route>
       </Routes>
     </Router>
   );

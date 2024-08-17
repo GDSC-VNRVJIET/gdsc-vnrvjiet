@@ -20,20 +20,26 @@ mailApp.use(exp.urlencoded({ extended:false }));
 mailApp.use(bodyParser.json({ limit: '10mb', extended: true }))
 mailApp.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 587,
+  auth: {
+  user: process.env.USER,
+  pass: process.env.PASS
+}
+})
+transporter.verify((error, success) => {
+if (error) {
+  console.log(error);
+} else {
+  console.log('Server is ready to take messages');
+}
+});
+
 const sendEmail = async (email, orderId, paymentId , rollno) => {
     const qrCode = await QRCode.toDataURL(rollno);
     qrCodeImage=new Buffer.from(qrCode.split("base64,")[1], "base64")
     try {
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false,
-            auth: {
-              user: process.env.USER,
-              pass: process.env.PASS,
-            },
-        });
         const mailOptions = {
             from: {
                 name: "GDSC WORKSHOP REGISTERED",
@@ -92,72 +98,27 @@ function sendGiveAccessEmail(email) {
     }
 }
 
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    auth: {
-    user: process.env.USER,
-    pass: process.env.PASS
-  }
-})
-transporter.verify((error, success) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Server is ready to take messages');
-  }
-});
+
 
   const sendContactEmail = async (name, email, message) => {
-    const content = `
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <style>
-      .header {
-        text-align: center;
-        padding: 10px;
-        background-color: #f2f2f2;
-      }
-      .content {
-        padding: 20px;
-        font-family: Arial, sans-serif;
-      }
-      .logo {
-        height: 50px;
-      }
-      .footer {
-        text-align: center;
-        padding: 10px;
-        background-color: #f2f2f2;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="header">
-      <img src="https://upload.wikimedia.org/wikipedia/en/4/47/VNRVJIETLogo.png" class="logo" alt="VNR Logo">
-      <img src="https://cdn-images-1.medium.com/max/578/1*vZVM7utCuRiZ6-HDsNeYUA@2x.png" class="logo" alt="GDSC Logo">
-    </div>
-    <div class="content">
-      <p>You have received a new message from the contact form. Here are the details:</p>
-      <ul>
-        <li><strong>Name:</strong> ${name}</li>
-        <li><strong>Email:</strong> ${email}</li>
-        <li><strong>Message:</strong> ${message}</li>
-      </ul>
-    </div>
-    <div class="footer">
-      <p>&copy; 2024 VNR & GDSC. All rights reserved.</p>
-    </div>
-  </body>
-  </html>
-  `;
   
     const mail = {
       from: name,
-      to: "gdsc.vnrvjiet@gmail.com", // GDSC email
+      to: process.env.USER, 
       subject: "New Message from Contact Form",
-      html: content,
+      html:`
+        <p>Dear Team,</p>
+        <p>We have received a new message via the "Contact Us" form on our website. Please find the details below:</p>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Message:</b><br/> ${message}</p>
+        <br/>
+        <p>Please review the message and respond accordingly.</p>
+        <p><b>Note:</b> If the message requires urgent attention, please prioritize.</p>
+        ---
+        <b><p>Thanks & Regards,</p>
+        <p>GDSC VNRVJIET</p></b>
+      `,
     };
   
     await transporter.sendMail(mail);
@@ -165,51 +126,18 @@ transporter.verify((error, success) => {
     await transporter.sendMail({
       from: "<your email address>",
       to: email,
-      subject: "Submission was successful",
-      html: `
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <style>
-      .header, .footer {
-        text-align: center;
-        padding: 10px;
-        background-color: #f2f2f2;
-      }
-      .content {
-        padding: 20px;
-        font-family: Arial, sans-serif;
-      }
-      .logo {
-        height: 50px;
-      }
-      .footer-logo {
-        height: 30px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="header">
-      <img src="https://upload.wikimedia.org/wikipedia/en/4/47/VNRVJIETLogo.png" class="logo" alt="VNR Logo">
-      <img src="https://cdn-images-1.medium.com/max/578/1*vZVM7utCuRiZ6-HDsNeYUA@2x.png" class="logo" alt="GDSC Logo">
-    </div>
-    <div class="content">
-      <p>Dear ${name},</p>
-      <p>Thank you for getting in touch with us. We have received your submission successfully. Below are the details of your submission:</p>
-      <ul>
-        <li><strong>Name:</strong> ${name}</li>
-        <li><strong>Email:</strong> ${email}</li>
-        <li><strong>Message:</strong> ${message}</li>
-      </ul>
-      <p>We appreciate your interest and will get back to you shortly.</p>
-      <p>Best regards,<br>The VNR & GDSC Team</p>
-    </div>
-    <div class="footer">
-      <p>&copy; 2024 VNR & GDSC. All rights reserved.</p>
-    </div>
-  </body>
-  </html>
-  `,
+      subject: "Thank You for Contacting Us!",
+      html:`
+        <p>Dear ${name},</p>
+        <p>Thank you for reaching out to us through our "Contact Us" form. We have received your message and will get back to you as soon as possible. Below are the details of your submission:</p>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Message:</b><br/> ${message}</p>
+        <br/>
+        <p>Our team is currently reviewing your inquiry and will respond to you within 3 days. If your message is urgent, please feel free to contact us directly at gdsc.vnrvjiet@gmail.com</p>
+        <b><p>Thanks & Regards,</p>
+        <p>GDSC VNRVJIET</p></b>
+      `,
     });
   };
 
@@ -242,7 +170,7 @@ transporter.verify((error, success) => {
   
     const {razorpay_order_id, razorpay_payment_id, razorpay_signature, email , rollno} = req.body
   
-    const sha = crypto.createHmac("sha256", "q8KEghPtcWSoLFVyz586NDRz");
+    const sha = crypto.createHmac("sha256", process.env.RAZORPAY_SECRET);
   
     sha.update(`${razorpay_order_id}|${razorpay_payment_id}`);
   
