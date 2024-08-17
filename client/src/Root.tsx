@@ -7,8 +7,6 @@ import {
   useNavigate,
 } from "react-router-dom";
 import CheckUsers from "./pages/Events/admin/CheckUsers";
-import Dashboard from "./pages/Events/admin/Dashboard";
-import SingleBlog from "./pages/Events/admin/SingleBlog";
 import Register from "./pages/Events/user/Register";
 import Signup from "./pages/SignIn";
 import Home from "./pages/Home";
@@ -28,12 +26,10 @@ import accessDenied from "./images/accessDenied.png";
 import deniedAccess from "./images/deniedaccess.png";
 import ForgotPassword from "./pages/ForgotPassword";
 import Analysis from "./pages/leaderboard/analysis";
-import Blog from "./pages/Events/Blog";
-import AddBlog from "./pages/Events/admin/AddBlog";
-import Contactus from "./pages/Contactus";
-import TermsAndConditions from "./pages/TermsandConditions";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import RefundPolicy from "./pages/RefundPolicy";
+import WebDev from "./pages/Domain Info/WebDev";
+import CompetitiveProgramming from "./pages/Domain Info/CompetitiveProgramming";
+import ML from "./pages/Domain Info/ML";
+import Management from "./pages/Domain Info/Management";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -102,7 +98,6 @@ function Root() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/upcoming-events/:eventname" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/blogs" element={<Blog />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/upcoming-events" element={<UpcomingEvents />} />
         <Route path="/past-events" element={<PastEvents />} />
@@ -110,12 +105,10 @@ function Root() {
         <Route path="/leads" element={<Leads />} />
         <Route path="/solution-challenge" element={<SolutionChallenge />} />
         <Route path="/community-guidelines" element={<CommunityGuidelines />} />
-        <Route path="/add-blog" element={<AddBlog />} />
-        <Route path="/contact-us" element={<Contactus />} />
-        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/refund-policy" element={<RefundPolicy />} />
-        <Route path="/blogs/single-blog" element={<SingleBlog />} />
+        <Route path="/web-development" element={<WebDev />} />
+        <Route path="/competitive-programming" element={<CompetitiveProgramming />} />
+        <Route path="/machine-learning" element={<ML />} />
+        <Route path="/management" element={<Management />} />
         <Route
           path="/leaderboard"
           element={
@@ -138,7 +131,6 @@ function Root() {
           path="/checkuser"
           element={<ProtectedRoute element={<CheckUsers />} path="/checkuser" />}
         />
-        <Route path="/dashboard" element={<Dashboard />}></Route>
       </Routes>
     </Router>
   );
