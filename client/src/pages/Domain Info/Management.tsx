@@ -1,6 +1,6 @@
 import React from 'react';
 import SahithiImage from '../Domain Info/images/MANAGEMENT/Sahithi.jpg';
-import VarunImage from '../Domain Info/images/MANAGEMENT/GVK.jpeg';
+import VarunImage from '../Domain Info/images/MANAGEMENT/GVK.jpg';
 import RakshithaImage from '../Domain Info/images/MANAGEMENT/SaiRakshita.jpg';
 import SadhikImage from '../Domain Info/images/MANAGEMENT/Sadhik.jpg';
 import SriKruthiImage from '../Domain Info/images/MANAGEMENT/SriKruthi.jpg';
@@ -19,7 +19,7 @@ function WebDev() {
       instagram: '#',
     },
     {
-        name: 'Varun Kalyan',
+        name: 'Vinay Kalyan',
         role: 'Management Coordinator',
         image: VarunImage,
         linkedin: '#',

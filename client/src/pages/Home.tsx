@@ -42,7 +42,7 @@ const cards = [
     title: "Design",
     description:
       "Engages students in learning and applying best practices to secure digital systems, prevent cyber threats, and promote online safety.",
-    path: "/cyber-security",
+    path: "/design",
   }
 ];
 
