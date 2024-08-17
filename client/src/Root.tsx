@@ -34,7 +34,7 @@ import TermsAndConditions from "./pages/TermsandConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import SingleBlog from "./pages/Events/admin/SingleBlog";
-import WebDev from "./pages/Domain Info/Management";
+import WebDev from "./pages/Domain Info/WebDev";
 import CompetitiveProgramming from "./pages/Domain Info/CompetitiveProgramming";
 import ML from "./pages/Domain Info/ML";
 import Management from "./pages/Domain Info/Management";
@@ -109,6 +109,7 @@ function Root() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/upcoming-events" element={<UpcomingEvents />} />
         <Route path="/past-events" element={<PastEvents />} />
+        <Route path="/blogs" element={<Blog />}></Route>
         <Route path="/forum" element={<Forum />} />
         <Route path="/leads" element={<Leads />} />
         <Route path="/solution-challenge" element={<SolutionChallenge />} />
@@ -120,6 +121,10 @@ function Root() {
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/blogs/:blogId" element={<SingleBlog />} />
         <Route path="/edit-blog/:id" element={<EditBlog />} />
+        <Route path="/web-development" element={<WebDev />} />
+        <Route path="/competitive-programming" element={<CompetitiveProgramming />} />
+        <Route path="/machine-learning" element={<ML />} />
+        <Route path="/management" element={<Management />} />
         <Route
           path="/leaderboard"
           element={
