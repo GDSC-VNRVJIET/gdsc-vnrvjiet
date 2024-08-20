@@ -15,6 +15,33 @@ interface Blog {
 
 const EditBlog: React.FC = () => {
   const { id } = useParams<{ id: any }>();
+  const [access,setAccess] = useState<boolean>(false);
+  useEffect(() => {
+    // code for to give access to the particular person only
+    const getUserData = async () => {
+      try {
+        if(user?.role==="admin")
+        {
+          setAccess(true);
+        }
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACK_URL}/addblog/getAccessdata/${user?.emailId}`
+        );
+        if(response.data.success===true)
+        {
+          if(id===response.data.payload.blogId)
+          {
+            setAccess(true);
+          }
+        }
+      } catch (error) {
+        
+      }
+    }
+    getUserData();
+  }, []);
+
+  
   console.log(id)
   const navigate = useNavigate();
   const [blog, setBlog] = useState<Blog | null>(null);
@@ -28,9 +55,10 @@ const EditBlog: React.FC = () => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("userObjGDSC") || "null") as {
       token: string;
+      role: string;
+      emailId: string;
     } | null
   );
-  // console.log(user)
   useEffect(() => {
     const fetchBlog = async () => {
       try {
@@ -85,7 +113,6 @@ const EditBlog: React.FC = () => {
     }
   };
 
-
   const handleUpdateBlog = async () => {
     try {
       const updatedBlog = {
@@ -113,7 +140,6 @@ const EditBlog: React.FC = () => {
       console.error("Error updating blog:", error);
     }
 };
-
 
 
 
@@ -147,7 +173,7 @@ const EditBlog: React.FC = () => {
   //   }
   // };
 
-  return blog ? (
+  return blog && access ? (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Edit Blog</h2>
       <form className="flex flex-col gap-4">
@@ -223,7 +249,9 @@ const EditBlog: React.FC = () => {
       </form>
     </div>
   ) : (
-    <p>Loading blog details...</p>
+    <div className="flex justify-center items-center min-h-screen">
+    <p className="text-red-500 text-6xl">Access Denied</p>
+    </div>
   );
 };
 

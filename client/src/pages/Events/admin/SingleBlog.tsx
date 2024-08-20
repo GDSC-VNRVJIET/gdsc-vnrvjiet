@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams , useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 interface Blog {
@@ -13,6 +13,7 @@ interface Blog {
 const SingleBlog: React.FC = () => {
   const { blogId } = useParams<{ blogId: string }>();
   const [blog, setBlog] = useState<Blog | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -31,6 +32,19 @@ const SingleBlog: React.FC = () => {
   if (!blog) {
     return <div>Loading blog data.....</div>;
   }
+  async function handleClick() {
+    try {
+      const response = await axios.put(`${process.env.REACT_APP_BACK_URL}/addblog/change/${blogId}`);
+      if (response.data.success === true) {
+        alert("Blog posted successfully");
+        navigate("/blogs");
+      }else{
+        alert("Blog already posted");
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  }
 
   return (
     <div>
@@ -47,7 +61,11 @@ const SingleBlog: React.FC = () => {
         </div>
         <hr className="my-6 border-t-2 border-gray-200" />
         <p className="mb-4 text-gray-600" dangerouslySetInnerHTML={{ __html: blog.description }}></p>
+        <button onClick={handleClick} className="border border-green-500 text-green-500 font-bold py-2 px-4 rounded">
+           Post Blog
+        </button>
       </article>
+      
     </div>
   );
 };

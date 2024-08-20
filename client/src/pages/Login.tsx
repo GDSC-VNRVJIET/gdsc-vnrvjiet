@@ -35,7 +35,7 @@ const Login = () => {
 
     try {
       const loggedInUser = await getUserByMail(formData);
-      console.log(loggedInUser.payload);
+      console.log(loggedInUser);
       setUser(loggedInUser.userObj);
       setFormData({
         email: "",
@@ -47,7 +47,8 @@ const Login = () => {
         const userObj = {
           userId: loggedInUser.userObj.userId,
           role: loggedInUser.userObj.role,
-          token: loggedInUser.payload
+          token: loggedInUser.payload,
+          emailId:  loggedInUser.userObj.email
         };
         const userObjString = JSON.stringify(userObj);
         localStorage.setItem("userObjGDSC", userObjString);

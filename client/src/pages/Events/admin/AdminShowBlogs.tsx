@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import TemporaryBlogs from "./TemporaryBlogs";
 interface Blog {
   thumbnail: string;
   title: string;
@@ -14,22 +14,27 @@ const AdminShowBlogs: React.FC = () => {
   // when we press the give access button then a modal should be opened to send a mail to the user
 
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [mailModal,setMailModal] = useState<boolean>(false);
+  const [mailModal, setMailModal] = useState<boolean>(false);
   const [blogTitle, setBlogTitle] = useState<string>("");
-  const [mail,setMail] = useState("");
+  const [mail, setMail] = useState("");
   const [base64Image1, setBase64Image1] = useState<string>("");
   const [categories, setCategories] = useState<string[]>([""]);
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const navigate = useNavigate();
-
-  function handleAccess(){
-    setMailModal(true);
-  }
+  const [activeTab, setActiveTab] = useState<"tab1" | "tab2">("tab1");
+  const [showRadioButtons, setShowRadioButtons] = useState<boolean>(false);
+  const [selectedBlogId, setSelectedBlogId] = useState<string>("");
+  const activateTab = (tab: "tab1" | "tab2") => {
+    setActiveTab(tab);
+  };
+  // function handleAccess() {
+  //   setMailModal(true);
+  // }
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACK_URL}/addblog/gettrueblogs`
+          `${process.env.REACT_APP_BACK_URL}/addblog/getfalseblogs`
         );
         console.log("Fetched blogs:", response.data.payload);
 
@@ -92,21 +97,30 @@ const AdminShowBlogs: React.FC = () => {
   const handleBlogClick = (blogId: string) => {
     navigate(`/blogs/${blogId}`);
   };
-  async function handleGiveAccess() {
+  const handleAccess = () => {
+    setShowRadioButtons(true); // Show radio buttons for blog selection
+  };
+
+  const handleBlogSelection = (blogId: string) => {
+    setSelectedBlogId(blogId);
+    setMailModal(true); // Open the mail modal
+  };
+  const handleGiveAccess = async () => {
     try {
-        const res = await axios.post(`${process.env.REACT_APP_BACK_URL}/sendmail/give-access-mail`, { mail });
-        console.log(res.data);
-        if(res.data.status==="success")
-        {
-          console.log(res.data); // To ensure the response is logged and debugged
-          setMailModal(false);  // Close the modal upon successful email sending
-        }
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACK_URL}/sendmail/give-access-mail`,
+        { mail, blogId: selectedBlogId } // Send the selected blog ID with the email
+      );
+      console.log(res.data);
+      if (res.data.status === "success") {
+        console.log("Email sent successfully");
+        setMailModal(false); // Close the modal upon successful email sending
+        setShowRadioButtons(false); // Hide radio buttons after sending the email
+      }
     } catch (error) {
-        console.error("Error sending email:", error);
+      console.error("Error sending email:", error);
     }
-}
-
-
+  };
   return (
     <div>
       <div className="bg-gray-100 p-4 flex items-center justify-between">
@@ -123,19 +137,27 @@ const AdminShowBlogs: React.FC = () => {
             <p className="text-gray-600">Blogs by GDSC achievers</p>
           </div>
         </div>
+        {
+          activeTab === "tab1" &&
         <div className="flex justify-center">
-        <button
-          className="bg-blue-600 text-white py-2 px-4 rounded cursor-pointer mr-3"
-          onClick={() => setShowModal(true)}
-        >
-          + Add Blog
-        </button>
-        {/* Change the button colour */}
+          <button
+            className="bg-blue-600 text-white py-2 px-4 rounded cursor-pointer mr-3"
+            onClick={() => setShowModal(true)}
+          >
+            + Add Blog
+          </button>
+          {/* Change the button colour */}
 
-        <button onClick={handleAccess} className="bg-gray-800 text-white py-2 px-4 rounded cursor-pointer">Give Access</button>
+          <button
+            onClick={handleAccess}
+            className="bg-gray-800 text-white py-2 px-4 rounded cursor-pointer"
+          >
+            Give Access
+          </button>
         </div>
+}
       </div>
-
+        
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md relative">
@@ -235,60 +257,100 @@ const AdminShowBlogs: React.FC = () => {
           </div>
         </div>
       )}
-      
       <div>
-        <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
-          {blogs.length > 0 ? (
-            blogs.map((blog, index) => (
-              <div
-                key={index}
-                onClick={() => handleBlogClick(blog._id)}
-              >
-                <li className="relative bg-white flex flex-col justify-between border rounded shadow-md hover:shadow-primary-400">
-                  <div className="relative w-full aspect-video">
-                    <img
-                      className="rounded object-cover mx-auto w-full"
-                      src={blog.thumbnail}
-                      style={{ height: "19rem" }}
-                      alt={blog.title}
-                      loading="lazy"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-b from-gray-800 to-gray-500 text-white">
-                      <h2 className="text-xl font-semibold">{blog.title}</h2>
-                    </div>
-                  </div>
-                  <div className="flex flex-col justify-between gap-3 px-4 py-2">
-                    {blog.description.length < 140 ? (
-                      <p
-                        className="text-gray-600 two-lines"
-                        dangerouslySetInnerHTML={{ __html: blog.description }}
-                      ></p>
-                    ) : (
-                      <p
-                        className="text-gray-600 two-lines"
-                        dangerouslySetInnerHTML={{
-                          __html: blog.description.substring(0, 136) + "...",
-                        }}
-                      ></p>
-                    )}
-                    <ul className="flex flex-wrap items-center justify-start text-sm gap-2">
-                      {blog.category.split(",").map((cat, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-center cursor-pointer gap-0.5 bg-gray-100 text-black px-2 py-0.5 rounded-full"
-                        >
-                          <span>{cat.trim()}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </li>
-              </div>
-            ))
-          ) : (
-            <p>No blogs available.</p>
-          )}
+        <ul className="flex mt-3 flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400 justify-center">
+          <li className="me-2">
+            <button
+              onClick={() => activateTab("tab1")}
+              className={`inline-block px-4 py-3 rounded-lg ${
+                activeTab === "tab1"
+                  ? "text-white bg-blue-600"
+                  : "hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-500 dark:hover:text-white"
+              }`}
+              aria-current={activeTab === "tab1" ? "page" : undefined}
+            >
+              Temporary
+            </button>
+          </li>
+          <li className="me-2">
+            <button
+              onClick={() => activateTab("tab2")}
+              className={`inline-block px-4 py-3 rounded-lg ${
+                activeTab === "tab2"
+                  ? "text-white bg-blue-600"
+                  : "hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-500 dark:hover:text-white"
+              }`}
+              aria-current={activeTab === "tab2" ? "page" : undefined}
+            >
+              Current
+            </button>
+          </li>
         </ul>
+        {activeTab === "tab1" ? (
+          <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
+            {blogs.length > 0 ? (
+              blogs.map((blog, index) => (
+                <div key={index}>
+                  <li className="relative bg-white flex flex-col justify-between border rounded shadow-md hover:shadow-primary-400">
+                    <div className="relative w-full aspect-video">
+                      <img
+                        className="rounded object-cover mx-auto w-full"
+                        src={blog.thumbnail}
+                        style={{ height: "19rem" }}
+                        alt={blog.title}
+                        loading="lazy"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-b from-gray-800 to-gray-500 text-white">
+                        <h2 className="text-xl font-semibold">{blog.title}</h2>
+                      </div>
+                    </div>
+                    {showRadioButtons && (
+                      <input
+                        type="radio"
+                        name="selectedBlog"
+                        value={blog._id}
+                        onChange={() => handleBlogSelection(blog._id)}
+                        className="absolute top-4 right-4 border-8 border-blue-600"
+                      />
+                    )}
+                    <div onClick={() => handleBlogClick(blog._id)} className="flex flex-col justify-between gap-3 px-4 py-2">
+                      {blog.description.length < 140 ? (
+                        <p
+                          className="text-gray-600 two-lines"
+                          dangerouslySetInnerHTML={{ __html: blog.description }}
+                        ></p>
+                      ) : (
+                        <p
+                          className="text-gray-600 two-lines"
+                          dangerouslySetInnerHTML={{
+                            __html: blog.description.substring(0, 136) + "...",
+                          }}
+                        ></p>
+                      )}
+                      <ul className="flex flex-wrap items-center justify-start text-sm gap-2">
+                        {blog.category.split(",").map((cat, idx) => (
+                          <li
+                            key={idx}
+                            className="flex items-center cursor-pointer gap-0.5 bg-gray-100 text-black px-2 py-0.5 rounded-full"
+                          >
+                            <span>{cat.trim()}</span>
+                          </li>
+                        ))}
+                        
+                      </ul>
+                    </div>
+                  </li>
+                  
+                </div>
+                
+              ))
+            ) : (
+              <p>No blogs available.</p>
+            )}
+          </ul>
+        ) : (
+          <TemporaryBlogs />
+        )}
       </div>
     </div>
   );
