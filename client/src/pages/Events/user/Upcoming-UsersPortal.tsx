@@ -34,7 +34,7 @@ function UserPortalUpcoming() {
   const [explodingEvent, setExplodingEvent] = React.useState<number | null>(
     null
   );
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("No upcoming events for now :(");
   const [displayLoader, setDisplayLoader] = useState(true);
 
   async function fetchData() {
@@ -51,6 +51,7 @@ function UserPortalUpcoming() {
       // const registeredEvents = await getAllRegistrationsByUserId(userId);
       // setRegisteredEvents(registeredEvents);
     } catch (error) {
+      setDisplayLoader(false);
       console.log(error);
     }
   }
