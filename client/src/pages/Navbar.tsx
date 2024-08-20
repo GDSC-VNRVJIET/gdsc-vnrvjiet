@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GetUserIcon from "./GetUserIcon";
 import { getUserById } from "../Apis/users";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
   
@@ -30,7 +30,10 @@ function Navbar() {
   };
 
   return (
-    <nav style={{zIndex:"10"}} className="sticky top-0 bg-white border-b-2 border-slate-300 p-3 mr-4">
+    <nav
+      style={{ zIndex: "10" }}
+      className="sticky top-0 bg-white border-b-2 border-slate-300 p-3 mr-4"
+    >
       <div className="block md:hidden">
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -58,18 +61,18 @@ function Navbar() {
         }`}
       >
         <div className="hidden md:flex md:items-center">
-          <a href="/">
+          <NavLink to="/">
             <img
               className="gdsc_logo"
               src="https://cdn-images-1.medium.com/max/578/1*vZVM7utCuRiZ6-HDsNeYUA@2x.png"
               width="50"
               height="50"
             />
-          </a>
+          </NavLink>
         </div>
-        <a href="/">
+        <NavLink to="/">
           <h1 className="text-[#868686] text-lg pl-5">GDSC VNRVJIET.</h1>
-        </a>
+        </NavLink>
         <div className="flex flex-col md:flex-row ml-auto text-center text-slate-600">
           <div className="relative">
             <button
@@ -83,59 +86,59 @@ function Navbar() {
                 className="absolute right-0 mt-4 w-max bg-white shadow-lg border-2 border-grey"
                 onBlur={() => setDropOpen(false)}
               >
-                <a
-                  href="/"
+                <NavLink
+                  to="/"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   About
-                </a>
-                <a
-                  href="/leads"
+                </NavLink>
+                <NavLink
+                  to="/leads"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Leads
-                </a>
-                <a
-                  href="/community-guidelines"
+                </NavLink>
+                <NavLink
+                  to="/community-guidelines"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Community Guidelines
-                </a>
-                <a
-                  href="/blogs"
+                </NavLink>
+                <NavLink
+                  to="/blogs"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Blog
-                </a>
-                <a
-                  href="/solution-challenge"
+                </NavLink>
+                <NavLink
+                  to="/solution-challenge"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Solution Challenge
-                </a>
+                </NavLink>
               </div>
             )}
           </div>
           <button className="pl-5">
-            <a href="/">Home</a>
+            <NavLink to="/">Home</NavLink>
           </button>
           <button className="pl-5">
-            <a href="/enter">Evaluate</a>
+            <NavLink to="/enter">Evaluate</NavLink>
           </button>
           <button className="pl-5">
-            <a href="/leaderboard">Leaderboard</a>
+            <NavLink to="/leaderboard">Leaderboard</NavLink>
           </button>
           <button className="pl-5">
-            <a href="/upcoming-events">Upcoming Events</a>
+            <NavLink to="/upcoming-events">Upcoming Events</NavLink>
           </button>
           <button className="pl-5">
-            <a href="/past-events">Past events</a>
+            <NavLink to="/past-events">Past events</NavLink>
           </button>
           <button className="pl-5">
-            <a href="/Forum">Forum</a>
+            <NavLink to="/Forum">Forum</NavLink>
           </button>
           <button className="pl-5">
-            <a href="/contact-us">Contact Us</a>
+            <NavLink to="/contact-us">Contact Us</NavLink>
           </button>
           <div className="relative">
             <button
@@ -149,30 +152,30 @@ function Navbar() {
                 className="absolute right-0 mt-4 w-max bg-white shadow-lg border-2 border-grey"
                 onBlur={() => setPoliciesOpen(false)}
               >
-                <a
-                  href="/terms-and-conditions"
+                <NavLink
+                  to="/terms-and-conditions"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Terms and Conditions
-                </a>
-                <a
-                  href="/privacy-policy"
+                </NavLink>
+                <NavLink
+                  to="/privacy-policy"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Privacy Policy
-                </a>
-                <a
-                  href="/refund-policy"
+                </NavLink>
+                <NavLink
+                  to="/refund-policy"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Refund Policy
-                </a>
+                </NavLink>
               </div>
             )}
-          </div>  
+          </div>
           {userObjGDSC == null ? (
             <button className="pl-5 relative">
-              <a href="/login">Login</a>
+              <NavLink to="/login">Login</NavLink>
             </button>
           ) : (
             <div className="relative">

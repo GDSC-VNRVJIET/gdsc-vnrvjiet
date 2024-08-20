@@ -12,7 +12,8 @@ import {
 import ConfettiExplosion from "react-confetti-explosion";
 import { getUserById } from "../../../Apis/users";
 // import noEvents from "../noEvents.png";
-import { format } from 'date-fns';
+import { format } from "date-fns";
+import Loader from "../../Loader";
 
 interface Event {
   eventId: number;
@@ -32,15 +33,20 @@ function UserPortalPast() {
   const [explodingEvent, setExplodingEvent] = React.useState<number | null>(
     null
   );
-  const [message, setMessage] = useState("Loading...")
+  const [message, setMessage] = useState("");
+  const [displayLoader, setDisplayLoader] = useState(true);
 
   async function fetchData() {
     try {
       const fetchedEvents = await getPastEvents();
       // const user = await getUserById(userId);
       // setUserData(user);
-      setEvents(fetchedEvents.payload.reverse());
-      setMessage("No past events for now :(")
+      if (fetchedEvents.payload != null) {
+        setEvents(fetchedEvents.payload.reverse());
+      } else {
+        setMessage("No past events for now :(");
+      }
+      setDisplayLoader(false);
 
       // const registeredEvents = await getAllRegistrationsByUserId(userId);
       // setRegisteredEvents(registeredEvents);
@@ -88,7 +94,9 @@ function UserPortalPast() {
     height: "100px",
   };
 
-  return (
+  return displayLoader ? (
+    <Loader />
+  ) : (
     <div className="min-h-full p-4">
       <div
         className="HeroSection flex flex-col  bg-cover bg-center bg-no-repeat m-4"
@@ -96,7 +104,7 @@ function UserPortalPast() {
       >
         <img src="" />
         <h2 className="text-2xl font-bold mb-4 my-auto">
-          Welcome 
+          Welcome
           {/* back, {userData?.name}. */}
         </h2>
       </div>
@@ -118,10 +126,12 @@ function UserPortalPast() {
                     {event.description}
                   </p>
                   <p className="py-2">
-                  <strong>When : </strong>{" "}
+                    <strong>When : </strong>{" "}
                     {/* {format(new Date(event.startDate), "yyyy-MM-dd HH:mm")} to{" "}
                     {format(new Date(event.endDate), "yyyy-MM-dd HH:mm")} */}
-                    {event.startDate}{' - '}{event.endDate}
+                    {event.startDate}
+                    {" - "}
+                    {event.endDate}
                   </p>
                   <p>
                     <strong>Where : </strong>

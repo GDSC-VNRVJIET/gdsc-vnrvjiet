@@ -99,7 +99,6 @@ const ProtectedRoute: React.FC<{ element: React.ReactNode; path: string }> = ({
 
 function Root() {
   return (
-    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/admin-signup" element={<Signup />} />
@@ -150,7 +149,6 @@ function Root() {
           element={<ProtectedRoute element={<CheckUsers />} path="/checkuser" />}
         />
       </Routes>
-    </Router>
   );
 }
 

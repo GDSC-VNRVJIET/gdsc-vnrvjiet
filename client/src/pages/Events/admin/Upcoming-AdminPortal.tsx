@@ -6,7 +6,8 @@ import {
   getUpcomingEvents,
   updateEvent,
 } from "../../../Apis/events";
-import { format } from 'date-fns';
+import { format } from "date-fns";
+import Loader from "../../Loader";
 // import Files from "../files";
 
 interface Event {
@@ -40,11 +41,13 @@ function AdminPortalUpcoming() {
   });
   const [editEvent, setEditEvent] = useState<Event | null>();
   const [isCreatingEvent, setIsCreatingEvent] = useState(false);
+  const [displayLoader, setDisplayLoader] = useState(true);
 
   async function fetchData() {
     try {
       const fetchedEvents = await getUpcomingEvents();
       setEvents(fetchedEvents.payload);
+      setDisplayLoader(false);
     } catch (error) {
       console.log(error);
     }
@@ -108,7 +111,9 @@ function AdminPortalUpcoming() {
     }
   };
 
-  return (
+  return displayLoader ? (
+    <Loader />
+  ) : (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4 ">Admin Portal</h2>
       <button
@@ -147,7 +152,10 @@ function AdminPortalUpcoming() {
               }
               className="border border-[#323434] rounded px-2 py-1 w-[80vw] mb-4 input-validation bg-slate-100 text-black"
             />
-            <label><br/>Start date & time : </label>
+            <label>
+              <br />
+              Start date & time :{" "}
+            </label>
             <input
               type="datetime-local"
               placeholder="Start Date"
@@ -157,7 +165,10 @@ function AdminPortalUpcoming() {
               }
               className="border border-[#323434] rounded px-2 py-1 w-[80vw] mb-4 input-validation bg-slate-100 text-black"
             />
-            <label><br/>End date & time : </label>
+            <label>
+              <br />
+              End date & time :{" "}
+            </label>
             <input
               type="datetime-local"
               placeholder="End Date"
@@ -221,9 +232,9 @@ function AdminPortalUpcoming() {
                 {event.description}
               </p>
               <p>
-              <strong>When : </strong>{" "}
-                    {format(new Date(event.startDate), "yyyy-MM-dd HH:mm")} to{" "}
-                    {format(new Date(event.endDate), "yyyy-MM-dd HH:mm")}
+                <strong>When : </strong>{" "}
+                {format(new Date(event.startDate), "yyyy-MM-dd HH:mm")} to{" "}
+                {format(new Date(event.endDate), "yyyy-MM-dd HH:mm")}
               </p>
 
               <p>

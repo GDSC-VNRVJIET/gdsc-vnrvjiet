@@ -1,16 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import Loader from "./pages/Loader";
+import { BrowserRouter as Router } from 'react-router-dom';
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const Index = () => {
+  const [isAnimationCompleted, setIsAnimationCompleted] = useState(false);
+
+  const handleAnimationComplete = () => {
+    setIsAnimationCompleted(true);
+  };
+
+  return (
+    <>
+      {!isAnimationCompleted && (
+        <Loader handleAnimationComplete={handleAnimationComplete} />
+      )}
+      <div
+        className={`transition-opacity duration-500 ${
+          isAnimationCompleted ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        {isAnimationCompleted && (
+          <Router>
+            <App />
+          </Router>
+        )}
+      </div>
+    </>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
-    <App />
+    <Index />
   </React.StrictMode>
 );
 

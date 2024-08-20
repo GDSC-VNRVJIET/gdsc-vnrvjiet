@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate , Link} from 'react-router-dom'
+import { useNavigate, Link } from "react-router-dom";
 import {
   createEvent,
   getAllEvents,
@@ -13,6 +13,7 @@ import {
 import ConfettiExplosion from "react-confetti-explosion";
 import { getUserById } from "../../../Apis/users";
 import { format } from "date-fns";
+import Loader from "../../Loader";
 
 interface Event {
   eventId: number;
@@ -33,23 +34,28 @@ function UserPortalUpcoming() {
   const [explodingEvent, setExplodingEvent] = React.useState<number | null>(
     null
   );
-  const [message, setMessage] = useState("Loading...");
+  const [message, setMessage] = useState("");
+  const [displayLoader, setDisplayLoader] = useState(true);
 
   async function fetchData() {
     try {
       const fetchedEvents = await getUpcomingEvents();
       // const user = await getUserById(userId);
       // setUserData(user);
-      setEvents(fetchedEvents.payload.reverse());
-      setMessage("No upcoming events for now :(");
+      if (fetchedEvents.payload != null) {
+        setEvents(fetchedEvents.payload.reverse());
+      } else {
+        setMessage("No upcoming events for now :(");
+      }
+      setDisplayLoader(false);
       // const registeredEvents = await getAllRegistrationsByUserId(userId);
       // setRegisteredEvents(registeredEvents);
     } catch (error) {
       console.log(error);
     }
   }
-  function gotoRegister(event: Event){
-    navigate(`${event.name}`,{state:event})
+  function gotoRegister(event: Event) {
+    navigate(`${event.name}`, { state: event });
   }
 
   useEffect(() => {
@@ -91,7 +97,9 @@ function UserPortalUpcoming() {
     height: "100px",
   };
 
-  return (
+  return displayLoader ? (
+    <Loader />
+  ) : (
     <div className="min-h-full p-4">
       <div
         className="HeroSection flex flex-col  bg-cover bg-center bg-no-repeat m-4"
@@ -154,9 +162,14 @@ function UserPortalUpcoming() {
                     {isEventRegistered(event.eventId)
                       ? "Registered !"
                       : "Register"}
-                  </button> */} 
+                  </button> */}
                   <div className="mt-2">
-                  <Link to={`${event.name}`} className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Register</Link>
+                    <Link
+                      to={`${event.name}`}
+                      className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                    >
+                      Register
+                    </Link>
                   </div>
                 </div>
               ))}
