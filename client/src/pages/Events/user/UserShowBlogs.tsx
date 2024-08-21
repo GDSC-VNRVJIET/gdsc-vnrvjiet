@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getUserById } from "../../../Apis/users";
+import Loader from "../../Loader";
 
 interface Blog {
   id: string; // Assuming each blog has a unique ID
@@ -14,6 +15,7 @@ interface Blog {
 
 const UserShowBlogs: React.FC = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [displayLoader, setDisplayLoader] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,13 +27,16 @@ const UserShowBlogs: React.FC = () => {
 
         if (Array.isArray(response.data.payload)) {
           setBlogs(response.data.payload);
+          setDisplayLoader(false);
           console.log("Fetched blogs:", response.data.payload);
         } else {
           console.error("Unexpected response format: payload is not an array");
+          setDisplayLoader(false);
           setBlogs([]);
         }
       } catch (error) {
         console.error("Error fetching blogs:", error);
+        setDisplayLoader(false);
         setBlogs([]);
       }
     };
@@ -49,7 +54,9 @@ const UserShowBlogs: React.FC = () => {
     navigate(`/blogs/${blogId}`);
   };
 
-  return (
+  return displayLoader ? (
+    <Loader />
+  ) : (
     <div>
       <div className="bg-gray-100 p-4 flex items-center justify-between">
         <div className="flex items-center ml-6">
@@ -71,10 +78,7 @@ const UserShowBlogs: React.FC = () => {
         <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
           {blogs.length > 0 ? (
             blogs.map((blog) => (
-              <div
-                key={blog._id}
-                
-              >
+              <div key={blog._id}>
                 <li className="relative bg-white flex flex-col justify-between border rounded shadow-md hover:shadow-primary-400">
                   <div className="relative w-full aspect-video">
                     <img
@@ -93,9 +97,10 @@ const UserShowBlogs: React.FC = () => {
                     <p
                       className="text-gray-600 two-lines"
                       dangerouslySetInnerHTML={{
-                        __html: blog.description.length < 140
-                          ? blog.description
-                          : blog.description.substring(0, 136) + "...",
+                        __html:
+                          blog.description.length < 140
+                            ? blog.description
+                            : blog.description.substring(0, 136) + "...",
                       }}
                     ></p>
                     <ul className="flex flex-wrap items-center justify-start text-sm gap-2">

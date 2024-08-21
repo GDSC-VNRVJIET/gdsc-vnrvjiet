@@ -4,10 +4,12 @@ import loadingPageAnimation from "../animations/loadingPage.json";
 
 interface LoaderProps {
   handleAnimationComplete?: () => void;
+  loop?: boolean;
 }
 
 const Loader: React.FC<LoaderProps> = ({
   handleAnimationComplete = () => {},
+  loop = true,
 }) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -19,10 +21,11 @@ const Loader: React.FC<LoaderProps> = ({
     >
       <Lottie
         animationData={loadingPageAnimation}
-        onLoopComplete={() => {
+        onComplete={() => {
           setIsTransitioning(true);
           handleAnimationComplete();
         }}
+        loop={loop}
       />
     </div>
   );

@@ -41,20 +41,29 @@ const sendEmail = async (email, orderId, paymentId, rollno) => {
   try {
     const mailOptions = {
       from: {
-        name: "GDSC WORKSHOP REGISTERED",
+        name: "GDSC VNRVJIET",
         address: process.env.USER,
       },
       to: `${email}`,
-      subject: "Order Confirmation",
+      subject: "You're Registered! Welcome to the Event by GDSC VNRVJIET",
       attachDataUrls: true,
       html: `
-                <h1>Order Confirmation</h1>
-                <img src="${qrCode}" alt="QR Code" />
-                <p>Order ID: ${orderId}</p>
-                <p>Payment ID: ${paymentId}</p>
-                <p>Thank you for your order!</p>
-                <p>Best regards</p>
-            `,
+        <h1>Welcome to the GDSC VNRVJIET Event!</h1>
+        <img src="${qrCode}" alt="QR Code" />
+        <p>Dear ${recipientName},</p>
+        <p>Thank you for registering for our upcoming event at GDSC VNRVJIET. We're thrilled to have you join us.</p>
+        <p>Your registration details are as follows:</p>
+        <ul>
+          <li><strong>Order ID:</strong> ${orderId}</li>
+          <li><strong>Payment ID:</strong> ${paymentId}</li>
+        </ul>
+        <p>You can use the QR code above for a smooth check-in process at the event.</p>
+        <p>If you have any questions or need further assistance, feel free to reach out to us.</p>
+        <br>
+        <p>Best regards,</p>
+    <p>Google Developer Student Clubs<br>
+    VNR Vignana Jyothi Institute of Engineering & Technology</p>
+      `,
     };
     await transporter.sendMail(mailOptions);
     console.log("Email sent successfully");
@@ -77,17 +86,25 @@ function sendGiveAccessEmail(email, blogId) {
     });
     const mailOptions = {
       from: {
-        name: "ACCESS GRANTED",
+        name: "GDSC VNRVJIET",
         address: process.env.USER,
       },
       to: `${email}`,
-      subject: "Access Granted",
+      subject: "Invitation to Share Your Achievement on GDSC VNR VJIET Website",
       html: `
-                <h1>Access Granted</h1>
-                 <a href=https://gdsc-vnrvjiet.vercel.app/edit-blog/${blogId} target="_blank">Add your blog</a>
-                <p>Now you can add blog to our website</p>
-                <p>Best regards</p>
-               
+                <p>Hi,</p>
+    <p>I hope this email finds you well.</p>
+    <p>We are delighted to recognize your achievement, and as a part of our ongoing efforts to inspire and engage our community, we would love to feature your accomplishment on the GDSC VNR VJIET website.</p>
+    <p>We believe that your story will be a valuable source of motivation for our peers and juniors.</p>
+    <p>To contribute your blog, please click on the link below and use your email ID to access the submission portal:</p>
+    <p><a href="https://gdsc-vnrvjiet.vercel.app/edit-blog/${blogId}" target="_blank">Submit Your Blog Post</a></p>
+    <p>Once you have access, you can submit your blog post, including details about your achievement, any challenges you faced, and the impact it has had on your personal or professional growth.</p>
+    <p>If you have any questions or need assistance during the submission process, please feel free to reach out to us.</p>
+    <p>Thank you for considering this opportunity to share your journey with the GDSC community.</p>
+    <br>
+    <p>Best regards,</p>
+    <p>Google Developer Student Clubs<br>
+    VNR Vignana Jyothi Institute of Engineering & Technology</p>
             `,
     };
     transporter.sendMail(mailOptions);

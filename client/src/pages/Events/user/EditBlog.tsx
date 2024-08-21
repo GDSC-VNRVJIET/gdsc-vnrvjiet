@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import Loader from "../../Loader";
 
 interface Blog {
   _id: string;
@@ -15,34 +16,32 @@ interface Blog {
 
 const EditBlog: React.FC = () => {
   const { id } = useParams<{ id: any }>();
-  const [access,setAccess] = useState<boolean>(false);
+  const [access, setAccess] = useState<boolean>(false);
+  const [displayLoader, setDisplayLoader] = useState(true);
+
   useEffect(() => {
     // code for to give access to the particular person only
     const getUserData = async () => {
       try {
-        if(user?.role==="admin")
-        {
+        if (user?.role === "admin") {
+          setDisplayLoader(false);
           setAccess(true);
         }
         const response = await axios.get(
           `${process.env.REACT_APP_BACK_URL}/addblog/getAccessdata/${user?.emailId}`
         );
-        if(response.data.success===true)
-        {
-          if(id===response.data.payload.blogId)
-          {
+        if (response.data.success === true) {
+          if (id === response.data.payload.blogId) {
             setAccess(true);
+            setDisplayLoader(false);
           }
         }
-      } catch (error) {
-        
-      }
-    }
+      } catch (error) {}
+    };
     getUserData();
   }, []);
 
-  
-  console.log(id)
+  console.log(id);
   const navigate = useNavigate();
   const [blog, setBlog] = useState<Blog | null>(null);
   const [title, setTitle] = useState<string>("");
@@ -71,6 +70,7 @@ const EditBlog: React.FC = () => {
         setDescription(blogData.description);
         setCategories(blogData.category.split(","));
         setThumbnail(blogData.thumbnail);
+        setDisplayLoader(false);
       } catch (error) {
         console.error("Error fetching blog:", error);
       }
@@ -126,12 +126,12 @@ const EditBlog: React.FC = () => {
       // add access control allow origin header
       const response = await axios.put(
         `${process.env.REACT_APP_BACK_URL}/addblog/updateblog/${id}`,
-        updatedBlog,
+        updatedBlog
         // { withCredentials: true, headers: { Authorization: `Bearer ${user?.token}` } }
       );
 
       // console.log("Response from backend:", response.data.message);
-      console.log(response)
+      console.log(response);
       if (response.data.message === "Blog updated successfully") {
         alert("Blog updated successfully!");
         navigate(`/blogs/${id}`);
@@ -139,9 +139,7 @@ const EditBlog: React.FC = () => {
     } catch (error) {
       console.error("Error updating blog:", error);
     }
-};
-
-
+  };
 
   // const handleUpdateBlog = async () => {
   //   try {
@@ -167,13 +165,15 @@ const EditBlog: React.FC = () => {
   //     }
 
   //     // alert("Blog updated successfully!");
-      
+
   //   } catch (error) {
   //     console.error("Error updating blog:", error);
   //   }
   // };
 
-  return blog && access ? (
+  return displayLoader ? (
+    <Loader />
+  ) : blog && access ? (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Edit Blog</h2>
       <form className="flex flex-col gap-4">
@@ -250,7 +250,7 @@ const EditBlog: React.FC = () => {
     </div>
   ) : (
     <div className="flex justify-center items-center min-h-screen">
-    <p className="text-red-500 text-6xl">Access Denied</p>
+      <p className="text-red-500 text-6xl">Access Denied</p>
     </div>
   );
 };
