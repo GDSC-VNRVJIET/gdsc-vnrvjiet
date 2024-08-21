@@ -6,7 +6,7 @@ import Loader from "../../Loader";
 interface Blog {
   title: string;
   thumbnail: string;
-  authorname: string;
+  author: string;
   category: string;
   description: string;
 }
@@ -62,7 +62,7 @@ const SingleBlog: React.FC = () => {
           className="rounded-md mb-4 w-full max-h-[450px] object-cover"
         />
         <div className="flex items-center space-x-2">
-          <span className="font-medium">by {blog.authorname}</span>
+          <span className="font-medium">by {blog.author}</span>
           <span className="text-gray-400">• in {blog.category}</span>
         </div>
         <hr className="my-6 border-t-2 border-gray-200" />

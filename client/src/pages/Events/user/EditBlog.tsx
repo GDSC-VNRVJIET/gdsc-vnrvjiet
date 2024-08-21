@@ -11,7 +11,7 @@ interface Blog {
   description: string;
   category: string;
   thumbnail: string;
-  createdBy: number;
+  author: string;
 }
 
 const EditBlog: React.FC = () => {
@@ -49,6 +49,7 @@ const EditBlog: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [thumbnail, setThumbnail] = useState<string>("");
   const [base64Image, setBase64Image] = useState<string>("");
+  const [author,setAuthor] = useState<string>("");
 
   // get local storage details
   const [user, setUser] = useState(
@@ -67,6 +68,7 @@ const EditBlog: React.FC = () => {
         const blogData = response.data.payload;
         setBlog(blogData);
         setTitle(blogData.title);
+        setAuthor(blogData.author);
         setDescription(blogData.description);
         setCategories(blogData.category.split(","));
         setThumbnail(blogData.thumbnail);
@@ -98,6 +100,9 @@ const EditBlog: React.FC = () => {
   const removeCategoryField = (index: number) => {
     const newCategories = categories.filter((_, i) => i !== index);
     setCategories(newCategories);
+  };
+  const handleAuthorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAuthor(e.target.value);
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -184,6 +189,7 @@ const EditBlog: React.FC = () => {
           placeholder="Title"
           className="p-2 border border-gray-300 rounded"
         />
+        <input type="text" value={author} placeholder="Author" onChange={handleAuthorChange} className="p-2 border border-gray-300 rounded" />
         {categories.map((category, index) => (
           <div key={index} className="flex items-center gap-2">
             <input

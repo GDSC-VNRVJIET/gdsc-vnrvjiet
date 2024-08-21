@@ -4,6 +4,7 @@ import axios from "axios";
 import TemporaryBlogs from "./TemporaryBlogs";
 import Loader from "../../Loader";
 interface Blog {
+  author:string;
   thumbnail: string;
   title: string;
   description: string;
@@ -25,6 +26,7 @@ const AdminShowBlogs: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"tab1" | "tab2">("tab1");
   const [showRadioButtons, setShowRadioButtons] = useState<boolean>(false);
   const [selectedBlogId, setSelectedBlogId] = useState<string>("");
+  const [author,setAuthor] = useState<string>("");
   const activateTab = (tab: "tab1" | "tab2") => {
     setActiveTab(tab);
   };
@@ -64,9 +66,13 @@ const AdminShowBlogs: React.FC = () => {
   const handleMailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setMail(e.target.value);
 
+  const handleAuthorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAuthor(e.target.value);
+  };
+
   const handleAddBlog = () => {
     console.log("Blog Title:", blogTitle);
-    navigate("/add-blog", { state: [base64Image1, blogTitle, categories] });
+    navigate("/add-blog", { state: [base64Image1, blogTitle, categories , author] });
     setShowModal(false);
   };
 
@@ -183,6 +189,7 @@ const AdminShowBlogs: React.FC = () => {
                 placeholder="Title"
                 className="p-2 border border-gray-300 rounded"
               />
+              <input type="text" value={author} onChange={handleAuthorChange} required placeholder="Author" className="p-2 border border-gray-300 rounded" />
               {categories.map((category, index) => (
                 <div key={index} className="flex items-center gap-2">
                   <input

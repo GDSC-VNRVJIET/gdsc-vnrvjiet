@@ -7,6 +7,7 @@ import "react-quill/dist/quill.snow.css";
 import { useLocation } from "react-router-dom";
 
 interface FormData {
+  author: string;
   title: string;
   description: string;
   category: string;
@@ -81,6 +82,7 @@ const AddBlog: React.FC = () => {
     formData.append("description", description);
     formData.append("category", state[2]);
     formData.append("thumbnail", state[0]);
+    formData.append("author", state[3]);
     formData.append("show", false.toString());
     console.log(formData);
     createBlog(formData as any);

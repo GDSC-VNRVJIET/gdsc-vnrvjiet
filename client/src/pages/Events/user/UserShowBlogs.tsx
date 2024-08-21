@@ -9,6 +9,7 @@ interface Blog {
   thumbnail: string;
   title: string;
   description: string;
+  author: string;
   category: string;
   [key: string]: any;
 }
