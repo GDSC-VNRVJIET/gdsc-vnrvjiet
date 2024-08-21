@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation , useParams } from "react-router-dom";
 import {WhatsappShareButton,WhatsappIcon,LinkedinIcon,LinkedinShareButton,TwitterIcon,TwitterShareButton,FacebookIcon,FacebookShareButton} from 'react-share'
-import { FaShare } from "react-icons/fa";
+import { FaShareAlt } from "react-icons/fa";
 import axios from "axios";
 import {
   createEvent,
@@ -180,11 +180,11 @@ const PaymentGatewayRazorpay: React.FC = () => {
         </div>
       </div>
     }
-      <div className="product ml-3 mt-3">
+      <div className="product ml-3 mt-6">
         <div className="flex justify-center">
         <h1 className="ml-3 mt-0 text-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">{states?.name}</h1>
-        <div className="ml-3 mt-3 sm:mt-4 md:mt-8 lg:mt-16">
-        <button className="flex text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-3 py-2.5 text-center me-2 mb-2" onClick={()=>setModal(true)}>Share <FaShare className="mt-1 ml-2"/> </button>
+        <div className="ml-3">
+        <button className="text-3xl" onClick={()=>setModal(true)}><FaShareAlt /></button>
         </div>
         </div>
         <p className="text-center mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-blue-400">{states?.description}</p>
@@ -269,13 +269,19 @@ const PaymentGatewayRazorpay: React.FC = () => {
         </div>
         {/* <div className=""></div> */}
         <div className="mt-3 ml-3">
-          <button
-            className="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-            type="submit"
-          >
-            Pay Now
-          </button>
+        <div className="cursor-pointer">
+        <button type="submit" className="relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-medium text-teal-600 transition duration-300 ease-out border-2 border-teal-500 rounded-full shadow-md group">
+      <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-teal-500 group-hover:translate-x-0 ease">
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      </span>
+      <span className="absolute flex items-center justify-center w-full h-full text-teal-500 transition-all duration-300 transform group-hover:translate-x-full ease">Pay Now</span>
+      <span className="relative invisible">Pay Now</span>
+    </button>
+    </div>
         </div>
+        <div className="p-4 flex flex-col items-center justify-center">
+    
+</div>
         </form>
         
       </div>
