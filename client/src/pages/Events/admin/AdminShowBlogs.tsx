@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import TemporaryBlogs from "./TemporaryBlogs";
+import Loader from "../../Loader";
 interface Blog {
   thumbnail: string;
   title: string;
@@ -27,6 +28,7 @@ const AdminShowBlogs: React.FC = () => {
   const activateTab = (tab: "tab1" | "tab2") => {
     setActiveTab(tab);
   };
+  const [displayLoader, setDisplayLoader] = useState(true);
   // function handleAccess() {
   //   setMailModal(true);
   // }
@@ -41,12 +43,15 @@ const AdminShowBlogs: React.FC = () => {
         // Ensure response.data.payload is an array
         if (Array.isArray(response.data.payload)) {
           setBlogs(response.data.payload);
+          setDisplayLoader(false);
         } else {
           console.error("Unexpected response format: payload is not an array");
           setBlogs([]);
+          setDisplayLoader(false);
         }
       } catch (error) {
         console.error("Error fetching blogs:", error);
+        setDisplayLoader(false);
         setBlogs([]);
       }
     };
@@ -121,7 +126,9 @@ const AdminShowBlogs: React.FC = () => {
       console.error("Error sending email:", error);
     }
   };
-  return (
+  return displayLoader ? (
+    <Loader />
+  ) : (
     <div>
       <div className="bg-gray-100 p-4 flex items-center justify-between">
         <div className="flex items-center ml-6">
@@ -137,27 +144,26 @@ const AdminShowBlogs: React.FC = () => {
             <p className="text-gray-600">Blogs by GDSC achievers</p>
           </div>
         </div>
-        {
-          activeTab === "tab1" &&
-        <div className="flex justify-center">
-          <button
-            className="bg-blue-600 text-white py-2 px-4 rounded cursor-pointer mr-3"
-            onClick={() => setShowModal(true)}
-          >
-            + Add Blog
-          </button>
-          {/* Change the button colour */}
+        {activeTab === "tab1" && (
+          <div className="flex justify-center">
+            <button
+              className="bg-blue-600 text-white py-2 px-4 rounded cursor-pointer mr-3"
+              onClick={() => setShowModal(true)}
+            >
+              + Add Blog
+            </button>
+            {/* Change the button colour */}
 
-          <button
-            onClick={handleAccess}
-            className="bg-gray-800 text-white py-2 px-4 rounded cursor-pointer"
-          >
-            Give Access
-          </button>
-        </div>
-}
+            <button
+              onClick={handleAccess}
+              className="bg-gray-800 text-white py-2 px-4 rounded cursor-pointer"
+            >
+              Give Access
+            </button>
+          </div>
+        )}
       </div>
-        
+
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md relative">
@@ -313,7 +319,10 @@ const AdminShowBlogs: React.FC = () => {
                         className="absolute top-4 right-4 border-8 border-blue-600"
                       />
                     )}
-                    <div onClick={() => handleBlogClick(blog._id)} className="flex flex-col justify-between gap-3 px-4 py-2">
+                    <div
+                      onClick={() => handleBlogClick(blog._id)}
+                      className="flex flex-col justify-between gap-3 px-4 py-2"
+                    >
                       {blog.description.length < 140 ? (
                         <p
                           className="text-gray-600 two-lines"
@@ -336,13 +345,10 @@ const AdminShowBlogs: React.FC = () => {
                             <span>{cat.trim()}</span>
                           </li>
                         ))}
-                        
                       </ul>
                     </div>
                   </li>
-                  
                 </div>
-                
               ))
             ) : (
               <p>No blogs available.</p>

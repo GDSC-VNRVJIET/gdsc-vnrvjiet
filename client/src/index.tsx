@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import Loader from "./pages/Loader";
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
 const Index = () => {
@@ -16,7 +16,10 @@ const Index = () => {
   return (
     <>
       {!isAnimationCompleted && (
-        <Loader handleAnimationComplete={handleAnimationComplete} />
+        <Loader
+          handleAnimationComplete={handleAnimationComplete}
+          loop={false}
+        />
       )}
       <div
         className={`transition-opacity duration-500 ${
@@ -33,7 +36,9 @@ const Index = () => {
   );
 };
 
-const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 root.render(
   <React.StrictMode>
     <Index />
