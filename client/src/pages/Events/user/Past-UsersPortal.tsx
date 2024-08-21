@@ -1,18 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  getAllEvents,
-  getEventById,
-  getPastEvents,
-  getUpcomingEvents,
-} from "../../../Apis/events";
-import {
-  getAllRegistrationsByUserId,
-  updateRegistration,
-} from "../../../Apis/registrations";
-import ConfettiExplosion from "react-confetti-explosion";
-import { getUserById } from "../../../Apis/users";
+import { getPastEvents } from "../../../Apis/events";
 // import noEvents from "../noEvents.png";
-import { format } from "date-fns";
 import Loader from "../../Loader";
 
 interface Event {
@@ -101,44 +89,52 @@ function UserPortalPast() {
     <div className="min-h-full p-4">
       <div
         className="HeroSection flex flex-col  bg-cover bg-center bg-no-repeat m-4"
-        style={heroStyle}
+        // style={heroStyle}
       >
-        <img src="" />
-        <h2 className="text-2xl font-bold mb-4 my-auto">
+        <div className="flex justify-center">
+          <video className="lg:w-3/4 sm:w-full animate-fadeIn"  width="" height="" autoPlay loop muted>
+            <source
+              src={`${process.env.PUBLIC_URL}/banner.mp4`}
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        {/* <h2 className="text-2xl font-bold mb-4 my-auto">
           Welcome
-          {/* back, {userData?.name}. */}
-        </h2>
+          back, {userData?.name}.
+        </h2> */}
       </div>
-
-      <div>
-        {events.length ? (
-          <>
-            <h3 className="text-xl font-semibold mb-4">Past Events</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {events.map((event) => (
-                <div
-                  key={event.eventId}
-                  className="bg-white rounded shadow-lg max-w-sm hover:scale-105 duration-200 border border-slate-400 p-4"
-                >
-                  <h4 className="text-lg font-semibold mb-3">{event.name}</h4>
-                  <p>
-                    {" "}
-                    <strong>What's Happening : </strong>
-                    {event.description}
-                  </p>
-                  <p className="py-2">
-                    <strong>When : </strong>{" "}
-                    {/* {format(new Date(event.startDate), "yyyy-MM-dd HH:mm")} to{" "}
+      <div className="flex justify-evenly">
+        <div>
+          {events.length ? (
+            <>
+              <h3 className="text-xl font-semibold mb-7 mt-5 text-center">Past Events</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {events.map((event) => (
+                  <div
+                    key={event.eventId}
+                    className="bg-white rounded shadow-lg max-w-sm hover:scale-105 duration-200 border border-slate-400 p-4 sm:me-5"
+                  >
+                    <h4 className="text-lg font-semibold mb-3">{event.name}</h4>
+                    <p>
+                      {" "}
+                      <strong>What's Happening : </strong>
+                      {event.description}
+                    </p>
+                    <p className="py-2">
+                      <strong>When : </strong>{" "}
+                      {/* {format(new Date(event.startDate), "yyyy-MM-dd HH:mm")} to{" "}
                     {format(new Date(event.endDate), "yyyy-MM-dd HH:mm")} */}
-                    {event.startDate}
-                    {" - "}
-                    {event.endDate}
-                  </p>
-                  <p>
-                    <strong>Where : </strong>
-                    {event.venue}
-                  </p>
-                  {/* <button
+                      {event.startDate}
+                      {" - "}
+                      {event.endDate}
+                    </p>
+                    <p>
+                      <strong>Where : </strong>
+                      {event.venue}
+                    </p>
+                    {/* <button
                     onClick={() => handleRegisterForEvent(event.eventId)}
                     className="bg-[#0F71F2] rounded px-3 py-1 mt-2 hover:ring-4  "
                   >
@@ -161,20 +157,21 @@ function UserPortalPast() {
                       ? "Registered !"
                       : "Register"}
                   </button> */}
-                </div>
-              ))}
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="flex items-center justify-center ">
+              <p>{message}</p>
+              <img
+                src="https://hadibuttt.github.io/GDSC-Portfolio-Site/img/main.png"
+                alt="image"
+                className="w-[75vw] md:w-[40vw]"
+              />
             </div>
-          </>
-        ) : (
-          <div className="flex items-center justify-center ">
-            <p>{message}</p>
-            <img
-              src="https://hadibuttt.github.io/GDSC-Portfolio-Site/img/main.png"
-              alt="image"
-              className="w-[75vw] md:w-[40vw]"
-            />
-          </div>
-        )}
+          )}
+        </div>
       </div>
       {/* <div>
         <h3 className="text-xl font-semibold">Registered Events</h3>

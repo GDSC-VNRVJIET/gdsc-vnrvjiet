@@ -22,6 +22,11 @@ function Navbar() {
     };
     getData();
   }, [userId]);
+  const [users, setUsers] = useState(
+    JSON.parse(localStorage.getItem("userObjGDSC") || "null") as {
+      role: string;
+    } | null
+  );
 
   const handleLogOut = async () => {
     await localStorage.removeItem("userObjGDSC");
@@ -122,9 +127,12 @@ function Navbar() {
           <button className="pl-5">
             <NavLink to="/">Home</NavLink>
           </button>
+          {
+            users?.role==="admin" &&
           <button className="pl-5">
             <NavLink to="/enter">Evaluate</NavLink>
           </button>
+}
           <button className="pl-5">
             <NavLink to="/leaderboard">Leaderboard</NavLink>
           </button>
