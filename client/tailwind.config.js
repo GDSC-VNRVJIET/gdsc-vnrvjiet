@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      backgroundImage:{
+        'gradient-text': 'linear-gradient(to right, #db3803, #e5cc00, #a8c567, #7bbad2, #588fb5)',
+      },
       keyframes: {
         fadeIn: {
           '0%': { opacity: 0 },

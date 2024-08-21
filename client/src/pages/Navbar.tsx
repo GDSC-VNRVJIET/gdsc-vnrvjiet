@@ -7,7 +7,6 @@ function Navbar() {
   
   const [isOpen, setIsOpen] = useState(false);
   const [dropOpen, setDropOpen] = useState(false);
-  const [policiesOpen, setPoliciesOpen] = useState(false);
   const [showSignout, setShowSignout] = useState(false);
   const userObjGDSC = localStorage.getItem("userObjGDSC");
   const userId = userObjGDSC ? JSON.parse(userObjGDSC).userId : null;
@@ -81,7 +80,7 @@ function Navbar() {
         <div className="flex flex-col md:flex-row ml-auto text-center text-slate-600">
           <div className="relative">
             <button
-              className="pl-5 pt-2"
+              className="pl-5 pt-1"
               onClick={() => setDropOpen(!dropOpen)}
             >
               About GDSC <span className="text-lg">&#9662;</span>
@@ -148,39 +147,6 @@ function Navbar() {
           <button className="pl-5">
             <NavLink to="/contact-us">Contact Us</NavLink>
           </button>
-          <div className="relative">
-            <button
-              className="pl-5 pt-2"
-              onClick={() => setPoliciesOpen(!policiesOpen)}
-            >
-              Policies <span className="text-lg">&#9662;</span>
-            </button>
-            {policiesOpen && (
-              <div
-                className="absolute right-0 mt-4 w-max bg-white shadow-lg border-2 border-grey"
-                onBlur={() => setPoliciesOpen(false)}
-              >
-                <NavLink
-                  to="/terms-and-conditions"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  Terms and Conditions
-                </NavLink>
-                <NavLink
-                  to="/privacy-policy"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  Privacy Policy
-                </NavLink>
-                <NavLink
-                  to="/refund-policy"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  Refund Policy
-                </NavLink>
-              </div>
-            )}
-          </div>
           {userObjGDSC == null ? (
             <button className="pl-5 relative">
               <NavLink to="/login">Login</NavLink>

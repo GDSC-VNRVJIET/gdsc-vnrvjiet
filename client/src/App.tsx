@@ -1,5 +1,6 @@
 import Root from "./Root";
 import "./output.css";
+import Footer from "./pages/Footer";
 import Navbar from "./pages/Navbar";
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -9,6 +10,7 @@ function App() {
         <Navbar />
         <Root />
         <Toaster />
+        <Footer />
       </div>
   );
 }

@@ -95,7 +95,7 @@ const Contactus: React.FC = () => {
   };
 
   return (
-    <div className="h-screen p-10 bg-gray-100 ">
+    <div className="p-10 bg-gray-100 ">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div className="p-5">
           <h2 className="text-xl font-semibold mb-4">Have a Question?</h2>
