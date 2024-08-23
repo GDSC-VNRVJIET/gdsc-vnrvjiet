@@ -1,5 +1,7 @@
 import React from 'react';
 import ManikantaImage from '../Domain Info/images/WEB DEV/Manikanta.jpg';
+import KarthikImage from '../Domain Info/images/WEB DEV/Karthik.jpg';
+import VarunImage from '../Domain Info/images/WEB DEV/Varun.jpg';
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
@@ -7,13 +9,29 @@ import { FaGithub } from "react-icons/fa";
 function WebDev() {
   const members = [
     {
-      name: 'Sri Manikanta Battu',
+      name: 'Sri Manikanta',
       role: 'Web Development Volunteer',
       image: ManikantaImage,
       linkedin: '#',
       github: '#',
       instagram: '#',
     },
+    {
+      name: 'Karthik',
+      role: 'Web Development Volunteer',
+      image: KarthikImage,
+      linkedin: '#',
+      github: '#',
+      instagram: '#',
+    },
+    {
+      name: 'Varun',
+      role: 'Web Development Volunteer',
+      image: VarunImage,
+      linkedin: '#',
+      github: '#',
+      instagram: '#',
+    }
   ];
 
   return (
