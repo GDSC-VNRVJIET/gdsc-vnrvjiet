@@ -146,36 +146,6 @@ const EditBlog: React.FC = () => {
     }
   };
 
-  // const handleUpdateBlog = async () => {
-  //   try {
-  //     const updatedBlog = {
-  //       title,
-  //       description,
-  //       category: categories.join(","),
-  //       thumbnail: base64Image || thumbnail,
-  //     };
-
-  //     console.log(updatedBlog)
-  //     // add access control allow origin header
-  //     const response = await axios.put(
-  //       `${process.env.REACT_APP_BACK_URL}/addblog/updateblog/${id}`,
-
-  //       updatedBlog,
-  //       {withCredentials:true , headers:{Authorization:`Bearer ${user?.token}`}}
-  //     );
-  //     console.log(response.data.message)
-  //     if(response.data.message === "Blog updated successfully"){
-  //       alert("Blog updated successfully!");
-  //       navigate(`/blogs/${id}`);
-  //     }
-
-  //     // alert("Blog updated successfully!");
-
-  //   } catch (error) {
-  //     console.error("Error updating blog:", error);
-  //   }
-  // };
-
   return displayLoader ? (
     <Loader />
   ) : blog && access ? (
@@ -222,29 +192,6 @@ const EditBlog: React.FC = () => {
           onChange={setDescription}
           className="mb-4"
         />
-        {/* <label className="border-dashed border-2 border-gray-500 p-4 rounded cursor-pointer flex flex-col items-center">
-          <span className="text-gray-700">Change Thumbnail (optional)</span>
-          <input
-            className="hidden"
-            type="file"
-            accept="image/png, image/jpg, image/jpeg"
-            onChange={handleImageChange}
-          />
-        </label> */}
-        {/* {thumbnail && !base64Image && (
-          <img
-            src={thumbnail}
-            alt="Current Thumbnail"
-            className="max-w-full h-auto mt-4"
-          />
-        )} */}
-        {/* {base64Image && (
-          <img
-            src={base64Image}
-            alt="New Thumbnail"
-            className="max-w-full h-auto mt-4"
-          />
-        )} */}
         <button
           type="button"
           onClick={handleUpdateBlog}
