@@ -16,10 +16,12 @@ const OrgChart = () => {
           />
           <h2 className="text-xl font-semibold">Lead</h2>
         </div>
+      </div>
+      <div className="flex justify-center space-x-12 mb-12">
         <div className="flex flex-col items-center">
           <img
-            src="co_lead_image_url"
-            alt="Co-Lead"
+            src="lead_image_url"
+            alt="Lead"
             className="w-28 h-28 rounded-full border-4 border-yellow-500 mb-4"
           />
           <h2 className="text-xl font-semibold">Co-Lead</h2>
