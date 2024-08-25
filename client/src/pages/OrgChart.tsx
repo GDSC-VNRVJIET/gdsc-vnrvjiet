@@ -10,7 +10,7 @@ const OrgChart = () => {
       <div className="flex justify-center space-x-12 mb-12">
         <div className="flex flex-col items-center">
           <img
-            src="lead_image_url"
+            src=""
             alt="Lead"
             className="w-28 h-28 rounded-full border-4 border-yellow-500 mb-4"
           />
@@ -20,7 +20,7 @@ const OrgChart = () => {
       <div className="flex justify-center space-x-12 mb-12">
         <div className="flex flex-col items-center">
           <img
-            src="lead_image_url"
+            src=""
             alt="Lead"
             className="w-28 h-28 rounded-full border-4 border-yellow-500 mb-4"
           />
@@ -32,7 +32,7 @@ const OrgChart = () => {
       <div className="grid grid-cols-5 gap-12">
         <div className="flex flex-col items-center">
           <img
-            src="webdev_lead_image_url"
+            src=""
             alt="WebDev Lead"
             className="w-24 h-24 rounded-full border-4 border-green-500 mb-4"
           />
@@ -40,7 +40,7 @@ const OrgChart = () => {
         </div>
         <div className="flex flex-col items-center">
           <img
-            src="cp_lead_image_url"
+            src=""
             alt="CP Lead"
             className="w-24 h-24 rounded-full border-4 border-green-500 mb-4"
           />
@@ -48,7 +48,7 @@ const OrgChart = () => {
         </div>
         <div className="flex flex-col items-center">
           <img
-            src="management_lead_image_url"
+            src=""
             alt="Management Lead"
             className="w-24 h-24 rounded-full border-4 border-green-500 mb-4"
           />
@@ -56,7 +56,7 @@ const OrgChart = () => {
         </div>
         <div className="flex flex-col items-center">
           <img
-            src="ml_lead_image_url"
+            src=""
             alt="ML Lead"
             className="w-24 h-24 rounded-full border-4 border-green-500 mb-4"
           />
@@ -64,7 +64,7 @@ const OrgChart = () => {
         </div>
         <div className="flex flex-col items-center">
           <img
-            src="design_lead_image_url"
+            src=""
             alt="Design Lead"
             className="w-24 h-24 rounded-full border-4 border-green-500 mb-4"
           />
