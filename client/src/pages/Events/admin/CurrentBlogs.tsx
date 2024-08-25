@@ -14,7 +14,7 @@ interface Blog {
   [key: string]: any;
 }
 
-const UserShowBlogs: React.FC = () => {
+const CurrentBlogs: React.FC = () => {
   const colors = [
     "bg-gradient-to-b from-sky-400 to-blue-500",
     "bg-gradient-to-r from-pink-600 to-rose-400",
@@ -64,22 +64,6 @@ const UserShowBlogs: React.FC = () => {
     <Loader />
   ) : (
     <div>
-      <div className="bg-gray-100 p-4 flex items-center justify-between">
-        <div className="flex items-center ml-6">
-          <div className="bg-white rounded-lg p-2 shadow-md flex items-center justify-center h-20">
-            <img
-              src="https://cdn-images-1.medium.com/max/578/1*vZVM7utCuRiZ6-HDsNeYUA@2x.png"
-              alt="GDSC Logo"
-              className="h-10 w-15"
-            />
-          </div>
-          <div className="ml-4">
-            <h1 className="text-xl font-bold">Blogs</h1>
-            <p className="text-gray-600">Blogs by GDSC achievers</p>
-          </div>
-        </div>
-      </div>
-
       <div>
         <ul className="mt-10">
           {blogs.length > 0 ? (
@@ -198,4 +182,4 @@ const UserShowBlogs: React.FC = () => {
   );
 };
 
-export default UserShowBlogs;
+export default CurrentBlogs;

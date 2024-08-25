@@ -10,7 +10,7 @@ function Navbar() {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
   const userId = userObjGDSC ? JSON.parse(userObjGDSC).userId : null;
   const [user, setUser] = useState<{ name: string }>();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     const getData = async () => {
       if (userId) {
@@ -29,7 +29,7 @@ function Navbar() {
   const handleLogOut = async () => {
     await localStorage.removeItem("userObjGDSC");
     
-    // navigate("/login");
+    navigate("/");
   };
 
   return (

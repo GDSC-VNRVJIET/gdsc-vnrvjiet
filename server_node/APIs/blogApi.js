@@ -128,4 +128,20 @@ blogApp.put("/change/:id", expressAsyncHandler(async (req, res) => {
       res.status(500).json({ success: false, message: "Server error" });
     }
   }));
+
+// api for deleting a particular blog using its MongoId
+blogApp.delete("/delete/:id", expressAsyncHandler(async (req, res) => {
+  try {
+    let blogCollection = await getDBObj("blogCollectionObject");
+    const blogId = req.params.id;
+    const result = await blogCollection.deleteOne({ _id: new ObjectId(blogId) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ success: false, message: "Blog not found" });
+    }
+    res.json({ success: true, message: "Blog deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting blog:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+}))  
 module.exports = blogApp;
