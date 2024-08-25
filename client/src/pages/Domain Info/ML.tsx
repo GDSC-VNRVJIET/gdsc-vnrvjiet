@@ -3,6 +3,7 @@ import SharanImage from '../Domain Info/images/ML/SriSharanTej.jpg';
 import KeerthikaImage from '../Domain Info/images/ML/KeerthikaGoli.jpg';
 import RoshiniImage from '../Domain Info/images/ML/KotagiriRoshini.jpg';
 import BharathImage from '../Domain Info/images/ML/BharathChandra.jpg';
+import VishwaImage from '../Domain Info/images/ML/Viswa Prateek Tummala .jpg';
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
@@ -37,6 +38,14 @@ function ML() {
       name: 'Bharath Chandra',
       role: 'Machine Learning Volunteer',
       image: BharathImage,
+      linkedin: '#',
+      github: '#',
+      instagram: '#',
+    },
+    {
+      name: 'Vishwa Prateek',
+      role: 'Machine Learning Volunteer',
+      image: VishwaImage,
       linkedin: '#',
       github: '#',
       instagram: '#',

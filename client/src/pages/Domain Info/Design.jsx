@@ -2,7 +2,12 @@ import React from 'react';
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-import PoojaImage from './images/design/Poojasiri.jpg';
+import PoojaImage from '../Domain Info/images/Design/Poojasiri.jpg';
+import SiddeshwariImage from '../Domain Info/images/Design/Siddeshwari _Adepu.jpg';
+import PraneethaImage from '../Domain Info/images/Design/Praneetha.jpg';
+import ChAnirudhImage from '../Domain Info/images/Design/Anirudh.jpg';
+import AnirudhPImage from '../Domain Info/images/Design/Anirudh P.jpg';
+
 
 function ML() {
   const members = [
@@ -13,7 +18,39 @@ function ML() {
       linkedin: '#',
       github: '#',
       instagram: '#',
-    }
+    },
+    {
+      name: 'Siddeshwari',
+      role: 'Design Coordinator',
+      image: SiddeshwariImage,
+      linkedin: '#',
+      github: '#',
+      instagram: '#',
+    },
+    {
+      name: 'Pavan Praneetha',
+      role: 'Design Coordinator',
+      image: PraneethaImage,
+      linkedin: '#',
+      github: '#',
+      instagram: '#',
+    },
+    {
+      name: 'Ch.Anirudh',
+      role: 'Design Volunteer',
+      image: ChAnirudhImage,
+      linkedin: '#',
+      github: '#',
+      instagram: '#',
+    },
+    {
+      name: 'P. Anirudh',
+      role: 'Design Volunteer',
+      image: AnirudhPImage,
+      linkedin: '#',
+      github: '#',
+      instagram: '#',
+    },
   ];
 
   return (

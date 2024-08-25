@@ -1,13 +1,23 @@
 import React from 'react';
+import JahnaviImage from '../Domain Info/images/WEB DEV/Sai Jahnavi Rallapalli.jpeg';
 import ManikantaImage from '../Domain Info/images/WEB DEV/Manikanta.jpg';
 import KarthikImage from '../Domain Info/images/WEB DEV/Karthik.jpg';
 import VarunImage from '../Domain Info/images/WEB DEV/Varun.jpg';
+import DedeepyaImage from '../Domain Info/images/WEB DEV/Vellanki Chenchu Dedeepya .jpg';
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 
 function WebDev() {
   const members = [
+    {
+      name: 'Sai Jahnavi',
+      role: 'Web Development Coordinator',
+      image: JahnaviImage,
+      linkedin: '#',
+      github: '#',
+      instagram: '#',
+    },
     {
       name: 'Sri Manikanta',
       role: 'Web Development Volunteer',
@@ -31,7 +41,15 @@ function WebDev() {
       linkedin: '#',
       github: '#',
       instagram: '#',
-    }
+    },
+    {
+      name: 'Dedeepya',
+      role: 'Web Development Volunteer',
+      image: DedeepyaImage,
+      linkedin: '#',
+      github: '#',
+      instagram: '#',
+    },
   ];
 
   return (

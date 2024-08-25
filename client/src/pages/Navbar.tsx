@@ -75,8 +75,12 @@ function Navbar() {
           <span className="absolute inset-0 group-hover:bg-blue-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
         </button>
           <button className="relative px-4 py-2 overflow-hidden rounded-lg group hover:text-white ">
-            <NavLink to="/leads" className="relative z-10">Leads</NavLink>
+            <NavLink to="/team" className="relative z-10">Team </NavLink>
             <span className="absolute inset-0 group-hover:bg-blue-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
+          </button>
+          <button className="relative px-4 py-2 overflow-hidden rounded-lg group hover:text-white ">
+            <NavLink to="/orgchart" className="relative z-10">Org Chart </NavLink>
+            <span className="absolute inset-0 group-hover:bg-yellow-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
           </button>
           <button className="relative px-4 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/blogs" className="relative z-10">Blog</NavLink>

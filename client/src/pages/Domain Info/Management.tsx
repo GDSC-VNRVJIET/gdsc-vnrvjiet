@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import SahithiImage from '../Domain Info/images/MANAGEMENT/Sahithi.jpg';
 import VarunImage from '../Domain Info/images/MANAGEMENT/GVK.jpg';
+import JahnaviImage from '../Domain Info/images/MANAGEMENT/Jahnavi Reddy.png';
 import RakshithaImage from '../Domain Info/images/MANAGEMENT/SaiRakshita.jpg';
+import AbhijeetImage from '../Domain Info/images/MANAGEMENT/Abhijeet.png';
 import SadhikImage from '../Domain Info/images/MANAGEMENT/Sadhik.jpg';
 import SriKruthiImage from '../Domain Info/images/MANAGEMENT/SriKruthi.jpg';
 import { FiInstagram } from "react-icons/fi";
@@ -22,6 +24,14 @@ function WebDev() {
         name: 'Vinay Kalyan',
         role: 'Management Coordinator',
         image: VarunImage,
+        linkedin: '#',
+        github: '#',
+        instagram: '#',
+      },
+      {
+        name: 'Jahnavi Reddy',
+        role: 'Management Coordinator',
+        image: JahnaviImage,
         linkedin: '#',
         github: '#',
         instagram: '#',
@@ -50,7 +60,16 @@ function WebDev() {
         github: '#',
         instagram: '#',
       },
+      {
+        name: 'Abhijeet',
+        role: 'Management Volunteer',
+        image: AbhijeetImage,
+        linkedin: '#',
+        github: '#',
+        instagram: '#',
+      },
   ];
+
 
   return (
     <div className="bg-gray-50 p-8">
@@ -97,6 +116,7 @@ function WebDev() {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }

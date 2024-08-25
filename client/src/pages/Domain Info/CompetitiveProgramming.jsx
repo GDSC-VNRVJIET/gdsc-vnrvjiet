@@ -1,5 +1,7 @@
 import React from 'react';
+import HarshaImage from '../Domain Info/images/CP/Harsha Vardhan.jpg';
 import VighneshImage from '../Domain Info/images/CP/VighneshVangari.jpg';
+import DivyaImage from '../Domain Info/images/CP/Divya Sri.jpg';
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
@@ -7,6 +9,22 @@ import { FaGithub } from "react-icons/fa";
 
 function CompetitiveProgramming() {
   const members = [
+    {
+      name: 'Harsha Vardhan',
+      role: 'Competitive Programming Coordinator',
+      image: HarshaImage,
+      linkedin: '#',
+      github: '#',
+      instagram: '#',
+    },
+    {
+      name: 'Divya Sri',
+      role: 'Competitive Programming Volunteer',
+      image: DivyaImage,
+      linkedin: '#',
+      github: '#',
+      instagram: '#',
+    },
     {
       name: 'Vighnesh',
       role: 'Competitive Programming Volunteer',

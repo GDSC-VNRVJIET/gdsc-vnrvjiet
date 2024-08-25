@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useInView, useAnimation, MotionValue } from "framer-motion";
+import { motion, useInView, useAnimation } from "framer-motion";
+// import BharathImage from "./images/bharathsir.png";
+import BharathImage from "./images/Bharath.jpg";
 import leadimg from "./images/lead.png";
 import colead from "./images/colead.png";
 import managelead from "./images/managementlead.png";
@@ -8,7 +10,7 @@ import applead from "./images/appdevlead.png";
 import weblead from "./images/webdevlead.png";
 import creativelead from "./images/creativelead.png";
 
-function Leads() {
+function Team() {
   const Reveal = ({ children }: any) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: false });
@@ -88,10 +90,33 @@ function Leads() {
   return (
     <div>
       <h1 className="text-4xl text-slate-800 font-bold text-center pt-10">
+        Faculty Advisor
+      </h1>
+      <div className="flex flex-col w-90 bg-white border m-2 mt-10 p-4 border-slate-100 sm:flex-row">
+      <div className={`shrink-0 h-[222px] overflow-hidden`}>
+              <img
+                src={BharathImage}
+                alt="image"
+                className=" shrink-0 rounded-full w-full h-full object-cover"
+              />
+            </div>
+        <div className="shrink p-6">
+          <p className="shrink mb-4 border-2 border-blue-600 rounded-lg m-4 p-4">
+            <Reveal>
+              {`""`}
+            </Reveal>
+          </p>
+          <h3 className="text-1xl sm:text-2xl m-4 italic">
+            - Dr. P. Bharath Kumar
+          </h3>
+        </div>
+      </div>
+
+      <h1 className="text-4xl text-slate-800 font-bold text-center pt-10">
         Lead's Testimonials :
       </h1>
       <div className="">
-        {testimonials.map((testimonials, index) => (
+        {testimonials.map((testimonial, index) => (
           <div
             key={index}
             className={`flex flex-col w-90 bg-white border m-2 mt-10 p-4 border-slate-100 ${
@@ -100,7 +125,7 @@ function Leads() {
           >
             <div className={`shrink-0 h-[222px] overflow-hidden`}>
               <img
-                src={testimonials.image}
+                src={testimonial.image}
                 alt="image"
                 className=" shrink-0 rounded-full w-full h-full object-cover"
               />
@@ -108,10 +133,10 @@ function Leads() {
 
             <div className="shrink p-6">
               <p className=" shrink mb-4 border-2 border-green-600 rounded-lg m-4 p-4">
-                <Reveal>{testimonials.description}</Reveal>
+                <Reveal>{testimonial.description}</Reveal>
               </p>
               <h3 className="text-1xl sm:text-2xl m-4 italic">
-                - {testimonials.title}
+                - {testimonial.title}
               </h3>
             </div>
           </div>
@@ -121,4 +146,4 @@ function Leads() {
   );
 }
 
-export default Leads;
+export default Team;

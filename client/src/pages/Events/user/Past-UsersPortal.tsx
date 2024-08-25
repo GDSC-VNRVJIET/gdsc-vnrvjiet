@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getPastEvents } from "../../../Apis/events";
 import Loader from "../../Loader";
-import { FaYoutube } from "react-icons/fa";
 
 interface Event {
   eventId: number;
@@ -23,6 +23,7 @@ function UserPortalPast() {
   );
   const [message, setMessage] = useState("No past events for now :(");
   const [displayLoader, setDisplayLoader] = useState(true);
+  const navigate = useNavigate();
 
   async function fetchData() {
     try {
@@ -42,6 +43,11 @@ function UserPortalPast() {
   useEffect(() => {
     fetchData();
   }, []);
+  const handleCardClick = (event: Event) => {
+        if (event.name === "GDSC Solution Challenge") {
+          navigate("/solution-challenge"); // Navigate to the Solution Challenge page
+        }
+      };
 
   return displayLoader ? (
     <Loader />
@@ -139,6 +145,7 @@ function UserPortalPast() {
                 {events.map((event, index) => (
                   <div
                     key={event.eventId}
+                    onClick={() => handleCardClick(event)}
                     className="bg-white rounded-xl shadow-2xl max-w-2xl hover:scale-105 duration-200 border border-slate-400 p-8 relative overflow-hidden group"
                   >
                     <img
