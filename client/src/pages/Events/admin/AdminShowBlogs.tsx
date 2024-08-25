@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import TemporaryBlogs from "./TemporaryBlogs";
+import CurrentBlogs from "./CurrentBlogs";
 import Loader from "../../Loader";
 interface Blog {
   author:string;
@@ -136,20 +136,7 @@ const AdminShowBlogs: React.FC = () => {
     <Loader />
   ) : (
     <div>
-      <div className="bg-gray-100 p-4 flex items-center justify-between">
-        <div className="flex items-center ml-6">
-          <div className="bg-white rounded-lg p-2 shadow-md flex items-center justify-center h-20">
-            <img
-              src="https://cdn-images-1.medium.com/max/578/1*vZVM7utCuRiZ6-HDsNeYUA@2x.png"
-              alt="GDSC Logo"
-              className="h-10 w-15"
-            />
-          </div>
-          <div className="ml-4">
-            <h1 className="text-xl font-bold">Blogs</h1>
-            <p className="text-gray-600">Blogs by GDSC achievers</p>
-          </div>
-        </div>
+      <div className="bg-gray-100 p-4 flex items-center justify-end">
         {activeTab === "tab1" && (
           <div className="flex justify-center">
             <button
@@ -362,7 +349,7 @@ const AdminShowBlogs: React.FC = () => {
             )}
           </ul>
         ) : (
-          <TemporaryBlogs />
+          <CurrentBlogs />
         )}
       </div>
     </div>
