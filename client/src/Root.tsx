@@ -39,7 +39,6 @@ import WebDev from "./pages/Domain Info/WebDev";
 import CompetitiveProgramming from "./pages/Domain Info/CompetitiveProgramming";
 import ML from "./pages/Domain Info/ML";
 import Management from "./pages/Domain Info/Management";
-import OrgChart from "./pages/OrgChart";
 import Teams from "./pages/leaderboard/Teams";
 
 const isAdmin = () => {
@@ -135,7 +134,6 @@ function Root() {
         <Route path="/blogs" element={<Blog />}></Route>
         <Route path="/forum" element={<Forum />} />
         <Route path="/team" element={<Team />} />
-        <Route path="/orgchart" element={<OrgChart />} />
         <Route path="/solution-challenge" element={<SolutionChallenge />} />
         <Route path="/community-guidelines" element={<CommunityGuidelines />} />
         <Route path="/add-blog" element={<AddBlog />} />
