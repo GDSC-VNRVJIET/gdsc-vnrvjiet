@@ -17,6 +17,12 @@ const SingleBlog: React.FC = () => {
   const [displayLoader, setDisplayLoader] = useState(true);
   const navigate = useNavigate();
 
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("userObjGDSC") || "null") as {
+      role: string;
+    } | null
+  );
+
   useEffect(() => {
     const fetchBlog = async () => {
       try {
@@ -70,12 +76,15 @@ const SingleBlog: React.FC = () => {
           className="mb-4 text-gray-600"
           dangerouslySetInnerHTML={{ __html: blog.description }}
         ></p>
+        {
+          user?.role === "admin" &&
         <button
           onClick={handleClick}
           className="border border-green-500 text-green-500 font-bold py-2 px-4 rounded"
         >
           Post Blog
         </button>
+}
       </article>
     </div>
   );

@@ -10,6 +10,7 @@ interface Blog {
   [key: string]: any; // In case there are other fields not mentioned
 }
 
+// These are the permanent Blogs that are allowed by the Admin
 const TemporaryBlogs: React.FC = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const navigate = useNavigate();
