@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import SahithiImage from '../Domain Info/images/MANAGEMENT/Sahithi.jpg';
-import VarunImage from '../Domain Info/images/MANAGEMENT/GVK.jpg';
-import JahnaviImage from '../Domain Info/images/MANAGEMENT/Jahnavi Reddy.png';
-import RakshithaImage from '../Domain Info/images/MANAGEMENT/SaiRakshita.jpg';
-import AbhijeetImage from '../Domain Info/images/MANAGEMENT/Abhijeet.png';
-import SadhikImage from '../Domain Info/images/MANAGEMENT/Sadhik.jpg';
-import SriKruthiImage from '../Domain Info/images/MANAGEMENT/SriKruthi.jpg';
+import SahithiImage from './images/MANAGEMENT/Sahithi.jpg';
+import VarunImage from './images/MANAGEMENT/GVK.jpg';
+import JahnaviImage from './images/MANAGEMENT/Jahnavi Reddy.png';
+import RakshithaImage from './images/MANAGEMENT/SaiRakshita.jpg';
+import AbhijeetImage from './images/MANAGEMENT/Abhijeet.png';
+import SadhikImage from './images/MANAGEMENT/Sadhik.jpg';
+import SriKruthiImage from './images/MANAGEMENT/SriKruthi.jpg';
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";

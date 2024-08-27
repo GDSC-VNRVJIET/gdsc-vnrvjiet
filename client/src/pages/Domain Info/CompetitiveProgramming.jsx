@@ -1,7 +1,7 @@
 import React from 'react';
-import HarshaImage from '../Domain Info/images/CP/Harsha Vardhan.jpg';
-import VighneshImage from '../Domain Info/images/CP/VighneshVangari.jpg';
-import DivyaImage from '../Domain Info/images/CP/Divya Sri.jpg';
+import HarshaImage from './images/CP/Harsha Vardhan.jpg';
+import VighneshImage from './images/CP/VighneshVangari.jpg';
+import DivyaImage from './images/CP/Divya Sri.jpg';
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";

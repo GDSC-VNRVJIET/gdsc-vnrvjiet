@@ -1,9 +1,9 @@
 import React from 'react';
-import JahnaviImage from '../Domain Info/images/WEB DEV/Sai Jahnavi Rallapalli.jpeg';
-import ManikantaImage from '../Domain Info/images/WEB DEV/Manikanta.jpg';
-import KarthikImage from '../Domain Info/images/WEB DEV/Karthik.jpg';
-import VarunImage from '../Domain Info/images/WEB DEV/Varun.jpg';
-import DedeepyaImage from '../Domain Info/images/WEB DEV/Vellanki Chenchu Dedeepya .jpg';
+import JahnaviImage from './images/WEB DEV/Sai Jahnavi Rallapalli.jpeg';
+import ManikantaImage from './images/WEB DEV/Manikanta.jpg';
+import KarthikImage from './images/WEB DEV/Karthik.jpg';
+import VarunImage from './images/WEB DEV/Varun.jpg';
+import DedeepyaImage from './images/WEB DEV/Vellanki Chenchu Dedeepya .jpg';
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
