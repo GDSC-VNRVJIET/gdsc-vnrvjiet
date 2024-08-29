@@ -127,6 +127,7 @@ function Root() {
         {/* <Route path="/admin-signup" element={<Signup />} />
         <Route path="/admin-login" element={<Login />} /> */}
         <Route path="/signup" element={<Signup />} />
+        <Route path="upcoming-events/:eventname" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/blogs" element={<Blog />}></Route>
@@ -148,7 +149,6 @@ function Root() {
         <Route path="/management" element={<Management />} />
         <Route path="/events" element={<Events />} >
           <Route path="upcoming-events" element={<UpcomingEvents />} />
-          <Route path="upcoming-events/:eventname" element={<Register />} />
           <Route path="past-events" element={<PastEvents />} />
         </Route>
         <Route
