@@ -6,9 +6,11 @@ import toast, { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
-      <div className="bg-slate-50 min-h-screen text-slate-900">
+      <div className="bg-slate-50 min-h-screen flex flex-col text-slate-900">
         <Navbar />
-        <Root />
+        <main className="flex-grow">
+          <Root />
+        </main>
         <Toaster />
         <Footer />
       </div>
