@@ -11,6 +11,11 @@ import weblead from "./images/webdevlead.png";
 import creativelead from "./images/creativelead.png";
 
 function Team() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const Reveal = ({ children }: any) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: false });

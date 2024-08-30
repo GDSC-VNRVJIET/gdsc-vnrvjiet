@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HarshaImage from '../Domain Info/images/CP/Harsha Vardhan.jpg';
 import VighneshImage from '../Domain Info/images/CP/VighneshVangari.jpg';
 import DivyaImage from '../Domain Info/images/CP/Divya Sri.jpg';
@@ -8,6 +8,12 @@ import { FaGithub } from "react-icons/fa";
 
 
 function CompetitiveProgramming() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const gifUrl = "https://cdn.dribbble.com/users/330915/screenshots/3587000/10_coding_dribbble.gif"
   const members = [
     {
       name: 'Harsha Vardhan',
@@ -37,24 +43,32 @@ function CompetitiveProgramming() {
 
   return (
     <div className="bg-gray-50 p-8">
-      <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl mx-auto">
+      <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-6xl mx-auto">
         <div className="p-6">
-          <h3 className="text-4xl text-center font-extrabold mb-4 text-green-600">
+          <h3 className="text-4xl text-center font-extrabold text-green-600 mb-10">
             Competitive Programming
           </h3>
-          <p className="text-gray-700 text-lg leading-relaxed">
+          <div className="flex justify-center mb-20">
+            <img
+              src={gifUrl}
+              alt="Competitive Programming Animation"
+              className="rounded-lg shadow-lg w-2/3 md:w-1/4 mr-2"
+            />
+            <p className="text-gray-700 text-lg leading-relaxed">
           The Competitive Programming Domain at GDSC VNR VJIET is committed to creating a community where members can improve their problem-solving skills and perform well in coding competitions. It focuses on enhancing members' problem-solving abilities through regular practice on platforms like Codeforces and LeetCode. The domain fosters collaboration, where experienced members mentor newcomers and everyone works together to improve.
           </p>
+          </div>
+          
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
             {members.map((member, index) => (
               <div key={index} className="flex flex-col items-center">
-                <div className="relative w-40 h-40 flex-shrink-0">
+                <div className="relative w-56 h-56 flex-shrink-0">
                   <div className="rounded-full overflow-hidden shadow-lg w-full h-full flex items-center justify-center bg-gray-100">
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="object-contain"
+                      className="object-contain hover:scale-105 duration-300"
                     />
                   </div>
                 </div>

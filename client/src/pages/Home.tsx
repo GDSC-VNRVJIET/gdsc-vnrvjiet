@@ -56,6 +56,11 @@ interface props {
 }
 
 function Home() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const [showPopup, setShowPopup] = useState(true);
   const [showSignup, setShowSignup] = useState(false);
 

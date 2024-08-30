@@ -15,6 +15,7 @@ import PastEvents from "./pages/Events/PastEvents";
 import Login from "./pages/Login";
 import Forum from "./pages/Forum";
 import Team from "./pages/Team";
+import OrgChart from "./pages/OrgChart";
 import UpcomingEvents from "./pages/Events/UpcomingEvents";
 import SolutionChallenge from "./pages/SolutionChallenge";
 import CommunityGuidelines from "./pages/CommunityGuidelines";
@@ -134,6 +135,7 @@ function Root() {
         <Route path="/blogs" element={<Blog />}></Route>
         <Route path="/forum" element={<Forum />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/orgchart" element={<OrgChart />} />
         <Route path="/solution-challenge" element={<SolutionChallenge />} />
         <Route path="/community-guidelines" element={<CommunityGuidelines />} />
         <Route path="/add-blog" element={<AddBlog />} />

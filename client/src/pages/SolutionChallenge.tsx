@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import sollutionChallengeImage from "../images/sollutionChallengeImage.png";
 
 function SolutionChallenge() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <div className="p-8 flex flex-col max-w-[1060px] text-[16px] text-[#202126] m-auto">
