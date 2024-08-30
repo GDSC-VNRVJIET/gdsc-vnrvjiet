@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { CiLocationOn } from "react-icons/ci";
 import { GoMail } from "react-icons/go";
@@ -24,6 +24,11 @@ interface ModalProps {
 const API_URL = process.env.REACT_APP_BACK_URL;
 
 const Contactus: React.FC = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const {
     register,
     handleSubmit,

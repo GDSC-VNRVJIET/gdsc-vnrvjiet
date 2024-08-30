@@ -14,6 +14,11 @@ interface Question {
 }
 
 function UserForum() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const [question, setQuestion] = useState<string>();
   const faqRef = useRef<HTMLDivElement>(null);
   const [user, setUser] = useState(
