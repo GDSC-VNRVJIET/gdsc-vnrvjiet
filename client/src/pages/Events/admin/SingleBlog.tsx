@@ -33,21 +33,21 @@ const SingleBlog: React.FC = () => {
     setIsModalVisible(false); // Hide the modal
   };
 
-const deleteBlog = async () => {
-  try {
-    const response = await axios.delete(
-      `${process.env.REACT_APP_BACK_URL}/addblog/delete/${blogId}`
-    );
-    if (response.data.success === true) {
-      alert("Blog deleted successfully");
-      navigate("/blogs");
-    } else {
-      alert("Blog already deleted");
+  const deleteBlog = async () => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_BACK_URL}/addblog/delete/${blogId}`
+      );
+      if (response.data.success === true) {
+        alert("Blog deleted successfully");
+        navigate("/blogs");
+      } else {
+        alert("Blog already deleted");
+      }
+    } catch (error) {
+      console.log("Error:", error);
     }
-  } catch (error) {
-    console.log("Error:", error);
-  }
-}
+  };
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -90,7 +90,10 @@ const deleteBlog = async () => {
           <h2 className="text-3xl font-bold mb-4">{blog.title}</h2>
           {user?.role === "admin" && blog?.show === "true" && (
             <div className="inline-flex items-center rounded-md shadow-sm">
-              <button onClick={()=>navigate(`/edit-blog/${blogId}`)} className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
+              <button
+                onClick={() => navigate(`/edit-blog/${blogId}`)}
+                className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center"
+              >
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +144,7 @@ const deleteBlog = async () => {
         <img
           src={blog.thumbnail}
           alt=""
-          className="rounded-md mb-4 w-full max-h-[450px] object-cover"
+          className="rounded-md mb-4 w-full max-h-[450px] object-contain"
         />
         <div className="flex items-center space-x-2">
           <span className="font-medium">by {blog.author}</span>
@@ -150,8 +153,14 @@ const deleteBlog = async () => {
         <hr className="my-6 border-t-2 border-gray-200" />
         <p
           className="mb-4 text-gray-600"
-          dangerouslySetInnerHTML={{ __html: blog.description }}
+          dangerouslySetInnerHTML={{
+            __html: blog.description.replace(
+              /<img/g,
+              '<img style="display: block; margin: 0 auto;"'
+            ),
+          }}
         ></p>
+
         {user?.role === "admin" && blog?.show === "false" && (
           <button
             onClick={handleClick}
@@ -163,9 +172,7 @@ const deleteBlog = async () => {
       </article>
       <div>
         {isModalVisible && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50"
-          >
+          <div className="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
             <div className="relative p-4 w-full max-w-md h-full md:h-auto">
               <div className="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
                 <button
