@@ -29,8 +29,12 @@ interface NewEvent {
   //image: string;
 }
 
-function AdminPortalUpcoming() {
-  const [events, setEvents] = useState<Event[]>([]);
+interface PastProps {
+  eventsprop: any[];
+}
+
+const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
+  const [events, setEvents] = useState<Event[]>(eventsprop);
   const [newEvent, setNewEvent] = useState<NewEvent>({
     name: "",
     startDate: "",
@@ -41,7 +45,7 @@ function AdminPortalUpcoming() {
   });
   const [editEvent, setEditEvent] = useState<Event | null>();
   const [isCreatingEvent, setIsCreatingEvent] = useState(false);
-  const [displayLoader, setDisplayLoader] = useState(true);
+  const [displayLoader, setDisplayLoader] = useState(false);
 
   async function fetchData() {
     try {
@@ -54,8 +58,14 @@ function AdminPortalUpcoming() {
   }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    console.log("eventsprop updated:", eventsprop);
+
+    if (eventsprop && eventsprop.length > 0) {
+      setEvents(eventsprop);
+    } else {
+      setEvents([]);
+    }
+  }, [eventsprop]);
 
   async function handleCreateEvent() {
     try {
@@ -111,9 +121,7 @@ function AdminPortalUpcoming() {
     }
   };
 
-  return displayLoader ? (
-    <Loader />
-  ) : (
+  return(
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4 ">Admin Portal</h2>
       <button

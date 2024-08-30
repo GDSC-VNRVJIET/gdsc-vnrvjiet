@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { getUserById } from "../../Apis/users";
 import AdminPortalPast from "./admin/Past-AdminPortal";
@@ -10,6 +11,7 @@ function PastEvents() {
       role: string;
     } | null
   );
+  const { pastEvents } = useOutletContext<{ pastEvents: any[] }>();
 
   // useEffect(() => {
   //   const fetchUser = async () => {
@@ -28,9 +30,9 @@ function PastEvents() {
   // }, [user]);
 
   if (user && user.role == "admin") {
-    return <AdminPortalPast />;
+    return <AdminPortalPast eventsprop={pastEvents}/>;
   } else {
-    return <UserPortalPast />;
+    return <UserPortalPast eventsprop={pastEvents}/>;
   }
 }
 
