@@ -2,12 +2,12 @@ import React,{useEffect} from "react";
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-import PoojaImage from "../Domain Info/images/Design/Poojasiri.jpg";
-import SiddeshwariImage from "../Domain Info/images/Design/Siddeshwari _Adepu.jpg";
-import PraneethaImage from "../Domain Info/images/Design/Praneetha.jpg";
-import ChAnirudhImage from "../Domain Info/images/Design/Anirudh.jpg";
-import AnirudhPImage from "../Domain Info/images/Design/Anirudh P.jpg";
-import AryaImage from "../Domain Info/images/Design/Arya Joshi.jpg";
+import PoojaImage from "../Domain Info/images/design/Poojasiri.jpg";
+import SiddeshwariImage from "../Domain Info/images/design/Siddeshwari _Adepu.jpg";
+import PraneethaImage from "../Domain Info/images/design/Praneetha.jpg";
+import ChAnirudhImage from "../Domain Info/images/design/Anirudh.jpg";
+import AnirudhPImage from "../Domain Info/images/design/Anirudh P.jpg";
+import AryaImage from "../Domain Info/images/design/Arya Joshi.jpg";
 
 function ML() {
 
