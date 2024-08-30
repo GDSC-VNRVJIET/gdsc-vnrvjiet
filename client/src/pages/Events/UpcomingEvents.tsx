@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { getUserById } from "../../Apis/users";
 import AdminPortalUpcoming from "./admin/Upcoming-AdminPortal";
@@ -10,6 +11,7 @@ function UpcomingEvents() {
       role: string;
     } | null
   );
+  const { upcomingEvents } = useOutletContext<{ upcomingEvents: any[] }>();
   console.log(user)
   // useEffect(() => {
   //   const fetchUser = async () => {
@@ -27,10 +29,12 @@ function UpcomingEvents() {
   //   fetchUser();
   // }, [user]);
 
+  
+
   if (user && user.role === "admin") {
-    return <AdminPortalUpcoming />;
+    return <AdminPortalUpcoming eventsprop={upcomingEvents}/>;
   } else {
-    return <UserPortalUpcoming />;
+    return <UserPortalUpcoming eventsprop={upcomingEvents} />;
   }
 }
 
