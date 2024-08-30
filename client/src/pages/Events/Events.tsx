@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef,useLayoutEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import { getPastEvents, getUpcomingEvents } from '../../Apis/events';
+import Loader from '../Loader';
 
 const Events: React.FC = () => {
   const location = useLocation();
@@ -8,8 +10,11 @@ const Events: React.FC = () => {
   const [activeTab, setActiveTab] = useState(isPast ? "past-events" : "upcoming-events");
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0);
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0);
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
+  const [pastEvents, setPastEvents] = useState([]);
   const tabsRef = useRef<(HTMLElement | null)[]>([]);
   const ref = useRef<HTMLDivElement | null>(null);
+  const [displayLoader, setDisplayLoader] = useState(true);
 
   useEffect(() => {
     if (tabsRef.current.length === 0) return;
@@ -20,10 +25,29 @@ const Events: React.FC = () => {
     }else {
       console.error("currentTab is not found. Check if refs are set correctly.");
     }
-    console.log('currentTab:', currentTab);
-    console.log('tabUnderlineLeft:', tabUnderlineLeft);
-    console.log('tabUnderlineWidth:', tabUnderlineWidth);
-  }, [activeTab]);
+  }, [activeTab,displayLoader]);
+
+  async function fetchData() {
+    try {
+      const upcomingResponse = await getUpcomingEvents();
+      if (upcomingResponse.payload != null) {
+        setUpcomingEvents(upcomingResponse.payload.reverse());
+      }
+      const pastResponse = await getPastEvents();
+      if (pastResponse.payload != null) {
+        setPastEvents(pastResponse.payload.reverse());
+      }
+      setDisplayLoader(false);
+    } catch (error) {
+      setDisplayLoader(false);
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
 
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
@@ -56,7 +80,9 @@ const Events: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScrollEvent);
   }, [scrolled]);
 
-  return (
+  return displayLoader ? (
+    <Loader/>
+  ) : (
     <div className="w-full h-full p-4">
       <div className={`HeroSection flex flex-col bg-cover bg-center bg-no-repeat mt-4 relative ${scrolled ? 'static mt-4' : ''}`}>
         <div className={`relative flex justify-center ${scrolled ? 'static' : ''}`}>
@@ -197,7 +223,7 @@ const Events: React.FC = () => {
       </div>
 
       <div className="w-full">
-        <Outlet />
+        <Outlet context={{ upcomingEvents, pastEvents }}/>
       </div>
     </div>
   );

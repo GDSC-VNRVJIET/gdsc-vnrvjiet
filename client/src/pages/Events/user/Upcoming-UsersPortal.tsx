@@ -25,7 +25,11 @@ interface Event {
   // image: string;
 }
 
-function UserPortalUpcoming() {
+interface UpcomingProps {
+  eventsprop: any[];
+}
+
+const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
   const navigate = useNavigate();
   const [registeredEvents, setRegisteredEvents] = useState<Event[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
@@ -35,33 +39,46 @@ function UserPortalUpcoming() {
     null
   );
   const [message, setMessage] = useState("No upcoming events for now :(");
-  const [displayLoader, setDisplayLoader] = useState(true);
+  // const [displayLoader, setDisplayLoader] = useState(true);
 
-  async function fetchData() {
-    try {
-      const fetchedEvents = await getUpcomingEvents();
-      // const user = await getUserById(userId);
-      // setUserData(user);
-      if (fetchedEvents.payload != null) {
-        setEvents(fetchedEvents.payload.reverse());
-      } else {
-        setMessage("No upcoming events for now :(");
-      }
-      setDisplayLoader(false);
-      // const registeredEvents = await getAllRegistrationsByUserId(userId);
-      // setRegisteredEvents(registeredEvents);
-    } catch (error) {
-      setDisplayLoader(false);
-      console.log(error);
+  // async function fetchData() {
+  //   try {
+  //     const fetchedEvents = await getUpcomingEvents();
+  //     // const user = await getUserById(userId);
+  //     // setUserData(user);
+  //     if (fetchedEvents.payload != null) {
+  //       setEvents(fetchedEvents.payload.reverse());
+  //     } else {
+  //       setMessage("No upcoming events for now :(");
+  //     }
+  //     setDisplayLoader(false);
+  //     // const registeredEvents = await getAllRegistrationsByUserId(userId);
+  //     // setRegisteredEvents(registeredEvents);
+  //   } catch (error) {
+  //     setDisplayLoader(false);
+  //     console.log(error);
+  //   }
+  // }
+
+  useEffect(() => {
+    console.log("eventsprop updated:", eventsprop); // Debug log
+
+    if (eventsprop && eventsprop.length > 0) {
+      setEvents(eventsprop);
+      setMessage(""); // Clear message if events are available
+    } else {
+      setEvents([]);
+      setMessage("No upcoming events for now :(");
     }
-  }
+  }, [eventsprop]);
+  
   function gotoRegister(event: Event) {
     navigate(`${event.name}`, { state: event });
   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   // const handleRegisterForEvent = async (eventId: number) => {
   //   try {
@@ -98,11 +115,7 @@ function UserPortalUpcoming() {
     height: "100px",
   };
 
-  return displayLoader ? (
-    <div className="relative w-full h-full">
-    <Loader notfullScreen/>
-    </div>
-  ) : (
+  return (
     <div className="min-h-full p-4">
       {/* <div
         className="HeroSection flex flex-col  bg-cover bg-center bg-no-repeat m-4"

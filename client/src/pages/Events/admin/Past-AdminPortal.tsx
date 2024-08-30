@@ -30,12 +30,16 @@ interface NewEvent {
   //image: string;
 }
 
-function AdminPortalPast() {
+interface PastProps {
+  eventsprop: any[];
+}
+
+const AdminPortalPast: React.FC<PastProps> = ({ eventsprop }) => {
   const navigate = useNavigate();
   function goto(){
     navigate('/checkuser')
   }
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<Event[]>(eventsprop);
   const [newEvent, setNewEvent] = useState<NewEvent>({
     name: "",
     startDate: "",
@@ -57,8 +61,14 @@ function AdminPortalPast() {
   }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    console.log("eventsprop updated:", eventsprop);
+
+    if (eventsprop && eventsprop.length > 0) {
+      setEvents(eventsprop);
+    } else {
+      setEvents([]);
+    }
+  }, [eventsprop]);
 
   async function handleCreateEvent() {
     try {
