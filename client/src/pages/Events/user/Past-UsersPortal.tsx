@@ -50,10 +50,12 @@ function UserPortalPast() {
       };
 
   return displayLoader ? (
-    <Loader />
+    <div className="relative w-full h-full">
+    <Loader notfullScreen/>
+    </div>
   ) : (
     <div className="min-h-full p-4">
-      <div className="HeroSection flex flex-col bg-cover bg-center bg-no-repeat m-4">
+      {/* <div className="HeroSection flex flex-col bg-cover bg-center bg-no-repeat m-4">
         <div className="relative flex justify-center">
           <video
             className="lg:w-4/5 sm:w-full animate-fadeIn"
@@ -132,7 +134,7 @@ function UserPortalPast() {
             </svg>
           </a>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex justify-evenly">
         <div>

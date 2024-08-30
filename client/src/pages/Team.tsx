@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 // import BharathImage from "./images/bharathsir.png";
-import BharathImage from "./images/Bharath.jpg";
+import facultyCord from "./images/facultyCord.jpg";
 import leadimg from "./images/lead.png";
 import colead from "./images/colead.png";
 import managelead from "./images/managementlead.png";
@@ -98,18 +98,16 @@ function Team() {
         Faculty Advisor
       </h1>
       <div className="flex flex-col w-90 bg-white border m-2 mt-10 p-4 border-slate-100 sm:flex-row">
-      <div className={`shrink-0 h-[222px] overflow-hidden`}>
-              <img
-                src={BharathImage}
-                alt="image"
-                className=" shrink-0 rounded-full w-full h-full object-cover"
-              />
-            </div>
+        <div className={`shrink-0 h-[222px] overflow-hidden`}>
+          <img
+            src={facultyCord}
+            alt="image"
+            className=" shrink-0 rounded-full w-full h-full object-cover"
+          />
+        </div>
         <div className="shrink p-6">
           <p className="shrink mb-4 border-2 border-blue-600 rounded-lg m-4 p-4">
-            <Reveal>
-              {`""`}
-            </Reveal>
+            <Reveal>{`""`}</Reveal>
           </p>
           <h3 className="text-1xl sm:text-2xl m-4 italic">
             - Dr. P. Bharath Kumar

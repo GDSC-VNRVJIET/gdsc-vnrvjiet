@@ -99,24 +99,28 @@ function UserPortalUpcoming() {
   };
 
   return displayLoader ? (
-    <Loader />
+    <div className="relative w-full h-full">
+    <Loader notfullScreen/>
+    </div>
   ) : (
     <div className="min-h-full p-4">
-      <div
+      {/* <div
         className="HeroSection flex flex-col  bg-cover bg-center bg-no-repeat m-4"
         style={heroStyle}
       >
         <img src="" />
         <h2 className="text-2xl font-bold mb-4 my-auto">
           Welcome
-          {/* back, {userData?.name}. */}
+          {/* back, {userData?.name}. }
         </h2>
-      </div>
+      </div> */}
 
       <div>
         {events.length ? (
           <>
-            <h3 className="text-xl font-semibold mb-4">Upcoming Events</h3>
+            <h3 className="text-2xl font-semibold mb-7 mt-5 text-center">
+                Upcoming Events
+              </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {events.map((event) => (
                 <div
@@ -166,7 +170,7 @@ function UserPortalUpcoming() {
                   </button> */}
                   <div className="mt-2">
                     <Link
-                      to={`${event.name}`}
+                      to={`/upcoming-events/${event.name}`}
                       className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                     >
                       Register
