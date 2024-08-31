@@ -8,7 +8,7 @@ import managelead from "./images/managementlead.png";
 import corolead from "./images/corolead.png";
 import applead from "./images/appdevlead.png";
 import weblead from "./images/webdevlead.png";
-import creativelead from "./images/creativelead.png";
+import designlead from "./images/creativelead.png";
 
 function Team() {
 
@@ -86,8 +86,8 @@ function Team() {
       description: `"As the Web Development Lead for GDSC VNRVJIET, I've had the incredible opportunity to lead and contribute to our club's mission of fostering a passion for web development among students. I'm passionate about this role and want to share my experiences and commitment. I genuinely enjoy helping our junior members learn web development. It's about inspiring others to explore the possibilities of webdevelopment. My aim is to make complex concepts accessible and engaging, so every member feels empowered I'm committed to building strong relationships wtih our upcoming coordinators as transitioning leadership is vital for our club's success. I'm excited to mentor and support the next generation of leaders, sharing insights and experiences for a smooth handover. For GDSC VNRVJIET, I envision a future filled with growth, innovation, and close-knit member relationships. I aim to push our club's boundaries, empowering more students to become web developers and creators."`,
     },
     {
-      image: creativelead,
-      title: "Vinay ( Creative Lead )",
+      image: designlead,
+      title: "Vinay ( Design Lead )",
       description: `"I am honored to share my testimony as a proud member of the Google Developer Student Club (GDSC) at VNRVJIET Institute. I am Vinay Vardhan, and being a part of this club has been an incredibly enriching experience that has positively impacted my technical skills, interactions with faculty, juniors, and classmates, and has allowed me to grow both creatively and professionally. GDSC has not only taught me the importance of staying updated with the latest technologies but has also provided a supportive environment for learning and experimentation. As the Head of the Creative and Social Media Department within GDSC,I have had the privilege of improving my creative skills and expanding my expertise in designing and video editing. This role has challenged me to think outside the box, come up with innovative ideas, and translate them into visually appealing content. It has been immensely gratifying to see the impact of our creative endeavors in promoting GDSC's activities and engaging with a wider audience through social media platforms. This experience has undoubtedly contributed to my personal and professional growth."`,
     },
   ];

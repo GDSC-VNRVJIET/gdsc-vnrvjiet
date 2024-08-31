@@ -3,8 +3,35 @@ import leadimg from "./images/lead.png";
 import colead from "./images/colead.png";
 import weblead from "./images/webdevlead.png";
 import managelead from "./images/managementlead.png";
+import designlead from "./images/creativelead.png";
+import jahnaviimg from "./Domain Info/images/WEB DEV/Sai Jahnavi Rallapalli.jpeg"
+import manikantaimg from "./Domain Info/images/WEB DEV/Manikanta.jpg"
+import karthikimg from "./Domain Info/images/WEB DEV/Karthik.jpg"
+import varunimg from "./Domain Info/images/WEB DEV/Varun.jpg"
+import dedeepyaimg from "./Domain Info/images/WEB DEV/Vellanki Chenchu Dedeepya .jpg"
+import harshaimg from "./Domain Info/images/CP/Harsha Vardhan.jpg"
+import divyaimg from "./Domain Info/images/CP/Divya Sri.jpg"
+import vighneshimg from "./Domain Info/images/CP/VighneshVangari.jpg"
+import sahithiimg from "./Domain Info/images/MANAGEMENT/Sahithi.jpg"
+import vinayimg from "./Domain Info/images/MANAGEMENT/GVK.jpg"
+import jahnavireddyimg from "./Domain Info/images/MANAGEMENT/Jahnavi Reddy.png"
+import rakshithaimg from "./Domain Info/images/MANAGEMENT/SaiRakshita.jpg"
+import sadhikimg from "./Domain Info/images/MANAGEMENT/Sadhik.jpg"
+import srikruthiimg from "./Domain Info/images/MANAGEMENT/SriKruthi.jpg"
+import abhijeetimg from "./Domain Info/images/MANAGEMENT/Abhijeet.png"
+import suryaimg from "./Domain Info/images/ML/Chittiprolu Suryateja.jpg"
+import sharanimg from "./Domain Info/images/ML/SriSharanTej.jpg"
+import keerthikaimg from "./Domain Info/images/ML/KeerthikaGoli.jpg"
+import roshiniimg from "./Domain Info/images/ML/KotagiriRoshini.jpg"
+import bharathimg from "./Domain Info/images/ML/BharathChandra.jpg"
+import vishwaimg from "./Domain Info/images/ML/Viswa Prateek Tummala .jpg"
+import poojaimg from "./Domain Info/images/design/Poojasiri.jpg"
+import siddeshwariimg from "./Domain Info/images/design/Siddeshwari _Adepu.jpg"
+import praneethaimg from "./Domain Info/images/design/Praneetha.jpg"
+import chanirudhimg from "./Domain Info/images/design/Anirudh.jpg"
+import panirudhimg from "./Domain Info/images/design/Anirudh P.jpg"
+import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg"
 
-// Define types for the data structure
 interface Person {
   role: string;
   name: string;
@@ -117,12 +144,15 @@ const data2024: OrgChartData = {
       name: "Manideep",
       img: weblead,
       coordinators: [
-        { name: "Sam Patel", img: colead },
-        { name: "Nina James", img: colead },
+        { name: "Jayasree", img: jahnaviimg },
+        { name: "Sai Jahnavi", img: colead },
       ],
       volunteers: [
-        { name: "Michael Davis", img: colead },
-        { name: "Emma Brown", img: colead },
+        { name: "Sri Manikanta", img: manikantaimg },
+        { name: "Karthik", img: karthikimg },
+        { name: "Varun", img: varunimg },
+        { name: "Dedeepya", img: dedeepyaimg },
+        { name: "Lakshitha", img: colead },
       ],
     },
     {
@@ -130,12 +160,11 @@ const data2024: OrgChartData = {
       name: "John Smith",
       img: managelead,
       coordinators: [
-        { name: "Jacob Scott", img: colead },
-        { name: "Mia Lewis", img: colead },
+        { name: "Harsha Vardhan", img: harshaimg },
       ],
       volunteers: [
-        { name: "Aiden Johnson", img: colead },
-        { name: "Olivia Wilson", img: colead },
+        { name: "Vighnesh", img: vighneshimg },
+        { name: "Divya Sri", img: divyaimg },
       ],
     },
     {
@@ -143,12 +172,15 @@ const data2024: OrgChartData = {
       name: "Shivesh",
       img: managelead,
       coordinators: [
-        { name: "David Martinez", img: colead },
-        { name: "Sophia Garcia", img: colead },
+        { name: "Sahithi", img: sahithiimg },
+        { name: "Vinay Kalyan", img: vinayimg },
+        { name: "Jahnavi Reddy", img: jahnavireddyimg },
+        { name: "Sai Rakshitha", img: rakshithaimg },
       ],
       volunteers: [
-        { name: "James Anderson", img: colead },
-        { name: "Charlotte Lee", img: colead },
+        { name: "Sadhik", img: sadhikimg },
+        { name: "Sri Kruthi", img: srikruthiimg },
+        { name: "Abhijeet", img: abhijeetimg },
       ],
     },
     {
@@ -156,25 +188,29 @@ const data2024: OrgChartData = {
       name: "Ryan Howard",
       img: managelead,
       coordinators: [
-        { name: "Isabella Harris", img: colead },
-        { name: "Jackson Walker", img: colead },
+        { name: "Surya Teja", img: suryaimg },
       ],
       volunteers: [
-        { name: "Liam Robinson", img: colead },
-        { name: "Mia Martinez", img: colead },
+        { name: "Sri Sharan Tej", img: sharanimg },
+        { name: "Keerthika", img: keerthikaimg },
+        { name: "Roshini", img: roshiniimg },
+        { name: "Bharath Chandra", img: bharathimg },
+        { name: "Vishwa Prateek", img: vishwaimg },
       ],
     },
     {
       role: "Design Lead",
-      name: "Angela Martin",
-      img: managelead,
+      name: "Vinay",
+      img: designlead,
       coordinators: [
-        { name: "Oliver Thompson", img: colead },
-        { name: "Amelia Wilson", img: colead },
+        { name: "Pooja Siri", img: poojaimg },
+        { name: "Siddeshwari", img: siddeshwariimg },
+        { name: "Pavan Praneetha", img: praneethaimg },
       ],
       volunteers: [
-        { name: "Noah Harris", img: colead },
-        { name: "Ava Allen", img: colead },
+        { name: "Ch. Anirudh", img: chanirudhimg },
+        { name: "Arya Joshi", img: aryaimg },
+        { name: "P. Anirudh", img: panirudhimg },
       ],
     },
   ],
@@ -189,10 +225,6 @@ const OrgChart: React.FC = () => {
   const [selectedDomain, setSelectedDomain] = useState<number | null>(null);
 
   const dataToDisplay = year === 2025 ? data2025 : data2024;
-
-  const handleClick = (index: number) => {
-    setSelectedDomain(selectedDomain === index ? null : index);
-  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 relative">
@@ -241,14 +273,19 @@ const OrgChart: React.FC = () => {
             <p className="text-md text-gray-700">{dataToDisplay.lead.name}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-24 relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-24 relative">
             {dataToDisplay.domainLeads.map((person, index) => (
-              <div key={index} className="flex flex-col items-center relative">
+              <div
+                key={index}
+                className="flex flex-col items-center relative"
+                onMouseEnter={() => person.role !== "Co Lead" && setSelectedDomain(index)}
+                onMouseLeave={() => setSelectedDomain(null)}
+              >
                 <div className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden">
                   <img
                     src={person.img}
                     alt={person.role}
-                    className="shrink-0 rounded-full w-full h-full object-cover transition-transform duration-300 transform hover:scale-105"
+                    className="shrink-0 rounded-full w-full h-full object-cover transition-transform duration-500 transform hover:scale-105"
                   />
                 </div>
                 <h2 className="text-lg font-medium text-center">
@@ -257,42 +294,43 @@ const OrgChart: React.FC = () => {
                 <p className="text-md text-gray-700 text-center">
                   {person.name}
                 </p>
-                {person.role !== "Co Lead" && (
-                  <button
-                    onClick={() => handleClick(index)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2"
-                  >
-                    Click here to see team
-                  </button>
-                )}
-
                 {selectedDomain === index && (
-                  <div className="p-4 bg-white border rounded shadow-lg w-full mt-4 transition-opacity duration-300 opacity-100">
-                    <h3 className="text-lg font-semibold">Coordinators</h3>
-                    <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div className="absolute top-full left-0 w-full bg-white p-4 mt-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out opacity-100">
+                    <h3 className="text-md font-semibold text-center mb-2">
+                      Coordinators
+                    </h3>
+                    <div className="flex justify-center flex-wrap mb-4">
                       {person.coordinators.map((coordinator, idx) => (
-                        <div key={idx} className="flex flex-col items-center">
+                        <div
+                          key={idx}
+                          className="flex flex-col items-center mb-2 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
+                        >
                           <img
                             src={coordinator.img}
                             alt={coordinator.name}
-                            className="w-16 h-16 rounded-full object-cover"
+                            className="shrink-0 rounded-full w-full h-full object-cover"
                           />
-                          <p className="text-sm text-gray-700">
+                          <p className="text-sm text-gray-700 text-center mt-2">
                             {coordinator.name}
                           </p>
                         </div>
                       ))}
                     </div>
-                    <h3 className="text-lg font-semibold">Volunteers</h3>
-                    <div className="grid grid-cols-2 gap-4">
+                    <h3 className="text-md font-semibold text-center mb-2">
+                      Volunteers
+                    </h3>
+                    <div className="flex justify-center flex-wrap">
                       {person.volunteers.map((volunteer, idx) => (
-                        <div key={idx} className="flex flex-col items-center">
+                        <div
+                          key={idx}
+                          className="flex flex-col items-center mb-2 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
+                        >
                           <img
                             src={volunteer.img}
                             alt={volunteer.name}
-                            className="w-16 h-16 rounded-full object-cover"
+                            className="shrink-0 rounded-full w-full h-full object-cover"
                           />
-                          <p className="text-sm text-gray-700">
+                          <p className="text-sm text-gray-700 text-center mt-2">
                             {volunteer.name}
                           </p>
                         </div>
