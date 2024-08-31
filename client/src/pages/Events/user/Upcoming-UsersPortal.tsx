@@ -147,11 +147,12 @@ const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
                     {event.description}
                   </p>
                   <p className="py-2">
+                    {/* To be announced is kept directly in the database now */}
                     <strong>When : </strong>{" "}
                     {/* {format(new Date(event.startDate), "yyyy-MM-dd HH:mm")} to{" "}
                     {format(new Date(event.endDate), "yyyy-MM-dd HH:mm")} */}
                     {event.startDate}
-                    {" - "}
+                    {" - "}  
                     {event.endDate}
                   </p>
                   <p>
