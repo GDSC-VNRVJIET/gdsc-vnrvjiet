@@ -17,6 +17,11 @@ const SingleBlog: React.FC = () => {
   const [blog, setBlog] = useState<Blog | null>(null);
   const [displayLoader, setDisplayLoader] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const colors = [
+    "bg-gradient-to-b from-sky-400 to-blue-500",
+    "bg-gradient-to-r from-pink-600 to-rose-400",
+    "bg-gradient-to-r from-emerald-600 to-teal-500",
+  ];
   const navigate = useNavigate();
 
   const [user, setUser] = useState(
@@ -88,9 +93,9 @@ const SingleBlog: React.FC = () => {
       <article className="max-w-3xl mx-auto my-8 p-6 md:p-8 lg:p-10 bg-white shadow-lg rounded-md">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           <div className="mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-0 text-center">
-            {blog.title}
-          </h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-0 text-center">
+              {blog.title}
+            </h2>
           </div>
           {user?.role === "admin" && (
             <div className="inline-flex items-center justify-center rounded-md shadow-sm">
@@ -150,9 +155,27 @@ const SingleBlog: React.FC = () => {
           alt=""
           className="rounded-md mb-4 w-full max-h-[450px] object-contain mt-4"
         />
-        <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-2">
-          <span className="font-medium">by {blog.author}</span>
-          <span className="text-gray-400">• in {blog.category}</span>
+        <div className="">
+        <div className="text-center md:text-right">
+  <span className="block font-bold text-sm">
+    By : {blog.author}
+  </span>
+</div>
+          <div className="mb-3 flex flex-wrap mt-3 justify-center font-medium text-xs md:text-sm -m-1">
+            {blog.category.split(",").map((cat, idx) => (
+              <ul key={idx} className="">
+                <li className="m-1">
+                  <a
+                    className={`inline-flex text-center text-gray-100 py-1 px-3 md:py-2 md:px-4 rounded-full transition duration-150 ease-in-out ${
+                      colors[idx % colors.length]
+                    }`}
+                  >
+                    {cat.trim()}
+                  </a>
+                </li>
+              </ul>
+            ))}
+          </div>
         </div>
         <hr className="my-6 border-t-2 border-gray-200" />
         <p
