@@ -27,9 +27,14 @@ function Navbar() {
   );
 
   const handleLogOut = async () => {
-    await localStorage.removeItem("userObjGDSC");
+    localStorage.removeItem("userObjGDSC");
     
     navigate("/");
+  };
+  const handleNavClick = () => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
   };
 
   return (
@@ -78,31 +83,31 @@ function Navbar() {
           <h1 className="text-[#868686] text-lg pl-5 hidden md:block transition-all duration-500 ease-in-out hover:text-transparent hover:bg-clip-text  hover:bg-gradient-to-r hover:from-red-500 hover:via-yellow-500 hover:via-green-500 hover:to-blue-500 hover:tracking-wider hover:scale-110">GDSC VNRVJIET.</h1>
         </NavLink>
         <div className="flex flex-col md:flex-row ml-auto text-center text-slate-600 ">
-        <button className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white  ">
+        <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white  ">
           <NavLink to="/" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-lg  ${isActive ? "bg-blue-500 text-white" : ""}`}>
           <span className="absolute inset-0 group-hover:bg-blue-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
           <span className="relative">Home</span>
         </NavLink>
         </button>
-          <button className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
+          <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/team" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-lg  ${isActive ? "bg-blue-500 text-white" : ""}`}>
             <span className="absolute inset-0 group-hover:bg-blue-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
             <span className="relative">Team </span>
             </NavLink>
           </button>
-          <button className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
+          <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/orgchart" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-lg  ${isActive ? "bg-red-500 text-white" : ""}`}>
             <span className="absolute inset-0 group-hover:bg-red-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
             <span className="relative">OrgChart </span>
             </NavLink>
           </button>
-          <button className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
+          <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/blogs" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-lg  ${isActive ? "bg-red-500 text-white" : ""}`}>
             <span className="absolute inset-0 group-hover:bg-red-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
             <span className="relative">Blog</span>
             </NavLink>
           </button>
-          <button className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
+          <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/solution-challenge" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-lg  ${isActive ? "bg-yellow-500 text-white" : ""}`}>
             <span className="absolute inset-0 group-hover:bg-yellow-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
             <span className="relative">Solution Challenge</span>
@@ -121,27 +126,27 @@ function Navbar() {
             <NavLink to="/leaderboard" className="relative z-10">Leaderboard
             <span className="absolute inset-0 group-hover:bg-yellow-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
           </button> */}
-          <button className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
+          <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/events" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-lg  ${isActive ? "bg-green-500 text-white" : ""}`}>
             <span className="absolute inset-0 group-hover:bg-green-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
             <span className="relative">Events</span>
             </NavLink>
           </button>
-          <button className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
+          <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/Forum" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-lg  ${isActive ? "bg-green-500 text-white" : ""}`}>
             <span className="absolute inset-0 group-hover:bg-green-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
             <span className="relative">Forum</span>
             </NavLink>
           </button>
-          <button className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
+          <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/contact-us" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-lg  ${isActive ? "bg-blue-500 text-white" : ""}`}>
             <span className="absolute inset-0 group-hover:bg-blue-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
             <span className="relative">Contact Us</span>
             </NavLink>
           </button>
           {userObjGDSC == null ? (
-            <button className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
-              <NavLink to="/login" className="relative z-10">
+            <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
+              <NavLink to="/login" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-lg  ${isActive ? "bg-red-500 text-white" : ""}`}>
               <span className="absolute inset-0 group-hover:bg-red-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
               <span className="relative">Login</span>
               </NavLink>
