@@ -150,6 +150,7 @@ function Root() {
         <Route path="/machine-learning" element={<ML />} />
         <Route path="/management" element={<Management />} />
         <Route path="/events" element={<Events />} >
+          <Route path="" element={<UpcomingEvents />} />
           <Route path="upcoming-events" element={<UpcomingEvents />} />
           <Route path="past-events" element={<PastEvents />} />
         </Route>
