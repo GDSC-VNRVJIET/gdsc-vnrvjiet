@@ -81,16 +81,16 @@ function WebDev() {
     <div className="bg-gray-50 p-8">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-6xl mx-auto">
         <div className="p-6">
-          <h3 className="text-4xl text-center font-extrabold mb-4 text-red-600">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl text-center font-extrabold mb-6 sm:mb-8 md:mb-10 text-red-600">
             Management
           </h3>
-          <div className="flex justify-center mb-20">
+          <div className="flex flex-col md:flex-row justify-center mb-20 items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
             <img
               src={gifUrl}
               alt="Management Animation"
-              className="rounded-lg shadow-lg w-2/3 md:w-1/4 mr-2"
+              className="rounded-lg shadow-lg w-full sm:w-2/3 md:w-1/4 mb-4 md:mb-0"
             />
-            <p className="text-gray-700 text-lg leading-relaxed">
+            <p className="text-gray-700 text-lg leading-relaxed text-center md:text-left">
               The Management Domain at GDSC VNR VJIET plays a pivotal role in
               executing and conducting successful events for the club,
               overseeing every aspect from start to finish. This domain is

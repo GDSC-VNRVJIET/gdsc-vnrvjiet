@@ -1,67 +1,39 @@
 import React, { useEffect } from "react";
-import SuryaImage from "../Domain Info/images/ML/Chittiprolu Suryateja.jpg";
-import SharanImage from "../Domain Info/images/ML/SriSharanTej.jpg";
-import KeerthikaImage from "../Domain Info/images/ML/KeerthikaGoli.jpg";
-import RoshiniImage from "../Domain Info/images/ML/KotagiriRoshini.jpg";
-import BharathImage from "../Domain Info/images/ML/BharathChandra.jpg";
-import VishwaImage from "../Domain Info/images/ML/Viswa Prateek Tummala .jpg";
+import HarshaImage from "../Domain Info/images/CP/Harsha Vardhan.jpg";
+import VighneshImage from "../Domain Info/images/CP/VighneshVangari.jpg";
+import DivyaImage from "../Domain Info/images/CP/Divya Sri.jpg";
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 
-function ML() {
-
+function CompetitiveProgramming() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const gifUrl =
-    "https://connect.ignatiuz.com/hs-fs/hubfs/AI%20and%20Deep%20Learning.gif?width=1000&name=AI%20and%20Deep%20Learning.gif";
+    "https://cdn.dribbble.com/users/330915/screenshots/3587000/10_coding_dribbble.gif";
   const members = [
     {
-      name: "Surya Teja",
-      role: "Machine Learning Coordinator",
-      image: SuryaImage,
+      name: "Harsha Vardhan",
+      role: "Competitive Programming Coordinator",
+      image: HarshaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Sri Sharan Tej",
-      role: "Machine Learning Volunteer",
-      image: SharanImage,
+      name: "Divya Sri",
+      role: "Competitive Programming Volunteer",
+      image: DivyaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Keerthika",
-      role: "Machine Learning Volunteer",
-      image: KeerthikaImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "Roshini",
-      role: "Machine Learning Volunteer",
-      image: RoshiniImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "Bharath Chandra",
-      role: "Machine Learning Volunteer",
-      image: BharathImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "Vishwa Prateek",
-      role: "Machine Learning Volunteer",
-      image: VishwaImage,
+      name: "Vighnesh",
+      role: "Competitive Programming Volunteer",
+      image: VighneshImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
@@ -72,24 +44,23 @@ function ML() {
     <div className="bg-gray-50 p-8">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-6xl mx-auto">
         <div className="p-6">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl text-center font-extrabold mb-6 sm:mb-8 md:mb-10 text-yellow-600">
-            Machine Learning
+          <h3 className="text-2xl sm:text-3xl md:text-4xl text-center font-extrabold mb-6 sm:mb-8 md:mb-10 text-green-500">
+            Competitive Programming
           </h3>
           <div className="flex flex-col md:flex-row justify-center mb-20 items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
             <img
               src={gifUrl}
-              alt="Machine Learning Animation"
+              alt="Competitive Programming Animation"
               className="rounded-lg shadow-lg w-full sm:w-2/3 md:w-1/4 mb-4 md:mb-0"
             />
             <p className="text-gray-700 text-lg leading-relaxed text-center md:text-left">
-              The Machine Learning Domain at GDSC VNRVJIET is where innovation
-              meets application. Our team is focused on exploring the full
-              potential of machine learning, from data analysis to building
-              adaptive systems. We conduct events and workshops to simplify
-              machine learning concepts, making them accessible and showcasing
-              their real-world applications. As mentors, we guide students in
-              hackathons, helping them turn their ideas into successful projects
-              with AI.
+              The Competitive Programming Domain at GDSC VNR VJIET is committed
+              to creating a community where members can improve their
+              problem-solving skills and perform well in coding competitions. It
+              focuses on enhancing members' problem-solving abilities through
+              regular practice on platforms like Codeforces and LeetCode. The
+              domain fosters collaboration, where experienced members mentor
+              newcomers and everyone works together to improve.
             </p>
           </div>
 
@@ -138,4 +109,4 @@ function ML() {
   );
 }
 
-export default ML;
+export default CompetitiveProgramming;
