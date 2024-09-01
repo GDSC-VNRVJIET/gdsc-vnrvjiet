@@ -100,7 +100,7 @@ const UserShowBlogs: React.FC = () => {
                           className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out"
                           src={blog.thumbnail}
                           onClick={() => handleBlogClick(blog._id)}
-                          style={{cursor: "pointer"}}
+                          style={{ cursor: "pointer" }}
                           width="540"
                           height="303"
                           alt="Blog post"
@@ -109,7 +109,6 @@ const UserShowBlogs: React.FC = () => {
                     </a>
                     <div>
                       <header>
-                        
                         <h3 className="text-2xl lg:text-3xl font-bold leading-tight mb-2">
                           <a className="hover:text-blue-500 transition duration-150 ease-in-out">
                             {blog.title}
@@ -152,20 +151,20 @@ const UserShowBlogs: React.FC = () => {
                         </svg>
                       </a>
                       <div className="mb-3 flex flex-wrap font-medium text-sm -m-1">
-                          {blog.category.split(",").map((cat, idx) => (
-                            <ul className="">
-                              <li className="m-1">
-                                <a
-                                  className={`inline-flex text-center text-gray-100 py-2 px-4 rounded-full transition duration-150 ease-in-out ${
-                                    colors[idx % colors.length]
-                                  }`}
-                                >
-                                  {cat.trim()}
-                                </a>
-                              </li>
-                            </ul>
-                          ))}
-                        </div>
+                        {blog.category.split(",").map((cat, idx) => (
+                          <ul className="">
+                            <li className="m-1">
+                              <a
+                                className={`inline-flex text-center text-gray-100 py-2 px-4 rounded-full transition duration-150 ease-in-out ${
+                                  colors[idx % colors.length]
+                                }`}
+                              >
+                                {cat.trim()}
+                              </a>
+                            </li>
+                          </ul>
+                        ))}
+                      </div>
                       <footer className="flex items-center mt-4">
                         <a>
                           <img
@@ -180,8 +179,8 @@ const UserShowBlogs: React.FC = () => {
                           <a className="font-medium text-gray-800 hover:text-green-400 transition duration-150 ease-in-out">
                             {blog.author}
                           </a>
-                          <span className="text-gray-700"> - </span>
-                          <span className="text-gray-500">Jan 19, 2020</span>
+                          {/* <span className="text-gray-700"> - </span>
+                          <span className="text-gray-500">Jan 19, 2020</span> */}
                         </div>
                       </footer>
                     </div>
