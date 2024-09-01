@@ -149,58 +149,79 @@ const EditBlog: React.FC = () => {
   return displayLoader ? (
     <Loader />
   ) : blog && access ? (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Edit Blog</h2>
-      <form className="flex flex-col gap-4">
-        <input
-          type="text"
-          value={title}
-          onChange={handleTitleChange}
-          placeholder="Title"
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input type="text" value={author} placeholder="Author" onChange={handleAuthorChange} className="p-2 border border-gray-300 rounded" />
-        {categories.map((category, index) => (
-          <div key={index} className="flex items-center gap-2">
-            <input
-              type="text"
-              value={category}
-              onChange={(e) => handleCategoryChange(index, e.target.value)}
-              placeholder="Category"
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-            <button
-              type="button"
-              onClick={() => removeCategoryField(index)}
-              className="bg-red-500 text-white px-2 rounded"
-            >
-              &times;
-            </button>
-          </div>
-        ))}
-        {categories.length < 3 && (
+    <div className="container mx-auto p-4 max-w-4xl">
+  <h2 className="text-3xl font-bold mb-6 text-center">Edit Blog</h2>
+  <form className="space-y-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <input
+        type="text"
+        value={title}
+        onChange={handleTitleChange}
+        placeholder="Title"
+        className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:border-blue-50"
+      />
+      <input
+        type="text"
+        value={author}
+        onChange={handleAuthorChange}
+        placeholder="Author"
+        className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:border-blue-50"
+      />
+    </div>
+    <div className="space-y-4">
+      {categories.map((category, index) => (
+        <div key={index} className="flex items-center gap-4">
+          <input
+            type="text"
+            value={category}
+            onChange={(e) => handleCategoryChange(index, e.target.value)}
+            placeholder="Category"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:border-blue-50"
+          />
           <button
             type="button"
-            onClick={addCategoryField}
-            className="bg-green-500 text-white py-1 rounded"
+            onClick={() => removeCategoryField(index)}
+            className="bg-red-500 text-white px-3 py-2 rounded-lg"
           >
-            + Add Category
+            &times;
           </button>
-        )}
-        <ReactQuill
-          value={description}
-          onChange={setDescription}
-          className="mb-4"
-        />
+        </div>
+      ))}
+      {categories.length < 3 && (
         <button
           type="button"
-          onClick={handleUpdateBlog}
-          className="bg-blue-600 text-white py-2 rounded cursor-pointer hover:bg-blue-700"
+          onClick={addCategoryField}
+          className="bg-green-500 text-white py-2 px-4 rounded-lg"
         >
-          Update Blog
+          + Add Category
         </button>
-      </form>
+      )}
     </div>
+    <div className="mb-4">
+      <ReactQuill
+        value={description}
+        onChange={setDescription}
+        className="border rounded-lg focus:outline-none focus:ring focus:border-blue-50"
+        style={{
+          height: "300px",
+          maxHeight: "500px",
+          width: "100%",
+          overflow: "auto",
+        }}
+      />
+    </div>
+    <div className="flex justify-center">
+      <button
+        type="button"
+        onClick={handleUpdateBlog}
+        className="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700"
+      >
+        Update Blog
+      </button>
+    </div>
+  </form>
+</div>
+
   ) : (
     <div className="flex justify-center items-center min-h-screen">
       <p className="text-red-500 text-6xl">Access Denied</p>

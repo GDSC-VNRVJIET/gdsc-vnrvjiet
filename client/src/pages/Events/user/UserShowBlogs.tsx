@@ -177,7 +177,7 @@ const UserShowBlogs: React.FC = () => {
                           />
                         </a>
                         <div>
-                          <a className="font-medium text-gray-200 hover:text-gray-100 transition duration-150 ease-in-out">
+                          <a className="font-medium text-gray-800 hover:text-green-400 transition duration-150 ease-in-out">
                             {blog.author}
                           </a>
                           <span className="text-gray-700"> - </span>

@@ -15,6 +15,7 @@ import PastEvents from "./pages/Events/PastEvents";
 import Login from "./pages/Login";
 import Forum from "./pages/Forum";
 import Team from "./pages/Team";
+import OrgChart from "./pages/OrgChart";
 import UpcomingEvents from "./pages/Events/UpcomingEvents";
 import SolutionChallenge from "./pages/SolutionChallenge";
 import CommunityGuidelines from "./pages/CommunityGuidelines";
@@ -40,6 +41,7 @@ import CompetitiveProgramming from "./pages/Domain Info/CompetitiveProgramming";
 import ML from "./pages/Domain Info/ML";
 import Management from "./pages/Domain Info/Management";
 import Teams from "./pages/leaderboard/Teams";
+import Events from "./pages/Events/Events";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -126,14 +128,13 @@ function Root() {
         {/* <Route path="/admin-signup" element={<Signup />} />
         <Route path="/admin-login" element={<Login />} /> */}
         <Route path="/signup" element={<Signup />} />
-        <Route path="/upcoming-events/:eventname" element={<Register />} />
+        <Route path="upcoming-events/:eventname" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/upcoming-events" element={<UpcomingEvents />} />
-        <Route path="/past-events" element={<PastEvents />} />
         <Route path="/blogs" element={<Blog />}></Route>
         <Route path="/forum" element={<Forum />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/orgchart" element={<OrgChart />} />
         <Route path="/solution-challenge" element={<SolutionChallenge />} />
         <Route path="/community-guidelines" element={<CommunityGuidelines />} />
         <Route path="/add-blog" element={<AddBlog />} />
@@ -148,6 +149,11 @@ function Root() {
         <Route path="/competitive-programming" element={<CompetitiveProgramming />} />
         <Route path="/machine-learning" element={<ML />} />
         <Route path="/management" element={<Management />} />
+        <Route path="/events" element={<Events />} >
+          <Route path="" element={<UpcomingEvents />} />
+          <Route path="upcoming-events" element={<UpcomingEvents />} />
+          <Route path="past-events" element={<PastEvents />} />
+        </Route>
         <Route
           path="/leaderboard"
           element={

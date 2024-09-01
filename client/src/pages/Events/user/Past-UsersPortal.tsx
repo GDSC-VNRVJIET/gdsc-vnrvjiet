@@ -13,7 +13,11 @@ interface Event {
   image: string;
 }
 
-function UserPortalPast() {
+interface PastProps {
+  eventsprop: any[];
+}
+
+const UserPortalPast: React.FC<PastProps> = ({ eventsprop }) => {
   const [registeredEvents, setRegisteredEvents] = useState<Event[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const userId = localStorage.getItem("userIdGDSC");
@@ -22,38 +26,49 @@ function UserPortalPast() {
     null
   );
   const [message, setMessage] = useState("No past events for now :(");
-  const [displayLoader, setDisplayLoader] = useState(true);
+  // const [displayLoader, setDisplayLoader] = useState(true);
   const navigate = useNavigate();
 
-  async function fetchData() {
-    try {
-      const fetchedEvents = await getPastEvents();
-      if (fetchedEvents.payload != null) {
-        setEvents(fetchedEvents.payload.reverse());
-      } else {
-        setMessage("No past events for now :(");
-      }
-      setDisplayLoader(false);
-    } catch (error) {
-      setDisplayLoader(false);
-      console.log(error);
-    }
-  }
+  // async function fetchData() {
+  //   try {
+  //     const fetchedEvents = await getPastEvents();
+  //     if (fetchedEvents.payload != null) {
+  //       setEvents(fetchedEvents.payload.reverse());
+  //     } else {
+  //       setMessage("No past events for now :(");
+  //     }
+  //     setDisplayLoader(false);
+  //   } catch (error) {
+  //     setDisplayLoader(false);
+  //     console.log(error);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    console.log("eventsprop updated:", eventsprop); // Debug log
+
+    if (eventsprop && eventsprop.length > 0) {
+      setEvents(eventsprop);
+      setMessage(""); // Clear message if events are available
+    } else {
+      setEvents([]);
+      setMessage("No upcoming events for now :(");
+    }
+  }, [eventsprop]);
+
   const handleCardClick = (event: Event) => {
         if (event.name === "GDSC Solution Challenge") {
           navigate("/solution-challenge"); // Navigate to the Solution Challenge page
         }
       };
 
-  return displayLoader ? (
-    <Loader />
-  ) : (
+  return(
     <div className="min-h-full p-4">
-      <div className="HeroSection flex flex-col bg-cover bg-center bg-no-repeat m-4">
+      {/* <div className="HeroSection flex flex-col bg-cover bg-center bg-no-repeat m-4">
         <div className="relative flex justify-center">
           <video
             className="lg:w-4/5 sm:w-full animate-fadeIn"
@@ -132,7 +147,7 @@ function UserPortalPast() {
             </svg>
           </a>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex justify-evenly">
         <div>

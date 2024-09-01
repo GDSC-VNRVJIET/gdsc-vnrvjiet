@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import SuryaImage from "../Domain Info/images/ML/Chittiprolu Suryateja.jpg";
-import SharanImage from "../Domain Info/images/ML/SriSharanTej.jpg";
-import KeerthikaImage from "../Domain Info/images/ML/KeerthikaGoli.jpg";
-import RoshiniImage from "../Domain Info/images/ML/KotagiriRoshini.jpg";
-import BharathImage from "../Domain Info/images/ML/BharathChandra.jpg";
-import VishwaImage from "../Domain Info/images/ML/Viswa Prateek Tummala .jpg";
+import React,{useEffect} from "react";
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+import PoojaImage from "../Domain Info/images/design/Poojasiri.jpg";
+import SiddeshwariImage from "../Domain Info/images/design/Siddeshwari _Adepu.jpg";
+import PraneethaImage from "../Domain Info/images/design/Praneetha.jpg";
+import ChAnirudhImage from "../Domain Info/images/design/Anirudh.jpg";
+import AnirudhPImage from "../Domain Info/images/design/Anirudh P.jpg";
+import AryaImage from "../Domain Info/images/design/Arya Joshi.jpg";
 
 function ML() {
 
@@ -16,52 +16,52 @@ function ML() {
   }, []);
 
   const gifUrl =
-    "https://connect.ignatiuz.com/hs-fs/hubfs/AI%20and%20Deep%20Learning.gif?width=1000&name=AI%20and%20Deep%20Learning.gif";
+    "https://cdn.dribbble.com/users/3943049/screenshots/14032596/media/9e39cf22d33b4d2b77e9f270f2f06f6e.gif";
   const members = [
     {
-      name: "Surya Teja",
-      role: "Machine Learning Coordinator",
-      image: SuryaImage,
+      name: "Pooja Siri",
+      role: "Design Coordinator",
+      image: PoojaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Sri Sharan Tej",
-      role: "Machine Learning Volunteer",
-      image: SharanImage,
+      name: "Siddeshwari",
+      role: "Design Coordinator",
+      image: SiddeshwariImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Keerthika",
-      role: "Machine Learning Volunteer",
-      image: KeerthikaImage,
+      name: "Pavan Praneetha",
+      role: "Design Coordinator",
+      image: PraneethaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Roshini",
-      role: "Machine Learning Volunteer",
-      image: RoshiniImage,
+      name: "Ch.Anirudh",
+      role: "Design Volunteer",
+      image: ChAnirudhImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Bharath Chandra",
-      role: "Machine Learning Volunteer",
-      image: BharathImage,
+      name: "P. Anirudh",
+      role: "Design Volunteer",
+      image: AnirudhPImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Vishwa Prateek",
-      role: "Machine Learning Volunteer",
-      image: VishwaImage,
+      name: "Arya Joshi",
+      role: "Design Volunteer",
+      image: AryaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
@@ -72,24 +72,24 @@ function ML() {
     <div className="bg-gray-50 p-8">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-6xl mx-auto">
         <div className="p-6">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl text-center font-extrabold mb-6 sm:mb-8 md:mb-10 text-yellow-600">
-            Machine Learning
+          <h3 className="text-2xl sm:text-3xl md:text-4xl text-center font-extrabold mb-6 sm:mb-8 md:mb-10 text-yellow-500">
+            Design
           </h3>
           <div className="flex flex-col md:flex-row justify-center mb-20 items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
             <img
               src={gifUrl}
-              alt="Machine Learning Animation"
+              alt="Design Animation"
               className="rounded-lg shadow-lg w-full sm:w-2/3 md:w-1/4 mb-4 md:mb-0"
             />
             <p className="text-gray-700 text-lg leading-relaxed text-center md:text-left">
-              The Machine Learning Domain at GDSC VNRVJIET is where innovation
-              meets application. Our team is focused on exploring the full
-              potential of machine learning, from data analysis to building
-              adaptive systems. We conduct events and workshops to simplify
-              machine learning concepts, making them accessible and showcasing
-              their real-world applications. As mentors, we guide students in
-              hackathons, helping them turn their ideas into successful projects
-              with AI.
+              The Design Domain at GDSC VNR VJIET specializes in creating
+              visually captivating posters, banners, and promotional materials
+              to enhance our club's presence. Our team of skilled designers
+              collaborates on producing impactful graphics for events,
+              workshops, and social media. By leveraging the latest design
+              trends and techniques, we aim to communicate our mission and
+              engage our community effectively, ensuring every project reflects
+              our commitment to innovation and creativity.
             </p>
           </div>
 

@@ -25,7 +25,11 @@ interface Event {
   // image: string;
 }
 
-function UserPortalUpcoming() {
+interface UpcomingProps {
+  eventsprop: any[];
+}
+
+const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
   const navigate = useNavigate();
   const [registeredEvents, setRegisteredEvents] = useState<Event[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
@@ -35,33 +39,46 @@ function UserPortalUpcoming() {
     null
   );
   const [message, setMessage] = useState("No upcoming events for now :(");
-  const [displayLoader, setDisplayLoader] = useState(true);
+  // const [displayLoader, setDisplayLoader] = useState(true);
 
-  async function fetchData() {
-    try {
-      const fetchedEvents = await getUpcomingEvents();
-      // const user = await getUserById(userId);
-      // setUserData(user);
-      if (fetchedEvents.payload != null) {
-        setEvents(fetchedEvents.payload.reverse());
-      } else {
-        setMessage("No upcoming events for now :(");
-      }
-      setDisplayLoader(false);
-      // const registeredEvents = await getAllRegistrationsByUserId(userId);
-      // setRegisteredEvents(registeredEvents);
-    } catch (error) {
-      setDisplayLoader(false);
-      console.log(error);
+  // async function fetchData() {
+  //   try {
+  //     const fetchedEvents = await getUpcomingEvents();
+  //     // const user = await getUserById(userId);
+  //     // setUserData(user);
+  //     if (fetchedEvents.payload != null) {
+  //       setEvents(fetchedEvents.payload.reverse());
+  //     } else {
+  //       setMessage("No upcoming events for now :(");
+  //     }
+  //     setDisplayLoader(false);
+  //     // const registeredEvents = await getAllRegistrationsByUserId(userId);
+  //     // setRegisteredEvents(registeredEvents);
+  //   } catch (error) {
+  //     setDisplayLoader(false);
+  //     console.log(error);
+  //   }
+  // }
+
+  useEffect(() => {
+    console.log("eventsprop updated:", eventsprop); // Debug log
+
+    if (eventsprop && eventsprop.length > 0) {
+      setEvents(eventsprop);
+      setMessage(""); // Clear message if events are available
+    } else {
+      setEvents([]);
+      setMessage("No upcoming events for now :(");
     }
-  }
+  }, [eventsprop]);
+  
   function gotoRegister(event: Event) {
     navigate(`${event.name}`, { state: event });
   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   // const handleRegisterForEvent = async (eventId: number) => {
   //   try {
@@ -98,25 +115,25 @@ function UserPortalUpcoming() {
     height: "100px",
   };
 
-  return displayLoader ? (
-    <Loader />
-  ) : (
+  return (
     <div className="min-h-full p-4">
-      <div
+      {/* <div
         className="HeroSection flex flex-col  bg-cover bg-center bg-no-repeat m-4"
         style={heroStyle}
       >
         <img src="" />
         <h2 className="text-2xl font-bold mb-4 my-auto">
           Welcome
-          {/* back, {userData?.name}. */}
+          {/* back, {userData?.name}. }
         </h2>
-      </div>
+      </div> */}
 
       <div>
         {events.length ? (
           <>
-            <h3 className="text-xl font-semibold mb-4">Upcoming Events</h3>
+            <h3 className="text-2xl font-semibold mb-7 mt-5 text-center">
+                Upcoming Events
+              </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {events.map((event) => (
                 <div
@@ -130,11 +147,12 @@ function UserPortalUpcoming() {
                     {event.description}
                   </p>
                   <p className="py-2">
+                    {/* To be announced is kept directly in the database now */}
                     <strong>When : </strong>{" "}
                     {/* {format(new Date(event.startDate), "yyyy-MM-dd HH:mm")} to{" "}
                     {format(new Date(event.endDate), "yyyy-MM-dd HH:mm")} */}
                     {event.startDate}
-                    {" - "}
+                    {" - "}  
                     {event.endDate}
                   </p>
                   <p>
@@ -164,14 +182,14 @@ function UserPortalUpcoming() {
                       ? "Registered !"
                       : "Register"}
                   </button> */}
-                  <div className="mt-2">
+                  {/* <div className="mt-2">
                     <Link
-                      to={`${event.name}`}
+                      to={`/upcoming-events/${event.name}`}
                       className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                     >
                       Register
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>
