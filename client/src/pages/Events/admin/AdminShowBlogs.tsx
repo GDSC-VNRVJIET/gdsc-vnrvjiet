@@ -5,7 +5,6 @@ import CurrentBlogs from "./CurrentBlogs";
 import Loader from "../../Loader";
 interface Blog {
   author: string;
-  author: string;
   thumbnail: string;
   title: string;
   description: string;
@@ -32,7 +31,6 @@ const AdminShowBlogs: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"tab1" | "tab2">("tab1");
   const [showRadioButtons, setShowRadioButtons] = useState<boolean>(false);
   const [selectedBlogId, setSelectedBlogId] = useState<string>("");
-  const [author, setAuthor] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
   const activateTab = (tab: "tab1" | "tab2") => {
     setActiveTab(tab);
