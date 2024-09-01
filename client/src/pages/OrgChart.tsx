@@ -35,6 +35,7 @@ import chanirudhimg from "./Domain Info/images/design/Anirudh.jpg"
 import panirudhimg from "./Domain Info/images/design/Anirudh P.jpg"
 import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg"
 import rishithaimg from "./Domain Info/images/design/Rishitha.jpg"
+import { set } from "date-fns";
 
 interface Person {
   role: string;
@@ -294,6 +295,7 @@ const OrgChart: React.FC = () => {
               >
                 <div className="shrink-0 w-36 h-36 md:w-48 md:h-48"
                 onMouseEnter={() => person.role !== "Co Lead" && setSelectedDomain(index)}
+                onMouseLeave={() => window.innerWidth<=1024 && setSelectedDomain(null)}
                 
                 >
                   <img
@@ -308,7 +310,7 @@ const OrgChart: React.FC = () => {
                 <p className="text-md text-gray-700 text-center">
                   {person.name}
                 </p>
-                <div className={`lg:absolute lg:top-[15.5rem] relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out ${(fadein && selectedDomain===index ) ? 'opacity-100 pointer-events-auto scale-y-100':'opacity-0 pointer-events-none scale-y-95 h-0'} `}>
+                <div className={`lg:absolute lg:top-[15.5rem] relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out ${(selectedDomain===index ) ? '':'hidden'} ${fadein?'opacity-100':'opacity-0'}`}>
                     <h3 className="text-md font-semibold text-center mb-2">
                       Coordinators
                     </h3>
