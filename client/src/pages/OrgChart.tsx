@@ -278,15 +278,17 @@ const OrgChart: React.FC = () => {
             <p className="text-md text-gray-700">{dataToDisplay.lead.name}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-24 relative">
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 justify-around gap-y-10 relative">
             {dataToDisplay.domainLeads.map((person, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center relative"
-                onMouseEnter={() => person.role !== "Co Lead" && setSelectedDomain(index)}
+                className="flex flex-col items-center"
                 onMouseLeave={() => setSelectedDomain(null)}
               >
-                <div className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden">
+                <div className="shrink-0 w-36 h-36 md:w-48 md:h-48"
+                onMouseEnter={() => person.role !== "Co Lead" && setSelectedDomain(index)}
+                
+                >
                   <img
                     src={person.img}
                     alt={person.role}
@@ -300,7 +302,7 @@ const OrgChart: React.FC = () => {
                   {person.name}
                 </p>
                 {selectedDomain === index && (
-                  <div className="absolute top-full left-0 w-full bg-white p-4 mt-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out opacity-100">
+                  <div className="lg:absolute lg:top-64 relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out opacity-100 ">
                     <h3 className="text-md font-semibold text-center mb-2">
                       Coordinators
                     </h3>
@@ -343,6 +345,7 @@ const OrgChart: React.FC = () => {
                     </div>
                   </div>
                 )}
+                
               </div>
             ))}
           </div>
