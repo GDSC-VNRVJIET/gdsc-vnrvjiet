@@ -12,6 +12,7 @@ interface Blog {
   author: string;
   category: string;
   [key: string]: any;
+  date:string;
 }
 
 const UserShowBlogs: React.FC = () => {
@@ -179,8 +180,8 @@ const UserShowBlogs: React.FC = () => {
                           <a className="font-medium text-gray-800 hover:text-green-400 transition duration-150 ease-in-out">
                             {blog.author}
                           </a>
-                          {/* <span className="text-gray-700"> - </span>
-                          <span className="text-gray-500">Jan 19, 2020</span> */}
+                          <span className="text-gray-700"> - </span>
+                          <span className="text-gray-500">{blog.date}</span>
                         </div>
                       </footer>
                     </div>

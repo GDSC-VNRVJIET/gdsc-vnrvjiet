@@ -16,6 +16,12 @@ blogApp.post('/add',expressAsyncHandler(async(req,res)=>{
     console.log("hello")
     let blogCollection = await getDBObj("blogCollectionObject");
     try {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = currentDate.toLocaleString('default', { month: 'short' });
+      const day = currentDate.getDate();
+      const dateString = `${month} ${day}, ${year}`;
+      blog.date = dateString;
         const result =  await blogCollection.insertOne(blog);
    res.json({ status: "Sent successfully" });
     } catch (error) {
@@ -115,9 +121,14 @@ blogApp.put("/change/:id", expressAsyncHandler(async (req, res) => {
     try {
       let blogCollection = await getDBObj("blogCollectionObject");
       const blogId = req.params.id;
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = currentDate.toLocaleString('default', { month: 'short' });
+      const day = currentDate.getDate();
+      const dateString = `${month} ${day}, ${year}`;
       const result = await blogCollection.updateOne(
         { _id: new ObjectId(blogId) },
-        { $set: { show: "true" } }
+        { $set: { show: "true", date: dateString } }
       );
       if (result.modifiedCount === 0) {
         return res.status(404).json({ success: false, message: "Blog not found" });
