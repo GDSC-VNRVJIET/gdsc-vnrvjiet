@@ -8,6 +8,7 @@ import PraneethaImage from "../Domain Info/images/design/Praneetha.jpg";
 import ChAnirudhImage from "../Domain Info/images/design/Anirudh.jpg";
 import AnirudhPImage from "../Domain Info/images/design/Anirudh P.jpg";
 import AryaImage from "../Domain Info/images/design/Arya Joshi.jpg";
+import RishithaImage from "../Domain Info/images/design/Rishitha.jpg";
 
 function ML() {
 
@@ -62,6 +63,14 @@ function ML() {
       name: "Arya Joshi",
       role: "Design Volunteer",
       image: AryaImage,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Rishitha",
+      role: "Design Volunteer",
+      image: RishithaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",

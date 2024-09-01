@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import NikhitaImage from "../Domain Info/images/ML/D_Nikhita_Kashyap.jpeg";
 import SuryaImage from "../Domain Info/images/ML/Chittiprolu Suryateja.jpg";
 import SharanImage from "../Domain Info/images/ML/SriSharanTej.jpg";
 import KeerthikaImage from "../Domain Info/images/ML/KeerthikaGoli.jpg";
@@ -18,6 +19,14 @@ function ML() {
   const gifUrl =
     "https://connect.ignatiuz.com/hs-fs/hubfs/AI%20and%20Deep%20Learning.gif?width=1000&name=AI%20and%20Deep%20Learning.gif";
   const members = [
+    {
+      name: "Nikhita Kashyap",
+      role: "Machine Learning Coordinator",
+      image: NikhitaImage,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
     {
       name: "Surya Teja",
       role: "Machine Learning Coordinator",
