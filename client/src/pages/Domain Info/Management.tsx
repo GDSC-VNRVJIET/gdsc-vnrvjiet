@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SahithiImage from "../Domain Info/images/MANAGEMENT/Sahithi.jpg";
 import VarunImage from "../Domain Info/images/MANAGEMENT/GVK.jpg";
 import JahnaviImage from "../Domain Info/images/MANAGEMENT/Jahnavi Reddy.png";
-import RakshithaImage from "../Domain Info/images/MANAGEMENT/SaiRakshita.jpg";
+import RakshithaImage from "../Domain Info/images/MANAGEMENT/Sai Rakshita Narsingh.jpg";
 import AbhijeetImage from "../Domain Info/images/MANAGEMENT/Abhijeet.png";
 import SadhikImage from "../Domain Info/images/MANAGEMENT/Sadhik.jpg";
 import SriKruthiImage from "../Domain Info/images/MANAGEMENT/SriKruthi.jpg";
@@ -44,7 +44,7 @@ function WebDev() {
       instagram: "#",
     },
     {
-      name: "Sai Rakshitha",
+      name: "Sai Rakshita",
       role: "Management Coordinator",
       image: RakshithaImage,
       linkedin: "#",
