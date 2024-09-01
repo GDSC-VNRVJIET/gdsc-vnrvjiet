@@ -4,6 +4,7 @@ import colead from "./images/colead.png";
 import weblead from "./images/webdevlead.png";
 import managelead from "./images/managementlead.png";
 import designlead from "./images/creativelead.png";
+import jayasreeimg from "./Domain Info/images/WEB DEV/Jayasree Gondipalle.jpg"
 import jahnaviimg from "./Domain Info/images/WEB DEV/Sai Jahnavi Rallapalli.jpeg"
 import manikantaimg from "./Domain Info/images/WEB DEV/Manikanta.jpg"
 import karthikimg from "./Domain Info/images/WEB DEV/Karthik.jpg"
@@ -19,6 +20,7 @@ import rakshithaimg from "./Domain Info/images/MANAGEMENT/SaiRakshita.jpg"
 import sadhikimg from "./Domain Info/images/MANAGEMENT/Sadhik.jpg"
 import srikruthiimg from "./Domain Info/images/MANAGEMENT/SriKruthi.jpg"
 import abhijeetimg from "./Domain Info/images/MANAGEMENT/Abhijeet.png"
+import nikhitaimg from "./Domain Info/images/ML/D_Nikhita_Kashyap.jpeg"
 import suryaimg from "./Domain Info/images/ML/Chittiprolu Suryateja.jpg"
 import sharanimg from "./Domain Info/images/ML/SRI SHARAN TEJ.jpg"
 import keerthikaimg from "./Domain Info/images/ML/KeerthikaGoli.jpg"
@@ -31,6 +33,7 @@ import praneethaimg from "./Domain Info/images/design/Praneetha.jpg"
 import chanirudhimg from "./Domain Info/images/design/Anirudh.jpg"
 import panirudhimg from "./Domain Info/images/design/Anirudh P.jpg"
 import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg"
+import rishithaimg from "./Domain Info/images/design/Rishitha.jpg"
 
 interface Person {
   role: string;
@@ -144,8 +147,8 @@ const data2024: OrgChartData = {
       name: "Manideep",
       img: weblead,
       coordinators: [
-        { name: "Jayasree", img: jahnaviimg },
-        { name: "Sai Jahnavi", img: colead },
+        { name: "Jayasree", img: jayasreeimg },
+        { name: "Sai Jahnavi", img: jahnaviimg },
       ],
       volunteers: [
         { name: "Sri Manikanta", img: manikantaimg },
@@ -188,6 +191,7 @@ const data2024: OrgChartData = {
       name: "Ryan Howard",
       img: managelead,
       coordinators: [
+        { name: "Nikhita Kashyap", img: nikhitaimg },
         { name: "Surya Teja", img: suryaimg },
       ],
       volunteers: [
@@ -211,6 +215,7 @@ const data2024: OrgChartData = {
         { name: "Ch. Anirudh", img: chanirudhimg },
         { name: "Arya Joshi", img: aryaimg },
         { name: "P. Anirudh", img: panirudhimg },
+        { name: "Rishitha", img: rishithaimg },
       ],
     },
   ],

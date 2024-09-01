@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import jayasreeImage from "../Domain Info/images/WEB DEV/Jayasree Gondipalle.jpg";
 import JahnaviImage from "../Domain Info/images/WEB DEV/Sai Jahnavi Rallapalli.jpeg";
 import ManikantaImage from "../Domain Info/images/WEB DEV/Manikanta.jpg";
 import KarthikImage from "../Domain Info/images/WEB DEV/Karthik.jpg";
@@ -17,6 +18,14 @@ function WebDev() {
     "https://global.discourse-cdn.com/business6/uploads/codeorgforum/original/2X/5/5850a08813648555f34c29bea7b6d1de15f01655.gif";
 
   const members = [
+    {
+      name: "Jayasree",
+      role: "Web Development Coordinator",
+      image: jayasreeImage,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
     {
       name: "Sai Jahnavi",
       role: "Web Development Coordinator",
