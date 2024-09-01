@@ -2,7 +2,7 @@ import React,{useEffect} from "react";
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-import PoojaImage from "../Domain Info/images/design/Poojasiri.jpg";
+import PoojaImage from "../Domain Info/images/design/Poojasiri.jpg.jpg";
 import SiddeshwariImage from "../Domain Info/images/design/Siddeshwari _Adepu.jpg";
 import PraneethaImage from "../Domain Info/images/design/Praneetha.jpg";
 import ChAnirudhImage from "../Domain Info/images/design/Anirudh.jpg";
