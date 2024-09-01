@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CurrentBlogs from "./CurrentBlogs";
 import Loader from "../../Loader";
 interface Blog {
-  author:string;
+  author: string;
   thumbnail: string;
   title: string;
   description: string;
@@ -19,14 +19,15 @@ const AdminShowBlogs: React.FC = () => {
   const [mailModal, setMailModal] = useState<boolean>(false);
   const [blogTitle, setBlogTitle] = useState<string>("");
   const [mail, setMail] = useState("");
-  const [base64Image1, setBase64Image1] = useState<string>("");
+  const [base64Image, setBase64Image] = useState<string>("");
+  const [fileName, setFileName] = useState<string | null>(null);
   const [categories, setCategories] = useState<string[]>([""]);
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"tab1" | "tab2">("tab1");
   const [showRadioButtons, setShowRadioButtons] = useState<boolean>(false);
   const [selectedBlogId, setSelectedBlogId] = useState<string>("");
-  const [author,setAuthor] = useState<string>("");
+  const [author, setAuthor] = useState<string>("");
   const activateTab = (tab: "tab1" | "tab2") => {
     setActiveTab(tab);
   };
@@ -72,27 +73,39 @@ const AdminShowBlogs: React.FC = () => {
 
   const handleAddBlog = () => {
     console.log("Blog Title:", blogTitle);
-    navigate("/add-blog", { state: [base64Image1, blogTitle, categories , author] });
+    navigate("/add-blog", {
+      state: [base64Image, blogTitle, categories, author],
+    });
     setShowModal(false);
   };
 
-  const handleImageChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setBase64Image1(reader.result as string);
-    };
-
     if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setBase64Image(reader.result as string);
+        setFileName(file.name);
+      };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleDelete = () => {
+    setFileName("");
+    setBase64Image("");
   };
 
   const handleCategoryChange = (index: number, value: string) => {
     const newCategories = [...categories];
     newCategories[index] = value;
     setCategories(newCategories);
+  };
+
+  const handleKeyDown = (event: { key: string }) => {
+    if (event.key === "Enter") {
+      addCategoryField();
+    }
   };
 
   const addCategoryField = () => {
@@ -176,7 +189,14 @@ const AdminShowBlogs: React.FC = () => {
                 placeholder="Title"
                 className="p-2 border border-gray-300 rounded"
               />
-              <input type="text" value={author} onChange={handleAuthorChange} required placeholder="Author" className="p-2 border border-gray-300 rounded" />
+              <input
+                type="text"
+                value={author}
+                onChange={handleAuthorChange}
+                required
+                placeholder="Author"
+                className="p-2 border border-gray-300 rounded"
+              />
               {categories.map((category, index) => (
                 <div key={index} className="flex items-center gap-2">
                   <input
@@ -185,6 +205,7 @@ const AdminShowBlogs: React.FC = () => {
                     onChange={(e) =>
                       handleCategoryChange(index, e.target.value)
                     }
+                    onKeyDown={handleKeyDown}
                     placeholder="Category"
                     className="w-full p-2 border border-gray-300 rounded"
                   />
@@ -206,16 +227,32 @@ const AdminShowBlogs: React.FC = () => {
                   + Add Category
                 </button>
               )}
-              <label className="border-dashed border-2 border-gray-500 p-4 rounded cursor-pointer flex flex-col items-center">
-                <span className="text-gray-700">Drop Thumbnail here</span> (or)
-                <input
-                  className="hidden"
-                  type="file"
-                  id="images"
-                  accept="image/png, image/jpg, image/jpeg"
-                  onChange={handleImageChange1}
-                />
-              </label>
+              <div className="flex flex-col items-center">
+                {fileName ? (
+                  <div className="flex items-center justify-between w-full p-4 border-dashed border-2 border-gray-500 rounded">
+                    <span className="text-gray-700">{fileName}</span>
+                    <button
+                      type="button"
+                      onClick={handleDelete}
+                      className="bg-red-500 text-white py-1 px-3 rounded"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ) : (
+                  <label className="border-dashed border-2 border-gray-500 p-4 rounded cursor-pointer flex flex-col items-center">
+                    <span className="text-gray-700">Drop Thumbnail here</span>{" "}
+                    (or)
+                    <input
+                      className="hidden"
+                      type="file"
+                      id="images"
+                      accept="image/png, image/jpg, image/jpeg"
+                      onChange={handleImageChange}
+                    />
+                  </label>
+                )}
+              </div>
               <button
                 type="button"
                 onClick={handleAddBlog}
