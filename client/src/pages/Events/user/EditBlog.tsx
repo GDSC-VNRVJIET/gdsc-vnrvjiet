@@ -27,16 +27,19 @@ const EditBlog: React.FC = () => {
           setDisplayLoader(false);
           setAccess(true);
         }
+        else{
         const response = await axios.get(
           `${process.env.REACT_APP_BACK_URL}/addblog/getAccessdata/${user?.emailId}`
         );
+        console.log(response.data.success);
         if (response.data.success === true) {
           if (id === response.data.payload.blogId) {
             setAccess(true);
             setDisplayLoader(false);
           }
         }
-      } catch (error) {}
+      }
+      } catch (error) {console.log(error);}
     };
     getUserData();
   }, []);
@@ -59,6 +62,16 @@ const EditBlog: React.FC = () => {
       emailId: string;
     } | null
   );
+
+  async function sendEmailToAdmin() {
+    if(user?.emailId!=="admin@gmail.com"){
+      // send mail to gdsc.vnrvjiet@gmail.com
+      await axios.post(`${process.env.REACT_APP_BACK_URL}/sendmail/notify-admin`, {
+        email: user?.emailId,
+        blogId: id,
+      })
+    }
+  }
   useEffect(() => {
     const fetchBlog = async () => {
       try {
@@ -123,6 +136,7 @@ const EditBlog: React.FC = () => {
       const updatedBlog = {
         title,
         description,
+        author,
         category: categories.join(","),
         thumbnail: base64Image || thumbnail,
       };
@@ -213,7 +227,7 @@ const EditBlog: React.FC = () => {
     <div className="flex justify-center">
       <button
         type="button"
-        onClick={handleUpdateBlog}
+        onClick={() => { handleUpdateBlog(); sendEmailToAdmin(); }}
         className="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700"
       >
         Update Blog

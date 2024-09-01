@@ -201,14 +201,6 @@ const AdminShowBlogs: React.FC = () => {
                 placeholder="Author"
                 className="p-2 border border-gray-300 rounded"
               />
-              <input
-                type="text"
-                value={author}
-                onChange={handleAuthorChange}
-                required
-                placeholder="Author"
-                className="p-2 border border-gray-300 rounded"
-              />
               {categories.map((category, index) => (
                 <div key={index} className="flex items-center gap-2">
                   <input

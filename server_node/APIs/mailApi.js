@@ -154,6 +154,27 @@ const sendContactEmail = async (name, email, message) => {
   });
 };
 
+const sendNotifyAdminEmail = async (email,blogId) => {
+  const mail = {
+    from: process.env.USER,
+    to: process.env.USER,
+    subject: "New Blog Submission",
+    html: `
+        <p>We have received a new blog submission. Please find the details below to Post the blog:</p>
+        <p>We got a new blog submission from ${email}</p>
+        <br/>
+        <p><a href="https://gdsc-vnrvjiet.vercel.app/blogs/${blogId}" target="_blank">Post the Blog Permenantly</a></p>
+        <p><b>Note:</b> Check whether the data is postable or not</p>
+        ---
+        <b><p>Thanks & Regards,</p>
+        <p>GDSC VNRVJIET</p></b>
+      `,
+  };
+
+  await transporter.sendMail(mail);
+};
+
+
 mailApp.post("/order", async (req, res) => {
   try {
     const razorpay = new Razorpay({
@@ -249,5 +270,17 @@ mailApp.post(
     }
   })
 );
+
+mailApp.post("/notify-admin", expressAsyncHandler(async (req, res) => {
+  const { email, blogId } = req.body;
+  try {
+    // Send the access email
+    sendNotifyAdminEmail(email, blogId);  
+    res.json({ status: "success" });
+  } catch (error) {
+    console.error("Error during access grant:", error.message);
+    res.json({ status: "Error", message: error.message });
+  }
+}));
 
 module.exports = mailApp;
