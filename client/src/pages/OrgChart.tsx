@@ -10,6 +10,7 @@ import manikantaimg from "./Domain Info/images/WEB DEV/Manikanta.jpg"
 import karthikimg from "./Domain Info/images/WEB DEV/Karthik.jpg"
 import varunimg from "./Domain Info/images/WEB DEV/Varun.jpg"
 import dedeepyaimg from "./Domain Info/images/WEB DEV/Vellanki Chenchu Dedeepya .jpg"
+import lakshitaimg from "./Domain Info/images/WEB DEV/Lakshita Goyal.jpg"
 import harshaimg from "./Domain Info/images/CP/Harsha Vardhan.jpg"
 import divyaimg from "./Domain Info/images/CP/Divya Sri.jpg"
 import vighneshimg from "./Domain Info/images/CP/VighneshVangari.jpg"
@@ -155,7 +156,7 @@ const data2024: OrgChartData = {
         { name: "Karthik", img: karthikimg },
         { name: "Varun", img: varunimg },
         { name: "Dedeepya", img: dedeepyaimg },
-        { name: "Lakshitha", img: colead },
+        { name: "Lakshita", img: lakshitaimg },
       ],
     },
     {
@@ -228,8 +229,14 @@ const OrgChart: React.FC = () => {
 
   const [year, setYear] = useState<number>(2025);
   const [selectedDomain, setSelectedDomain] = useState<number | null>(null);
+  const [fadein, setFadein] = useState<boolean>(false);
 
   const dataToDisplay = year === 2025 ? data2025 : data2024;
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFadein(selectedDomain !== null);
+    }, 10) }, [selectedDomain])
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 relative">
@@ -301,8 +308,7 @@ const OrgChart: React.FC = () => {
                 <p className="text-md text-gray-700 text-center">
                   {person.name}
                 </p>
-                {selectedDomain === index && (
-                  <div className="lg:absolute lg:top-64 relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out opacity-100 ">
+                <div className={`lg:absolute lg:top-[15.5rem] relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out ${(fadein && selectedDomain===index ) ? 'opacity-100 pointer-events-auto scale-y-100':'opacity-0 pointer-events-none scale-y-95 h-0'} `}>
                     <h3 className="text-md font-semibold text-center mb-2">
                       Coordinators
                     </h3>
@@ -344,7 +350,6 @@ const OrgChart: React.FC = () => {
                       ))}
                     </div>
                   </div>
-                )}
                 
               </div>
             ))}

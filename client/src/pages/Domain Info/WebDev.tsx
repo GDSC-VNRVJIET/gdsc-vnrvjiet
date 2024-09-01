@@ -5,6 +5,7 @@ import ManikantaImage from "../Domain Info/images/WEB DEV/Manikanta.jpg";
 import KarthikImage from "../Domain Info/images/WEB DEV/Karthik.jpg";
 import VarunImage from "../Domain Info/images/WEB DEV/Varun.jpg";
 import DedeepyaImage from "../Domain Info/images/WEB DEV/Vellanki Chenchu Dedeepya .jpg";
+import lakshitaimg from "../Domain Info/images/WEB DEV/Lakshita Goyal.jpg";
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
@@ -62,6 +63,14 @@ function WebDev() {
       name: "Dedeepya",
       role: "Web Development Volunteer",
       image: DedeepyaImage,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Lakshita",
+      role: "Web Development Volunteer",
+      image: lakshitaimg,
       linkedin: "#",
       github: "#",
       instagram: "#",
