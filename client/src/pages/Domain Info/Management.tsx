@@ -123,7 +123,8 @@ function WebDev() {
                   {member.name}
                 </h4>
                 <p className="text-gray-500 mb-4 text-center">{member.role}</p>
-                <div className="flex justify-center space-x-4 mt-4">
+                {/* Lets add these after collecting the details */}
+                {/* <div className="flex justify-center space-x-4 mt-4">
                   <a
                     href={member.linkedin}
                     className="text-blue-500 hover:text-blue-600"
@@ -142,7 +143,7 @@ function WebDev() {
                   >
                     <FiInstagram size={20} />
                   </a>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>

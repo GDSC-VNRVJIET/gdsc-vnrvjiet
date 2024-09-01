@@ -63,9 +63,9 @@ function WebDev() {
     <div className="bg-gray-50 p-8">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-6xl mx-auto">
         <div className="p-6">
-        <h3 className="text-2xl sm:text-3xl md:text-4xl text-center font-extrabold mb-6 sm:mb-8 md:mb-10 text-blue-500">
-  Web Development
-</h3>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl text-center font-extrabold mb-6 sm:mb-8 md:mb-10 text-blue-500">
+            Web Development
+          </h3>
 
           <div className="flex flex-col md:flex-row justify-center mb-20 items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
             <img
@@ -101,7 +101,8 @@ function WebDev() {
                   {member.name}
                 </h4>
                 <p className="text-gray-500 mb-4 text-center">{member.role}</p>
-                <div className="flex justify-center space-x-4 mt-4">
+                {/* Lets add these after collecting the details */}
+                {/* <div className="flex justify-center space-x-4 mt-4">
                   <a
                     href={member.linkedin}
                     className="text-blue-500 hover:text-blue-600"
@@ -120,7 +121,7 @@ function WebDev() {
                   >
                     <FiInstagram size={20} />
                   </a>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>

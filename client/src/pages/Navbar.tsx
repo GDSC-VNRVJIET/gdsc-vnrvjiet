@@ -80,7 +80,7 @@ function Navbar() {
           </NavLink>
         </div>
         <NavLink to="/">
-          <h1 className="text-[#868686] text-lg pl-5 hidden md:block transition-all duration-500 ease-in-out hover:text-transparent hover:bg-clip-text  hover:bg-gradient-to-r hover:from-red-500 hover:via-yellow-500 hover:via-green-500 hover:to-blue-500 hover:tracking-wider hover:scale-110">GDSC VNRVJIET.</h1>
+          <h1 className="text-[#868686] text-lg pl-5 hidden md:block transition-all duration-500 ease-in-out hover:text-transparent hover:bg-clip-text  hover:bg-gradient-to-r hover:from-red-500 hover:via-yellow-500 hover:via-green-500 hover:to-blue-500 hover:tracking-wider hover:scale-110">GDSC VNRVJIET</h1>
         </NavLink>
         <div className="flex flex-col md:flex-row ml-auto text-center text-slate-600 ">
         <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white  ">
@@ -89,22 +89,22 @@ function Navbar() {
           <span className="relative">Home</span>
         </NavLink>
         </button>
-          <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
+          {/* <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/team" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-full  ${isActive ? "bg-blue-500 text-white" : ""}`}>
             <span className="absolute inset-0 group-hover:bg-blue-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
             <span className="relative">Team </span>
             </NavLink>
-          </button>
-          <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
+          </button> */}
+          {/* <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/orgchart" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-full  ${isActive ? "bg-red-500 text-white" : ""}`}>
             <span className="absolute inset-0 group-hover:bg-red-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
             <span className="relative">OrgChart </span>
             </NavLink>
-          </button>
+          </button> */}
           <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/blogs" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-full  ${isActive ? "bg-red-500 text-white" : ""}`}>
             <span className="absolute inset-0 group-hover:bg-red-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
-            <span className="relative">Blog</span>
+            <span className="relative">Blogs</span>
             </NavLink>
           </button>
           <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
@@ -113,7 +113,7 @@ function Navbar() {
             <span className="relative">Solution Challenge</span>
             </NavLink>
           </button>
-          {
+          {/* {
             users?.role==="admin" &&
             <button className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
               <NavLink to="/enter" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-full  ${isActive ? "bg-yellow-500 text-white" : ""}`}>
@@ -121,7 +121,7 @@ function Navbar() {
               <span className="relative">Evaluate</span>
               </NavLink>
             </button>
-          }
+          } */}
           {/* <button className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/leaderboard" className="relative z-10">Leaderboard
             <span className="absolute inset-0 group-hover:bg-yellow-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
