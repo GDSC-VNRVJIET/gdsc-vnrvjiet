@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import NikhitaImage from "../Domain Info/images/ML/D_Nikhita_Kashyap.jpeg";
 import SuryaImage from "../Domain Info/images/ML/Chittiprolu Suryateja.jpg";
-import SharanImage from "../Domain Info/images/ML/SriSharanTej.jpg";
+import SharanImage from "../Domain Info/images/ML/SRI SHARAN TEJ.jpg";
 import KeerthikaImage from "../Domain Info/images/ML/KeerthikaGoli.jpg";
 import RoshiniImage from "../Domain Info/images/ML/KotagiriRoshini.jpg";
 import BharathImage from "../Domain Info/images/ML/BharathChandra.jpg";
