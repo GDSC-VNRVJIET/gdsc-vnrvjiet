@@ -104,6 +104,7 @@ blogApp.put('/updateblog/:id', expressAsyncHandler( async (req, res, next) => {
 blogApp.post("/getAccessdata", expressAsyncHandler( async (req, res) => {
   try {
     const {blogId,emailId} = req.body;
+    console.log(blogId,emailId);
     let blogAccessCollection = await getDBObj("blogAccessCollectionObject");
     // in the database check the blogId , if that blogId axists , check its corresponding emailId
     const result = await blogAccessCollection.findOne({ blogId: blogId});
