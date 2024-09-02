@@ -4,6 +4,8 @@ import colead from "./images/colead.png";
 import weblead from "./images/webdevlead.png";
 import managelead from "./images/managementlead.png";
 import designlead from "./images/creativelead.png";
+import cplead from "./images/jayachandra_thelukuntla.webp"
+import mllead from "./images/corolead.png"
 import jayasreeimg from "./Domain Info/images/WEB DEV/Jayasree Gondipalle.jpg"
 import jahnaviimg from "./Domain Info/images/WEB DEV/Sai Jahnavi Rallapalli.jpeg"
 import manikantaimg from "./Domain Info/images/WEB DEV/Manikanta.jpg"
@@ -162,8 +164,8 @@ const data2024: OrgChartData = {
     },
     {
       role: "CP Lead",
-      name: "John Smith",
-      img: managelead,
+      name: "Jayachandra",
+      img: cplead,
       coordinators: [
         { name: "Harsha Vardhan", img: harshaimg },
       ],
@@ -190,8 +192,8 @@ const data2024: OrgChartData = {
     },
     {
       role: "ML Lead",
-      name: "Ryan Howard",
-      img: managelead,
+      name: "Akhil",
+      img: mllead ,
       coordinators: [
         { name: "Nikhita Kashyap", img: nikhitaimg },
         { name: "Surya Teja", img: suryaimg },
