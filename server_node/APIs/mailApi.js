@@ -191,7 +191,7 @@ const thankAuthor = async (email) => {
       `,
   };
 
-  await transporter.sendMail(mail);
+  return await transporter.sendMail(mail);
 };
 
 mailApp.post("/order", async (req, res) => {
@@ -312,19 +312,17 @@ mailApp.post(
     let blogAccessCollectionObject = await getDBObj(
       "blogAccessCollectionObject"
     );
-    const response = await blogAccessCollectionObject.findOne({
-      where: { blogId },
-    });
-
     try {
-      console.log(response, response?.email);
+      const response = await blogAccessCollectionObject.findOne({ blogId });
       if (response?.email) {
-        thankAuthor(response?.email);
+        await thankAuthor(response?.email);
+        return res.json({ status: "success" });
+      } else {
+        return res.json({ status: "failure", message: "Email not found" });
       }
-      res.json({ status: "success" });
     } catch (error) {
       console.error("Error during thanking author:", error.message);
-      res.json({ status: "Error", message: error.message });
+      return res.json({ status: "error", message: error.message });
     }
   })
 );
