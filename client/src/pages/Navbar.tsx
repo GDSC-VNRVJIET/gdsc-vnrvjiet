@@ -144,7 +144,7 @@ function Navbar() {
             <span className="relative">Contact Us</span>
             </NavLink>
           </button>
-          {userObjGDSC == null ? (
+          {/* {userObjGDSC == null ? (
             <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
               <NavLink to="/login" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-full  ${isActive ? "bg-red-500 text-white" : ""}`}>
               <span className="absolute inset-0 group-hover:bg-red-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
@@ -173,7 +173,13 @@ function Navbar() {
                 )}
               </button>
             </div>
-          )}
+          )} */}
+          <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
+            <NavLink to="https://gdsc.community.dev/vallurupalli-nageswara-rao-vignana-jyothi-institute-of-engineering-and-technology-hyderabad-india/" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-full  ${isActive ? "bg-red-500 text-white" : ""}`}>
+            <span className="absolute inset-0 group-hover:bg-red-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
+            <span className="relative">Join us</span>
+            </NavLink>
+          </button>
         </div>
       </div>
     </nav>
