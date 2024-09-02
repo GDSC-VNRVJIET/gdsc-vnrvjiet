@@ -28,8 +28,11 @@ const EditBlog: React.FC = () => {
           setAccess(true);
         }
         else{
-        const response = await axios.get(
-          `${process.env.REACT_APP_BACK_URL}/addblog/getAccessdata/${user?.emailId}`
+        const response = await axios.post(
+          `${process.env.REACT_APP_BACK_URL}/addblog/getAccessdata`,{
+            blogId: id,
+            emailId: user?.emailId,
+          }
         );
         console.log(response.data.success);
         if (response.data.success === true) {

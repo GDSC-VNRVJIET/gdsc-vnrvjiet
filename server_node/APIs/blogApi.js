@@ -101,18 +101,21 @@ blogApp.put('/updateblog/:id', expressAsyncHandler( async (req, res, next) => {
   }
 }));
 
-blogApp.get("/getAccessdata/:emailId", expressAsyncHandler( async (req, res) => {
+blogApp.post("/getAccessdata", expressAsyncHandler( async (req, res) => {
   try {
+    const {blogId,emailId} = req.body;
     let blogAccessCollection = await getDBObj("blogAccessCollectionObject");
-    const emailId = req.params.emailId;
-    const result = await blogAccessCollection.findOne({ email: emailId });
-    if (!result) {
-      return res.status(404).json({ success: false, message: "Data not found" });
+    // in the database check the blogId , if that blogId axists , check its corresponding emailId
+    const result = await blogAccessCollection.findOne({ blogId: blogId});
+    if(result){
+      if(result.email===emailId){
+        return res.status(200).json({ success: true, message: "Access granted" });
+      }else{
+        return res.status(200).json({ success: false, message: "Access denied" });
+      }
     }
-    console.log(result)
-    res.json({ success: true, payload: result });
   } catch (error) {
-    console.error("Error retrieving data:", error);
+    console.error("Error checking blog access:", error);
     res.status(500).json({ success: false, message: "Server error" });
   }
 }));
