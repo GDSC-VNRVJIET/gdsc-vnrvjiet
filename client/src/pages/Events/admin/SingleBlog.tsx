@@ -76,9 +76,10 @@ const SingleBlog: React.FC = () => {
         `${process.env.REACT_APP_BACK_URL}/addblog/change/${blogId}`
       );
       if (response.data.success === true) {
-        axios.put(
+        const sent = await axios.put(
           `${process.env.REACT_APP_BACK_URL}/sendmail/thank-author/${blogId}`
         );
+        console.log(sent);
         alert("Blog posted successfully");
         navigate("/blogs");
       } else {

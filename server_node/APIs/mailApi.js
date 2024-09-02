@@ -317,6 +317,7 @@ mailApp.post(
     });
 
     try {
+      console.log(response, response?.email);
       if (response?.email) {
         thankAuthor(response?.email);
       }
