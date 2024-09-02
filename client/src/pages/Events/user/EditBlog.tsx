@@ -36,10 +36,8 @@ const EditBlog: React.FC = () => {
         );
         console.log(response.data.success);
         if (response.data.success === true) {
-          if (id === response.data.payload.blogId) {
             setAccess(true);
             setDisplayLoader(false);
-          }
         }
       }
       } catch (error) {console.log(error);}
