@@ -76,6 +76,10 @@ const SingleBlog: React.FC = () => {
         `${process.env.REACT_APP_BACK_URL}/addblog/change/${blogId}`
       );
       if (response.data.success === true) {
+        const sent = await axios.put(
+          `${process.env.REACT_APP_BACK_URL}/sendmail/thank-author/${blogId}`
+        );
+        console.log(sent);
         alert("Blog posted successfully");
         navigate("/blogs");
       } else {
@@ -156,11 +160,9 @@ const SingleBlog: React.FC = () => {
           className="rounded-md mb-4 w-full max-h-[450px] object-contain mt-4"
         />
         <div className="">
-        <div className="text-center md:text-right">
-  <span className="block font-bold text-sm">
-    By : {blog.author}
-  </span>
-</div>
+          <div className="text-center md:text-right">
+            <span className="block font-bold text-sm">By : {blog.author}</span>
+          </div>
           <div className="mb-3 flex flex-wrap mt-3 justify-center font-medium text-xs md:text-sm -m-1">
             {blog.category.split(",").map((cat, idx) => (
               <ul key={idx} className="">

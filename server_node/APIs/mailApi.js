@@ -154,7 +154,7 @@ const sendContactEmail = async (name, email, message) => {
   });
 };
 
-const sendNotifyAdminEmail = async (email,blogId) => {
+const sendNotifyAdminEmail = async (email, blogId) => {
   const mail = {
     from: process.env.USER,
     to: process.env.USER,
@@ -174,6 +174,25 @@ const sendNotifyAdminEmail = async (email,blogId) => {
   await transporter.sendMail(mail);
 };
 
+const thankAuthor = async (email) => {
+  const mail = {
+    from: process.env.USER,
+    to: email,
+    subject: "Your Blog is Now Live!",
+    html: `
+        <p>Dear Author,</p>
+        <p>We are excited to inform you that your blog has been successfully published and is now live on our platform. You can find your blog at the following link:</p>
+        <p><a href="https://gdsc-vnrvjiet.vercel.app/blogs" target="_blank">https://gdsc-vnrvjiet.vercel.app/blogs</a></p>
+        <br/>
+        <p>Thank you for your time in contributing to the community! We look forward to more insightful content from you in the future.</p>
+        ---
+        <b><p>Best Regards,</p>
+        <p>GDSC VNRVJIET</p></b>
+      `,
+  };
+
+  await transporter.sendMail(mail);
+};
 
 mailApp.post("/order", async (req, res) => {
   try {
@@ -271,16 +290,43 @@ mailApp.post(
   })
 );
 
-mailApp.post("/notify-admin", expressAsyncHandler(async (req, res) => {
-  const { email, blogId } = req.body;
-  try {
-    // Send the access email
-    sendNotifyAdminEmail(email, blogId);  
-    res.json({ status: "success" });
-  } catch (error) {
-    console.error("Error during access grant:", error.message);
-    res.json({ status: "Error", message: error.message });
-  }
-}));
+mailApp.post(
+  "/notify-admin",
+  expressAsyncHandler(async (req, res) => {
+    const { email, blogId } = req.body;
+    try {
+      // Send the access email
+      sendNotifyAdminEmail(email, blogId);
+      res.json({ status: "success" });
+    } catch (error) {
+      console.error("Error during access grant:", error.message);
+      res.json({ status: "Error", message: error.message });
+    }
+  })
+);
+
+mailApp.post(
+  "/thank-author",
+  expressAsyncHandler(async (req, res) => {
+    const { blogId } = req.body;
+    let blogAccessCollectionObject = await getDBObj(
+      "blogAccessCollectionObject"
+    );
+    const response = await blogAccessCollectionObject.findOne({
+      where: { blogId },
+    });
+
+    try {
+      console.log(response, response?.email);
+      if (response?.email) {
+        thankAuthor(response?.email);
+      }
+      res.json({ status: "success" });
+    } catch (error) {
+      console.error("Error during thanking author:", error.message);
+      res.json({ status: "Error", message: error.message });
+    }
+  })
+);
 
 module.exports = mailApp;
