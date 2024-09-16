@@ -353,7 +353,7 @@ const OrgChart: React.FC = () => {
                 <p className="text-md text-gray-700 text-center">
                   {person.name}
                 </p>
-                <div className={`lg:absolute ${index<5?"lg:top-[15.5rem]":"lg:top-[33rem]"} relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out ${(selectedDomain===index ) ? '':'hidden'} ${fadein?'opacity-100':'opacity-0'}`}>
+                <div className={`lg:absolute ${(year===2024 || index<5)?"lg:top-[15.5rem]":"lg:top-[33rem]"} relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out ${(selectedDomain===index ) ? '':'hidden'} ${fadein?'opacity-100':'opacity-0'}`}>
                   {person.coordinators.length > 0 && 
                   <h3 className="text-md font-semibold text-center mb-2">
                   Coordinators
