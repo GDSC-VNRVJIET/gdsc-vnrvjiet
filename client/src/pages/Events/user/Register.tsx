@@ -65,7 +65,6 @@ const PaymentGatewayRazorpay: React.FC = () => {
     if (foundEvent) {
       setStates(foundEvent);
       setDisplayLoader(false);
-      console.log(states);
     } else {
       console.log(`Event with name ${eventname} not found.`);
     }
@@ -114,7 +113,6 @@ const PaymentGatewayRazorpay: React.FC = () => {
     );
 
     const order = await response.json();
-    console.log("order", order);
 
     var option = {
       key: "rzp_live_ZppdxrzAdnfFFT",
@@ -141,13 +139,11 @@ const PaymentGatewayRazorpay: React.FC = () => {
           }
         );
         const jsonResponse = await validateResponse.json();
-        console.log("jsonResponse", jsonResponse);
         if (jsonResponse.msg === " Transaction is legit!") {
           const res = await axios.post(
             `${process.env.REACT_APP_BACK_URL}/registration/register`,
             formdata
           );
-          console.log(res);
         }
       },
       prefill: {

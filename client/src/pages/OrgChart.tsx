@@ -58,6 +58,7 @@ interface Volunteer {
 interface DomainLead extends Person {
   coordinators: Coordinator[];
   volunteers: Volunteer[];
+  type?: string;
 }
 
 interface OrgChartData {
@@ -66,72 +67,116 @@ interface OrgChartData {
 }
 
 const data2025: OrgChartData = {
-  lead: { role: "Lead", name: "John Doe", img: leadimg },
+  lead: { role: "Lead", name: "Jayasree Gondipalle", img: jayasreeimg },
   domainLeads: [
     {
+      role: "Co Lead",
+      name: "Sahithi Kolla",
+      img: sahithiimg,
+      coordinators: [],
+      volunteers: [],
+      type: "nonTechnical",
+    },
+    {
       role: "WebDev Lead",
-      name: "Alice Johnson",
-      img: weblead,
+      name: "Sai Jahnavi",
+      img: jahnaviimg,
       coordinators: [
-        { name: "Tom Brown", img: colead },
-        { name: "Emma Wilson", img: colead },
       ],
       volunteers: [
-        { name: "Jake White", img: colead },
-        { name: "Sophia Green", img: colead },
+        { name: "Sri Manikanta", img: manikantaimg },
+        { name: "Karthik", img: karthikimg },
+        { name: "Varun", img: varunimg },
+        { name: "Dedeepya", img: dedeepyaimg },
+        { name: "Lakshita", img: lakshitaimg },
       ],
+      type:"technical",
     },
     {
       role: "CP Lead",
-      name: "Bob Brown",
-      img: leadimg,
+      name: "Harsha Vardhan",
+      img: harshaimg,
       coordinators: [
-        { name: "Sara Lee", img: colead },
-        { name: "Mike Johnson", img: colead },
       ],
       volunteers: [
-        { name: "James Carter", img: colead },
-        { name: "Olivia Davis", img: colead },
+        { name: "Vighnesh", img: vighneshimg },
+        { name: "Divya Sri", img: divyaimg },
       ],
+      type:"technical",
     },
     {
       role: "Management Lead",
-      name: "Carol White",
-      img: managelead,
+      name: "Sai Rakshita Narsingh",
+      img: rakshithaimg,
       coordinators: [
-        { name: "Nina Patel", img: colead },
-        { name: "Paul Allen", img: colead },
       ],
       volunteers: [
-        { name: "Liam Martin", img: colead },
-        { name: "Ella Thomas", img: colead },
+        { name: "Sadhik", img: sadhikimg },
+        { name: "Sri Kruthi", img: srikruthiimg },
+        { name: "Abhijeet", img: abhijeetimg },
       ],
+      type: "nonTechnical",
     },
     {
-      role: "ML Lead",
-      name: "David Black",
-      img: leadimg,
+      role: "AIML Lead",
+      name: "Surya Teja Chittiprolu",
+      img: suryaimg ,
       coordinators: [
-        { name: "Sophia Lee", img: colead },
-        { name: "Michael Brown", img: colead },
       ],
       volunteers: [
-        { name: "Zara Khan", img: colead },
-        { name: "Daniel White", img: colead },
+        { name: "Sri Sharan Tej", img: sharanimg },
+        { name: "Keerthika", img: keerthikaimg },
+        { name: "Roshini", img: roshiniimg },
+        { name: "Bharath Chandra", img: bharathimg },
+        { name: "Vishwa Prateek", img: vishwaimg },
       ],
+      type:"technical",
     },
     {
       role: "Design Lead",
-      name: "Eve Green",
-      img: leadimg,
+      name: "Siddeshwari A",
+      img: siddeshwariimg,
       coordinators: [
-        { name: "Luna Scott", img: colead },
-        { name: "Oscar Gray", img: colead },
       ],
       volunteers: [
-        { name: "Ava Clark", img: colead },
-        { name: "Ethan Harris", img: colead },
+        { name: "Ch. Anirudh", img: chanirudhimg },
+        { name: "Arya Joshi", img: aryaimg },
+        { name: "P. Anirudh", img: panirudhimg },
+        { name: "Rishitha", img: rishithaimg },
       ],
+      type: "nonTechnical",
+    },
+    {
+      role: "Testing and Cybersecurity Lead",
+      name: "Vinay Gajula",
+      img: vinayimg,
+      coordinators: [],
+      volunteers: [],
+      type:"technical",
+    },
+    {
+      role: "AppDev Lead",
+      name: "Jahnavi Reddy",
+      img: jahnavireddyimg,
+      coordinators: [],
+      volunteers: [],
+      type:"technical",
+    },
+    {
+      role: "Social Media Lead",
+      name: "Pavanpraneetha Kunuku",
+      img: praneethaimg,
+      coordinators: [],
+      volunteers: [],
+      type: "nonTechnical",
+    },
+    {
+      role: "Women In Tech Lead",
+      name: "Nikhita Kashyap D",
+      img: nikhitaimg,
+      coordinators: [],
+      volunteers: [],
+      type:"technical",
     },
   ],
 };
@@ -233,6 +278,7 @@ const OrgChart: React.FC = () => {
   const [year, setYear] = useState<number>(2025);
   const [selectedDomain, setSelectedDomain] = useState<number | null>(null);
   const [fadein, setFadein] = useState<boolean>(false);
+  const domainTypes = ["technical", "nonTechnical"];
 
   const dataToDisplay = year === 2025 ? data2025 : data2024;
 
@@ -270,11 +316,6 @@ const OrgChart: React.FC = () => {
         </button>
       </div>
 
-      {year === 2025 ? (
-        <div className="text-center text-2xl text-gray-700">
-          To be announced soon
-        </div>
-      ) : (
         <>
           <div className="flex flex-col items-center space-y-4 mb-6">
             <div className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden">
@@ -287,16 +328,16 @@ const OrgChart: React.FC = () => {
             <h2 className="text-xl font-semibold">{dataToDisplay.lead.role}</h2>
             <p className="text-md text-gray-700">{dataToDisplay.lead.name}</p>
           </div>
-
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 justify-around gap-y-10 relative">
-            {dataToDisplay.domainLeads.map((person, index) => (
+          <div className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${year===2025?"xl:grid-cols-5":"xl:grid-cols-6"} justify-around gap-y-10 relative`}>
+            {dataToDisplay.domainLeads
+            .map((person, index) => (
               <div
                 key={index}
                 className="flex flex-col items-center"
                 onMouseLeave={() => setSelectedDomain(null)}
               >
                 <div className="shrink-0 w-36 h-36 md:w-48 md:h-48"
-                onMouseEnter={() => person.role !== "Co Lead" && setSelectedDomain(index)}
+                onMouseEnter={() => person.role !== "Co Lead" && (person.coordinators.length+person.volunteers.length>0) && setSelectedDomain(index)}
                 onMouseLeave={() => window.innerWidth<=1024 && setSelectedDomain(null)}
                 
                 >
@@ -312,10 +353,13 @@ const OrgChart: React.FC = () => {
                 <p className="text-md text-gray-700 text-center">
                   {person.name}
                 </p>
-                <div className={`lg:absolute lg:top-[15.5rem] relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out ${(selectedDomain===index ) ? '':'hidden'} ${fadein?'opacity-100':'opacity-0'}`}>
-                    <h3 className="text-md font-semibold text-center mb-2">
-                      Coordinators
-                    </h3>
+                <div className={`lg:absolute ${index<5?"lg:top-[15.5rem]":"lg:top-[33rem]"} relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out ${(selectedDomain===index ) ? '':'hidden'} ${fadein?'opacity-100':'opacity-0'}`}>
+                  {person.coordinators.length > 0 && 
+                  <h3 className="text-md font-semibold text-center mb-2">
+                  Coordinators
+                </h3>
+                }
+                    
                     <div className="flex justify-center flex-wrap mb-4">
                       {person.coordinators.map((coordinator, idx) => (
                         <div
@@ -333,9 +377,10 @@ const OrgChart: React.FC = () => {
                         </div>
                       ))}
                     </div>
+                    {person.volunteers.length > 0 && 
                     <h3 className="text-md font-semibold text-center mb-2">
                       Volunteers
-                    </h3>
+                    </h3>}
                     <div className="flex justify-center flex-wrap">
                       {person.volunteers.map((volunteer, idx) => (
                         <div
@@ -359,7 +404,6 @@ const OrgChart: React.FC = () => {
             ))}
           </div>
         </>
-      )}
     </div>
   );
 };

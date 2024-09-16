@@ -257,7 +257,6 @@ questionApp.put(
       }
 
       if (data.isAnswered !== undefined) {
-        console.log(data.isAnswered, 1 - data.isAnswered);
         data.isAnswered = 1 - data.isAnswered;
       }
 

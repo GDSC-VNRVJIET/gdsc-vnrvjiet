@@ -35,7 +35,6 @@ const CurrentBlogs: React.FC = () => {
         if (Array.isArray(response.data.payload)) {
           setBlogs(response.data.payload);
           setDisplayLoader(false);
-          console.log("Fetched blogs:", response.data.payload);
         } else {
           console.error("Unexpected response format: payload is not an array");
           setDisplayLoader(false);

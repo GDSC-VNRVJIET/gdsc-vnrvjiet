@@ -49,7 +49,6 @@ const UserPortalPast: React.FC<PastProps> = ({ eventsprop }) => {
   // }, []);
 
   useEffect(() => {
-    console.log("eventsprop updated:", eventsprop); // Debug log
 
     if (eventsprop && eventsprop.length > 0) {
       setEvents(eventsprop);

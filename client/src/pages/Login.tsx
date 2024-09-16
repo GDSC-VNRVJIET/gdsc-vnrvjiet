@@ -35,7 +35,6 @@ const Login = () => {
 
     try {
       const loggedInUser = await getUserByMail(formData);
-      console.log(loggedInUser);
       setUser(loggedInUser.userObj);
       setFormData({
         email: "",

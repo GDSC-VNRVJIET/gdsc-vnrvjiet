@@ -13,7 +13,6 @@ blogApp.use(cors());
 
 blogApp.post('/add',expressAsyncHandler(async(req,res)=>{
     let blog = req.body;
-    console.log("hello")
     let blogCollection = await getDBObj("blogCollectionObject");
     try {
       const currentDate = new Date();
@@ -64,24 +63,20 @@ blogApp.get('/getblog/:id', expressAsyncHandler( async (req, res) => {
 
 blogApp.put('/updateblog/:id', expressAsyncHandler( async (req, res, next) => {
   try {
-      console.log("Route hit");
       const blogId = req.params.id;
       const updatedBlog = req.body;
 
-      console.log("Received updated blog data:", updatedBlog);
 
       let blogCollection = await getDBObj("blogCollectionObject");
       const existingBlog = await blogCollection.findOne({ _id: new ObjectId(blogId) });
 
       if (!existingBlog) {
-          console.log('Blog not found');
           return res.status(404).send('Blog not found');
       }
 
       const blogToUpdate = {
           ...updatedBlog,
       };
-      console.log("Blog to update:", blogToUpdate);
 
       const result = await blogCollection.updateOne(
           { _id: new ObjectId(blogId) },
@@ -89,13 +84,11 @@ blogApp.put('/updateblog/:id', expressAsyncHandler( async (req, res, next) => {
       );
 
       if (result.modifiedCount === 0) {
-          console.log('Blog not found or no changes made');
           return res.status(404).send('Blog not found or no changes made');
       }
 
       res.send({ message: 'Blog updated successfully' });
   } catch (error) {
-    console.log("hello");
       console.error('Error in update route:', error);
       next(error);  // Pass the error to the middleware
   }
@@ -104,7 +97,6 @@ blogApp.put('/updateblog/:id', expressAsyncHandler( async (req, res, next) => {
 blogApp.post("/getAccessdata", expressAsyncHandler( async (req, res) => {
   try {
     const {blogId,emailId} = req.body;
-    console.log(blogId,emailId);
     let blogAccessCollection = await getDBObj("blogAccessCollectionObject");
     // in the database check the blogId , if that blogId axists , check its corresponding emailId
     const result = await blogAccessCollection.findOne({ blogId: blogId});

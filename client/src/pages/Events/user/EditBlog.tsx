@@ -34,7 +34,6 @@ const EditBlog: React.FC = () => {
             emailId: user?.emailId,
           }
         );
-        console.log(response.data.success);
         if (response.data.success === true) {
             setAccess(true);
             setDisplayLoader(false);
@@ -45,7 +44,6 @@ const EditBlog: React.FC = () => {
     getUserData();
   }, []);
 
-  console.log(id);
   const navigate = useNavigate();
   const [blog, setBlog] = useState<Blog | null>(null);
   const [title, setTitle] = useState<string>("");
@@ -145,7 +143,6 @@ const EditBlog: React.FC = () => {
         thumbnail: base64Image || thumbnail,
       };
 
-      console.log("Sending updated blog data:", updatedBlog);
       // add access control allow origin header
       const response = await axios.put(
         `${process.env.REACT_APP_BACK_URL}/addblog/updateblog/${id}`,

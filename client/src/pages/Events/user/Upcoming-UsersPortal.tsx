@@ -61,7 +61,6 @@ const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
   // }
 
   useEffect(() => {
-    console.log("eventsprop updated:", eventsprop); // Debug log
 
     if (eventsprop && eventsprop.length > 0) {
       setEvents(eventsprop);

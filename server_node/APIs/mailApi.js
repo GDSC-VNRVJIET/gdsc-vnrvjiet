@@ -30,8 +30,6 @@ const transporter = nodemailer.createTransport({
 transporter.verify((error, success) => {
   if (error) {
     console.log(error);
-  } else {
-    console.log("Server is ready to take messages");
   }
 });
 
@@ -66,7 +64,6 @@ const sendEmail = async (email, orderId, paymentId, rollno) => {
       `,
     };
     await transporter.sendMail(mailOptions);
-    console.log("Email sent successfully");
   } catch (err) {
     console.error("Error sending email:", err);
   }
@@ -108,7 +105,6 @@ function sendGiveAccessEmail(email, blogId) {
             `,
     };
     transporter.sendMail(mailOptions);
-    console.log("Email sent successfully");
   } catch (err) {
     console.error("Error sending email:", err);
   }
@@ -205,7 +201,6 @@ mailApp.post("/order", async (req, res) => {
     }
     const options = req.body;
     // const email = req.body.email;
-    console.log(options);
     const order = await razorpay.orders.create(options);
     if (!order) {
       return res.status(400).send("Bad Request");
@@ -262,7 +257,6 @@ mailApp.post(
     const { mail, blogId } = req.body;
 
     try {
-      console.log("Processing access grant for:", mail);
 
       // Send the access email
       sendGiveAccessEmail(mail, blogId);
@@ -277,9 +271,6 @@ mailApp.post(
         email: mail,
         blogId: blogId,
       });
-
-      // Log the MongoDB update result
-      console.log("Mongo DB Response", response);
 
       // Check if the update was successful
       res.json({ status: "success" });

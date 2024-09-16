@@ -22,7 +22,6 @@ function CheckUsers() {
     function success(result: string) {
       scanner.clear();
       setScanResult(result);
-      console.log(scanResult);
     }
 
     function error(erro: any) {
@@ -38,11 +37,9 @@ function CheckUsers() {
       `${process.env.REACT_APP_BACK_URL}/registration/register`,
       posted
     );
-    console.log(result);
     setMsg(JSON.stringify(res.data.message));
     setData(JSON.stringify(res.data.payload.name));
     setEventname(JSON.stringify(res.data.payload.event));
-    console.log(data);
   }
   return (
     <div className="">

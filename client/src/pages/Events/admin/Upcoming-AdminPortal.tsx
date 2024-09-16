@@ -58,7 +58,6 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
   }
 
   useEffect(() => {
-    console.log("eventsprop updated:", eventsprop);
 
     if (eventsprop && eventsprop.length > 0) {
       setEvents(eventsprop);

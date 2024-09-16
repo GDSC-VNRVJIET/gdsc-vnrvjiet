@@ -12,7 +12,6 @@ function UpcomingEvents() {
     } | null
   );
   const { upcomingEvents } = useOutletContext<{ upcomingEvents: any[] }>();
-  console.log(user)
   // useEffect(() => {
   //   const fetchUser = async () => {
   //     if (!user) {

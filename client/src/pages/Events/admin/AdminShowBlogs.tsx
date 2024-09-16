@@ -45,7 +45,6 @@ const AdminShowBlogs: React.FC = () => {
         const response = await axios.get(
           `${process.env.REACT_APP_BACK_URL}/addblog/getfalseblogs`
         );
-        console.log("Fetched blogs:", response.data.payload);
 
         // Ensure response.data.payload is an array
         if (Array.isArray(response.data.payload)) {
@@ -76,7 +75,6 @@ const AdminShowBlogs: React.FC = () => {
   };
 
   const handleAddBlog = () => {
-    console.log("Blog Title:", blogTitle);
     navigate("/add-blog", {
       state: [base64Image, blogTitle, categories, author],
     });
@@ -139,9 +137,7 @@ const AdminShowBlogs: React.FC = () => {
         `${process.env.REACT_APP_BACK_URL}/sendmail/give-access-mail`,
         { mail, blogId: selectedBlogId } // Send the selected blog ID with the email
       );
-      console.log(res.data);
       if (res.data.status === "success") {
-        console.log("Email sent successfully");
         setMailModal(false); // Close the modal upon successful email sending
         setShowRadioButtons(false); // Hide radio buttons after sending the email
       }

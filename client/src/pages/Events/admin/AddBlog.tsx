@@ -70,7 +70,6 @@ const AddBlog: React.FC = () => {
         window.alert("Blog Added Successfully");
         navigate("/");
       }
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -84,7 +83,6 @@ const AddBlog: React.FC = () => {
     formData.append("thumbnail", state[0]);
     formData.append("author", state[3]);
     formData.append("show", false.toString());
-    console.log(formData);
     createBlog(formData as any);
   };
 
