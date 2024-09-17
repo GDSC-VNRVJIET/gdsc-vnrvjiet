@@ -105,7 +105,7 @@ function Home() {
         <Reveal>
           <div className="text-center m-4">
             <p className="text-4xl text-slate-800 font-bold">
-              What we do, at GDSC VNRVJIET :
+              What we do, at GDGC VNRVJIET :
             </p>
           </div>
         </Reveal>
@@ -147,7 +147,7 @@ function Home() {
         <Reveal>
           <div className="mt-10 text-white flex flex-col gap-4 items-center p-6">
             <p className="text-xl text-gray-600 font-semibold">
-              Join us, at GDSC.
+              Join us, at GDGC.
             </p>
             <p className="text-gray-500 text-lg text-center">
               Discover amazing events and connect with like-minded people.

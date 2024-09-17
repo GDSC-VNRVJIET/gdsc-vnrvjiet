@@ -29,7 +29,7 @@ function Hero() {
           width="250"
         />
         <h1 className="text-gray-700 xl:text-5xl md:text-xl">
-          Google Developer Student Clubs
+        Google Developer Groups on Campus
         </h1>
         <h1
           className="text-gray-500 xl:text-lg lg:text-md mx-10 hover:underline cursor-pointer"

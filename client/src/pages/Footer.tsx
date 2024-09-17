@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
                         className="w-20 h-auto mx-auto mb-3" 
                     />
                     <h1 className="bg-gradient-text bg-clip-text text-transparent text-xl font-bold">
-                        GDSC VNRVJIET
+                        GDGC VNRVJIET
                     </h1>
                     <div className="flex justify-center space-x-4 mt-4">
                         <a href="https://www.instagram.com/gdsc.vnrvjiet/" target="_blank">
@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
                     </div>
 
                     <div className="text-center">
-                        <p className="mb-4">Join us at GDSC.</p>
+                        <p className="mb-4">Join us at GDGC.</p>
                         <p>Discover amazing events and connect with like-minded people.</p>
                     </div>
                 </div>
