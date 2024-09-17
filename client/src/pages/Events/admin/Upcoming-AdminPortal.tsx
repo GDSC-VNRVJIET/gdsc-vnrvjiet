@@ -6,7 +6,7 @@ import {
   getUpcomingEvents,
   updateEvent,
 } from "../../../Apis/events";
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import Loader from "../../Loader";
 // import Files from "../files";
 
@@ -239,9 +239,10 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
                 {event.description}
               </p>
               <p>
-                <strong>When : </strong>{" "}
-                {format(new Date(event.startDate), "yyyy-MM-dd HH:mm")} to{" "}
-                {format(new Date(event.endDate), "yyyy-MM-dd HH:mm")}
+                <strong>When : </strong>
+                {isValid(new Date(event.startDate)) ? format(new Date(event.startDate), "yyyy-MM-dd") : "Invalid Start Date"} to{" "}
+                {isValid(new Date(event.endDate)) ? format(new Date(event.endDate), "yyyy-MM-dd") : "Invalid End Date"}
+
               </p>
 
               <p>

@@ -191,7 +191,7 @@ const Events: React.FC = () => {
         <div className='w-full flex flex-col items-center mt-10 lg:mt-32'>
           <h1 className="text-3xl font-bold text-gray-700 mb-2">Events</h1>
           <p className="text-sm text-gray-600 text-center mb-4">
-            GDSC hosts diverse events like workshops, hackathons, speaker sessions, and study jams to help students learn and grow.
+            GDGC hosts diverse events like workshops, hackathons, speaker sessions, and study jams to help students learn and grow.
           </p>
         </div>
       )}

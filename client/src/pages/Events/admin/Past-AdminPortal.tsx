@@ -155,8 +155,8 @@ const AdminPortalPast: React.FC<PastProps> = ({ eventsprop }) => {
               </p>
               <p>
               <strong>When : </strong>{" "}
-                    {format(new Date(event.startDate), "yyyy-MM-dd HH:mm")} to{" "}
-                    {format(new Date(event.endDate), "yyyy-MM-dd HH:mm")}
+                    {format(new Date(event.startDate), "yyyy-MM-dd")} to{" "}
+                    {format(new Date(event.endDate), "yyyy-MM-dd")}
               </p>
 
               <p>
