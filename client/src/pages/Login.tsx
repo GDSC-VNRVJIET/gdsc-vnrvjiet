@@ -1,8 +1,28 @@
 import React, { useState } from "react";
 import { getUserByMail, resetPw } from "../Apis/users";
 import { useNavigate } from "react-router-dom";
-
+import CryptoJS from "crypto-js";
 const Login = () => {
+
+  const encryptData = (data: string) => {
+    try {
+      return CryptoJS.AES.encrypt(data, process.env.ENCRYPTION_KEY || "").toString();
+    } catch (error) {
+      console.error("Encryption error:", error);
+      return "";
+    }
+  };
+  
+  const decryptData = (cipherText: string) => {
+    try {
+      const bytes = CryptoJS.AES.decrypt(cipherText, process.env.ENCRYPTION_KEY || "");
+      return bytes.toString(CryptoJS.enc.Utf8);
+    } catch (error) {
+      console.error("Decryption error:", error);
+      return "";
+    }
+  };
+  
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -13,6 +33,8 @@ const Login = () => {
     password: false,
   });
   const navigate = useNavigate();
+
+  
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
@@ -35,6 +57,8 @@ const Login = () => {
 
     try {
       const loggedInUser = await getUserByMail(formData);
+      const userId = loggedInUser.userObj.userId;
+      const encryptedUserId = encryptData(String(userId));
       setUser(loggedInUser.userObj);
       setFormData({
         email: "",
@@ -44,7 +68,7 @@ const Login = () => {
         window.alert("Please check your credentials");
       } else {
         const userObj = {
-          userId: loggedInUser.userObj.userId,
+          userId: encryptedUserId,
           role: loggedInUser.userObj.role,
           token: loggedInUser.payload,
           emailId:  loggedInUser.userObj.email
