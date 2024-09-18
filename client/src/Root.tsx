@@ -7,6 +7,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import CheckUsers from "./pages/Events/admin/CheckUsers";
+import GoogleForms from "./pages/GoogleForms";
 import EditBlog from "./pages/Events/user/EditBlog";
 import Register from "./pages/Events/user/Register";
 import Signup from "./pages/SignIn";
@@ -128,6 +129,11 @@ function Root() {
         {/* <Route path="/admin-signup" element={<Signup />} />
         <Route path="/admin-login" element={<Login />} /> */}
         <Route path="/signup" element={<Signup />} />
+        <Route path="/google-forms" element={<GoogleForms />} >
+          <Route path="" element={<GoogleForms />} />
+          <Route path="" element={<GoogleForms />} />
+          <Route path="" element={<GoogleForms />} />
+        </Route>
         <Route path="upcoming-events/:eventname" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
