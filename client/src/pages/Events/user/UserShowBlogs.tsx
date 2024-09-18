@@ -75,7 +75,7 @@ const UserShowBlogs: React.FC = () => {
           </div>
           <div className="ml-4">
             <h1 className="text-xl font-bold">Blogs</h1>
-            <p className="text-gray-600">Blogs by GDSC achievers</p>
+            <p className="text-gray-600">Blogs by GDGC achievers</p>
           </div>
         </div>
       </div>
