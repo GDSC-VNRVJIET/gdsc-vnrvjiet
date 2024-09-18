@@ -20,18 +20,17 @@ const TabComponent: React.FC = () => {
   }, [activeTab]);
 
   return (
-    <div>
-      {/* Tab Links */}
+    <div className="w-full px-4 md:px-0">
       <div id="navLinks" className="relative flex justify-center my-4">
         <span
           className="absolute bottom-0 h-full -z-4 transition-all duration-300 bg-blue-500 rounded-lg"
-          style={{ left: tabUnderlineLeft, width: tabUnderlineWidth, height: "40px" }}
+          style={{ left: tabUnderlineLeft, width: tabUnderlineWidth, height: '40px' }}
         ></span>
         <Link
           to=""
           id="second-years"
           ref={(el) => (tabsRef.current[0] = el)}
-          className={`px-4 py-2 font-semibold text-lg rounded-s-lg z-0 ${
+          className={`px-4 py-2 font-semibold text-base md:text-lg rounded-s-lg z-0 ${
             activeTab === 'second-years' ? 'text-white' : 'text-gray-700'
           }`}
           onClick={() => handleTabClick('second-years')}
@@ -39,45 +38,41 @@ const TabComponent: React.FC = () => {
           Second year
         </Link>
         <Link
-         to=""
+          to=""
           id="third-years"
           ref={(el) => (tabsRef.current[1] = el)}
-          className={`px-4 py-2 font-semibold text-lg rounded-e-lg z-0 ${
+          className={`px-4 py-2 font-semibold text-base md:text-lg rounded-e-lg z-0 ${
             activeTab === 'third-years' ? 'text-white' : 'text-gray-700'
           }`}
           onClick={() => handleTabClick('third-years')}
         >
-         Third year
+          Third year
         </Link>
       </div>
-
-      {/* Conditional Content */}
       <div className="content my-4">
         {activeTab === 'second-years' && (
           <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLScXLISvkFT92Ah2NiE6EsXyHxsHrd_TbBBmthNTGgP4IQvcBg/viewform?embedded=true"
-          width="100%"
-          height="600"
-          frameBorder="0"
-          style={{ border: 0 }}
-          allowFullScreen
-          title="Google Form"
-        >
-          Loading…
-        </iframe>
+            src="https://docs.google.com/forms/d/e/1FAIpQLScXLISvkFT92Ah2NiE6EsXyHxsHrd_TbBBmthNTGgP4IQvcBg/viewform?embedded=true"
+            className="w-full h-[500px] md:h-[600px]"
+            frameBorder="0"
+            style={{ border: 0 }}
+            allowFullScreen
+            title="Second Year Google Form"
+          >
+            Loading…
+          </iframe>
         )}
         {activeTab === 'third-years' && (
           <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLScXLISvkFT92Ah2NiE6EsXyHxsHrd_TbBBmthNTGgP4IQvcBg/viewform?embedded=true"
-          width="100%"
-          height="600"
-          frameBorder="0"
-          style={{ border: 0 }}
-          allowFullScreen
-          title="Google Form"
-        >
-          Loading…
-        </iframe>
+            src="https://docs.google.com/forms/d/e/1FAIpQLScXLISvkFT92Ah2NiE6EsXyHxsHrd_TbBBmthNTGgP4IQvcBg/viewform?embedded=true"
+            className="w-full h-[500px] md:h-[600px]"
+            frameBorder="0"
+            style={{ border: 0 }}
+            allowFullScreen
+            title="Third Year Google Form"
+          >
+            Loading…
+          </iframe>
         )}
       </div>
     </div>
