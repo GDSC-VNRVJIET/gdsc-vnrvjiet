@@ -27,7 +27,7 @@ const TabComponent: React.FC = () => {
           style={{ left: tabUnderlineLeft, width: tabUnderlineWidth, height: '40px' }}
         ></span>
         <Link
-          to=""
+          to="second-years"
           id="second-years"
           ref={(el) => (tabsRef.current[0] = el)}
           className={`px-4 py-2 font-semibold text-base md:text-lg rounded-s-lg z-0 ${
@@ -38,7 +38,7 @@ const TabComponent: React.FC = () => {
           Second year
         </Link>
         <Link
-          to=""
+          to="third-years"
           id="third-years"
           ref={(el) => (tabsRef.current[1] = el)}
           className={`px-4 py-2 font-semibold text-base md:text-lg rounded-e-lg z-0 ${
