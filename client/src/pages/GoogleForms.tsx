@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Coordinator from '../images/coordinator.jpg';
-import Volunteer from '../images/volunteer.jpg';
+import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Coordinator from "../images/coordinator.jpg";
+import Volunteer from "../images/volunteer.jpg";
 
 const TabComponent: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('second-years');
+  const [activeTab, setActiveTab] = useState<string>("second-years");
   const tabsRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState<number>(0);
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState<number>(0);
@@ -14,7 +14,9 @@ const TabComponent: React.FC = () => {
   };
 
   useEffect(() => {
-    const activeTabElement = tabsRef.current.find((tab) => tab?.id === activeTab);
+    const activeTabElement = tabsRef.current.find(
+      (tab) => tab?.id === activeTab
+    );
     if (activeTabElement) {
       setTabUnderlineLeft(activeTabElement.offsetLeft);
       setTabUnderlineWidth(activeTabElement.offsetWidth);
@@ -26,21 +28,25 @@ const TabComponent: React.FC = () => {
       <div
         id="navLinks"
         className={`relative flex justify-center transition-colors duration-300 ${
-          activeTab === 'second-years' ? 'bg-amber-100' : 'bg-green-100'
+          activeTab === "second-years" ? "bg-amber-100" : "bg-green-100"
         }`}
       >
         <span
           className="absolute bottom-0 h-full -z-4 transition-all duration-300 bg-blue-500 rounded-lg"
-          style={{ left: tabUnderlineLeft, width: tabUnderlineWidth, height: '40px' }}
+          style={{
+            left: tabUnderlineLeft,
+            width: tabUnderlineWidth,
+            height: "40px",
+          }}
         ></span>
         <Link
           to=""
           id="second-years"
           ref={(el) => (tabsRef.current[0] = el)}
           className={`px-4 py-2 font-semibold text-base md:text-lg rounded-s-lg z-0 ${
-            activeTab === 'second-years' ? 'text-white' : 'text-gray-700'
+            activeTab === "second-years" ? "text-white" : "text-gray-700"
           }`}
-          onClick={() => handleTabClick('second-years')}
+          onClick={() => handleTabClick("second-years")}
         >
           Second year
         </Link>
@@ -49,16 +55,16 @@ const TabComponent: React.FC = () => {
           id="third-years"
           ref={(el) => (tabsRef.current[1] = el)}
           className={`px-4 py-2 font-semibold text-base md:text-lg rounded-e-lg z-0 ${
-            activeTab === 'third-years' ? 'text-white' : 'text-gray-700'
+            activeTab === "third-years" ? "text-white" : "text-gray-700"
           }`}
-          onClick={() => handleTabClick('third-years')}
+          onClick={() => handleTabClick("third-years")}
         >
           Third year
         </Link>
       </div>
 
       <div className="content">
-        {activeTab === 'second-years' && (
+        {activeTab === "second-years" && (
           <div className="relative h-[700px] overflow-auto scrollbar-hide bg-amber-100">
             <div className="relative">
               <img
@@ -78,7 +84,7 @@ const TabComponent: React.FC = () => {
             </iframe>
           </div>
         )}
-        {activeTab === 'third-years' && (
+        {activeTab === "third-years" && (
           <div className="relative h-[700px] overflow-auto scrollbar-hide bg-green-100">
             <div className="relative">
               <img
