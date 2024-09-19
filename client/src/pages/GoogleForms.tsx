@@ -22,7 +22,7 @@ const TabComponent: React.FC = () => {
   }, [activeTab]);
 
   return (
-    <div className="w-full px-4 md:px-0">
+    <div className="w-full md:px-0">
       <div
         id="navLinks"
         className={`relative flex justify-center transition-colors duration-300 ${
