@@ -17,9 +17,9 @@ interface Blog {
 
 const UserShowBlogs: React.FC = () => {
   const colors = [
-    "bg-gradient-to-b from-sky-400 to-blue-500",
-    "bg-gradient-to-r from-pink-600 to-rose-400",
-    "bg-gradient-to-r from-emerald-600 to-teal-500",
+    "bg-gradient-to-b from-green-600 to-green-600",
+    "bg-gradient-to-r from-blue-600 to-blue-600",
+    "bg-gradient-to-r from-yellow-500 to-yellow-500",
   ];
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [displayLoader, setDisplayLoader] = useState(true);
@@ -136,11 +136,11 @@ const UserShowBlogs: React.FC = () => {
                         className="inline-flex items-center py-2 space-x-2 text-sm dark:text-violet-600 hover:underline"
                         onClick={() => handleBlogClick(blog._id)}
                       >
-                        <span>Read more</span>
+                        <span style={{ color: "#3b82f6" }}>Read more</span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
-                          fill="currentColor"
+                          fill="#3b82f6"
                           className="w-4 h-4"
                         >
                           <path

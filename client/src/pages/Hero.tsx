@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SocialIcon } from "react-social-icons";
+import { FaLinkedin } from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
 
 function Hero() {
   const heroStyle = {
@@ -38,15 +39,13 @@ function Hero() {
           Vallurupalli Nageswara Rao Vignana Jyothi Institute of Engineering
           &Technology.
         </h1>
-        <div className="mt-6">
-          <SocialIcon
-            url="https://www.linkedin.com/company/gdsc-vnrvjiet/"
-            style={{ height: 30, width: 30, marginRight: "8px" , zIndex:"0" }}
-          />
-          <SocialIcon
-            url="https://www.instagram.com/gdsc.vnrvjiet/"
-            style={{ height: 30, width: 30 }}
-          />
+        <div className="mt-6 flex justify-center">
+          <a href="">
+          <FaLinkedin style={{ height: 30, width: 30, marginRight: "8px" , zIndex:"0", color: "#454545" }}/>
+          </a>
+          <a href="">
+          <FaInstagramSquare style={{ height: 30, width: 30, marginRight: "8px" , zIndex:"0", color: "#454545" }}/>
+          </a>
         </div>
       </div>
       {/* <button className="transition ease-in-out delay-70 hover:-translate-y-1 hover:scale-110 duration-300 bg-[#0F71F2] p-2 px-5 m-3 rounded ring-offset-2 ring-4 ring-[#F2A20C]" onClick={navigateLogin}>Join us.</button> */}

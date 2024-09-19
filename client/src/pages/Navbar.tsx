@@ -80,7 +80,7 @@ function Navbar() {
           </NavLink>
         </div>
         <NavLink to="/">
-          <h1 className="text-[#868686] text-lg pl-5 hidden md:block transition-all duration-500 ease-in-out hover:text-transparent hover:bg-clip-text  hover:bg-gradient-to-r hover:from-red-500 hover:via-yellow-500 hover:via-green-500 hover:to-blue-500 hover:tracking-wider hover:scale-110">GDGC VNRVJIET</h1>
+          <h1 className="text-[#868686] text-lg pl-5 hidden md:block transition-all duration-500 ease-in-out hover:text-transparent hover:bg-clip-text  hover:bg-gradient-to-r from-black via-gray-700 to-gray-500 hover:tracking-wider hover:scale-110">GDGC VNRVJIET</h1>
         </NavLink>
         <div className="flex flex-col md:flex-row ml-auto text-center text-slate-600 ">
         <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white  ">
