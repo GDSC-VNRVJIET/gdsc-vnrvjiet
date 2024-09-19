@@ -52,7 +52,7 @@ const TabComponent: React.FC = () => {
       <div className="content my-4">
         {activeTab === 'second-years' && (
           <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLScXLISvkFT92Ah2NiE6EsXyHxsHrd_TbBBmthNTGgP4IQvcBg/viewform?embedded=true"
+            src="https://docs.google.com/forms/d/e/1FAIpQLScVk1m8He6UWc4saf86_AJT2t8NFBF_IhsKMbIq_FHROVE_xw/viewform?embedded=true"
             className="w-full h-[500px] md:h-[600px]"
             frameBorder="0"
             style={{ border: 0 }}
@@ -64,7 +64,7 @@ const TabComponent: React.FC = () => {
         )}
         {activeTab === 'third-years' && (
           <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLScXLISvkFT92Ah2NiE6EsXyHxsHrd_TbBBmthNTGgP4IQvcBg/viewform?embedded=true"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfoCc116x8reSWzHct6ALdnu0yPjRNjk-IitbuV32suWMfz-g/viewform?embedded=true"
             className="w-full h-[500px] md:h-[600px]"
             frameBorder="0"
             style={{ border: 0 }}
