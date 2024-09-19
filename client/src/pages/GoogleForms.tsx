@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Coordinator from '../images/coordinator.jpg'
+import Volunteer from '../images/volunteer.jpg'
 
 const TabComponent: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('second-years');
@@ -27,7 +29,7 @@ const TabComponent: React.FC = () => {
           style={{ left: tabUnderlineLeft, width: tabUnderlineWidth, height: '40px' }}
         ></span>
         <Link
-          to="second-years"
+          to=""
           id="second-years"
           ref={(el) => (tabsRef.current[0] = el)}
           className={`px-4 py-2 font-semibold text-base md:text-lg rounded-s-lg z-0 ${
@@ -38,7 +40,7 @@ const TabComponent: React.FC = () => {
           Second year
         </Link>
         <Link
-          to="third-years"
+          to=""
           id="third-years"
           ref={(el) => (tabsRef.current[1] = el)}
           className={`px-4 py-2 font-semibold text-base md:text-lg rounded-e-lg z-0 ${
@@ -51,28 +53,32 @@ const TabComponent: React.FC = () => {
       </div>
       <div className="content my-4">
         {activeTab === 'second-years' && (
+          <div className="">
+          <img src={Volunteer} alt="" />
           <iframe
             src="https://docs.google.com/forms/d/e/1FAIpQLScVk1m8He6UWc4saf86_AJT2t8NFBF_IhsKMbIq_FHROVE_xw/viewform?embedded=true"
             className="w-full h-[500px] md:h-[600px]"
-            frameBorder="0"
             style={{ border: 0 }}
             allowFullScreen
             title="Second Year Google Form"
           >
             Loading…
           </iframe>
+          </div>
         )}
         {activeTab === 'third-years' && (
+          <div className="">
+            <img src={Coordinator} alt="" />
           <iframe
             src="https://docs.google.com/forms/d/e/1FAIpQLSfoCc116x8reSWzHct6ALdnu0yPjRNjk-IitbuV32suWMfz-g/viewform?embedded=true"
             className="w-full h-[500px] md:h-[600px]"
-            frameBorder="0"
             style={{ border: 0 }}
             allowFullScreen
             title="Third Year Google Form"
           >
             Loading…
           </iframe>
+          </div>
         )}
       </div>
     </div>

@@ -43,8 +43,6 @@ import ML from "./pages/Domain Info/ML";
 import Management from "./pages/Domain Info/Management";
 import Teams from "./pages/leaderboard/Teams";
 import Events from "./pages/Events/Events";
-import Secondyear from "./pages/Secondyear";
-import Thirdyear from "./pages/Thirdyear";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -132,9 +130,6 @@ function Root() {
         <Route path="/admin-login" element={<Login />} /> */}
         <Route path="/signup" element={<Signup />} />
         <Route path="/google-forms" element={<GoogleForms />} >
-          <Route path="" element={<Secondyear />} />
-          <Route path="second-years" element={<Secondyear />} />
-          <Route path="third-years" element={<Thirdyear />} />
         </Route>
         <Route path="upcoming-events/:eventname" element={<Register />} />
         <Route path="/login" element={<Login />} />
