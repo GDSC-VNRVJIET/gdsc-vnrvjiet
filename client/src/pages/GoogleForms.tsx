@@ -27,12 +27,12 @@ const TabComponent: React.FC = () => {
     <div className="w-full md:px-0">
       <div
         id="navLinks"
-        className={`relative flex justify-center transition-colors duration-300 ${
+        className={`relative flex justify-center transition-colors duration-300 p-2 ${
           activeTab === "second-years" ? "bg-amber-100" : "bg-green-100"
         }`}
       >
         <span
-          className="absolute bottom-0 h-full -z-4 transition-all duration-300 bg-blue-500 rounded-lg"
+          className="absolute bottom-2 h-full -z-4 transition-all duration-300 bg-blue-500 rounded-lg"
           style={{
             left: tabUnderlineLeft,
             width: tabUnderlineWidth,
