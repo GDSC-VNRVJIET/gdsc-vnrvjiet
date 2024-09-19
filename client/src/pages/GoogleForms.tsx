@@ -57,7 +57,7 @@ const TabComponent: React.FC = () => {
         </Link>
       </div>
 
-      <div className="content py-4">
+      <div className="content">
         {activeTab === 'second-years' && (
           <div className="relative h-[700px] overflow-auto scrollbar-hide bg-amber-100">
             <div className="relative">
