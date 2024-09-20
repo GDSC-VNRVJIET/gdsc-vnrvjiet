@@ -16,7 +16,7 @@ function CompetitiveProgramming() {
   const members = [
     {
       name: "Harsha Vardhan",
-      role: "Competitive Programming Coordinator",
+      role: "Competitive Programming Lead",
       image: HarshaImage,
       linkedin: "#",
       github: "#",

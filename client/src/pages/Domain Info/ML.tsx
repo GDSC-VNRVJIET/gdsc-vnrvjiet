@@ -20,25 +20,17 @@ function ML() {
     "https://connect.ignatiuz.com/hs-fs/hubfs/AI%20and%20Deep%20Learning.gif?width=1000&name=AI%20and%20Deep%20Learning.gif";
   const members = [
     {
-      name: "Nikhita Kashyap",
-      role: "Machine Learning Coordinator",
-      image: NikhitaImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
       name: "Surya Teja",
-      role: "Machine Learning Coordinator",
+      role: "Machine Learning Lead",
       image: SuryaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Sri Sharan Tej",
-      role: "Machine Learning Volunteer",
-      image: SharanImage,
+      name: "Roshini",
+      role: "Machine Learning Coordinator",
+      image: RoshiniImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
@@ -51,14 +43,7 @@ function ML() {
       github: "#",
       instagram: "#",
     },
-    {
-      name: "Roshini",
-      role: "Machine Learning Volunteer",
-      image: RoshiniImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
+    
     {
       name: "Bharath Chandra",
       role: "Machine Learning Volunteer",
@@ -67,14 +52,23 @@ function ML() {
       github: "#",
       instagram: "#",
     },
-    {
-      name: "Vishwa Prateek",
-      role: "Machine Learning Volunteer",
-      image: VishwaImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
+    // {
+    //   name: "Sri Sharan Tej",
+    //   role: "Machine Learning Volunteer",
+    //   image: SharanImage,
+    //   linkedin: "#",
+    //   github: "#",
+    //   instagram: "#",
+    // },
+    
+    // {
+    //   name: "Vishwa Prateek",
+    //   role: "Machine Learning Volunteer",
+    //   image: VishwaImage,
+    //   linkedin: "#",
+    //   github: "#",
+    //   instagram: "#",
+    // },
   ];
 
   return (

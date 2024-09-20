@@ -20,16 +20,8 @@ function WebDev() {
 
   const members = [
     {
-      name: "Jayasree",
-      role: "Web Development Coordinator",
-      image: jayasreeImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
       name: "Sai Jahnavi",
-      role: "Web Development Coordinator",
+      role: "Web Development Lead",
       image: JahnaviImage,
       linkedin: "#",
       github: "#",
@@ -37,7 +29,7 @@ function WebDev() {
     },
     {
       name: "Sri Manikanta",
-      role: "Web Development Volunteer",
+      role: "Web Development Coordinator",
       image: ManikantaImage,
       linkedin: "#",
       github: "#",
@@ -45,36 +37,36 @@ function WebDev() {
     },
     {
       name: "Karthik",
-      role: "Web Development Volunteer",
+      role: "Web Development Coordinator",
       image: KarthikImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Varun",
-      role: "Web Development Volunteer",
-      image: VarunImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "Dedeepya",
-      role: "Web Development Volunteer",
-      image: DedeepyaImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
       name: "Lakshita",
-      role: "Web Development Volunteer",
+      role: "Web Development Coordinator",
       image: lakshitaimg,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
+    // {
+    //   name: "Varun",
+    //   role: "Web Development Volunteer",
+    //   image: VarunImage,
+    //   linkedin: "#",
+    //   github: "#",
+    //   instagram: "#",
+    // },
+    // {
+    //   name: "Dedeepya",
+    //   role: "Web Development Volunteer",
+    //   image: DedeepyaImage,
+    //   linkedin: "#",
+    //   github: "#",
+    //   instagram: "#",
+    // },
   ];
 
   return (

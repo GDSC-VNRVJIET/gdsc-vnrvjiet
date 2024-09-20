@@ -6,6 +6,7 @@ import RakshithaImage from "../Domain Info/images/MANAGEMENT/Sai Rakshita Narsin
 import AbhijeetImage from "../Domain Info/images/MANAGEMENT/Abhijeet.png";
 import SadhikImage from "../Domain Info/images/MANAGEMENT/Sadhik.jpg";
 import SriKruthiImage from "../Domain Info/images/MANAGEMENT/SriKruthi.jpg";
+import HarikaImage from "../Domain Info/images/MANAGEMENT/Harika.jpg";
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
@@ -20,61 +21,72 @@ function WebDev() {
     "https://mir-s3-cdn-cf.behance.net/project_modules/hd/ea5d0476339699.5c6694d453222.gif";
   const members = [
     {
-      name: "Sahithi",
-      role: "Management Coordinator",
-      image: SahithiImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "Vinay Kalyan",
-      role: "Management Coordinator",
-      image: VarunImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "Jahnavi Reddy",
-      role: "Management Coordinator",
-      image: JahnaviImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
       name: "Sai Rakshita",
-      role: "Management Coordinator",
+      role: "Management Lead",
       image: RakshithaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Sadhik",
-      role: "Management Volunteer",
-      image: SadhikImage,
+      name: "Abhijeet",
+      role: "Management Coordinator",
+      image: AbhijeetImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
       name: "Sri Kruthi",
-      role: "Management Volunteer",
+      role: "Management Coordinator",
       image: SriKruthiImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Abhijeet",
-      role: "Management Volunteer",
-      image: AbhijeetImage,
+      name: "Harika",
+      role: "Management Coordinator",
+      image: HarikaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
+    // {
+    //   name: "Sahithi",
+    //   role: "Management Coordinator",
+    //   image: SahithiImage,
+    //   linkedin: "#",
+    //   github: "#",
+    //   instagram: "#",
+    // },
+    // {
+    //   name: "Vinay Kalyan",
+    //   role: "Management Coordinator",
+    //   image: VarunImage,
+    //   linkedin: "#",
+    //   github: "#",
+    //   instagram: "#",
+    // },
+    // {
+    //   name: "Jahnavi Reddy",
+    //   role: "Management Coordinator",
+    //   image: JahnaviImage,
+    //   linkedin: "#",
+    //   github: "#",
+    //   instagram: "#",
+    // },
+    
+    // {
+    //   name: "Sadhik",
+    //   role: "Management Volunteer",
+    //   image: SadhikImage,
+    //   linkedin: "#",
+    //   github: "#",
+    //   instagram: "#",
+    // },
+    
+    
   ];
 
   return (

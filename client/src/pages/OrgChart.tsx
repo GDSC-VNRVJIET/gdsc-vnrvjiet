@@ -34,6 +34,7 @@ import poojaimg from "./Domain Info/images/design/Poojasiri.jpg.jpg"
 import siddeshwariimg from "./Domain Info/images/design/Siddeshwari _Adepu.jpg"
 import praneethaimg from "./Domain Info/images/design/Praneetha.jpg"
 import chanirudhimg from "./Domain Info/images/design/Anirudh.jpg"
+import harikaimg from "./Domain Info/images/MANAGEMENT/Harika.jpg"
 import panirudhimg from "./Domain Info/images/design/Anirudh P.jpg"
 import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg"
 import rishithaimg from "./Domain Info/images/design/Rishitha.jpg"
@@ -82,13 +83,12 @@ const data2025: OrgChartData = {
       name: "Sai Jahnavi",
       img: jahnaviimg,
       coordinators: [
-      ],
-      volunteers: [
         { name: "Sri Manikanta", img: manikantaimg },
         { name: "Karthik", img: karthikimg },
-        { name: "Varun", img: varunimg },
-        { name: "Dedeepya", img: dedeepyaimg },
         { name: "Lakshita", img: lakshitaimg },
+      ],
+      volunteers: [
+        
       ],
       type:"technical",
     },
@@ -99,8 +99,6 @@ const data2025: OrgChartData = {
       coordinators: [
       ],
       volunteers: [
-        { name: "Vighnesh", img: vighneshimg },
-        { name: "Divya Sri", img: divyaimg },
       ],
       type:"technical",
     },
@@ -109,11 +107,11 @@ const data2025: OrgChartData = {
       name: "Sai Rakshita Narsingh",
       img: rakshithaimg,
       coordinators: [
-      ],
-      volunteers: [
-        { name: "Sadhik", img: sadhikimg },
         { name: "Sri Kruthi", img: srikruthiimg },
         { name: "Abhijeet", img: abhijeetimg },
+        { name: "Harika", img: harikaimg },
+      ],
+      volunteers: [
       ],
       type: "nonTechnical",
     },
@@ -122,13 +120,11 @@ const data2025: OrgChartData = {
       name: "Surya Teja Chittiprolu",
       img: suryaimg ,
       coordinators: [
-      ],
-      volunteers: [
-        { name: "Sri Sharan Tej", img: sharanimg },
         { name: "Keerthika", img: keerthikaimg },
         { name: "Roshini", img: roshiniimg },
         { name: "Bharath Chandra", img: bharathimg },
-        { name: "Vishwa Prateek", img: vishwaimg },
+      ],
+      volunteers: [
       ],
       type:"technical",
     },
@@ -137,12 +133,10 @@ const data2025: OrgChartData = {
       name: "Siddeshwari A",
       img: siddeshwariimg,
       coordinators: [
-      ],
-      volunteers: [
         { name: "Ch. Anirudh", img: chanirudhimg },
         { name: "Arya Joshi", img: aryaimg },
-        { name: "P. Anirudh", img: panirudhimg },
-        { name: "Rishitha", img: rishithaimg },
+      ],
+      volunteers: [
       ],
       type: "nonTechnical",
     },
