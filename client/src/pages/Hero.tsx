@@ -45,7 +45,7 @@ function Hero() {
             style={{ height: 30, width: 30, marginRight: "8px" , zIndex:"0" }}
           />
           <SocialIcon
-            url="https://www.instagram.com/gdsc.vnrvjiet/"
+            url="https://www.instagram.com/gdgc.vnrvjiet/ "
             style={{ height: 30, width: 30 }}
           />
           </div>
