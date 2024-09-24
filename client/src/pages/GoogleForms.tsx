@@ -11,7 +11,7 @@ const TabComponent: React.FC = () => {
               <img
                 src={Gen}
                 alt="Coordinator"
-                className="w-full lg:w-2/5 lg:pr-3 mt-1 rounded mx-auto"
+                className="w-full lg:w-[646px] lg:pr-3 mt-1 rounded mx-auto"
               />
             </div>
             <iframe
