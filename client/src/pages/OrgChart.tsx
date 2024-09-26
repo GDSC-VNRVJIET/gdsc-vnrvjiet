@@ -15,6 +15,7 @@ import dedeepyaimg from "./Domain Info/images/WEB DEV/Vellanki Chenchu Dedeepya 
 import lakshitaimg from "./Domain Info/images/WEB DEV/Lakshita Goyal.jpg"
 import harshaimg from "./Domain Info/images/CP/Harsha Vardhan.jpg"
 import divyaimg from "./Domain Info/images/CP/Divya Sri.jpg"
+import amruthaimg from "./Domain Info/images/CP/Amrutha_Tamada.jpg"
 import vighneshimg from "./Domain Info/images/CP/VighneshVangari.jpg"
 import sahithiimg from "./Domain Info/images/MANAGEMENT/Sahithi.jpg"
 import vinayimg from "./Domain Info/images/MANAGEMENT/GVK.jpg"
@@ -38,6 +39,7 @@ import harikaimg from "./Domain Info/images/MANAGEMENT/Harika.jpg"
 import panirudhimg from "./Domain Info/images/design/Anirudh P.jpg"
 import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg"
 import rishithaimg from "./Domain Info/images/design/Rishitha.jpg"
+
 import { set } from "date-fns";
 
 interface Person {
@@ -211,6 +213,7 @@ const data2024: OrgChartData = {
       volunteers: [
         { name: "Vighnesh", img: vighneshimg },
         { name: "Divya Sri", img: divyaimg },
+        { name: "Amrutha", img: amruthaimg },
       ],
     },
     {
