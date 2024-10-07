@@ -322,8 +322,8 @@ userApp.post(
         port: 465,
         secure: true,
         auth: {
-          user: process.env.email,
-          pass: process.env.apppassword,
+          user: process.env.USER,
+          pass: process.env.PASS,
         },
       });
 
