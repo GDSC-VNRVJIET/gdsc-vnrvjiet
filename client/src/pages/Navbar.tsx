@@ -89,12 +89,6 @@ function Navbar() {
           <span className="relative">Home</span>
         </NavLink>
         </button>
-        <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
-            <NavLink to="/gen-ai" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-full  ${isActive ? "bg-yellow-500 text-white" : ""}`}>
-            <span className="absolute inset-0 group-hover:bg-yellow-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
-            <span className="relative">GEN AI</span>
-            </NavLink>
-          </button>
           {/* <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
             <NavLink to="/team" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-full  ${isActive ? "bg-blue-500 text-white" : ""}`}>
             <span className="absolute inset-0 group-hover:bg-blue-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
@@ -111,12 +105,6 @@ function Navbar() {
             <NavLink to="/blogs" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-full  ${isActive ? "bg-red-500 text-white" : ""}`}>
             <span className="absolute inset-0 group-hover:bg-red-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
             <span className="relative">Blogs</span>
-            </NavLink>
-          </button>
-          <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white ">
-            <NavLink to="/solution-challenge" className={({ isActive }) =>`relative z-10 block px-4 py-2 overflow-hidden rounded-full  ${isActive ? "bg-yellow-500 text-white" : ""}`}>
-            <span className="absolute inset-0 group-hover:bg-yellow-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
-            <span className="relative">Solution Challenge</span>
             </NavLink>
           </button>
           {/* {
