@@ -35,7 +35,8 @@ transporter.verify((error, success) => {
 
 const sendEmail = async (email, orderId, paymentId, rollno) => {
   const qrCode = await QRCode.toDataURL(rollno);
-  qrCodeImage = new Buffer.from(qrCode.split("base64,")[1], "base64");
+  console.log("Hello")
+  const qrCodeImage = new Buffer.from(qrCode.split("base64,")[1], "base64");
   try {
     const mailOptions = {
       from: {
@@ -43,12 +44,11 @@ const sendEmail = async (email, orderId, paymentId, rollno) => {
         address: process.env.USER,
       },
       to: `${email}`,
-      subject: "You're Registered! Welcome to the Event by GDSC VNRVJIET",
+      subject: "You're Registered! Welcome to the Event by GDGC VNRVJIET",
       attachDataUrls: true,
       html: `
-        <h1>Welcome to the GDSC VNRVJIET Event!</h1>
+        <h1>Welcome to the GDGC VNRVJIET Event!</h1>
         <img src="${qrCode}" alt="QR Code" />
-        <p>Dear ${recipientName},</p>
         <p>Thank you for registering for our upcoming event at GDSC VNRVJIET. We're thrilled to have you join us.</p>
         <p>Your registration details are as follows:</p>
         <ul>
@@ -83,7 +83,7 @@ function sendGiveAccessEmail(email, blogId) {
     });
     const mailOptions = {
       from: {
-        name: "GDSC VNRVJIET",
+        name: "GDGC VNRVJIET",
         address: process.env.USER,
       },
       to: `${email}`,
@@ -220,8 +220,8 @@ mailApp.post("/validate", async (req, res) => {
     email,
     rollno,
   } = req.body;
-
-  const sha = crypto.createHmac("sha256", process.env.RAZORPAY_SECRET);
+  try {
+    const sha = crypto.createHmac("sha256", process.env.RAZORPAY_SECRET);
 
   sha.update(`${razorpay_order_id}|${razorpay_payment_id}`);
 
@@ -236,6 +236,11 @@ mailApp.post("/validate", async (req, res) => {
     orderId: razorpay_order_id,
     paymentId: razorpay_payment_id,
   });
+  } catch (error) {
+    console.error("Error processing transaction or sending email:", err.message);
+    return res.status(500).json({ msg: "Internal server error" });
+  }
+  
 });
 
 mailApp.post(
