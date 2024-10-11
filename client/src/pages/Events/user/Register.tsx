@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useParams } from "react-router-dom";
+import dotenv from "dotenv";
 import {
   WhatsappShareButton,
   WhatsappIcon,
@@ -89,6 +90,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
+    console.log(process.env.REACT_APP_BACK_URL);
 
     return () => {
       document.body.removeChild(script);
@@ -118,7 +120,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
     const order = await response.json();
 
     var option = {
-      key: "rzp_live_uTMybrQeKu35Kz",
+      key: "rzp_test_5maGGckNVtqtVp",
       amount,
       currency,
       name: "GDSC VNRVJIET",
@@ -136,24 +138,24 @@ const PaymentGatewayRazorpay: React.FC = () => {
           section: formdata.section
         };
 
-        const validateResponse = await fetch(
-          `${process.env.REACT_APP_BACK_URL}/sendmail/validate`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-          }
-        );
-        const jsonResponse = await validateResponse.json();
+        // const validateResponse = await fetch(
+        //   `${process.env.REACT_APP_BACK_URL}/sendmail/validate`,
+        //   {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(body),
+        //   }
+        // );
+        // const jsonResponse = await validateResponse.json();
         // if (jsonResponse.msg === " Transaction is legit!") {
         //   const res = await axios.post(
         //     `${process.env.REACT_APP_BACK_URL}/registration/register`,
         //     formdata
         //   );
         // }
-      console.log(jsonResponse.msg);
+      //console.log(jsonResponse.msg);
       },
       prefill: {
         name: formdata.name,

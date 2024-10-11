@@ -362,6 +362,14 @@ const checkDuplicateEvent = (req, res, next) => {
 
 mailApp.post('/verification',checkDuplicateEvent,expressAsyncHandler(async(req,res)=>{
   const signature = req.headers["x-razorpay-signature"];
+  console.log(req.body)
+  const crypto = require('crypto')
+
+	const shasum = crypto.createHmac('sha256', secret)
+	shasum.update(JSON.stringify(req.body))
+	const digest = shasum.digest('hex')
+
+	console.log(digest, req.headers['x-razorpay-signature'])
   const isValid = await validateWebhookSignature(
      JSON.stringify(req.body),
      signature,
@@ -383,6 +391,7 @@ if (isValid) {
          break;
        default:
          // console.log(`Unhandled event: ${event}`);
+         console.log(req.headers["x-razorpay-signature"]);
          break;
      }
    }
