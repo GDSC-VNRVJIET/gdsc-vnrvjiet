@@ -142,12 +142,13 @@ const PaymentGatewayRazorpay: React.FC = () => {
           }
         );
         const jsonResponse = await validateResponse.json();
-        if (jsonResponse.msg === " Transaction is legit!") {
-          const res = await axios.post(
-            `${process.env.REACT_APP_BACK_URL}/registration/register`,
-            formdata
-          );
-        }
+        // if (jsonResponse.msg === " Transaction is legit!") {
+        //   const res = await axios.post(
+        //     `${process.env.REACT_APP_BACK_URL}/registration/register`,
+        //     formdata
+        //   );
+        // }
+      console.log(jsonResponse.msg);
       },
       prefill: {
         name: formdata.name,

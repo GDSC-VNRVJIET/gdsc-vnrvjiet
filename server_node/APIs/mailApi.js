@@ -34,7 +34,7 @@ transporter.verify((error, success) => {
   }
 });
 
-const sendEmail = async (email, orderId, paymentId, rollno) => {
+const sendEmail = async (email, orderId, paymentId, rollno , whatsapp, branch, name, event, section) => {
   const qrCode = await QRCode.toDataURL(rollno);
   console.log("Hello")
   const qrCodeImage = new Buffer.from(qrCode.split("base64,")[1], "base64");
@@ -220,6 +220,11 @@ mailApp.post("/validate", async (req, res) => {
     razorpay_signature,
     email,
     rollno,
+    whatsapp,
+    branch,
+    name,
+    event,
+    section
   } = req.body;
   try {
     const sha = crypto.createHmac("sha256", process.env.RAZORPAY_SECRET);
@@ -231,9 +236,21 @@ mailApp.post("/validate", async (req, res) => {
   if (digest !== razorpay_signature) {
     return res.status(400).json({ msg: " Transaction is not legit!" });
   }
-  await sendEmail(email, razorpay_order_id, razorpay_payment_id, rollno);
+  await sendEmail(email, razorpay_order_id, razorpay_payment_id, rollno , whatsapp, branch, name, event, section);
+  let scannercollection = await getDBObj("scannerCollection");
+    const newRegister = {
+      rollno: rollno,
+      email: email,
+      entered: false,
+      whatsapp: whatsapp,
+      branch: branch,
+      name: name,
+      event: event,
+      section : section
+    };
+    const dbuser = await scannercollection.insertOne(newRegister);
   res.json({
-    msg: " Transaction is legit!",
+    msg: dbuser.acknowledged,
     orderId: razorpay_order_id,
     paymentId: razorpay_payment_id,
   });

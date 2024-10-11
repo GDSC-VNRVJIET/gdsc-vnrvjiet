@@ -28,13 +28,9 @@ registrationApp.put('/register',expressAsyncHandler(async(req,res)=>{
 }
 ))
 
-registrationApp.post('/register',expressAsyncHandler(async(req,res)=>{
-    let scannercollection = await getDBObj("scannerCollection");
-    const newRegister = req.body;
-    newRegister.entered = false;
-    await scannercollection.insertOne(newRegister);
-    res.send({message : "Successfully Registered"})
-}))
+// registrationApp.post('/register',expressAsyncHandler(async(req,res)=>{
+    
+// }))
 
 registrationApp.get(
     "/export-event-csv/:eventName",
