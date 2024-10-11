@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   createEvent,
   deleteEventById,
   getAllEvents,
   getUpcomingEvents,
   updateEvent,
+  handleDownloadCSV,
 } from "../../../Apis/events";
 import { format, isValid } from "date-fns";
 import Loader from "../../Loader";
@@ -119,6 +121,8 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
       console.log(error);
     }
   };
+
+  
 
   return(
     <div className="p-6">
@@ -261,6 +265,12 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
                   className="bg-red-500 text-white rounded px-2 py-1 ml-2 hover:bg-red-600"
                 >
                   Delete
+                </button>
+                <button
+                  onClick={() => handleDownloadCSV(event.name)}
+                  className="bg-[#318C07] text-white rounded px-2 py-1 ml-2 hover:bg-green-700"
+                >
+                  Download CSV
                 </button>
               </div>
             </div>
