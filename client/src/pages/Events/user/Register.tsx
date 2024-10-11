@@ -120,7 +120,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
     const order = await response.json();
 
     var option = {
-      key: "rzp_test_5maGGckNVtqtVp",
+      key: "rzp_live_uTMybrQeKu35Kz",
       amount,
       currency,
       name: "GDSC VNRVJIET",
