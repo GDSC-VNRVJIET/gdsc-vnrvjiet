@@ -36,7 +36,6 @@ transporter.verify((error, success) => {
 
 const sendEmail = async (email, orderId, paymentId, rollno , whatsapp, branch, name, event, section) => {
   const qrCode = await QRCode.toDataURL(rollno);
-  console.log("Hello")
   const qrCodeImage = new Buffer.from(qrCode.split("base64,")[1], "base64");
   try {
     const mailOptions = {
@@ -64,7 +63,10 @@ const sendEmail = async (email, orderId, paymentId, rollno , whatsapp, branch, n
     VNR Vignana Jyothi Institute of Engineering & Technology</p>
       `,
     };
-    await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions).catch(err => {
+      console.error('Email failed:', err);
+    });
+    console.log("Mail sent successfully",email);
   } catch (err) {
     console.error("Error sending email:", err);
   }
@@ -255,7 +257,7 @@ mailApp.post("/validate", async (req, res) => {
     paymentId: razorpay_payment_id,
   });
   } catch (error) {
-    console.error("Error processing transaction or sending email:", err.message);
+    console.error("Error processing transaction or sending email:", error.message);
     return res.status(500).json({ msg: "Internal server error" });
   }
   
@@ -340,5 +342,53 @@ mailApp.post(
     }
   })
 );
+
+
+const processedEventIds = new Set();
+
+const checkDuplicateEvent = (req, res, next) => {
+  const eventId = req.headers["x-razorpay-event-id"];
+
+  if (processedEventIds.has(eventId)) {
+    // Duplicate event, skip processing
+    console.log(`Duplicate event with ID ${eventId}. Skipping processing.`);
+    res.status(200).send();
+  } else {
+    // Not a duplicate, continue with the next middleware or route handler
+    processedEventIds.add(eventId);
+    next();
+  }
+};
+
+mailApp.post('/verification',checkDuplicateEvent,expressAsyncHandler(async(req,res)=>{
+  const signature = req.headers["x-razorpay-signature"];
+  const isValid = await validateWebhookSignature(
+     JSON.stringify(req.body),
+     signature,
+     process.env.RAZORPAY_WEBHOOK_SECRET
+   );
+if (isValid) {
+     const { event, payload } = req.body;
+
+     switch (event) {
+       case "payment.authorized":
+         alert("You will receive mail shortly after")
+         break;
+       case "payment.captured":
+         console.log("Some code for now");
+         console.log(req.body);
+         break;
+       case "payment.failed":
+         alert("Payment failed please try again")
+         break;
+       default:
+         // console.log(`Unhandled event: ${event}`);
+         break;
+     }
+   }
+
+  res.status(200).send();
+
+}))
 
 module.exports = mailApp;
