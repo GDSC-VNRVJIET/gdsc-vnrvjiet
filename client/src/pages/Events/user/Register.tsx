@@ -129,6 +129,11 @@ const PaymentGatewayRazorpay: React.FC = () => {
           ...response,
           email: formdata.email,
           rollno: formdata.rollno,
+          whatsapp: formdata.whatsapp,
+          branch: formdata.branch,
+          name: formdata.name,
+          event: formdata.event,
+          section: formdata.section
         };
 
         const validateResponse = await fetch(
