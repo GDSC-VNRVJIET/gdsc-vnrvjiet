@@ -362,7 +362,7 @@ const checkDuplicateEvent = (req, res, next) => {
 
 mailApp.post('/verification',checkDuplicateEvent,expressAsyncHandler(async(req,res)=>{
   const signature = req.headers["x-razorpay-signature"];
-  console.log(req.body)
+  console.log(req.body.payload.payment.entity);
   const crypto = require('crypto')
 
 	const shasum = crypto.createHmac('sha256', secret)
