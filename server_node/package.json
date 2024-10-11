@@ -27,5 +27,11 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/nodemailer": "^6.4.16",
+    "@types/qrcode": "^1.5.5"
   }
 }

@@ -96,7 +96,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
   }, []);
 
   const paymentHandler = async (formdata: FormData) => {
-    const amount = 500.0;
+    const amount = 100.0;
     const currency = "INR";
     const receiptId = "1235823";
 
