@@ -6,6 +6,7 @@ function CheckUsers() {
   const [msg, setMsg] = useState<string>("");
   const [data, setData] = useState<string>("");
   const [eventname, setEventname] = useState<string>("");
+  const [loading,setLoading] = useState(false);
   useEffect(() => {
     const scanner = new Html5QrcodeScanner(
       "reader",
@@ -32,6 +33,7 @@ function CheckUsers() {
     };
   }, []);
   async function handleAllow(result: string) {
+    setLoading(true);
     let posted = { order_id: result };
     let res = await axios.put(
       `${process.env.REACT_APP_BACK_URL}/registration/register`,
@@ -40,7 +42,9 @@ function CheckUsers() {
     setMsg(JSON.stringify(res.data.message));
     setData(JSON.stringify(res.data.payload.name));
     setEventname(JSON.stringify(res.data.payload.event));
+    setLoading(false);
   }
+  if(loading) return <p className="text-center block mx-auto">Loading...</p>
   return (
     <div className="">
       {scanResult ? (
