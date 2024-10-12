@@ -34,8 +34,8 @@ transporter.verify((error, success) => {
   }
 });
 
-const sendEmail = async (email, orderId, paymentId, rollno , whatsapp, branch, name, event, section) => {
-  const qrCode = await QRCode.toDataURL(rollno);
+const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event, section) => {
+  const qrCode = await QRCode.toDataURL(order_id);
   const qrCodeImage = new Buffer.from(qrCode.split("base64,")[1], "base64");
   try {
     const mailOptions = {
@@ -52,8 +52,8 @@ const sendEmail = async (email, orderId, paymentId, rollno , whatsapp, branch, n
         <p>Thank you for registering for our upcoming event at GDSC VNRVJIET. We're thrilled to have you join us.</p>
         <p>Your registration details are as follows:</p>
         <ul>
-          <li><strong>Order ID:</strong> ${orderId}</li>
-          <li><strong>Payment ID:</strong> ${paymentId}</li>
+          <li><strong>Branch:</strong>${branch}</li>
+          <li><strong>Section:</strong> ${section}</li>
         </ul>
         <p>You can use the QR code above for a smooth check-in process at the event.</p>
         <p>If you have any questions or need further assistance, feel free to reach out to us.</p>
@@ -208,6 +208,20 @@ mailApp.post("/order", async (req, res) => {
     if (!order) {
       return res.status(400).send("Bad Request");
     }
+    let scannercollection = await getDBObj("scannerCollection");
+    const newRegister = {
+      rollno: req.body.rollno,
+      email: req.body.email,
+      whatsapp: req.body.whatsapp,
+      branch: req.body.branch,
+      name: req.body.name,
+      event: req.body.event,
+      section: req.body.section,
+      razorpay_order_id: order.id,
+      mailSent: false,
+      entered: false
+    };
+    await scannercollection.insertOne(newRegister);
     res.json(order);
   } catch (err) {
     console.log(err);
@@ -379,20 +393,29 @@ if (isValid) {
      const { event, payload } = req.body;
 
      switch (event) {
-       case "payment.authorized":
+       case "payment.authorized":{
          alert("You will receive mail shortly after")
          break;
-       case "payment.captured":
-         console.log("Some code for now");
-         console.log(req.body);
+       }
+       case "payment.captured":{
+
+         let scannerCollection = await getDBObj("scannerCollection");
+         let dbuser = await scannerCollection.findOne({razorpay_order_id:payload.payment.entity.order_id});
+         if(dbuser!==null){
+          await sendEmail(payload.payment.entity.order_id,dbuser.email, dbuser.rollno, dbuser.whatsapp, dbuser.branch, dbuser.name, dbuser.event, dbuser.section);
+           await scannerCollection.updateOne({razorpay_order_id:payload.payment.entity.order_id},{$set:{mailSent:true}});
+         }
          break;
-       case "payment.failed":
+       }
+       case "payment.failed":{
          alert("Payment failed please try again")
          break;
-       default:
+       }
+       default:{
          // console.log(`Unhandled event: ${event}`);
          console.log(req.headers["x-razorpay-signature"]);
          break;
+       }
      }
    }
 
