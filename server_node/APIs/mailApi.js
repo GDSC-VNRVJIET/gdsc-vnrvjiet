@@ -202,7 +202,12 @@ mailApp.post("/order", async (req, res) => {
     if (!req.body) {
       return res.status(400).send("Bad Request");
     }
-    const options = req.body;
+    const options = {
+      amount: req.body.amount,
+      currency: req.body.currency,
+      receipt: req.body.receipt,
+      payment_capture: 1,
+    }
     // const email = req.body.email;
     const order = await razorpay.orders.create(options);
     if (!order) {
@@ -221,6 +226,7 @@ mailApp.post("/order", async (req, res) => {
       mailSent: false,
       entered: false
     };
+    console.log(newRegister);
     await scannercollection.insertOne(newRegister);
     res.json(order);
   } catch (err) {
