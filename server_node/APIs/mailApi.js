@@ -204,9 +204,10 @@ mailApp.post("/order", async (req, res) => {
     }
     const options = {
       amount: req.body.amount,
-      currency: "INR",
-      reciept: req.body.reciept
-    };
+      currency: req.body.currency,
+      receipt: req.body.receipt,
+      payment_capture: 1,
+    }
     // check the email should be one only
     const email = req.body.email.trim(); // Trim any leading/trailing whitespace
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -234,6 +235,7 @@ if (!emailRegex.test(email)) {
       mailSent: false,
       entered: false
     };
+    console.log(newRegister);
     await scannercollection.insertOne(newRegister);
    
     res.json(order);
