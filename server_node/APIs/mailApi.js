@@ -195,6 +195,7 @@ const thankAuthor = async (email) => {
 
 mailApp.post("/order", async (req, res) => {
   try {
+    console.log("Hello-1")
     const razorpay = new Razorpay({
       key_id: process.env.RAZORPAY_KEY_ID,
       key_secret: process.env.RAZORPAY_SECRET,
@@ -222,7 +223,7 @@ if (!emailRegex.test(email)) {
     }
     
     let scannercollection = await getDBObj("scannerCollection");
-    
+    console.log("Hello-2")
     const newRegister = {
       rollno: req.body.rollno,
       email: req.body.email,
@@ -238,7 +239,7 @@ if (!emailRegex.test(email)) {
     };
     console.log(newRegister);
     await scannercollection.insertOne(newRegister);
-   
+    console.log("Hello-3")
     res.json(order);
   } catch (err) {
     console.log(err);
@@ -391,53 +392,70 @@ const checkDuplicateEvent = (req, res, next) => {
   }
 };
 
-mailApp.post('/verification',checkDuplicateEvent,expressAsyncHandler(async(req,res)=>{
-  const signature = req.headers["x-razorpay-signature"];
-  console.log(req.body.payload.payment.entity);
-  const crypto = require('crypto')
+mailApp.post(
+  '/verification',
+  checkDuplicateEvent,
+  expressAsyncHandler(async (req, res) => {
+    try {
+      const signature = req.headers['x-razorpay-signature'];
+      const crypto = require('crypto');
+      const shasum = crypto.createHmac('sha256', process.env.RAZORPAY_SECRET);
+      shasum.update(JSON.stringify(req.body));
+      const digest = shasum.digest('hex');
 
-	const shasum = crypto.createHmac('sha256', process.env.RAZORPAY_SECRET)
-	shasum.update(JSON.stringify(req.body))
-	const digest = shasum.digest('hex')
+      console.log('Digest:', digest);
+      console.log('Razorpay Signature:', signature);
+      const isValid = await validateWebhookSignature(
+        JSON.stringify(req.body),
+        signature,
+        process.env.RAZORPAY_WEBHOOK_SECRET
+      );
 
-	console.log(digest, req.headers['x-razorpay-signature'])
-  const isValid = await validateWebhookSignature(
-     JSON.stringify(req.body),
-     signature,
-     process.env.RAZORPAY_WEBHOOK_SECRET
-   );
-if (isValid) {
-     const { event, payload } = req.body;
+      if (isValid) {
+        const { payload } = req.body;
+        let scannerCollection = await getDBObj('scannerCollection');
+        let dbuser = await scannerCollection.findOne({
+          razorpay_order_id: payload.payment.entity.order_id,
+        });
 
-     switch (event) {
-       case "payment.authorized":{
-         console.log("payment.authorized");
-         break;
-       }
-       case "payment.captured":{
+        if (dbuser !== null) {
+          await scannerCollection.updateOne(
+            { razorpay_order_id: payload.payment.entity.order_id },
+            {
+              $set: {
+                paymentSuccess: true,
+                razorpayResponse: req.body,
+              },
+            }
+          );
+          await sendEmail(
+            payload.payment.entity.order_id,
+            dbuser.email,
+            dbuser.rollno,
+            dbuser.whatsapp,
+            dbuser.branch,
+            dbuser.name,
+            dbuser.event,
+            dbuser.section
+          );
+          await scannerCollection.updateOne(
+            { razorpay_order_id: payload.payment.entity.order_id },
+            {
+              $set: {
+                mailSent: true
+              },
+            }
+          );
+          console.log('Payment and email process completed for:', dbuser.email);
+        }
+      }
+      res.status(200).send();
+    } catch (err) {
+      console.error('Error processing webhook:', err);
+      res.status(500).send('Internal Server Error');
+    }
+  })
+);
 
-         let scannerCollection = await getDBObj("scannerCollection");
-         let dbuser = await scannerCollection.findOne({razorpay_order_id:payload.payment.entity.order_id});
-         if(dbuser!==null){
-          await scannerCollection.updateOne({razorpay_order_id:payload.payment.entity.order_id},{$set:{paymentSuccess:true}});
-          await sendEmail(payload.payment.entity.order_id,dbuser.email, dbuser.rollno, dbuser.whatsapp, dbuser.branch, dbuser.name, dbuser.event, dbuser.section);
-           await scannerCollection.updateOne({razorpay_order_id:payload.payment.entity.order_id},{$set:{mailSent:true}});
-         }
-         break;
-       }
-       case "payment.failed":{
-         console.log("payment.failed");
-         break;
-       }
-       default:{
-        console.log("other event");
-         break;
-       }
-     }
-   }
-
-  res.status(200).send();
-
-}))
 
 module.exports = mailApp;
