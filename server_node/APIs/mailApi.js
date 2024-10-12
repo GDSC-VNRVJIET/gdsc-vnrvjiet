@@ -233,7 +233,8 @@ if (!emailRegex.test(email)) {
       section: req.body.section,
       razorpay_order_id: order.id,
       mailSent: false,
-      entered: false
+      entered: false,
+      paymentSuccess: false
     };
     console.log(newRegister);
     await scannercollection.insertOne(newRegister);
@@ -418,6 +419,7 @@ if (isValid) {
          let scannerCollection = await getDBObj("scannerCollection");
          let dbuser = await scannerCollection.findOne({razorpay_order_id:payload.payment.entity.order_id});
          if(dbuser!==null){
+          await scannerCollection.updateOne({razorpay_order_id:payload.payment.entity.order_id},{$set:{paymentSuccess:true}});
           await sendEmail(payload.payment.entity.order_id,dbuser.email, dbuser.rollno, dbuser.whatsapp, dbuser.branch, dbuser.name, dbuser.event, dbuser.section);
            await scannerCollection.updateOne({razorpay_order_id:payload.payment.entity.order_id},{$set:{mailSent:true}});
          }
