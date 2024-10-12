@@ -62,4 +62,21 @@ registrationApp.get(
     })
   );
 
+  registrationApp.get(
+    "/event-registrations/:eventName",
+    expressAsyncHandler(async (request, response) => {
+      let eventCollectionObject = await getDBObj("scannerCollection");
+      let eventName = request.params.eventName;
+  
+      let eventData = await eventCollectionObject.find({ event: eventName }).toArray();
+  
+      if (eventData.length === 0) {
+        return response.status(404).send({ message: "No data found for this event" });
+      }
+  
+      res.status(200).send(registrations);
+    })
+  );
+
+
 module.exports=registrationApp;

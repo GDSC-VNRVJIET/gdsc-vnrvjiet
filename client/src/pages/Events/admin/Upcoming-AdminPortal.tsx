@@ -261,17 +261,18 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
                   Edit
                 </button>
                 <button
+                  onClick={() => handleDownloadCSV(event.name)}
+                  className="bg-[#318C07] text-white rounded px-2 py-1 ml-2 hover:bg-green-700"
+                >
+                  View registrations
+                </button>
+                <button
                   onClick={() => handleDeleteEvent(event.eventId)}
                   className="bg-red-500 text-white rounded px-2 py-1 ml-2 hover:bg-red-600"
                 >
                   Delete
                 </button>
-                <button
-                  onClick={() => handleDownloadCSV(event.name)}
-                  className="bg-[#318C07] text-white rounded px-2 py-1 ml-2 hover:bg-green-700"
-                >
-                  Download CSV
-                </button>
+                
               </div>
             </div>
           ))}
