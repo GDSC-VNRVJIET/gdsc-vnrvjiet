@@ -92,3 +92,14 @@ export const handleDownloadCSV = async (eventName: String) => {
     console.error("Error downloading the CSV", error);
   }
 };
+
+export const eventRegistrations = async (eventName: String) => {
+  try {
+    const response = await axios.get(`${API_URL}/registration/event-registrations/${eventName}`);
+    console.log(response);
+    return response.data;
+    
+  } catch (error) {
+    console.error("Error fetching registrations");
+  }
+};

@@ -43,6 +43,7 @@ import ML from "./pages/Domain Info/ML";
 import Management from "./pages/Domain Info/Management";
 import Teams from "./pages/leaderboard/Teams";
 import Events from "./pages/Events/Events";
+import CheckRegistrations from "./pages/Events/admin/CheckRegistrations";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -157,6 +158,7 @@ function Root() {
           <Route path="upcoming-events" element={<UpcomingEvents />} />
           <Route path="past-events" element={<PastEvents />} />
         </Route>
+        <Route path="/viewregistrations/:eventname" element= {<CheckRegistrations/>}/>
         <Route
           path="/leaderboard"
           element={
@@ -179,6 +181,7 @@ function Root() {
           path="/checkuser"
           element={<ProtectedRoute element={<CheckUsers />} path="/checkuser" />}
         />
+        
         
       </Routes>
       {showScrollToTop && (

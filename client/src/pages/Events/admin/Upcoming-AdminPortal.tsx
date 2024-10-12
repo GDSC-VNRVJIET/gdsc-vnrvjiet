@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   createEvent,
@@ -48,6 +49,11 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
   const [editEvent, setEditEvent] = useState<Event | null>();
   const [isCreatingEvent, setIsCreatingEvent] = useState(false);
   const [displayLoader, setDisplayLoader] = useState(false);
+  const navigate = useNavigate();
+
+  function viewRegistrations(eventName: string) {
+      navigate(`/viewregistrations/${eventName}`);
+  }
 
   async function fetchData() {
     try {
@@ -261,7 +267,7 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
                   Edit
                 </button>
                 <button
-                  onClick={() => handleDownloadCSV(event.name)}
+                  onClick={() => viewRegistrations(event.name)}
                   className="bg-[#318C07] text-white rounded px-2 py-1 ml-2 hover:bg-green-700"
                 >
                   View registrations

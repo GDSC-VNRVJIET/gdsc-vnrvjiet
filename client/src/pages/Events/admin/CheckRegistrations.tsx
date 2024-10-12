@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { handleDownloadCSV ,eventRegistrations} from '../../../Apis/events';
 
 interface RegistrationData {
   _id: {
@@ -11,66 +13,85 @@ interface RegistrationData {
   whatsapp: string;
   branch: string;
   name: string;
-  event: string;
   section: string;
+  mailSent: boolean;
+  paymentSuccess: boolean;
 }
 
 const CheckRegistrations: React.FC = () => {
+  const navigate=useNavigate();
   const [registrations, setRegistrations] = useState<RegistrationData[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [showunsentMails,setShowunsentMails]=useState<boolean>(false);
+  const eventName=window.location.pathname.split("/")[2];
 
-  // Fetch registrations from the backend
+  const fetchData = async () => {
+    const res=await eventRegistrations(eventName);
+    console.log(res);
+    setRegistrations(res.payload);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get<RegistrationData[]>('/api/registrations');
-        setRegistrations(response.data);
-        setLoading(false);
-      } catch (err) {
-        setError('Error fetching registrations');
-        setLoading(false);
-      }
-    };
-
+    
     fetchData();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
+  function goto(){
+    navigate('/checkuser')
   }
-
-  if (error) {
-    return <div>{error}</div>;
+  function unsentMails(){
+    if(showunsentMails){
+      fetchData();
+    }
+    else{
+      let unsentmail=registrations.filter((registration)=>registration.mailSent===false);
+      setRegistrations(unsentmail);
+    }
+    setShowunsentMails(!showunsentMails);
   }
 
   return (
-    <div>
-      <h2>Check Registrations</h2>
-      <table border={1} cellPadding={10}>
+    <div className='container mx-auto p-5'>
+      <h2 className="text-center text-3xl font-bold ">Check Registrations</h2>
+      <div className="mb-4 flex justify-end mt-4 space-x-2">
+      <button
+        onClick={() => handleDownloadCSV(eventName)}
+        className="bg-[#318C07] text-white rounded px-2 py-1 ml-2 hover:bg-green-700"
+      >
+        Donwload CSV
+      </button>
+        <button onClick={goto} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+        Check
+        </button>
+        <button onClick={unsentMails} className="bg-blue-500 text-white rounded px-2 py-1 hover:bg-blue-500  font-semibold  border border-blue-500">
+        {showunsentMails?"Show all":"Show unsent mails"}
+        </button>
+        </div>
+      <table className='mt-10 mx-auto border border-gray-300 shadow-md rounded-lg'>
         <thead>
           <tr>
-            <th>Roll No</th>
-            <th>Email</th>
-            <th>Entered</th>
-            <th>WhatsApp</th>
-            <th>Branch</th>
-            <th>Name</th>
-            <th>Event</th>
-            <th>Section</th>
+            <th className="border px-4 py-2">Roll No</th>
+            <th className="border px-4 py-2">Email</th>
+            <th className="border px-4 py-2">WhatsApp</th>
+            <th className="border px-4 py-2">Branch</th>
+            <th className="border px-4 py-2">Name</th>
+            <th className="border px-4 py-2">Section</th>
+            <th className="border px-4 py-2">Entered</th>
+            <th className="border px-4 py-2">mailSent</th>
+            <th className="border px-4 py-2">paymentSuccess</th>
           </tr>
         </thead>
         <tbody>
           {registrations.map((registration) => (
             <tr key={registration._id.$oid}>
-              <td>{registration.rollno}</td>
-              <td>{registration.email}</td>
-              <td>{registration.entered ? 'Yes' : 'No'}</td>
-              <td>{registration.whatsapp}</td>
-              <td>{registration.branch}</td>
-              <td>{registration.name}</td>
-              <td>{registration.event}</td>
-              <td>{registration.section}</td>
+              <td className="border px-4 py-2">{registration.rollno}</td>
+              <td className="border px-4 py-2">{registration.email}</td>
+              <td className="border px-4 py-2">{registration.whatsapp}</td>
+              <td className="border px-4 py-2">{registration.branch}</td>
+              <td className="border px-4 py-2">{registration.name}</td>
+              <td className="border px-4 py-2">{registration.section}</td>
+              <td className="border px-4 py-2">{registration.entered ? 'Yes' : 'No'}</td>
+              <td className="border px-4 py-2">{registration.mailSent ? 'Yes' : 'No'}</td>
+              <td className="border px-4 py-2">{registration.paymentSuccess ? 'Yes' : 'No'}</td>
             </tr>
           ))}
         </tbody>

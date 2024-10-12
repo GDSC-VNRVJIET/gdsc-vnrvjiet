@@ -35,10 +35,7 @@ interface PastProps {
 }
 
 const AdminPortalPast: React.FC<PastProps> = ({ eventsprop }) => {
-  const navigate = useNavigate();
-  function goto(){
-    navigate('/checkuser')
-  }
+  
   const [events, setEvents] = useState<Event[]>(eventsprop);
   const [newEvent, setNewEvent] = useState<NewEvent>({
     name: "",
@@ -180,11 +177,7 @@ const AdminPortalPast: React.FC<PastProps> = ({ eventsprop }) => {
             </div>
           ))}
         </div>
-        <div className="flex justify-center mt-8">
-        <button onClick={goto} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-        Check
-        </button>
-        </div>
+        
       </div>
       {editEvent && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 ">
