@@ -113,6 +113,13 @@ const PaymentGatewayRazorpay: React.FC = () => {
           amount,
           currency,
           receipt: receiptId,
+          email: formdata.email,
+          rollno: formdata.rollno,
+          whatsapp: formdata.whatsapp,
+          branch: formdata.branch,
+          name: formdata.name,
+          event: formdata.event,
+          section: formdata.section
         }),
       }
     );
