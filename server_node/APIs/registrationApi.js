@@ -67,14 +67,14 @@ registrationApp.get(
     expressAsyncHandler(async (request, response) => {
       let eventCollectionObject = await getDBObj("scannerCollection");
       let eventName = request.params.eventName;
-  
-      let eventData = await eventCollectionObject.find({ event: eventName }).toArray();
-  
+      let eventData = await eventCollectionObject.find({ 
+        event: eventName,
+        paymentSuccess: true,
+      }).toArray();
       if (eventData.length === 0) {
         return response.status(404).send({ message: "No data found for this event" });
       }
-  
-      res.status(200).send(registrations);
+      response.send({ message: "Event registrations", payload: eventData });
     })
   );
 
