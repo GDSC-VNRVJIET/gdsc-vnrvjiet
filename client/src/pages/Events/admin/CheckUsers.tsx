@@ -10,8 +10,8 @@ function CheckUsers() {
   const [data, setData] = useState<string>("");
   const [data1,setData1] = useState<any>("");
   const [eventname, setEventname] = useState<string>("");
-  const [loading,setLoading] = useState(false);
-  const [button,showButton] = useState(true);
+  const [loading,setLoading] = useState<Boolean>(false);
+  const [button,showButton] = useState<Boolean>(true);
   useEffect(() => {
     const scanner = new Html5QrcodeScanner(
       "reader",
@@ -54,8 +54,23 @@ function CheckUsers() {
   if(loading) return <p className="text-center block mx-auto">Loading...</p>
   return (
     <div className="">
-      {scanResult ? (
+      {
+      scanResult ? (
         <div>
+          {/* Button for going to previuos page */}
+          { loading!==true && 
+          <div className="flex justify-center mt-9">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => setScanResult(null)}
+              type="submit"
+            >
+              Back
+            </button>
+          </div>
+}
+          {
+            button &&
           <div className="flex justify-center mt-9">
             <button
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
@@ -65,10 +80,10 @@ function CheckUsers() {
               Check
             </button>
           </div>
-          <p className="text-center mt-9">{msg} </p>
+          }
           {
             msg==="Allow To Workshop" ? <img src={Verified} alt="Verified" className="block mx-auto"/> : (
-              msg==="Already Scanned Dont Allow to Workshop" ? <img src={DontAllow} alt="Already Scanned" /> : <img src={Mistake} alt="Invalid QR" />
+              msg==="Already Scanned Dont Allow to Workshop" ? <img className="block mx-auto" src={DontAllow} alt="Already Scanned" /> : (msg==="Not registered for Workshop"?<img className="block mx-auto" src={Mistake} alt="Invalid QR" /> : <p></p>)
             ) 
           }
           <p className="block text-center mt-4">{data}  {data1.rollno}</p>
