@@ -90,8 +90,6 @@ const PaymentGatewayRazorpay: React.FC = () => {
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
-    console.log(process.env.REACT_APP_BACK_URL);
-
     return () => {
       document.body.removeChild(script);
     };
@@ -127,7 +125,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
     const order = await response.json();
 
     var option = {
-      key: "rzp_live_uTMybrQeKu35Kz",
+      key: "rzp_test_5maGGckNVtqtVp",
       amount,
       currency,
       name: "GDSC VNRVJIET",

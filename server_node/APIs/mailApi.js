@@ -202,13 +202,26 @@ mailApp.post("/order", async (req, res) => {
     if (!req.body) {
       return res.status(400).send("Bad Request");
     }
-    const options = req.body;
-    // const email = req.body.email;
+    const options = {
+      amount: req.body.amount,
+      currency: "INR",
+      reciept: req.body.reciept
+    };
+    // check the email should be one only
+    const email = req.body.email.trim(); // Trim any leading/trailing whitespace
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!emailRegex.test(email)) {
+  return res.status(400).send("Bad Request - Invalid Email Format");
+}
+
     const order = await razorpay.orders.create(options);
     if (!order) {
       return res.status(400).send("Bad Request");
     }
+    
     let scannercollection = await getDBObj("scannerCollection");
+    
     const newRegister = {
       rollno: req.body.rollno,
       email: req.body.email,
@@ -222,6 +235,7 @@ mailApp.post("/order", async (req, res) => {
       entered: false
     };
     await scannercollection.insertOne(newRegister);
+   
     res.json(order);
   } catch (err) {
     console.log(err);
@@ -379,7 +393,7 @@ mailApp.post('/verification',checkDuplicateEvent,expressAsyncHandler(async(req,r
   console.log(req.body.payload.payment.entity);
   const crypto = require('crypto')
 
-	const shasum = crypto.createHmac('sha256', secret)
+	const shasum = crypto.createHmac('sha256', process.env.RAZORPAY_SECRET)
 	shasum.update(JSON.stringify(req.body))
 	const digest = shasum.digest('hex')
 
@@ -394,7 +408,7 @@ if (isValid) {
 
      switch (event) {
        case "payment.authorized":{
-         alert("You will receive mail shortly after")
+         console.log("payment.authorized");
          break;
        }
        case "payment.captured":{
@@ -408,12 +422,11 @@ if (isValid) {
          break;
        }
        case "payment.failed":{
-         alert("Payment failed please try again")
+         console.log("payment.failed");
          break;
        }
        default:{
-         // console.log(`Unhandled event: ${event}`);
-         console.log(req.headers["x-razorpay-signature"]);
+        console.log("other event");
          break;
        }
      }
