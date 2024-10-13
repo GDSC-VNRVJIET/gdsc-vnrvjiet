@@ -267,6 +267,7 @@ if (!emailRegex.test(email)) {
       branch: req.body.branch,
       name: req.body.name,
       event: req.body.event,
+      year: req.body.year,
       section: req.body.section,
       razorpay_order_id: order.id,
       mailSent: false,
