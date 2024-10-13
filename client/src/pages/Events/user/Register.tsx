@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useParams } from "react-router-dom";
+import { FaXTwitter } from "react-icons/fa6";
 import dotenv from "dotenv";
 import {
   WhatsappShareButton,
@@ -38,6 +39,7 @@ interface FormData {
   section : string;
   name: string;
   event: string;
+  year:Number;
 }
 
 const PaymentGatewayRazorpay: React.FC = () => {
@@ -48,6 +50,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [modal, setModal] = useState<Boolean>(false);
   const [displayLoader, setDisplayLoader] = useState(true);
+  const [color,changeColor] = useState<string>('bg-red-300');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,8 +79,10 @@ const PaymentGatewayRazorpay: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
+    formState: { errors , isValid},
+    watch
+  } = useForm<FormData>({ mode: "all" });
+  const formFields = watch();
 
   const handleFormSubmit = (formData: FormData) => {
     console.log(formData);
@@ -95,6 +100,13 @@ const PaymentGatewayRazorpay: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (isValid) {
+      changeColor("bg-green-300");
+    } else {
+      changeColor("bg-red-300");
+    }
+  }, [isValid, formFields]);
   const paymentHandler = async (formdata: FormData) => {
     const amount = 100.0;
     const currency = "INR";
@@ -117,7 +129,8 @@ const PaymentGatewayRazorpay: React.FC = () => {
           branch: formdata.branch,
           name: formdata.name,
           event: formdata.event,
-          section: formdata.section
+          section: formdata.section,
+          year:formdata.year
         }),
       }
     );
@@ -140,27 +153,9 @@ const PaymentGatewayRazorpay: React.FC = () => {
           branch: formdata.branch,
           name: formdata.name,
           event: formdata.event,
-          section: formdata.section
+          section: formdata.section,
+          year:formdata.year
         };
-
-        // const validateResponse = await fetch(
-        //   `${process.env.REACT_APP_BACK_URL}/sendmail/validate`,
-        //   {
-        //     method: "POST",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(body),
-        //   }
-        // );
-        // const jsonResponse = await validateResponse.json();
-        // if (jsonResponse.msg === " Transaction is legit!") {
-        //   const res = await axios.post(
-        //     `${process.env.REACT_APP_BACK_URL}/registration/register`,
-        //     formdata
-        //   );
-        // }
-      //console.log(jsonResponse.msg);
       },
       prefill: {
         name: formdata.name,
@@ -188,7 +183,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md relative">
             <span
-              className="absolute top-4 right-4 text-2xl cursor-pointer text-gray-500 hover:text-gray-900"
+              className="absolute top-4 right-4 text-3xl cursor-pointer text-red-500 hover:bg-red-500 hover:text-white hover:rounded-full hover:p-1"
               onClick={() => setModal(false)}
             >
               &times;
@@ -199,12 +194,8 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 <WhatsappIcon round></WhatsappIcon>
               </WhatsappShareButton>
               <TwitterShareButton className="mr-2" url={window.location.href}>
-                <TwitterIcon round></TwitterIcon>
+              <FaXTwitter className="rounded-full w-12 h-12 bg-black text-white p-2" />
               </TwitterShareButton>
-              <FacebookShareButton className="mr-2" url={window.location.href}>
-                <FacebookIcon round></FacebookIcon>
-              </FacebookShareButton>
-
               <LinkedinShareButton url={window.location.href}>
                 <LinkedinIcon round></LinkedinIcon>
               </LinkedinShareButton>
@@ -212,7 +203,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
           </div>
         </div>
       )}
-      <div className="product ml-3 mt-6">
+      <div className="product mt-6">
         <div className="flex justify-center">
           <h1 className="ml-3 mt-0 text-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">
             {states?.name}
@@ -337,7 +328,21 @@ const PaymentGatewayRazorpay: React.FC = () => {
                   <p className="text-red-500">Email is required</p>
                 )}
               </div>
-
+              <div className="relative mt-6 w-full min-w-[200px] h-10">
+                <input
+                  autoComplete="off"
+                  type="number"
+                  {...register("year", { required: true })}
+                  className="peer bg-white w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+                  placeholder=" "
+                />
+                <label className="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-500 peer-focus:text-gray-900 before:border-blue-gray-200 peer-focus:before:!border-gray-900 after:border-blue-gray-200 peer-focus:after:!border-gray-900">
+                  Year
+                </label>
+                {errors.email?.type === "required" && (
+                  <p className="text-red-500">Enter year</p>
+                )}
+              </div>
               <div className="max-w-sm mx-auto mt-8 mb-8">
                 <label htmlFor="branch" className="ms-1 text-gray-500">
                   Select Branch
@@ -416,7 +421,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
             <div className="p-4 flex flex-col items-center justify-center"></div>
           </form>
           <div
-            className="relative bottom-0 left-0 right-0 h-12 bg-red-300 max-w-sm w-full mx-auto"
+            className={`relative bottom-0 left-0 right-0 h-12 ${color} max-w-sm w-full mx-auto`}
             style={{ borderRadius: "0 0 30px 30px" }}
           ></div>
         </div>

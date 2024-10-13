@@ -268,6 +268,7 @@ if (!emailRegex.test(email)) {
       branch: req.body.branch,
       name: req.body.name,
       event: req.body.event,
+      year: req.body.year,
       section: req.body.section,
       razorpay_order_id: order.id,
       mailSent: false,
@@ -282,54 +283,6 @@ if (!emailRegex.test(email)) {
     console.log(err);
     res.status(500).send(err);
   }
-});
-
-mailApp.post("/validate", async (req, res) => {
-  const {
-    razorpay_order_id,
-    razorpay_payment_id,
-    razorpay_signature,
-    email,
-    rollno,
-    whatsapp,
-    branch,
-    name,
-    event,
-    section
-  } = req.body;
-  try {
-    const sha = crypto.createHmac("sha256", process.env.RAZORPAY_SECRET);
-
-  sha.update(`${razorpay_order_id}|${razorpay_payment_id}`);
-
-  const digest = sha.digest("hex");
-
-  if (digest !== razorpay_signature) {
-    return res.status(400).json({ msg: " Transaction is not legit!" });
-  }
-  await sendEmail(email, razorpay_order_id, razorpay_payment_id, rollno , whatsapp, branch, name, event, section);
-  let scannercollection = await getDBObj("scannerCollection");
-    const newRegister = {
-      rollno: rollno,
-      email: email,
-      entered: false,
-      whatsapp: whatsapp,
-      branch: branch,
-      name: name,
-      event: event,
-      section : section
-    };
-    const dbuser = await scannercollection.insertOne(newRegister);
-  res.json({
-    msg: dbuser.acknowledged,
-    orderId: razorpay_order_id,
-    paymentId: razorpay_payment_id,
-  });
-  } catch (error) {
-    console.error("Error processing transaction or sending email:", error.message);
-    return res.status(500).json({ msg: "Internal server error" });
-  }
-  
 });
 
 mailApp.post(
