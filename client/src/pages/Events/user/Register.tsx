@@ -112,6 +112,17 @@ const PaymentGatewayRazorpay: React.FC = () => {
     const currency = "INR";
     const receiptId = "1235823";
 
+    const check = await axios.post(
+      `${process.env.REACT_APP_BACK_URL}/registration/check-register`,
+      {
+        rollno:formdata.rollno
+      }
+    )
+
+    if(check.data.status === false){
+      alert("Already Registered");
+      return;
+    }
     const response = await fetch(
       `${process.env.REACT_APP_BACK_URL}/sendmail/order`,
       {
@@ -197,13 +208,13 @@ const PaymentGatewayRazorpay: React.FC = () => {
             </span>
             <h2 className="text-center text-xl mb-4">Share through</h2>
             <div className="flex justify-center">
-              <WhatsappShareButton className="mr-2" url={window.location.href}>
+              <WhatsappShareButton title={`${states?.name} Register for this amazing event conducted by GDGC VNRVJIET!!`}   className="mr-2" url={window.location.href}>
                 <WhatsappIcon round></WhatsappIcon>
               </WhatsappShareButton>
-              <TwitterShareButton className="mr-2" url={window.location.href}>
+              <TwitterShareButton title={`${states?.name} Register for this amazing event conducted by GDGC VNRVJIET!!`}  className="mr-2" url={window.location.href}>
               <FaXTwitter className="rounded-full w-12 h-12 bg-black text-white p-2" />
               </TwitterShareButton>
-              <LinkedinShareButton url={window.location.href}>
+              <LinkedinShareButton summary="Register for this Amazing event conducted by GDGC VNRVJIET !!" title={states?.name} url={window.location.href}>
                 <LinkedinIcon round></LinkedinIcon>
               </LinkedinShareButton>
             </div>
