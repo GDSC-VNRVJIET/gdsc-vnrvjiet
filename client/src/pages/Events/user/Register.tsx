@@ -331,7 +331,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
                   )}
                 </div>
               </div>
-              <div className="relative mt-6 w-full lg:w-[45%] min-w-[200px] h-10">
+              <div className="relative mt-6 mb-8 w-full lg:w-[45%] min-w-[200px] h-10">
                 <input
                   autoComplete="off"
                   type="email"
@@ -349,7 +349,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
                   <p className="text-red-500">Invalid email format</p>
                 )}
               </div>
-              <div className="relative mt-6 w-full lg:w-[45%] min-w-[200px] h-10">
+              <div className="relative mt-6 mb-8 w-full lg:w-[45%] min-w-[200px] h-10">
                 <input
                   autoComplete="off"
                   type="number"
