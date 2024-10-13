@@ -38,6 +38,7 @@ function Hero() {
           Vallurupalli Nageswara Rao Vignana Jyothi Institute of Engineering
           &Technology.
         </h1>
+        
         <div className="mt-6 flex justify-center">
           <div className="mt-6">
           <SocialIcon
