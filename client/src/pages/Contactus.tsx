@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "../images/contactUs.png";
 import Lottie from "lottie-react";
 import { Button } from "@mui/material";
+import {EnvelopeIcon} from '@heroicons/react/24/outline';
 
 interface FormData {
   firstName: string;
@@ -107,6 +108,10 @@ const Contactus: React.FC = () => {
           <p className="text-gray-700 mb-6">
             We're here to help! Feel free to ask any questions, share your
             doubts, or give us feedback.
+          </p>
+          <p className="mx-auto my-4">
+          <EnvelopeIcon aria-hidden="true" className="h-6 w-6 text-blue-600" /> 
+          Or send us a mail at : <a href="mailto:gdsc.vnrvjiet@gmail.com"><p className="font-bold text-[#4285F4]">gdsc.vnrvjiet@gmail.com </p></a> 
           </p>
           <div className="flex justify-center items-center">
             <img
