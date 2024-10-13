@@ -45,12 +45,13 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
         address: process.env.USER,
       },
       to: `${email}`,
-      subject: "You're Registered! Welcome to the Event by GDGC VNRVJIET",
+      subject: `You're Registered! Welcome to the ${event} Event by GDGC VNRVJIET`,
       attachDataUrls: true,
       html: `
-        <img src="cid:gdg_banner" alt="" width="420px">
-        <h3>Welcome to the GDGC VNRVJIET Event!</h3>
-        <img src="${qrCode}" alt="QR Code" />
+      <div style="max-width:800px;margin:0 auto;">
+        <img src="cid:gdg_banner" alt="" style="max-height:250px;max-width:100%;display:block;margin:auto;">
+        <h3>Welcome to the GDGC VNRVJIET's ${event} Event, ${name}!</h3>
+        <img src="${qrCode}" alt="QR Code" style="width:30%;" />
         <p>Thank you for registering for our upcoming event at GDSC VNRVJIET. We're thrilled to have you join us.</p>
         <p>Your registration details are as follows:</p>
         <ul>
