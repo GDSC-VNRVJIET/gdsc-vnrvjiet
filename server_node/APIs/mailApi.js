@@ -37,6 +37,7 @@ transporter.verify((error, success) => {
 const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event, section) => {
   const qrCode = await QRCode.toDataURL(order_id);
   const qrCodeImage = new Buffer.from(qrCode.split("base64,")[1], "base64");
+  console.log(__dirname);
   try {
     const mailOptions = {
       from: {
@@ -47,7 +48,8 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
       subject: "You're Registered! Welcome to the Event by GDGC VNRVJIET",
       attachDataUrls: true,
       html: `
-        <h1>Welcome to the GDGC VNRVJIET Event!</h1>
+        <img src="cid:gdg_banner" alt="" width="420px">
+        <h3>Welcome to the GDGC VNRVJIET Event!</h3>
         <img src="${qrCode}" alt="QR Code" />
         <p>Thank you for registering for our upcoming event at GDSC VNRVJIET. We're thrilled to have you join us.</p>
         <p>Your registration details are as follows:</p>
@@ -61,7 +63,40 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
         <p>Best regards,</p>
     <p>Google Developer Student Clubs<br>
     VNR Vignana Jyothi Institute of Engineering & Technology</p>
+    <div>
+        <span>Best regards,</span>
+        <hr width="400px" style="margin: 5px 0px;border:none;background-color: rgb(88, 140, 236); height: 1px;">
+        <img src="cid:gdg_footer" width="160px"alt="" style="float: left;">
+        <div style="font-family: sans-serif;margin-right: 5px;margin-bottom: -10px;">
+            <p style="margin-bottom: 9px;">Google developer Groups</p>
+            <p style="margin-top: 5px;">On Campus <span style="color: darkslategray;">• VNRVJIET</span></p>
+        </div>
+        <div style="margin-top: 2px;">
+            <span>
+                <a href="https://www.linkedin.com/company/gdsc-vnrvjiet/" style="text-decoration: none;">
+                    <img src="https://lh6.googleusercontent.com/cC1MSbCakLeSsH9wlpfS5FfnKxHDTkPAp14j47AYFFUfYPpy7mxCukURTtmfBW5HyaLdcpn2ifOcsu5GCc1EuiigKeOJEI5oW7YcBpckpyNGSb5liSpnDbgKx0YS5Fdwf9VTTGLX8A" alt="">
+                </a>
+            </span>
+            <span>
+                <a href="https://www.instagram.com/gdsc.vnrvjiet/" style="text-decoration: none;">
+                    <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXe2WMPt0OyEHetlhDT4rhbuqUG8S3JjEEjE07rAtxVgiXI9Yxe9vJ85-MwSTbJdl1B3K9w5T1ExRtN5yyTZfoDPXYIiy_gGkBLGBL6HQJhANlMJA_9NoTYJWOEdaHk_wi23mrSUcA1UD9mL1mlkhv3Yk985?key=2z68nRGqyxEDZLXmUTszTw" alt="">
+                </a>
+            </span>
+        </div>
+        </div>
       `,
+      attachments: [
+        {
+          filename: 'gdgbanner.png',
+          path: __dirname+'/../images/gdgbanner.png',
+          cid: 'gdg_banner'
+        },
+        {
+          filename: 'gdgfooter.png',
+          path: __dirname+'/../images/gdgfooter.png',
+          cid: 'gdg_footer'
+        },
+      ],
     };
     await transporter.sendMail(mailOptions).catch(err => {
       console.error('Email failed:', err);
@@ -71,6 +106,7 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
     console.error("Error sending email:", err);
   }
 };
+
 
 function sendGiveAccessEmail(email, blogId) {
   try {
