@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useLocation, useParams } from "react-router-dom";
 import { FaXTwitter } from "react-icons/fa6";
 import dotenv from "dotenv";
+import tobeannounced from "../../../images/tobeannounced.jpg"
 import {
   WhatsappShareButton,
   WhatsappIcon,
@@ -22,6 +23,7 @@ import {
   getUpcomingEvents,
 } from "../../../Apis/events";
 import Loader from "../../Loader";
+import { stat } from "fs";
 interface Event {
   eventId: number;
   name: string;
@@ -235,7 +237,13 @@ const PaymentGatewayRazorpay: React.FC = () => {
         <p className="text-justify mt-5 mb-10 text-md font-normal w-11/12 mx-auto text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-blue-400">
           {states?.description}
         </p>
-        <div
+        {states?.name === "Webathon3.O"? (
+          <div className="text-center">
+            <p className="text-gray-600 text-xl">To be announced Soon!</p>
+            <img src={tobeannounced} className="mx-auto" alt="" />
+          </div>
+        ):(
+          <div
           style={{ borderRadius: "30px" }}
           className="pt-5  border border-gray-200 shadow max-w-sm lg:max-w-2xl mx-auto"
         >
@@ -446,6 +454,8 @@ const PaymentGatewayRazorpay: React.FC = () => {
             style={{ borderRadius: "0 0 30px 30px" }}
           ></div>
         </div>
+        )}
+        
       </div>
     </>
   );
