@@ -25,7 +25,7 @@ function Forum() {
   //   fetchUser();
   // }, []);
 
-  if (user && user.role === "admin") {
+  if (user && user.role === process.env.REACT_APP_ADMIN_ROLE) {
     return <AdminForum />;
   }
   return <UserForum />;

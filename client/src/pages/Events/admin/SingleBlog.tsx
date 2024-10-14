@@ -101,7 +101,7 @@ const SingleBlog: React.FC = () => {
               {blog.title}
             </h2>
           </div>
-          {user?.role === "admin" && (
+          {user?.role === process.env.REACT_APP_ADMIN_ROLE && (
             <div className="inline-flex items-center justify-center rounded-md shadow-sm">
               <button
                 onClick={() => navigate(`/edit-blog/${blogId}`)}
@@ -190,7 +190,7 @@ const SingleBlog: React.FC = () => {
             ),
           }}
         ></p>
-        {user?.role === "admin" && blog?.show === "false" && (
+        {user?.role === process.env.REACT_APP_ADMIN_ROLE && blog?.show === "false" && (
           <button
             onClick={handleClick}
             className="w-full md:w-auto border border-green-500 text-green-500 font-bold py-2 px-4 rounded mt-4 md:mt-0"

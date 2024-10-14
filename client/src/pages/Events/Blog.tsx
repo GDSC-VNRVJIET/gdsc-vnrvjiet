@@ -9,7 +9,7 @@ function Blog() {
         } | null
       );
 
-      if (user && user.role === "admin") {
+      if (user && user.role === process.env.REACT_APP_ADMIN_ROLE) {
         return <AdminShowBlogs/>;
       } else {
         return <UserShowBlogs />;

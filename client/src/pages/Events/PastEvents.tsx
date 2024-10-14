@@ -29,7 +29,7 @@ function PastEvents() {
   //   fetchUser();
   // }, [user]);
 
-  if (user && user.role == "admin") {
+  if (user && user.role == process.env.REACT_APP_ADMIN_ROLE) {
     return <AdminPortalPast eventsprop={pastEvents}/>;
   } else {
     return <UserPortalPast eventsprop={pastEvents}/>;

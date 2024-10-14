@@ -23,7 +23,7 @@ const EditBlog: React.FC = () => {
     // code for to give access to the particular person only
     const getUserData = async () => {
       try {
-        if (user?.role === "admin") {
+        if (user?.role === process.env.REACT_APP_ADMIN_ROLE) {
           setDisplayLoader(false);
           setAccess(true);
         }

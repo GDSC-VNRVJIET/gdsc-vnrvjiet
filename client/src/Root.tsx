@@ -49,7 +49,7 @@ const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
   if (userObjGDSC) {
     const userRole = JSON.parse(userObjGDSC);
-    return userRole && userRole.role == "admin";
+    return userRole && userRole.role == process.env.REACT_APP_ADMIN_ROLE;
   }
   return false;
 };
@@ -58,7 +58,7 @@ const isJury = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
   if (userObjGDSC) {
     const userRole = JSON.parse(userObjGDSC);
-    return userRole && userRole.role == "jury";
+    return userRole && userRole.role == process.env.REACT_APP_JURY_ROLE;
   }
   return false;
 };

@@ -30,7 +30,7 @@ function UpcomingEvents() {
 
   
 
-  if (user && user.role === "admin") {
+  if (user && user.role === process.env.REACT_APP_ADMIN_ROLE) {
     return <AdminPortalUpcoming eventsprop={upcomingEvents}/>;
   } else {
     return <UserPortalUpcoming eventsprop={upcomingEvents} />;

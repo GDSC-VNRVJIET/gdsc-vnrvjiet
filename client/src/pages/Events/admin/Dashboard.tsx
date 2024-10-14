@@ -63,7 +63,7 @@ const Dashboard: React.FC = () => {
       .catch((err) => console.log(err));
   };
 
-  if (!user || user.role !== "admin") {
+  if (!user || user.role !== process.env.REACT_APP_ADMIN_ROLE) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="text-center">

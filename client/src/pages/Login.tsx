@@ -75,9 +75,10 @@ const Login = () => {
         };
         const userObjString = JSON.stringify(userObj);
         localStorage.setItem("userObjGDSC", userObjString);
-        if (userObj.role == "jury")
+        console.log(process.env.REACT_APP_ADMIN_ROLE);
+        if (userObj.role == process.env.REACT_APP_JURY_ROLE)
           navigate("/enter", { state: { user: loggedInUser.userObj } });
-        if (userObj.role == "admin")
+        if (userObj.role == process.env.REACT_APP_ADMIN_ROLE)
           navigate("/leaderboard", { state: { user: loggedInUser.userObj } });
           if (userObj.role == "user")
           navigate("/upcoming-events", { state: { user: loggedInUser.userObj } });

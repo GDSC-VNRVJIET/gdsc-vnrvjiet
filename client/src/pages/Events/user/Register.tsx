@@ -283,11 +283,13 @@ const PaymentGatewayRazorpay: React.FC = () => {
       <div className="product mt-6 flex flex-col items-center">
         <div className=" lg:w-4/6 px-4 lg:px-1 p-4 bg-white shadow-lg rounded-xl mt-5 mb-10">
         <div className="flex justify-center items-center ">
-          <img
+          {states?.name === "Tensor Flow" && (
+            <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6JGGZMfhZhqwUSTg79d0vEvu_V8a6pk8njQ&s"  
             alt="TensorFlow Logo"
             className="w-20 h-20 rounded-full object-cover"  
-          />
+          />)}
+          
           <div className="lg:ml-3">
             <h1 className="text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">
             {states?.name}
