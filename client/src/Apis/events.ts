@@ -96,7 +96,6 @@ export const handleDownloadCSV = async (eventName: String) => {
 export const eventRegistrations = async (eventName: String) => {
   try {
     const response = await axios.get(`${API_URL}/registration/event-registrations/${eventName}`);
-    console.log(response);
     return response.data;
     
   } catch (error) {

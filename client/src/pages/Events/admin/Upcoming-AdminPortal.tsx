@@ -272,12 +272,12 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
                 >
                   View registrations
                 </button>
-                <button
+                {/* <button
                   onClick={() => handleDeleteEvent(event.eventId)}
                   className="bg-red-500 text-white rounded px-2 py-1 ml-2 hover:bg-red-600"
                 >
                   Delete
-                </button>
+                </button> */}
                 
               </div>
             </div>

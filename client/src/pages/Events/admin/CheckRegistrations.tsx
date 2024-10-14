@@ -26,7 +26,6 @@ const CheckRegistrations: React.FC = () => {
 
   const fetchData = async () => {
     const res=await eventRegistrations(eventName);
-    console.log(res);
     setRegistrations(res.payload);
   };
 

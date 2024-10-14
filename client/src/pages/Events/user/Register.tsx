@@ -280,7 +280,34 @@ const PaymentGatewayRazorpay: React.FC = () => {
     </Dialog>
         )
       }
-      <div className="product mt-6">
+      <div className="product mt-6 flex flex-col items-center">
+        <div className=" lg:w-4/6 px-4 lg:px-1 p-4 bg-white shadow-lg rounded-xl mt-5 mb-10">
+        <div className="flex justify-center items-center ">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6JGGZMfhZhqwUSTg79d0vEvu_V8a6pk8njQ&s"  
+            alt="TensorFlow Logo"
+            className="w-20 h-20 rounded-full object-cover"  
+          />
+          <div className="ml-3">
+            <h1 className="text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">
+            {states?.name}
+            </h1>
+            {states?.startDate!=="To be announced" && (
+            <p className="text-center text-md text-gray-600 mt-2">
+              {states?.startDate} to {states?.endDate}
+            </p>)}
+          </div>
+          <div className="ml-3">
+            <button className="text-3xl" onClick={() => setModal(true)}>
+              <FaShareAlt />
+            </button>
+          </div>
+        </div>
+      <p className="text-justify  text-md font-normal text-gray-500 lg:text-xl sm:px-16 mb-2 ">
+        {states?.description}  
+      </p>
+      </div>  
+      {/* <div className="product mt-6">
         <div className="flex justify-center mt-8">
           <h1 className="ml-3 mt-0 text-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">
             {states?.name}
@@ -293,7 +320,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
         </div>
         <p className="text-justify mt-5 mb-10 text-md font-normal w-11/12 mx-auto text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-blue-400">
           {states?.description}
-        </p>
+        </p> */}
         {states?.name === "Webathon3.O"? (
           <div className="text-center">
             <p className="text-gray-600 text-xl">To be announced Soon!</p>
@@ -302,7 +329,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
         ):(
           <div
           style={{ borderRadius: "30px" }}
-          className="pt-5  border border-gray-200 shadow max-w-sm lg:max-w-2xl mx-auto"
+          className="pt-5 bg-white border border-gray-200 shadow max-w-sm lg:max-w-2xl mx-auto"
         >
           <div className="flex mb-3 ms-4">
             <div
@@ -326,7 +353,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
             onSubmit={handleSubmit(handleFormSubmit)}
             className="w-full mx-auto border bg-gray-50 p-4"
           >
-            <div className="w-full mt-3 ml-3 flex flex-wrap space-x-1.5">
+            <div className="w-full mt-3 lg:ml-3 flex flex-wrap space-x-1.5">
               <div className="relative mt-6 mb-8 w-full lg:w-[45%] lg:ml-1.5 min-w-[200px] h-10">
                 <input
                   type="text"

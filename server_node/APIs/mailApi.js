@@ -37,11 +37,10 @@ transporter.verify((error, success) => {
 const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event, section) => {
   const qrCode = await QRCode.toDataURL(order_id);
   const qrCodeImage = new Buffer.from(qrCode.split("base64,")[1], "base64");
-  console.log(__dirname);
   try {
     const mailOptions = {
       from: {
-        name: "GDSC VNRVJIET",
+        name: "GDGC VNRVJIET",
         address: process.env.USER,
       },
       to: `${email}`,
@@ -52,9 +51,10 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
         <img src="cid:gdg_banner" alt="" style="max-height:250px;max-width:100%;display:block;margin:auto;">
         <h3>Welcome to the GDGC VNRVJIET's ${event} Event, ${name}!</h3>
         <img src="${qrCode}" alt="QR Code" style="width:30%;" />
-        <p>Thank you for registering for our upcoming event at GDSC VNRVJIET. We're thrilled to have you join us.</p>
+        <p>Thank you for registering for our upcoming event at GDGC VNRVJIET. We're thrilled to have you join us.</p>
         <p>Your registration details are as follows:</p>
         <ul>
+          <li><strong>Name:</strong>${name}</li>
           <li><strong>Branch:</strong>${branch}</li>
           <li><strong>Section:</strong> ${section}</li>
         </ul>
@@ -62,7 +62,7 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
         <p>If you have any questions or need further assistance, feel free to reach out to us.</p>
         <br>
         <p>Best regards,</p>
-    <p>Google Developer Student Clubs<br>
+    <p>Google Developer Groups on Campus<br>
     VNR Vignana Jyothi Institute of Engineering & Technology</p>
     <div>
         <span>Best regards,</span>
@@ -232,7 +232,6 @@ const thankAuthor = async (email) => {
 
 mailApp.post("/order", async (req, res) => {
   try {
-    console.log("Hello-1")
     const razorpay = new Razorpay({
       key_id: process.env.RAZORPAY_KEY_ID,
       key_secret: process.env.RAZORPAY_SECRET,
@@ -260,7 +259,6 @@ if (!emailRegex.test(email)) {
     }
     
     let scannercollection = await getDBObj("scannerCollection");
-    console.log("Hello-2")
     const newRegister = {
       rollno: req.body.rollno,
       email: req.body.email,
@@ -277,7 +275,6 @@ if (!emailRegex.test(email)) {
     };
     console.log(newRegister);
     await scannercollection.insertOne(newRegister);
-    console.log("Hello-3")
     res.json(order);
   } catch (err) {
     console.log(err);
