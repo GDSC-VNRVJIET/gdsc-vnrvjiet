@@ -288,7 +288,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
             alt="TensorFlow Logo"
             className="w-20 h-20 rounded-full object-cover"  
           />
-          <div className="ml-3">
+          <div className="lg:ml-3">
             <h1 className="text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">
             {states?.name}
             </h1>
@@ -307,20 +307,6 @@ const PaymentGatewayRazorpay: React.FC = () => {
         {states?.description}  
       </p>
       </div>  
-      {/* <div className="product mt-6">
-        <div className="flex justify-center mt-8">
-          <h1 className="ml-3 mt-0 text-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">
-            {states?.name}
-          </h1>
-          <div className="ml-3">
-            <button className="text-3xl" onClick={() => setModal(true)}>
-              <FaShareAlt />
-            </button>
-          </div>
-        </div>
-        <p className="text-justify mt-5 mb-10 text-md font-normal w-11/12 mx-auto text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-blue-400">
-          {states?.description}
-        </p> */}
         {states?.name === "Webathon3.O"? (
           <div className="text-center">
             <p className="text-gray-600 text-xl">To be announced Soon!</p>

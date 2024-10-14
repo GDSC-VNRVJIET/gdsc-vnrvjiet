@@ -58,6 +58,9 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
           <li><strong>Branch:</strong>${branch}</li>
           <li><strong>Section:</strong> ${section}</li>
         </ul>
+        <p>To stay informed and ensure you don't miss any crucial updates, please join the <strong>WhatsApp group for event participants</strong> by clicking the link below:
+        <b><a href="https://chat.whatsapp.com/LwoCq0gprrBLb6IuN2tPZB" style="text-decoration:none;color:#1a73e8;">TensorFlow Participants 2024</a>.<b>
+        </p>
         <p>You can use the QR code above for a smooth check-in process at the event.</p>
         <p>If you have any questions or need further assistance, feel free to reach out to us.</p>
         <br>
@@ -107,6 +110,7 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
     console.error("Error sending email:", err);
   }
 };
+
 
 
 function sendGiveAccessEmail(email, blogId) {
