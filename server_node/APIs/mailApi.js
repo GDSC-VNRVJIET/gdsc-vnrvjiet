@@ -277,7 +277,6 @@ if (!emailRegex.test(email)) {
       entered: false,
       paymentSuccess: false
     };
-    console.log(newRegister);
     await scannercollection.insertOne(newRegister);
     res.json(order);
   } catch (err) {
