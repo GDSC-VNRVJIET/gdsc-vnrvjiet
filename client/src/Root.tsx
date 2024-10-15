@@ -68,7 +68,8 @@ const ProtectedRoute: React.FC<{ element: React.ReactNode; path: string }> = ({
   path,
 }) => {
   const navigate = useNavigate();
-  if ((path == "/leaderboard" || path == "/analysis") && !isAdmin()) {
+  console.log(path);
+  if ((path == "/leaderboard" || path == "/analysis" || path=="/viewregistrations") && !isAdmin()) {
     return (
       <div className="">
         <div className="inset-0 flex flex-col items-center justify-center pt-10 text-sm md:text-2xl font-bold">
@@ -158,7 +159,12 @@ function Root() {
           <Route path="upcoming-events" element={<UpcomingEvents />} />
           <Route path="past-events" element={<PastEvents />} />
         </Route>
-        <Route path="/viewregistrations/:eventname" element= {<CheckRegistrations/>}/>
+        <Route 
+          path="/viewregistrations/:eventname" 
+          element= {
+            <ProtectedRoute element={<CheckRegistrations/>} path="/viewregistrations"/>
+          }
+        />
         <Route
           path="/leaderboard"
           element={
