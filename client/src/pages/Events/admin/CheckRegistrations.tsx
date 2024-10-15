@@ -16,6 +16,7 @@ interface RegistrationData {
   section: string;
   mailSent: boolean;
   paymentSuccess: boolean;
+  year: string;
 }
 
 const CheckRegistrations: React.FC = () => {
@@ -68,26 +69,30 @@ const CheckRegistrations: React.FC = () => {
       <table className='mt-10 mx-auto border border-gray-300 shadow-md rounded-lg'>
         <thead>
           <tr>
+            <th className="border px-4 py-2">S.No.</th>
+            <th className="border px-4 py-2">Name</th>
             <th className="border px-4 py-2">Roll No</th>
+            <th className="border px-4 py-2">Year</th>
+            <th className="border px-4 py-2">Branch</th>
+            <th className="border px-4 py-2">Section</th>
             <th className="border px-4 py-2">Email</th>
             <th className="border px-4 py-2">WhatsApp</th>
-            <th className="border px-4 py-2">Branch</th>
-            <th className="border px-4 py-2">Name</th>
-            <th className="border px-4 py-2">Section</th>
             <th className="border px-4 py-2">Entered</th>
             <th className="border px-4 py-2">mailSent</th>
             <th className="border px-4 py-2">paymentSuccess</th>
           </tr>
         </thead>
         <tbody>
-          {registrations.map((registration) => (
+          {registrations.map((registration,index) => (
             <tr key={registration._id.$oid}>
+              <td className="border px-4 py-2 text-center">{index+1}</td>
+              <td className="border px-4 py-2">{registration.name}</td>
               <td className="border px-4 py-2">{registration.rollno}</td>
+              <td className="border px-4 py-2">{registration.year}</td>
+              <td className="border px-4 py-2">{registration.branch}</td>
+              <td className="border px-4 py-2">{registration.section}</td>              
               <td className="border px-4 py-2">{registration.email}</td>
               <td className="border px-4 py-2">{registration.whatsapp}</td>
-              <td className="border px-4 py-2">{registration.branch}</td>
-              <td className="border px-4 py-2">{registration.name}</td>
-              <td className="border px-4 py-2">{registration.section}</td>
               <td className="border px-4 py-2">{registration.entered ? 'Yes' : 'No'}</td>
               <td className="border px-4 py-2">{registration.mailSent ? 'Yes' : 'No'}</td>
               <td className="border px-4 py-2">{registration.paymentSuccess ? 'Yes' : 'No'}</td>
