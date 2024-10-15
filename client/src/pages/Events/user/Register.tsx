@@ -44,7 +44,7 @@ interface FormData {
   section : string;
   name: string;
   event: string;
-  year:Number;
+  year:number;
 }
 
 const PaymentGatewayRazorpay: React.FC = () => {
@@ -534,7 +534,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 <input
                   autoComplete="off"
                   type="number"
-                  {...register("year", { required: true , validate: (value) => value === 1 || "Not applicable to 1st years" })}
+                  {...register("year", { required: true , validate: (value) => value <= 1 && value > 4 || "Not applicable" })}
                   className="peer bg-white w-full h-full bg-transparent text-blue-gray-700 font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
                   placeholder=" "
                 />
