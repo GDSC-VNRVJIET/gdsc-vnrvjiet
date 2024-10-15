@@ -60,7 +60,6 @@ const PaymentGatewayRazorpay: React.FC = () => {
   const [successModal,setSuccessModal] = useState<boolean>(false);
   const [checkModal, setCheckModal] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
-  console.log(successModal)
 
   useEffect(() => {
     const fetchData = async () => {
