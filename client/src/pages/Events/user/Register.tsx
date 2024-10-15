@@ -535,7 +535,12 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 <input
                   autoComplete="off"
                   type="number"
-                  {...register("year", { required: true })}
+                  {...register("year", { required: true,min:2,max:4 ,
+                    pattern: {
+                      value: /^[0-9]+$/, 
+                      message: "Year must be an integer",
+                    },
+                  })}
                   className="peer bg-white w-full h-full bg-transparent text-blue-gray-700 font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
                   placeholder=" "
                 />
@@ -544,6 +549,9 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 </label>
                 {errors.year?.type === "required" && (
                   <p className="text-red-500">Enter year</p>
+                )}
+                {(errors.year?.type === "min" || errors.year?.type === "max") && (
+                  <p className="text-red-500">Only for 2nd,3rd and 4th year</p>
                 )}
                 {errors.year && (
   <p className="text-red-500">{errors.year.message}</p>
