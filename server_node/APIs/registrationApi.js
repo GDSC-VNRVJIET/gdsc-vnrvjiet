@@ -38,7 +38,10 @@ registrationApp.get(
       let eventCollectionObject = await getDBObj("scannerCollection");
       let eventName = request.params.eventName;
   
-      let eventData = await eventCollectionObject.find({ event: eventName }).toArray();
+      let eventData = await eventCollectionObject.find({
+         event: eventName,
+        paymentSuccess: true,
+        }).toArray();
   
       if (eventData.length === 0) {
         return response.status(404).send({ message: "No data found for this event" });
@@ -47,12 +50,17 @@ registrationApp.get(
       const csvData = eventData.map(e => ({
         Name: e.name,
         RollNo: e.rollno,
+        Year: e.year,
+        Branch: e.branch,
+        Section:e.section,
         WhatsApp: e.whatsapp,
         Email: e.email,
-        Entered: e.entered
+        Entered: e.entered,
+        MailSent:e.mailSent,
+        PaymentSuccess:e.paymentSuccess,
       }));
   
-      const csvFields = ["Name", "RollNo", "WhatsApp", "Email", "Entered"];
+      const csvFields = ["Name", "RollNo","Year","Branch","Section" ,"WhatsApp", "Email", "Entered","MailSent","PaymentSuccess"];
       const json2csvParser = new Parser({ csvFields });
       const csv = json2csvParser.parse(csvData);
 
