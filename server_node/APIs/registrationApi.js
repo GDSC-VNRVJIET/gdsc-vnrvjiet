@@ -94,4 +94,24 @@ registrationApp.post(
     })
   );
 
+  registrationApp.get(
+    "/count-successful-registrations/:eventName",
+    expressAsyncHandler(async (request, response) => {
+      try {
+        let scannerCollectionObject = await getDBObj("scannerCollection");
+        let eventname = request.params.eventName;
+
+        let count = await scannerCollectionObject.find({
+            event: eventname,
+            paymentSuccess: true,
+        }).toArray();
+        response.send({ message: "Successful", cnt:count.length });
+      } catch (error) {
+        response.send({ message: "Error" });
+      }
+        
+    })
+);
+
+
 module.exports=registrationApp;

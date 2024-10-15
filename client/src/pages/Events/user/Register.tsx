@@ -59,6 +59,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
   const [color,changeColor] = useState<string>('bg-red-300');
   const [successModal,setSuccessModal] = useState<boolean>(false);
   const [checkModal, setCheckModal] = useState<boolean>(false);
+  const [count, setCount] = useState<number>(0);
   console.log(successModal)
 
   useEffect(() => {
@@ -116,7 +117,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
     }
   }, [isValid, formFields]);
   const paymentHandler = async (formdata: FormData) => {
-    const amount = 100.0;
+    const amount = 9900.0;
     const currency = "INR";
     const receiptId = "1235823";
     const check = await axios.post(
@@ -200,6 +201,24 @@ const PaymentGatewayRazorpay: React.FC = () => {
     const emailRegex= /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     return emailRegex.test(trimmedEmail);
   }
+  useEffect(() => {
+    const fetchSuccessfulCount = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACK_URL}/registration/count-successful-registrations/${eventname}`
+        );
+        if (response.data.message === "Successful") {
+          setCount(response.data.cnt);
+        } else {
+          console.error("Error fetching count");
+        }
+      } catch (error) {
+        console.error("Error fetching count:", error);
+      }
+    };
+
+    fetchSuccessfulCount();
+  }, [eventname]);
 
   return displayLoader ? (
     <Loader />
@@ -370,24 +389,28 @@ const PaymentGatewayRazorpay: React.FC = () => {
           style={{ borderRadius: "30px" }}
           className="pt-5 bg-white border border-gray-200 shadow max-w-sm lg:max-w-2xl mx-auto"
         >
-          <div className="flex mb-3 ms-4">
-            <div
-              style={{ backgroundColor: "#176BEF" }}
-              className="w-4 h-4 rounded-full ms-3"
-            ></div>
-            <div
-              style={{ backgroundColor: "#FF3e30" }}
-              className="w-4 h-4 rounded-full ms-3"
-            ></div>
-            <div
-              style={{ backgroundColor: "#F7B529" }}
-              className="w-4 h-4 rounded-full ms-3"
-            ></div>
-            <div
-              style={{ backgroundColor: "#179C52" }}
-              className="w-4 h-4 rounded-full ms-3"
-            ></div>
-          </div>
+                  <div className="flex mb-3 ms-4 justify-between items-center">
+              <div className="flex">
+                <div
+                  style={{ backgroundColor: "#176BEF" }}
+                  className="w-4 h-4 rounded-full ms-3"
+                ></div>
+                <div
+                  style={{ backgroundColor: "#FF3e30" }}
+                  className="w-4 h-4 rounded-full ms-3"
+                ></div>
+                <div
+                  style={{ backgroundColor: "#F7B529" }}
+                  className="w-4 h-4 rounded-full ms-3"
+                ></div>
+                <div
+                  style={{ backgroundColor: "#179C52" }}
+                  className="w-4 h-4 rounded-full ms-3"
+                ></div>
+              </div>
+              <h2 className="text-white rounded-full text-base bg-blue-400 lg:text-lg mr-3 ps-2 pr-2 pt-1 pb-1">{`Seats left: ${150 - count}`}</h2>
+
+            </div>
           <form
             onSubmit={handleSubmit(handleFormSubmit)}
             className="w-full mx-auto border bg-gray-50 p-4"
@@ -480,6 +503,34 @@ const PaymentGatewayRazorpay: React.FC = () => {
                   <p className="text-red-500">Invalid email format</p>
                 )}
               </div>
+              <div className="w-full lg:w-11/12 mx-auto mt-6 mb-8">
+                <label htmlFor="branch" className="ms-1 text-gray-500">
+                  Select Branch
+                </label>
+                <select
+                  {...register("branch", { required: true })}
+                  id="countries"
+                  className="bg-white border border-gray-300 text-gray-900 mt-3 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                >
+                  <option value="CSE">CSE</option>
+                  <option value="CSBS">CSBS</option>
+                  <option value="IT">IT</option>
+                  <option value="CSDS">CSDS</option>
+                  <option value="AIML">AIML</option>
+                  <option value="IOT">IOT</option>
+                  <option value="CYS">CYS</option>
+                  <option value="AIDS">AIDS</option>
+                  <option value="EEE">EEE</option>
+                  <option value="ECE">ECE</option>
+                  <option value="EIE">EIE</option>
+                  <option value="AE">AE</option>
+                  <option value="CE">CE</option>
+                  <option value="ME">ME</option>
+                </select>
+                {errors.branch?.type === "required" && (
+                  <p className="text-red-500">Select Branch</p>
+                )}
+              </div>
               <div className="relative mt-6 mb-8 w-full lg:w-[45%] min-w-[200px] h-10">
                 <input
                   autoComplete="off"
@@ -507,37 +558,11 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 </label>
                 <div className="">
                   {errors.section?.type === "required" && (
-                    <p className="text-red-500">Enter Section</p>
+                    <p className="text-red-500">Enter Section (Keep '-' for no section)</p>
                   )}
                 </div>
               </div>
-              <div className="w-full lg:w-11/12 mx-auto mt-8 mb-8">
-                <label htmlFor="branch" className="ms-1 text-gray-500">
-                  Select Branch
-                </label>
-                <select
-                  {...register("branch", { required: true })}
-                  id="countries"
-                  className="bg-white border border-gray-300 text-gray-900 mt-3 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                >
-                  <option value="AE">AE</option>
-                  <option value="CE">CE</option>
-                  <option value="CSE">CSE</option>
-                  <option value="CSBS">CSBS</option>
-                  <option value="IT">IT</option>
-                  <option value="AIML">AIML</option>
-                  <option value="IOT">IOT</option>
-                  <option value="CYS">CYS</option>
-                  <option value="AIDS">AIDS</option>
-                  <option value="EEE">EEE</option>
-                  <option value="ECE">ECE</option>
-                  <option value="EIE">EIE</option>
-                  <option value="ME">ME</option>
-                </select>
-                {errors.branch?.type === "required" && (
-                  <p className="text-red-500">Select Branch</p>
-                )}
-              </div>
+              
             </div>
             
             {/* <div className=""></div> */}
@@ -578,7 +603,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
           ></div>
         </div>
         )}
-        
+
       </div>
     </>
   );
