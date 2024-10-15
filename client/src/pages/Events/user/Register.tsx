@@ -363,11 +363,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
             <h1 className="text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">
             {states?.name}
             </h1>
-            {states?.startDate!=="To be announced" && (
-            <p className="text-center text-md text-green-600 mt-2">
-              {/* add end date also */}
-              {states?.startDate}
-            </p>)}
+            
           </div>
           <div className="ml-3">
             <button className="text-3xl" onClick={() => setModal(true)}>
