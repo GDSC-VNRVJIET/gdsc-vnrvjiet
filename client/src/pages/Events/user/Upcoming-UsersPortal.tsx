@@ -151,7 +151,7 @@ const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
                     {/* {format(new Date(event.startDate), "yyyy-MM-dd HH:mm")} to{" "}
                     {format(new Date(event.endDate), "yyyy-MM-dd HH:mm")} */}
                     {event.startDate}
-                    {" - "}  
+                    {/* {" - "}   */}
                     {event.endDate}
                   </p>
                   <p>

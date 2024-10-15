@@ -364,8 +364,9 @@ const PaymentGatewayRazorpay: React.FC = () => {
             {states?.name}
             </h1>
             {states?.startDate!=="To be announced" && (
-            <p className="text-center text-md text-gray-600 mt-2">
-              {states?.startDate} to {states?.endDate}
+            <p className="text-center text-md text-green-600 mt-2">
+              {/* add end date also */}
+              {states?.startDate}
             </p>)}
           </div>
           <div className="ml-3">
