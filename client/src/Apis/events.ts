@@ -95,9 +95,20 @@ export const handleDownloadCSV = async (eventName: String) => {
 
 export const eventRegistrations = async (eventName: String) => {
   try {
-    const response = await axios.get(`${API_URL}/registration/event-registrations/${eventName}`);
-    return response.data;
-    
+    const userObjGDSC = localStorage.getItem("userObjGDSC");
+    if (userObjGDSC) {
+      const userRole = JSON.parse(userObjGDSC);
+      const response = await axios.get(`${API_URL}/registration/event-registrations/${eventName}`,{
+        headers: {
+          'Authorization': `Bearer ${userRole.token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      return response.data;
+    }
+    else{
+      return {message:"User not logged in"};
+    }
   } catch (error) {
     console.error("Error fetching registrations");
   }

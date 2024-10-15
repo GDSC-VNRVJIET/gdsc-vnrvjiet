@@ -68,7 +68,6 @@ const ProtectedRoute: React.FC<{ element: React.ReactNode; path: string }> = ({
   path,
 }) => {
   const navigate = useNavigate();
-  console.log(path);
   if ((path == "/leaderboard" || path == "/analysis" || path=="/viewregistrations") && !isAdmin()) {
     return (
       <div className="">

@@ -142,7 +142,7 @@ userApp.post(
       if (status == false) {
         response.send({ message: "Invalid password" });
       } else {
-        let token = jwt.sign({ email: userOfDB.email }, process.env.PVT_KEY, {
+        let token = jwt.sign({ email: userOfDB.email,role:userOfDB.role }, process.env.PVT_KEY, {
           expiresIn: 12000000,
         });
         response.send({

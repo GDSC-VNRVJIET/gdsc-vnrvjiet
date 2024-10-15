@@ -24,14 +24,18 @@ const CheckRegistrations: React.FC = () => {
   const [registrations, setRegistrations] = useState<RegistrationData[]>([]);
   const [showunsentMails,setShowunsentMails]=useState<boolean>(false);
   const eventName=window.location.pathname.split("/")[2];
+  const [err,setErr]=useState<String>("");
 
   const fetchData = async () => {
     const res=await eventRegistrations(eventName);
-    setRegistrations(res.payload);
+    if(res.message==="Event registrations"){
+      setRegistrations(res.payload);
+    }else{
+      setErr(res.message);
+    }
   };
 
   useEffect(() => {
-    
     fetchData();
   }, []);
 
@@ -49,7 +53,9 @@ const CheckRegistrations: React.FC = () => {
     setShowunsentMails(!showunsentMails);
   }
 
-  return (
+  return err ? (
+    <div className="text-center text-3xl font-bold">Error Fetching Data : ${err}</div>
+  ):(
     <div className='container mx-auto p-5'>
       <h2 className="text-center text-3xl font-bold ">Check Registrations</h2>
       <div className="mb-4 flex justify-end mt-4 space-x-2">

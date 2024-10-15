@@ -3,6 +3,7 @@ const registrationApp = exp.Router();
 const expressAsyncHandler = require("express-async-handler");
 const getDBObj = require("./DBConnection");
 const { Parser } = require("json2csv");
+const verifyAdmin = require("../Middlewares/VerifyAdmin");
 
 require("dotenv").config();
 
@@ -71,7 +72,7 @@ registrationApp.get(
   );
 
   registrationApp.get(
-    "/event-registrations/:eventName",
+    "/event-registrations/:eventName",verifyAdmin,
     expressAsyncHandler(async (request, response) => {
       let eventCollectionObject = await getDBObj("scannerCollection");
       let eventName = request.params.eventName;
