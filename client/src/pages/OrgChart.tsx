@@ -39,6 +39,7 @@ import harikaimg from "./Domain Info/images/MANAGEMENT/Harika.jpg"
 import panirudhimg from "./Domain Info/images/design/Anirudh P.jpg"
 import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg"
 import rishithaimg from "./Domain Info/images/design/Rishitha.jpg"
+import bharathsirimg from "./images/facultyCord copy.jpg"
 
 import { set } from "date-fns";
 
@@ -65,20 +66,22 @@ interface DomainLead extends Person {
 }
 
 interface OrgChartData {
+  facultyAdvisor: Person;
   lead: Person;
   domainLeads: DomainLead[];
 }
 
 const data2025: OrgChartData = {
+  facultyAdvisor: { role: "Faculty Advisor", name: "Bharath Sir", img: bharathsirimg },
   lead: { role: "Lead", name: "Jayasree Gondipalle", img: jayasreeimg },
+ 
   domainLeads: [
-    {
-      role: "Co Lead",
-      name: "Sahithi Kolla",
+    { 
+      role: "Co Lead", 
+      name: "Sahithi Kolla", 
       img: sahithiimg,
       coordinators: [],
       volunteers: [],
-      type: "nonTechnical",
     },
     {
       role: "WebDev Lead",
@@ -178,6 +181,7 @@ const data2025: OrgChartData = {
 };
 
 const data2024: OrgChartData = {
+  facultyAdvisor: { role: "Faculty Advisor", name: "Bharath Sir", img: bharathsirimg },
   lead: { role: "Lead", name: "Dushyanth", img: leadimg },
   domainLeads: [
     {
@@ -314,6 +318,17 @@ const OrgChart: React.FC = () => {
       </div>
 
         <>
+          <div className="flex flex-col items-center space-y-4 mb-6">
+            <div className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden">
+              <img
+                src={dataToDisplay.facultyAdvisor.img}
+                alt={dataToDisplay.facultyAdvisor.role}
+                className="shrink-0 rounded-full w-full h-full object-cover"
+              />
+            </div>
+            <h2 className="text-xl font-semibold">{dataToDisplay.facultyAdvisor.role}</h2>
+            <p className="text-md text-gray-700">{dataToDisplay.facultyAdvisor.name}</p>
+          </div>
           <div className="flex flex-col items-center space-y-4 mb-6">
             <div className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden">
               <img
