@@ -1,12 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as XLSX from 'xlsx';
+import axios from "axios";
 
 function GenAi() {
 
   const [excelFile, setExcelFile] = useState<ArrayBuffer | null>(null);
   const [typeError, setTypeError] = useState<string>("");
-
+  const [triggerUpdate, setTriggerUpdate] = useState(false);
   const [excelData, setExcelData] = useState<any[] | null>(null);
+
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${process.env.REACT_APP_BACK_URL}/genAi/get-data`);
+        const sortedData = res.data.data.sort((a: any, b: any) => {
+          return b['# of Skill Badges Completed'] - a['# of Skill Badges Completed'];
+        });
+        setExcelData(sortedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, [triggerUpdate]);
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileTypes = [
@@ -34,18 +51,28 @@ function GenAi() {
     }
   }
 
-  const handleFileSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleUpdateSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (excelFile !== null) {
       const workbook = XLSX.read(excelFile, { type: 'buffer' });
       const worksheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[worksheetName];
       const data = XLSX.utils.sheet_to_json(worksheet);
+
       const sortedData = data.sort((a: any, b: any) => {
         return b['# of Skill Badges Completed'] - a['# of Skill Badges Completed'];
       });
 
-      setExcelData(sortedData);
+      try {
+        const res = await axios.put(`${process.env.REACT_APP_BACK_URL}/genAi/update-data`, {
+          data: sortedData,
+        });
+        console.log("Bulk update result:", res.data);
+
+        setTriggerUpdate(prev => !prev);
+      } catch (error) {
+        console.error("Error updating data in bulk:", error);
+      }
     }
   }
 
@@ -54,7 +81,7 @@ function GenAi() {
       <h3 className="text-2xl font-bold text-gray-700 mb-6 text-center">Upload & View Excel Sheets</h3>
 
       {/* form */}
-      <form className="form-group custom-form mb-6 flex flex-col items-center" onSubmit={handleFileSubmit}>
+      <form className="form-group custom-form mb-6 flex flex-col items-center" onSubmit={handleUpdateSubmit}>
         <input 
           type="file" 
           className="form-control p-3 border rounded-md w-full max-w-md mb-4 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
@@ -65,7 +92,7 @@ function GenAi() {
           type="submit" 
           className="btn btn-success bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-md"
         >
-          UPLOAD
+          UPDATE
         </button>
         {typeError && (
           <div className="alert alert-danger text-red-600 mt-4">{typeError}</div>
