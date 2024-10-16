@@ -7,6 +7,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import CheckUsers from "./pages/Events/admin/CheckUsers";
+import GenAiLeaderboard from "./pages/Events/admin/GenAi";
 import GoogleForms from "./pages/GoogleForms";
 import EditBlog from "./pages/Events/user/EditBlog";
 import Register from "./pages/Events/user/Register";
@@ -173,6 +174,10 @@ function Root() {
         <Route
           path="/analysis"
           element={<ProtectedRoute element={<Analysis />} path="/analysis" />}
+        />
+        <Route
+          path="/gen-ai-leaderboard"
+          element={<ProtectedRoute element={<GenAiLeaderboard />} path="/gen-ai-leaderboard" />}
         />
         <Route
           path="/enter"
