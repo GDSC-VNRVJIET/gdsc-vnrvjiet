@@ -5,6 +5,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { FaXTwitter } from "react-icons/fa6";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { ExclamationTriangleIcon , CheckBadgeIcon } from '@heroicons/react/24/outline'
+import { RxLapTimer } from "react-icons/rx";
 import dotenv from "dotenv";
 import tobeannounced from "../../../images/tobeannounced.jpg"
 import registrationClosed from "../../../images/registration_closed.jpg";
@@ -459,8 +460,11 @@ const PaymentGatewayRazorpay: React.FC = () => {
                   className="w-4 h-4 rounded-full ms-3"
                 ></div>
               </div>
-              <h2 className="text-white rounded-full text-base bg-blue-400 lg:text-lg mr-3 ps-2 pr-2 pt-1 pb-1">{`Seats left: ${count}`}</h2>
+              <div className="flex">
+              <h2 className="text-white rounded-full text-base bg-yellow-400 lg:text-lg mr-3 ps-2 pr-2 pt-1 pb-1">{`Seats left: ${count}`}</h2>
+              <RxLapTimer className="mt-1 mr-1 text-xl sm:text-2xl lg:text-3xl text-red-300" />
 
+              </div>
             </div>
             <form
             onSubmit={handleSubmit(handleFormSubmit)}
