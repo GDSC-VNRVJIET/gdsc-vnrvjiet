@@ -233,6 +233,18 @@ const thankAuthor = async (email) => {
 
 mailApp.post("/order", async (req, res) => {
   try {
+    let scannerCollectionObject = await getDBObj("scannerCollection");
+    let eventname = req.body.event;
+
+    let count = await scannerCollectionObject.find({
+        event: eventname,
+        paymentSuccess: true,
+    }).toArray();
+    if(count.length >= 150){
+      return res.status(400).json({
+        message: "Registrations closed. Maximum seats filled."
+    });
+    }
     const razorpay = new Razorpay({
       key_id: process.env.RAZORPAY_KEY_ID,
       key_secret: process.env.RAZORPAY_SECRET,

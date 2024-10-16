@@ -63,7 +63,7 @@ const CheckRegistrations: React.FC = () => {
         onClick={() => handleDownloadCSV(eventName)}
         className="bg-[#318C07] text-white rounded px-2 py-1 ml-2 hover:bg-green-700"
       >
-        Donwload CSV
+        Download CSV
       </button>
         <button onClick={goto} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
         Check

@@ -114,7 +114,7 @@ registrationApp.post(
             event: eventname,
             paymentSuccess: true,
         }).toArray();
-        response.send({ message: "Successful", cnt:count.length });
+        response.send({ message: "Successful", cnt:150-count.length });
       } catch (error) {
         response.send({ message: "Error" });
       }
