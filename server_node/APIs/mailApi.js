@@ -64,9 +64,6 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
         <p>You can use the QR code above for a smooth check-in process at the event.</p>
         <p>If you have any questions or need further assistance, feel free to reach out to us.</p>
         <br>
-        <p>Best regards,</p>
-    <p>Google Developer Groups on Campus<br>
-    VNR Vignana Jyothi Institute of Engineering & Technology</p>
     <div>
         <span>Best regards,</span>
         <hr width="400px" style="margin: 5px 0px;border:none;background-color: rgb(88, 140, 236); height: 1px;">
