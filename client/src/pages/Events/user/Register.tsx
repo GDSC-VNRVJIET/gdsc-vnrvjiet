@@ -7,6 +7,7 @@ import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/re
 import { ExclamationTriangleIcon , CheckBadgeIcon } from '@heroicons/react/24/outline'
 import dotenv from "dotenv";
 import tobeannounced from "../../../images/tobeannounced.jpg"
+import registrationClosed from "../../../images/registration_closed.jpg";
 import {
   WhatsappShareButton,
   WhatsappIcon,
@@ -437,7 +438,8 @@ const PaymentGatewayRazorpay: React.FC = () => {
           <div
           style={{ borderRadius: "30px" }}
           className="pt-5 bg-white border border-gray-200 shadow max-w-sm lg:max-w-2xl mx-auto"
-        >
+        >{count > 0 ? (
+          <>
                   <div className="flex mb-3 ms-4 justify-between items-center">
               <div className="flex">
                 <div
@@ -460,7 +462,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
               <h2 className="text-white rounded-full text-base bg-blue-400 lg:text-lg mr-3 ps-2 pr-2 pt-1 pb-1">{`Seats left: ${count}`}</h2>
 
             </div>
-          <form
+            <form
             onSubmit={handleSubmit(handleFormSubmit)}
             className="w-full mx-auto border bg-gray-50 p-4"
           >
@@ -656,6 +658,30 @@ const PaymentGatewayRazorpay: React.FC = () => {
             className={`relative bottom-0 left-0 right-0 h-12 ${color} max-w-sm lg:max-w-2xl w-full mx-auto`}
             style={{ borderRadius: "0 0 30px 30px" }}
           ></div>
+          </>
+        ):(
+          <div className="flex flex-col justify-center items-center bg-gray-100">
+            <div className="bg-white shadow-lg rounded-lg p-10 max-w-md w-full text-center">
+              <h1 className="text-3xl font-bold text-red-600 mb-4">Registrations Closed</h1>
+              <p className="text-gray-600 mb-6">
+                We're sorry, but the registration limit has been reached for this event.
+              </p>
+              <img 
+                src={registrationClosed} 
+                alt="Registrations Closed" 
+                className="w-32 mx-auto mb-4"
+              />
+              <button 
+                className="mt-4 px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition duration-200"
+                onClick={() => {navigate('/')}}
+              >
+                Back to Home
+              </button>
+            </div>
+          </div>
+        )}
+        
+          
         </div>
         )}
 
