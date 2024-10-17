@@ -135,10 +135,10 @@ function GenAi() {
       <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
         <thead>
           <tr className="bg-gradient-to-r from-blue-500 to-green-500 text-white">
-            <th className="py-3 px-6 text-sm font-semibold uppercase">S.No.</th>
-            <th className="py-3 px-6 text-sm font-semibold uppercase">User Name</th>
-            <th className="py-3 px-6 text-sm font-semibold uppercase">User Email</th>
-            <th className="py-3 px-6 text-sm font-semibold uppercase"># of Skill Badges Completed</th>
+            <th className="py-3 px-6 text-sm font-semibold uppercase">Rank</th>
+            <th className="py-3 px-6 text-sm font-semibold uppercase">Name</th>
+            <th className="py-3 px-6 text-sm font-semibold uppercase">Email</th>
+            <th className="py-3 px-6 text-sm font-semibold uppercase">Skill Badges Completed</th>
             <th className="py-3 px-6 text-sm font-semibold uppercase">Names of Completed Skill Badges</th>
           </tr>
         </thead>
