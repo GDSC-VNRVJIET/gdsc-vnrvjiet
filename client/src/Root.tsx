@@ -177,7 +177,7 @@ function Root() {
         />
         <Route
           path="/gen-ai-leaderboard"
-          element={<ProtectedRoute element={<GenAiLeaderboard />} path="/gen-ai-leaderboard" />}
+          element={<GenAiLeaderboard />}
         />
         <Route
           path="/enter"
