@@ -34,17 +34,28 @@ genAiApp.get("/get-data", expressAsyncHandler(async (request, response) => {
 }));
 
 genAiApp.put("/update-data", expressAsyncHandler(async (request, response) => {
-    const updatedDataArray = request.body.data; // Get array of updated documents from request
+    const updatedDataArray = request.body.data;
 
     let genAiCollectionObject = await getDBObj("genAiCollectionObject");
     try {
-        const bulkOperations = updatedDataArray.map((doc) => ({
-            updateOne: {
-                filter: { email: doc.email },  // Using email as the unique identifier
-                update: { $set: doc },
-                upsert: false,  // Don't insert a new document if email doesn't exist
+        const bulkOperations = updatedDataArray.map((doc) => {
+            if (!doc["User Email"]) {
+                return null;  // Skip this document
             }
-        }));
+
+
+            return {
+                updateOne: {
+                    filter: { "User Email": doc["User Email"] },  // Filter by email, which is unique
+                    update: { $set: { ...doc } },  // Update the whole document using $set
+                    upsert: false,  // Don't insert a new document if the email doesn't exist
+                }
+            };
+        }).filter(Boolean);  // Remove any null operations from missing email docs
+
+        if (bulkOperations.length === 0) {
+            return response.status(400).json({ status: "No valid updates", error: "No documents with valid email found" });
+        }
 
         const result = await genAiCollectionObject.bulkWrite(bulkOperations);
         response.json({ status: "Update successful", modifiedCount: result.modifiedCount });
@@ -53,6 +64,7 @@ genAiApp.put("/update-data", expressAsyncHandler(async (request, response) => {
         response.status(500).json({ status: "Error updating data", error: error.message });
     }
 }));
+
 
 
 
