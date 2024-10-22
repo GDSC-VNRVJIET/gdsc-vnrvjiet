@@ -22,6 +22,7 @@ function GenAi() {
   const [typeError, setTypeError] = useState<string>("");
   const [triggerUpdate, setTriggerUpdate] = useState(false);
   const [excelData, setExcelData] = useState<TeamData[] | null>(null);
+  const [participantData, setParticipantData] = useState<UserData[] | null>(null);
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("userObjGDSC") || "null") as {
       role: string;
@@ -34,7 +35,23 @@ function GenAi() {
       try {
         const res = await axios.get(`${process.env.REACT_APP_BACK_URL}/genAi/get-data`);
         const groupedData = groupByTeam(res.data.data);
-        setExcelData(Object.values(groupedData));
+        const sortedTeamData = Object.values(groupedData).sort((a: any, b: any) => {
+          return (
+            b.skillBadgesCompleted +
+            b.arcadeGamesCompleted -
+            (a.skillBadgesCompleted + a.arcadeGamesCompleted)
+          );
+        });
+        setExcelData(sortedTeamData);
+        const sortedParticipants = res.data.data.sort((a: UserData, b: UserData) => {
+          return (
+            b["# of Skill Badges Completed"] +
+            b["# of Arcade Games Completed"] -
+            (a["# of Skill Badges Completed"] + a["# of Arcade Games Completed"])
+          );
+        });
+
+        setParticipantData(sortedParticipants);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -158,7 +175,7 @@ function GenAi() {
           </form>
         </div>
       )}
-      {/* view data */}
+      {/* Teams Leaderboard */}
       <div className="viewer">
         <h1 className="text-4xl text-center mb-4 font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-400 to-blue-400">
           GEN AI STUDY JAMS LEADERBOARD
@@ -246,6 +263,67 @@ function GenAi() {
         ) : (
           <div className="text-center text-gray-500">Loading...</div>
         )}
+
+        {/* Participant Leaderboard */}
+      <div className="viewer mb-8">
+        <h1 className="text-4xl text-center mb-4 font-bold m-6">
+          PARTICIPANT LEADERBOARD
+        </h1>
+
+        {participantData ? (
+          <div className="w-full max-w-6xl mx-auto overflow-x-auto">
+            <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
+              <thead>
+                <tr className="bg-gradient-to-r from-blue-500 to-green-500 text-white">
+                  <th className="py-3 px-6 text-sm font-semibold uppercase">
+                    Rank
+                  </th>
+                  <th className="py-3 px-6 text-sm font-semibold uppercase">
+                    User Name
+                  </th>
+                  <th className="py-3 px-6 text-sm font-semibold uppercase">
+                    Google Cloud Skills Boost Profile URL
+                  </th>
+                  <th className="py-3 px-6 text-sm font-semibold uppercase">
+                    Skill Badges Completed
+                  </th>
+                  <th className="py-3 px-6 text-sm font-semibold uppercase">
+                    Arcade Games Completed
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-700">
+                {participantData.map((individualData, index) => (
+                  <tr
+                    key={index}
+                    className={`${index % 2 === 0 ? "bg-purple-100" : "bg-purple-200"} hover:bg-purple-300`}
+                  >
+                    <td className="py-3 px-6 border-b">{index + 1}</td>
+                    <td className="py-3 px-6 border-b">{individualData["User Name"]}</td>
+                    <td className="py-3 px-6 border-b">
+                      {individualData["Google Cloud Skills Boost Profile URL"] && (
+                        <a
+                          href={individualData["Google Cloud Skills Boost Profile URL"]}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:underline"
+                        >
+                          {individualData["Google Cloud Skills Boost Profile URL"]}
+                        </a>
+                      )}
+                    </td>
+                    <td className="py-3 px-6 border-b">{individualData["# of Skill Badges Completed"]}</td>
+                    <td className="py-3 px-6 border-b">{individualData["# of Arcade Games Completed"]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="text-center text-gray-500">Loading...</div>
+        )}
+      </div>
+        
       </div>
     </div>
   );
