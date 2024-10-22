@@ -2,38 +2,67 @@ import { useState, useEffect } from "react";
 import * as XLSX from "xlsx";
 import axios from "axios";
 
+interface UserData {
+  "User Name": string;
+  "Google Cloud Skills Boost Profile URL": string;
+  "# of Skill Badges Completed": number;
+  "# of Arcade Games Completed": number;
+  " Mentor": string;
+}
+
+interface TeamData {
+  team: string;
+  skillBadgesCompleted: number;
+  arcadeGamesCompleted: number;
+  members: UserData[];
+}
+
 function GenAi() {
   const [excelFile, setExcelFile] = useState<ArrayBuffer | null>(null);
   const [typeError, setTypeError] = useState<string>("");
   const [triggerUpdate, setTriggerUpdate] = useState(false);
-  const [excelData, setExcelData] = useState<any[] | null>(null);
+  const [excelData, setExcelData] = useState<TeamData[] | null>(null);
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("userObjGDSC") || "null") as {
       role: string;
     } | null
   );
+  const [expandedTeam, setExpandedTeam] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_BACK_URL}/genAi/get-data`
-        );
-        const sortedData = res.data.data.sort((a: any, b: any) => {
-          return (
-            b["# of Skill Badges Completed"] +
-            b["# of Arcade Games Completed"] -
-            (a["# of Skill Badges Completed"] +
-              a["# of Arcade Games Completed"])
-          );
-        });
-        setExcelData(sortedData);
+        const res = await axios.get(`${process.env.REACT_APP_BACK_URL}/genAi/get-data`);
+        const groupedData = groupByTeam(res.data.data);
+        setExcelData(Object.values(groupedData));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData();
   }, [triggerUpdate]);
+
+  const groupByTeam = (data: UserData[]) => {
+    return data.reduce((acc: Record<string, TeamData>, curr) => {
+  
+      const team = curr[" Mentor"]; // Ensure this matches your data field
+      
+      if (!acc[team]) {
+        acc[team] = {
+          team,
+          skillBadgesCompleted: 0,
+          arcadeGamesCompleted: 0,
+          members: [],
+        };
+      }
+      
+      acc[team].skillBadgesCompleted += curr["# of Skill Badges Completed"];
+      acc[team].arcadeGamesCompleted += curr["# of Arcade Games Completed"];
+      acc[team].members.push(curr); // Add user to the respective team
+      return acc;
+    }, {});
+  };
+  
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileTypes = [
@@ -85,7 +114,6 @@ function GenAi() {
           }
         );
         console.log("Bulk update result:", res.data);
-
         setTriggerUpdate((prev) => !prev);
       } catch (error) {
         console.error("Error updating data in bulk:", error);
@@ -93,10 +121,14 @@ function GenAi() {
     }
   };
 
+  const handleTeamClick = (teamName: string) => {
+    setExpandedTeam((prev) => (prev === teamName ? null : teamName));
+  };
+
   return (
     <div className="wrapper p-8 bg-gray-100 min-h-screen">
       {user && user.role === process.env.REACT_APP_ADMIN_ROLE && (
-        <div className="">
+        <div>
           <h3 className="text-2xl font-bold text-gray-700 mb-6 text-center">
             Upload & View Excel Sheets
           </h3>
@@ -134,8 +166,6 @@ function GenAi() {
 
         {excelData ? (
           <div className="w-full max-w-6xl mx-auto overflow-x-auto">
-            {" "}
-            {/* Added overflow-x-auto */}
             <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
               <thead>
                 <tr className="bg-gradient-to-r from-blue-500 to-green-500 text-white">
@@ -143,82 +173,74 @@ function GenAi() {
                     Rank
                   </th>
                   <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    Name
+                    Team Name
                   </th>
-                  <th className="py-3 px-6 text-sm font-semibold uppercase">
+                  {/* <th className="py-3 px-6 text-sm font-semibold uppercase">
                     Google Cloud Skills Boost Profile URL
-                  </th>
+                  </th> */}
                   <th className="py-3 px-6 text-sm font-semibold uppercase">
                     Skill Badges Completed
                   </th>
-                  {/* <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    Names of Completed Skill Badges
-                  </th> */}
                   <th className="py-3 px-6 text-sm font-semibold uppercase">
                     Arcade Games Completed
                   </th>
-                  {/* <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    Names of Completed Arcade Badges
-                  </th> */}
                 </tr>
               </thead>
               <tbody className="text-gray-700">
-                {excelData.map((individualExcelData, index) => (
-                  <tr
-                    key={index}
-                    className={`${
-                      index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                    } hover:bg-gray-200`}
-                  >
-                    <td className="py-3 px-6 border-b">{index + 1}</td>{" "}
-                    {/* S.No */}
+  {excelData.map((teamData, index) => (
+    <>
+      <tr
+        key={index}
+        className={`cursor-pointer hover:bg-blue-200 ${index % 2 === 0 ? "bg-blue-100" : "bg-blue-200"}`}
+        onClick={() => handleTeamClick(teamData.team)}
+      >
+        <td className="py-3 px-6 border-b">{index + 1}</td>
+        <td className="py-3 px-6 border-b">
+          <strong>Team {teamData.team}</strong>
+        </td>
+        <td className="py-3 px-6 border-b">
+          {teamData.skillBadgesCompleted}
+        </td>
+        <td className="py-3 px-6 border-b">
+          {teamData.arcadeGamesCompleted}
+        </td>
+      </tr>
+      {expandedTeam === teamData.team && (
+        <tr className="bg-gray-50">
+          <td colSpan={4}>
+            <table className="min-w-full text-left">
+              <tbody>
+                {teamData.members.map((individualData, subIndex) => (
+                  <tr key={subIndex} className={`${subIndex % 2 === 0 ? "bg-gray-100" : "bg-white"} hover:bg-gray-200`}>
+                    <td className="py-3 px-6 border-b">{index + 1}.{subIndex + 1}</td>
+                    <td className="py-3 px-6 border-b">{individualData["User Name"]}</td>
                     <td className="py-3 px-6 border-b">
-                      {individualExcelData["User Name"]}
-                    </td>
-                    {/* User Name */}
-                    {/* <td className="py-3 px-6 border-b">{individualExcelData['User Email']}</td> User Email */}
-                    <td className="py-3 px-6 border-b">
-                      {individualExcelData[
-                        "Google Cloud Skills Boost Profile URL"
-                      ] && (
+                      {individualData["Google Cloud Skills Boost Profile URL"] && (
                         <a
-                          href={
-                            individualExcelData[
-                              "Google Cloud Skills Boost Profile URL"
-                            ]
-                          }
+                          href={individualData["Google Cloud Skills Boost Profile URL"]}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-500 hover:underline"
                         >
-                          {
-                            individualExcelData[
-                              "Google Cloud Skills Boost Profile URL"
-                            ]
-                          }
+                          {individualData["Google Cloud Skills Boost Profile URL"]}
                         </a>
                       )}
                     </td>
-                    {/* Profile URL */}
-                    <td className="py-3 px-6 border-b">
-                      {individualExcelData["# of Skill Badges Completed"]}
-                    </td>
-                    {/* # of Badges */}
-                    {/* <td className="py-3 px-6 border-b">
-                      {individualExcelData["Names of Completed Skill Badges"]}
-                    </td> */}
-                    {/* Skill Badges */}
-                    <td className="py-3 px-6 border-b">
-                      {individualExcelData["# of Arcade Games Completed"]}
-                    </td>
-                    {/* # of Arcade Badges */}
-                    {/* <td className="py-3 px-6 border-b">
-                      {individualExcelData["Names of Completed Arcade Games"]}
-                    </td> */}
-                    {/* Arcade Badges */}
+                    <td className="py-3 px-6 border-b">{individualData["# of Skill Badges Completed"]}</td>
+                    <td className="py-3 px-6 border-b">{individualData["# of Arcade Games Completed"]}</td>
                   </tr>
                 ))}
               </tbody>
+            </table>
+          </td>
+        </tr>
+      )}
+    </>
+  ))}
+</tbody>
+
+
+
             </table>
           </div>
         ) : (
