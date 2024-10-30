@@ -22,7 +22,9 @@ function GenAi() {
   const [typeError, setTypeError] = useState<string>("");
   const [triggerUpdate, setTriggerUpdate] = useState(false);
   const [excelData, setExcelData] = useState<TeamData[] | null>(null);
-  const [participantData, setParticipantData] = useState<UserData[] | null>(null);
+  const [participantData, setParticipantData] = useState<UserData[] | null>(
+    null
+  );
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("userObjGDSC") || "null") as {
       role: string;
@@ -33,23 +35,30 @@ function GenAi() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BACK_URL}/genAi/get-data`);
+        const res = await axios.get(
+          `${process.env.REACT_APP_BACK_URL}/genAi/get-data`
+        );
         const groupedData = groupByTeam(res.data.data);
-        const sortedTeamData = Object.values(groupedData).sort((a: any, b: any) => {
-          return (
-            b.skillBadgesCompleted +
-            b.arcadeGamesCompleted -
-            (a.skillBadgesCompleted + a.arcadeGamesCompleted)
-          );
-        });
+        const sortedTeamData = Object.values(groupedData).sort(
+          (a: any, b: any) => {
+            return (
+              b.skillBadgesCompleted +
+              b.arcadeGamesCompleted -
+              (a.skillBadgesCompleted + a.arcadeGamesCompleted)
+            );
+          }
+        );
         setExcelData(sortedTeamData);
-        const sortedParticipants = res.data.data.sort((a: UserData, b: UserData) => {
-          return (
-            b["# of Skill Badges Completed"] +
-            b["# of Arcade Games Completed"] -
-            (a["# of Skill Badges Completed"] + a["# of Arcade Games Completed"])
-          );
-        });
+        const sortedParticipants = res.data.data.sort(
+          (a: UserData, b: UserData) => {
+            return (
+              b["# of Skill Badges Completed"] +
+              b["# of Arcade Games Completed"] -
+              (a["# of Skill Badges Completed"] +
+                a["# of Arcade Games Completed"])
+            );
+          }
+        );
 
         setParticipantData(sortedParticipants);
       } catch (error) {
@@ -61,9 +70,8 @@ function GenAi() {
 
   const groupByTeam = (data: UserData[]) => {
     return data.reduce((acc: Record<string, TeamData>, curr) => {
-  
       const team = curr[" Mentor"]; // Ensure this matches your data field
-      
+
       if (!acc[team]) {
         acc[team] = {
           team,
@@ -72,14 +80,13 @@ function GenAi() {
           members: [],
         };
       }
-      
+
       acc[team].skillBadgesCompleted += curr["# of Skill Badges Completed"];
       acc[team].arcadeGamesCompleted += curr["# of Arcade Games Completed"];
       acc[team].members.push(curr); // Add user to the respective team
       return acc;
     }, {});
   };
-  
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileTypes = [
@@ -141,6 +148,11 @@ function GenAi() {
   const handleTeamClick = (teamName: string) => {
     setExpandedTeam((prev) => (prev === teamName ? null : teamName));
   };
+  const [isChecked, setIsChecked] = useState(false)
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked)
+  }
 
   return (
     <div className="wrapper p-8 bg-gray-100 min-h-screen">
@@ -177,11 +189,41 @@ function GenAi() {
       )}
       {/* Teams Leaderboard */}
       <div className="viewer">
+      <div className="flex justify-center mb-5">
+          <label className="themeSwitcherTwo relative inline-flex cursor-pointer select-none items-center">
+            <input
+              type="checkbox"
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+              className="sr-only"
+            />
+            <span className="label flex items-center text-md font-medium text-black">
+             Teams Leaderboard
+            </span>
+            <span
+              className={`slider mx-4 flex h-8 w-[60px] items-center rounded-full p-1 duration-200 ${
+                isChecked ? "bg-green-500" : "bg-[#CCCCCE]"
+              }`}
+            >
+              <span
+                className={`dot h-6 w-6 rounded-full bg-white duration-200 ${
+                  isChecked ? "translate-x-[28px]" : ""
+                }`}
+              ></span>
+            </span>
+            <span className="label flex items-center text-md font-medium text-black">
+             Participants Leaderboard
+            </span>
+          </label>
+        </div>
+        {
+          !isChecked &&
         <h1 className="text-4xl text-center mb-4 font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-400 to-blue-400">
           GEN AI STUDY JAMS LEADERBOARD
         </h1>
+}
 
-        {excelData ? (
+        {excelData && !isChecked ? (
           <div className="w-full max-w-6xl mx-auto overflow-x-auto">
             <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
               <thead>
@@ -204,126 +246,179 @@ function GenAi() {
                 </tr>
               </thead>
               <tbody className="text-gray-700">
-  {excelData.map((teamData, index) => (
-    <>
-      <tr
-        key={index}
-        className={`cursor-pointer hover:bg-blue-200 ${index % 2 === 0 ? "bg-blue-100" : "bg-blue-200"}`}
-        onClick={() => handleTeamClick(teamData.team)}
-      >
-        <td className="py-3 px-6 border-b">{index + 1}</td>
-        <td className="py-3 px-6 border-b">
-          <strong>Team {teamData.team}</strong>
-        </td>
-        <td className="py-3 px-6 border-b">
-          {teamData.skillBadgesCompleted}
-        </td>
-        <td className="py-3 px-6 border-b">
-          {teamData.arcadeGamesCompleted}
-        </td>
-      </tr>
-      {expandedTeam === teamData.team && (
-        <tr className="bg-gray-50">
-          <td colSpan={4}>
-            <table className="min-w-full text-left">
-              <tbody>
-                {teamData.members.map((individualData, subIndex) => (
-                  <tr key={subIndex} className={`${subIndex % 2 === 0 ? "bg-gray-100" : "bg-white"} hover:bg-gray-200`}>
-                    <td className="py-3 px-6 border-b">{index + 1}.{subIndex + 1}</td>
-                    <td className="py-3 px-6 border-b">{individualData["User Name"]}</td>
-                    <td className="py-3 px-6 border-b">
-                      {individualData["Google Cloud Skills Boost Profile URL"] && (
-                        <a
-                          href={individualData["Google Cloud Skills Boost Profile URL"]}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-500 hover:underline"
-                        >
-                          {individualData["Google Cloud Skills Boost Profile URL"]}
-                        </a>
-                      )}
-                    </td>
-                    <td className="py-3 px-6 border-b">{individualData["# of Skill Badges Completed"]}</td>
-                    <td className="py-3 px-6 border-b">{individualData["# of Arcade Games Completed"]}</td>
-                  </tr>
+                {excelData.map((teamData, index) => (
+                  <>
+                    <tr
+                      key={index}
+                      className={`cursor-pointer hover:bg-gray-100 ${
+                        index % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
+                      }`}
+                      onClick={() => handleTeamClick(teamData.team)}
+                    >
+                      <td className="py-3 px-6 border-b">{index + 1}</td>
+                      <td className="py-3 px-6 border-b">
+                        <strong>Team {teamData.team}</strong>
+                      </td>
+                      <td className="py-3 px-6 border-b">
+                        {teamData.skillBadgesCompleted}
+                      </td>
+                      <td className="py-3 px-6 border-b">
+                        {teamData.arcadeGamesCompleted}
+                      </td>
+                    </tr>
+                    {expandedTeam === teamData.team && (
+                      <tr className="bg-gray-50">
+                        <td colSpan={4}>
+                          <table className="min-w-full text-left">
+                            <tbody>
+                              {teamData.members.map(
+                                (individualData, subIndex) => (
+                                  <tr
+                                    key={subIndex}
+                                    className={`${
+                                      subIndex % 2 === 0
+                                        ? "bg-gray-100"
+                                        : "bg-white"
+                                    } hover:bg-gray-200`}
+                                  >
+                                    <td className="py-3 px-6 border-b">
+                                      {index + 1}.{subIndex + 1}
+                                    </td>
+                                    <td className="py-3 px-6 border-b">
+                                      {individualData["User Name"]}
+                                    </td>
+                                    <td className="py-3 px-6 border-b">
+                                      {individualData[
+                                        "Google Cloud Skills Boost Profile URL"
+                                      ] && (
+                                        <a
+                                          href={
+                                            individualData[
+                                              "Google Cloud Skills Boost Profile URL"
+                                            ]
+                                          }
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="text-blue-500 hover:underline"
+                                        >
+                                          {
+                                            individualData[
+                                              "Google Cloud Skills Boost Profile URL"
+                                            ]
+                                          }
+                                        </a>
+                                      )}
+                                    </td>
+                                    <td className="py-3 px-6 border-b">
+                                      {
+                                        individualData[
+                                          "# of Skill Badges Completed"
+                                        ]
+                                      }
+                                    </td>
+                                    <td className="py-3 px-6 border-b">
+                                      {
+                                        individualData[
+                                          "# of Arcade Games Completed"
+                                        ]
+                                      }
+                                    </td>
+                                  </tr>
+                                )
+                              )}
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    )}
+                  </>
                 ))}
               </tbody>
             </table>
-          </td>
-        </tr>
-      )}
-    </>
-  ))}
-</tbody>
-
-
-
-            </table>
           </div>
         ) : (
-          <div className="text-center text-gray-500">Loading...</div>
+          <div className=""></div>
         )}
 
         {/* Participant Leaderboard */}
-      <div className="viewer mb-8">
-        <h1 className="text-4xl text-center mb-4 font-bold m-6">
-          PARTICIPANT LEADERBOARD
-        </h1>
+        { isChecked &&
+        <div className="viewer mb-8">
+          <h1 className="text-4xl text-center mb-4 font-bold m-6">
+            PARTICIPANT LEADERBOARD
+          </h1>
 
-        {participantData ? (
-          <div className="w-full max-w-6xl mx-auto overflow-x-auto">
-            <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
-              <thead>
-                <tr className="bg-gradient-to-r from-blue-500 to-green-500 text-white">
-                  <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    Rank
-                  </th>
-                  <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    User Name
-                  </th>
-                  <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    Google Cloud Skills Boost Profile URL
-                  </th>
-                  <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    Skill Badges Completed
-                  </th>
-                  <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    Arcade Games Completed
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-gray-700">
-                {participantData.map((individualData, index) => (
-                  <tr
-                    key={index}
-                    className={`${index % 2 === 0 ? "bg-purple-100" : "bg-purple-200"} hover:bg-purple-300`}
-                  >
-                    <td className="py-3 px-6 border-b">{index + 1}</td>
-                    <td className="py-3 px-6 border-b">{individualData["User Name"]}</td>
-                    <td className="py-3 px-6 border-b">
-                      {individualData["Google Cloud Skills Boost Profile URL"] && (
-                        <a
-                          href={individualData["Google Cloud Skills Boost Profile URL"]}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-500 hover:underline"
-                        >
-                          {individualData["Google Cloud Skills Boost Profile URL"]}
-                        </a>
-                      )}
-                    </td>
-                    <td className="py-3 px-6 border-b">{individualData["# of Skill Badges Completed"]}</td>
-                    <td className="py-3 px-6 border-b">{individualData["# of Arcade Games Completed"]}</td>
+          {participantData ? (
+            <div className="w-full max-w-6xl mx-auto overflow-x-auto">
+              <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
+                <thead>
+                  <tr className="bg-gradient-to-r from-blue-500 to-green-500 text-white">
+                    <th className="py-3 px-6 text-sm font-semibold uppercase">
+                      Rank
+                    </th>
+                    <th className="py-3 px-6 text-sm font-semibold uppercase">
+                      User Name
+                    </th>
+                    <th className="py-3 px-6 text-sm font-semibold uppercase">
+                      Google Cloud Skills Boost Profile URL
+                    </th>
+                    <th className="py-3 px-6 text-sm font-semibold uppercase">
+                      Skill Badges Completed
+                    </th>
+                    <th className="py-3 px-6 text-sm font-semibold uppercase">
+                      Arcade Games Completed
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <div className="text-center text-gray-500">Loading...</div>
-        )}
-      </div>
-        
+                </thead>
+                <tbody className="text-gray-700">
+                  {participantData.map((individualData, index) => (
+                    <tr
+                      key={index}
+                      className={`${
+                        index % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
+                      } hover:bg-gray-200`}
+                    >
+                      <td className="py-3 px-6 border-b">{index + 1}</td>
+                      <td className="py-3 px-6 border-b">
+                        {individualData["User Name"]}
+                      </td>
+                      <td className="py-3 px-6 border-b">
+                        {individualData[
+                          "Google Cloud Skills Boost Profile URL"
+                        ] && (
+                          <a
+                            href={
+                              individualData[
+                                "Google Cloud Skills Boost Profile URL"
+                              ]
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 hover:underline"
+                          >
+                            {
+                              individualData[
+                                "Google Cloud Skills Boost Profile URL"
+                              ]
+                            }
+                          </a>
+                        )}
+                      </td>
+                      <td className="py-3 px-6 border-b">
+                        {individualData["# of Skill Badges Completed"]}
+                      </td>
+                      <td className="py-3 px-6 border-b">
+                        {individualData["# of Arcade Games Completed"]}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="text-center text-gray-500">Loading...</div>
+          )}
+        </div>
+}
       </div>
     </div>
   );
