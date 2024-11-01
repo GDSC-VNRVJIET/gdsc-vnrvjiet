@@ -223,7 +223,7 @@ function GenAi() {
           </label>
         </div>
         {!isChecked && (
-          <h1 className="text-4xl text-center mb-4 font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-400 to-blue-400">
+          <h1 className="text-4xl text-center mb-4 font-bold text-black">
             GEN AI STUDY JAMS LEADERBOARD
           </h1>
         )}
@@ -277,7 +277,7 @@ function GenAi() {
             <div className="w-full max-w-6xl mx-auto overflow-x-auto">
               <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
                 <thead>
-                  <tr className="bg-gradient-to-r from-blue-500 to-green-500 text-white">
+                  <tr className="bg-red-500 text-white">
                     <th className="py-3 px-6 text-sm font-semibold uppercase">
                       Rank
                     </th>
@@ -459,7 +459,7 @@ function GenAi() {
                 <div className="w-full max-w-6xl mx-auto overflow-x-auto">
                   <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
                     <thead>
-                      <tr className="bg-gradient-to-r from-blue-500 to-green-500 text-white">
+                      <tr className="text-white bg-blue-500">
                         <th className="py-3 px-6 text-sm font-semibold uppercase">
                           Rank
                         </th>
@@ -483,7 +483,7 @@ function GenAi() {
                           key={index}
                           className={`${
                             index % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
-                          } hover:bg-gray-200`}
+                          } hover:bg-gray-100`}
                         >
                           <td className="py-3 px-6 border-b">{index + 1}</td>
                           <td className="py-3 px-6 border-b">
@@ -501,7 +501,7 @@ function GenAi() {
                                 }
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-blue-500 hover:underline"
+                                className="text-blue-600 hover:underline"
                               >
                                 {
                                   individualData[
