@@ -207,23 +207,24 @@ function GenAi() {
               Teams Leaderboard
             </span>
             <span
-              className={`slider mx-4 flex h-8 w-[60px] items-center rounded-full p-1 duration-200 ${
-                isChecked ? "bg-green-500" : "bg-[#CCCCCE]"
-              }`}
-            >
-              <span
-                className={`dot h-6 w-6 rounded-full bg-white duration-200 ${
-                  isChecked ? "translate-x-[28px]" : ""
-                }`}
-              ></span>
-            </span>
+  className={`slider mx-4 flex sm:h-8 sm:w-[60px] h-6 w-[55px] items-center rounded-full p-1 duration-200 ${
+    isChecked ? "bg-green-500" : "bg-[#CCCCCE]"
+  }`}
+>
+  <span
+    className={`dot sm:h-6 sm:w-6 h-4 w-4 rounded-full bg-white duration-200 transform ${
+      isChecked ? "sm:translate-x-[28px] translate-x-[13px]" : ""
+    }`}
+  ></span>
+</span>
+
             <span className="label flex items-center text-md font-medium text-black">
               Participants Leaderboard
             </span>
           </label>
         </div>
         {!isChecked && (
-          <h1 className="text-4xl text-center mb-4 font-bold text-black">
+          <h1 className="sm:text-4xl text-xl text-center mb-4 font-bold m-6">
             GEN AI STUDY JAMS LEADERBOARD
           </h1>
         )}
@@ -233,7 +234,7 @@ function GenAi() {
             {topThreeTeams && (
               <div className="flex justify-center mb-6 w-5/6 lg-w-1/3 mx-auto items-end space-x-1 ">
                 <div className="flex flex-col w-40 h-80 ">
-                  <div className="mb-4 text-xl font-bold text-center">
+                  <div className="mb-4 sm:text-xl text-md font-bold text-center">
                     Team {topThreeTeams[1].team}
                   </div>
                   <div className="flex flex-col justify-end items-center bg-gray-200 rounded-t-3xl w-full h-full p-5">
@@ -246,7 +247,7 @@ function GenAi() {
                   </div>
                 </div>
                 <div className="flex flex-col w-40 h-96 ">
-                  <div className="mb-4 text-xl font-bold text-center">
+                  <div className="mb-4 sm:text-xl text-md font-bold text-center">
                     Team {topThreeTeams[0].team}
                   </div>
                   <div className="flex flex-col justify-end items-center bg-amber-200 rounded-t-3xl w-full h-full p-5">
@@ -259,7 +260,7 @@ function GenAi() {
                   </div>
                 </div>
                 <div className="flex flex-col w-40 h-64">
-                  <div className="mb-4 text-xl font-bold text-center">
+                  <div className="mb-4 sm:text-xl text-md font-bold text-center">
                     Team {topThreeTeams[2].team}
                   </div>
                   <div className="flex flex-col justify-end items-center bg-orange-200 rounded-t-3xl w-full h-full p-5">
@@ -394,7 +395,7 @@ function GenAi() {
         {/* Participant Leaderboard */}
         {isChecked && (
           <div className="viewer mb-8">
-            <h1 className="text-4xl text-center mb-4 font-bold m-6">
+            <h1 className="sm:text-4xl text-xl text-center mb-4 font-bold m-6">
               PARTICIPANT LEADERBOARD
             </h1>
 
@@ -403,7 +404,7 @@ function GenAi() {
                 {topThreeParticipants && (
                   <div className="flex justify-center mb-6 w-5/6 lg-w-1/3 mx-auto items-end space-x-1 ">
                     <div className="flex flex-col w-40 h-80 ">
-                      <div className="mb-4 text-xl font-bold text-center">
+                      <div className="mb-4 sm:text-xl text-md font-bold text-center">
                         {topThreeParticipants[1]["User Name"]}
                       </div>
                       <div className="flex flex-col justify-end items-center bg-gray-200 rounded-t-3xl w-full h-full p-5">
@@ -420,7 +421,7 @@ function GenAi() {
                       </div>
                     </div>
                     <div className="flex flex-col w-40 h-96 ">
-                      <div className="mb-4 text-xl font-bold text-center">
+                      <div className="mb-4 sm:text-xl text-md font-bold text-center">
                         {topThreeParticipants[0]["User Name"]}
                       </div>
                       <div className="flex flex-col justify-end items-center bg-amber-200 rounded-t-3xl w-full h-full p-5">
@@ -437,7 +438,7 @@ function GenAi() {
                       </div>
                     </div>
                     <div className="flex flex-col w-40 h-60">
-                      <div className="mb-4 text-xl font-bold text-center">
+                      <div className="mb-4 sm:text-xl text-md font-bold text-center">
                         {topThreeParticipants[2]["User Name"]}
                       </div>
                       <div className="flex flex-col justify-end items-center bg-orange-200 rounded-t-3xl w-full h-full p-5">
