@@ -84,7 +84,7 @@ const UserPortalPast: React.FC<PastProps> = ({ eventsprop }) => {
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"></div>
                 <div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0">
-                  <h5 className="font-dmserif mt-6 font-bold text-white">
+                  <h5 className="font-dmserif mt-6 mb-2 font-bold text-white">
                     {event.name}
                   </h5>
                   <p className="mb-3 text-sm sm:text-md italic text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
