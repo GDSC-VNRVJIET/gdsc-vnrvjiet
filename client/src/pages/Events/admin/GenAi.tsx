@@ -242,7 +242,7 @@ function GenAi() {
                     <div className=" font-bold bg-slate-100 px-5 text-center rounded-xl">
                       {topThreeTeams[1].skillBadgesCompleted +
                         topThreeTeams[1].arcadeGamesCompleted}{" "}
-                      Pts
+                      Badges
                     </div>
                   </div>
                 </div>
@@ -255,7 +255,7 @@ function GenAi() {
                     <div className="font-bold bg-slate-100 px-5 text-center rounded-xl">
                       {topThreeTeams[0].skillBadgesCompleted +
                         topThreeTeams[0].arcadeGamesCompleted}{" "}
-                      Pts
+                      Badges
                     </div>
                   </div>
                 </div>
@@ -268,7 +268,7 @@ function GenAi() {
                     <div className=" font-bold bg-slate-100 px-5 text-center rounded-xl">
                       {topThreeTeams[2].skillBadgesCompleted +
                         topThreeTeams[2].arcadeGamesCompleted}{" "}
-                      Pts
+                      Badges
                     </div>
                   </div>
                 </div>
@@ -416,7 +416,7 @@ function GenAi() {
                             topThreeParticipants[1][
                               "# of Arcade Games Completed"
                             ]}{" "}
-                          Pts
+                          Badges
                         </div>
                       </div>
                     </div>
@@ -433,7 +433,7 @@ function GenAi() {
                             topThreeParticipants[0][
                               "# of Arcade Games Completed"
                             ]}{" "}
-                          Pts
+                          Badges
                         </div>
                       </div>
                     </div>
@@ -450,7 +450,7 @@ function GenAi() {
                             topThreeParticipants[2][
                               "# of Arcade Games Completed"
                             ]}{" "}
-                          Pts
+                          Badges
                         </div>
                       </div>
                     </div>
