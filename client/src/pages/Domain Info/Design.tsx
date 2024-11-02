@@ -2,13 +2,15 @@ import React,{useEffect} from "react";
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-import PoojaImage from "../Domain Info/images/design/Poojasiri.jpg.jpg";
+// import PoojaImage from "../Domain Info/images/design/Poojasiri.jpg.jpg";
 import SiddeshwariImage from "../Domain Info/images/design/Siddeshwari _Adepu.jpg";
-import PraneethaImage from "../Domain Info/images/design/Praneetha.jpg";
+// import PraneethaImage from "../Domain Info/images/design/Praneetha.jpg";
 import ChAnirudhImage from "../Domain Info/images/design/Anirudh.jpg";
-import AnirudhPImage from "../Domain Info/images/design/Anirudh P.jpg";
+// import AnirudhPImage from "../Domain Info/images/design/Anirudh P.jpg";
 import AryaImage from "../Domain Info/images/design/Arya Joshi.jpg";
 import RishithaImage from "../Domain Info/images/design/Rishitha.jpg";
+import PavanPraneethaImage from "../Domain Info/images/design/PavanPraneetha.jpg"
+import TanmayeeKyramImage from "../Domain Info/images/design/Tanmayee_kyram.jpg"
 
 function ML() {
 
@@ -21,24 +23,32 @@ function ML() {
   const members = [
     {
       name: "Siddeshwari",
-      role: "Design Lead",
+      role: "Social Media and Design Lead",
       image: SiddeshwariImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
-    // {
-    //   name: "Pavan Praneetha",
-    //   role: "Design Coordinator",
-    //   image: PraneethaImage,
-    //   linkedin: "#",
-    //   github: "#",
-    //   instagram: "#",
-    // },
+    {
+      name: "Pavan Praneetha",
+      role: "Social Media and Design Lead",
+      image: PavanPraneethaImage,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
     {
       name: "Ch.Anirudh",
-      role: "Design Coordinator",
+      role: "Social Media and Design Coordinator",
       image: ChAnirudhImage,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Tanmayee Kyram",
+      role: "Social Media and Design Coordinator",
+      image: TanmayeeKyramImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
@@ -53,20 +63,20 @@ function ML() {
     // },
     {
       name: "Arya Joshi",
-      role: "Design Coordinator",
+      role: "Social Media and Design Coordinator",
       image: AryaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
-    // {
-    //   name: "Rishitha",
-    //   role: "Design Volunteer",
-    //   image: RishithaImage,
-    //   linkedin: "#",
-    //   github: "#",
-    //   instagram: "#",
-    // },
+    {
+      name: "Rishitha",
+      role: "Social Media and Design Coordinator",
+      image: RishithaImage,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
   ];
 
   return (
@@ -74,7 +84,7 @@ function ML() {
       <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-6xl mx-auto">
         <div className="p-6">
           <h3 className="text-2xl sm:text-3xl md:text-4xl text-center font-extrabold mb-6 sm:mb-8 md:mb-10 text-yellow-500">
-            Design
+            Social Media and Design
           </h3>
           <div className="flex flex-col md:flex-row justify-center mb-20 items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
             <img
@@ -83,14 +93,7 @@ function ML() {
               className="rounded-lg shadow-lg w-full sm:w-2/3 md:w-1/4 mb-4 md:mb-0"
             />
             <p className="text-gray-700 text-lg leading-relaxed text-center md:text-left">
-              The Design Domain at GDSC VNR VJIET specializes in creating
-              visually captivating posters, banners, and promotional materials
-              to enhance our club's presence. Our team of skilled designers
-              collaborates on producing impactful graphics for events,
-              workshops, and social media. By leveraging the latest design
-              trends and techniques, we aim to communicate our mission and
-              engage our community effectively, ensuring every project reflects
-              our commitment to innovation and creativity.
+            The Design and Social Media domain of GDGC plays a crucial role in shaping the club's identity and public outreach. This team crafts engaging graphics, posters, and promotional materials that bring life to our events and initiatives, supporting public relations and enhancing visibility. In addition to creating cohesive branding for workshops, hackathons, and community gatherings, they manage our Instagram, LinkedIn, and other social media platforms, engaging our audience with strategic posts and interactive content. Through compelling visuals and thoughtful design, this domain strengthens GDGC's presence both online and offline, helping to build a vibrant, connected community.
             </p>
           </div>
 

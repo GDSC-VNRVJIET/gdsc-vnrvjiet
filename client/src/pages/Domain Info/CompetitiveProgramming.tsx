@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import HarshaImage from "../Domain Info/images/CP/Harsha Vardhan.jpg";
-import VighneshImage from "../Domain Info/images/CP/VighneshVangari.jpg";
-import DivyaImage from "../Domain Info/images/CP/Divya Sri.jpg";
+// import VighneshImage from "../Domain Info/images/CP/VighneshVangari.jpg";
+// import DivyaImage from "../Domain Info/images/CP/Divya Sri.jpg";
+import CP1 from '../Domain Info/images/CP/CP1.jpeg';
+import CP2 from '../Domain Info/images/CP/CP2.jpg';
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
@@ -23,17 +25,17 @@ function CompetitiveProgramming() {
       instagram: "#",
     },
     {
-      name: "Divya Sri",
-      role: "Competitive Programming Volunteer",
-      image: DivyaImage,
+      name: "",
+      role: "Competitive Programming Coordinator",
+      image: CP1,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Vighnesh",
-      role: "Competitive Programming Volunteer",
-      image: VighneshImage,
+      name: "",
+      role: "Competitive Programming Coordinator",
+      image: CP2,
       linkedin: "#",
       github: "#",
       instagram: "#",
