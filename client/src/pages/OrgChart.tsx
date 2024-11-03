@@ -13,6 +13,10 @@ import karthikimg from "./Domain Info/images/WEB DEV/Karthik.jpg"
 import varunimg from "./Domain Info/images/WEB DEV/Varun.jpg"
 import dedeepyaimg from "./Domain Info/images/WEB DEV/Vellanki Chenchu Dedeepya .jpg"
 import lakshitaimg from "./Domain Info/images/WEB DEV/Lakshita Goyal.jpg"
+import vigneshvardhan from "./Domain Info/images/CP/VighneshVangari.jpg"
+import sailokesh from './Domain Info/images/CP/CP1.jpeg'
+import vishnuvardhan from './Domain Info/images/CP/CP2.jpg'
+import udayyadav from './Domain Info/images/CP/GUdhayYadav.jpg'
 import harshaimg from "./Domain Info/images/CP/Harsha.jpg"
 import divyaimg from "./Domain Info/images/CP/Divya Sri.jpg"
 import vighneshimg from "./Domain Info/images/CP/VighneshVangari.jpg"
@@ -39,7 +43,12 @@ import harikaimg from "./Domain Info/images/MANAGEMENT/Harika.jpg"
 import panirudhimg from "./Domain Info/images/design/Anirudh P.jpg"
 import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg"
 import rishithaimg from "./Domain Info/images/design/Rishitha.jpg"
+import tanmayeeimg from "./Domain Info/images/design/Tanmayee_kyram.jpg"
 import bharathsirimg from "./images/facultyCord copy.jpg"
+import Harshitha from "./Domain Info/images/TandC/Harshithamandadi.jpg"
+import UdaySagar from "./Domain Info/images/AppDev/UdaySagar.jpeg"
+import VinayKumar from "./Domain Info/images/AppDev/VinayKumarKajjapu.jpg"
+
 
 import { set } from "date-fns";
 
@@ -102,6 +111,9 @@ const data2025: OrgChartData = {
       name: "Harsha Vardhan",
       img: harshaimg,
       coordinators: [
+        {name:"Sai Lokesh",img:sailokesh},
+        {name:"N Vishnu Vardhan",img:vishnuvardhan},
+        {name:"G Udhay Yadav",img:udayyadav}
       ],
       volunteers: [
       ],
@@ -140,16 +152,33 @@ const data2025: OrgChartData = {
       coordinators: [
         { name: "Ch. Anirudh", img: chanirudhimg },
         { name: "Arya Joshi", img: aryaimg },
+        {name:"Rishitha",img:rishithaimg},
+        {name:"Tanmayee Kyram",img:tanmayeeimg}
       ],
       volunteers: [
       ],
       type: "nonTechnical",
     },
     {
+      role: "Social Media Lead",
+      name: "Pavanpraneetha Kunuku",
+      img: praneethaimg,
+      coordinators: [
+        {name:"Ch.Anirudh",img:chanirudhimg},
+        {name:"Tanmayee Kyram",img:tanmayeeimg},
+        {name:"Arya Joshi",img:aryaimg},
+        {name:"Rishitha",img:rishithaimg}
+      ],
+      volunteers: [],
+      type: "nonTechnical",
+    },
+    {
       role: "Testing and Cybersecurity Lead",
       name: "Vinay Gajula",
       img: vinayimg,
-      coordinators: [],
+      coordinators: [
+        {name:"Harshitha Mandadi",img:Harshitha}
+      ],
       volunteers: [],
       type:"technical",
     },
@@ -157,23 +186,20 @@ const data2025: OrgChartData = {
       role: "AppDev Lead",
       name: "Jahnavi Reddy",
       img: jahnavireddyimg,
-      coordinators: [],
+      coordinators: [
+        {name:"Uday Sagar",img:UdaySagar},
+        {name:"Vinay Kumar",img:VinayKumar}
+      ],
       volunteers: [],
       type:"technical",
-    },
-    {
-      role: "Social Media Lead",
-      name: "Pavanpraneetha Kunuku",
-      img: praneethaimg,
-      coordinators: [],
-      volunteers: [],
-      type: "nonTechnical",
     },
     {
       role: "Women In Tech Lead",
       name: "Nikhita Kashyap D",
       img: nikhitaimg,
-      coordinators: [],
+      coordinators: [
+        {name:"Roshini Kotagiri",img:roshiniimg}
+      ],
       volunteers: [],
       type:"technical",
     },
@@ -329,7 +355,7 @@ const OrgChart: React.FC = () => {
             <h2 className="text-xl font-semibold">{dataToDisplay.facultyAdvisor.role}</h2>
             
             
-<p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey' }}>
+<p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
   {dataToDisplay.facultyAdvisor.name}
 </p>
 </div>
@@ -343,7 +369,7 @@ const OrgChart: React.FC = () => {
             </div>
             <h2 className="text-xl font-semibold">{dataToDisplay.lead.role}</h2>
             
-            <p className="text-md" style={{ fontFamily: 'Roboto, sans-serif',color:'gray' }}>
+            <p className="text-md" style={{ fontFamily: 'Roboto, sans-serif',color:'grey-200' }}>
   {dataToDisplay.lead.name}
 </p>
 
@@ -372,7 +398,7 @@ const OrgChart: React.FC = () => {
                 </h2>
                 
                 
-<p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'Gray ' }}>
+<p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'Grey-200 ' }}>
   {person.name}
 </p>
                 <div className={`lg:absolute ${(year===2024 || index<5)?"lg:top-[15.5rem]":"lg:top-[33rem]"} relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out ${(selectedDomain===index ) ? '':'hidden'} ${fadein?'opacity-100':'opacity-0'}`}>
@@ -392,7 +418,7 @@ const OrgChart: React.FC = () => {
             className="shrink-0 rounded-full w-full h-full object-cover"
           />
          
-<p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'gray' }}>
+<p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
   {coordinator.name}
 </p>
 
@@ -421,7 +447,7 @@ const OrgChart: React.FC = () => {
                             className="shrink-0 rounded-full w-full h-full object-cover"
                           />
                          
-                          <p className="text-sm" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey' }}>
+                          <p className="text-sm" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
   {volunteer.name}
 </p>
 
