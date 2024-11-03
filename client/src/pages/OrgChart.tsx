@@ -48,7 +48,9 @@ import bharathsirimg from "./images/facultyCord copy.jpg"
 import Harshitha from "./Domain Info/images/TandC/Harshithamandadi.jpg"
 import UdaySagar from "./Domain Info/images/AppDev/UdaySagar.jpeg"
 import VinayKumar from "./Domain Info/images/AppDev/VinayKumarKajjapu.jpg"
-
+import nishmaimg from "./Domain Info/images/Hardware/HardwareC1.jpg"
+import durgamadhavimg from "./Domain Info/images/Hardware/HardwareC2.jpg";
+import hardwarelead from "./Domain Info/images/Hardware/Hardwarelead.jpg"
 
 import { set } from "date-fns";
 
@@ -194,6 +196,17 @@ const data2025: OrgChartData = {
       type:"technical",
     },
     {
+      role:"Hardware Lead",
+      name:"Avaneesh",
+      img:hardwarelead,
+      coordinators:[
+        {name:"Nishma Reddy",img:nishmaimg},
+        {name:"Durga Madhav",img:durgamadhavimg}
+      ],
+      volunteers:[],
+      type:"non technical"
+    },
+    {
       role: "Women In Tech Lead",
       name: "Nikhita Kashyap D",
       img: nikhitaimg,
@@ -203,6 +216,7 @@ const data2025: OrgChartData = {
       volunteers: [],
       type:"technical",
     },
+    
   ],
 };
 
@@ -294,6 +308,7 @@ const data2024: OrgChartData = {
         { name: "Rishitha", img: rishithaimg },
       ],
     },
+   
   ],
 };
 
@@ -412,13 +427,14 @@ const OrgChart: React.FC = () => {
           key={idx}
           className="flex flex-col items-center mb-2 mx-2 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
         >
+          {/* <p className="text-center">{coordinator.name}</p> */}
           <img
             src={coordinator.img}
             alt={coordinator.name}
             className="shrink-0 rounded-full w-full h-full object-cover"
           />
          
-<p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
+<p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
   {coordinator.name}
 </p>
 
