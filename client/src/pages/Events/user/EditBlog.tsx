@@ -212,6 +212,14 @@ const EditBlog: React.FC = () => {
             </button>
           )}
         </div>
+        <div className="">
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:border-blue-50"
+          />
+        </div>
         <div className="mb-4">
           <ReactQuill
             value={description}

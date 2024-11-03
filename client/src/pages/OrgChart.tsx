@@ -24,7 +24,7 @@ import rakshithaimg from "./Domain Info/images/MANAGEMENT/Sai Rakshita Narsingh.
 import sadhikimg from "./Domain Info/images/MANAGEMENT/Sadhik.jpg"
 import srikruthiimg from "./Domain Info/images/MANAGEMENT/SriKruthi.jpg"
 import abhijeetimg from "./Domain Info/images/MANAGEMENT/Abhijeet.png"
-import nikhitaimg from "./Domain Info/images/ML/D_Nikhita_Kashyap.jpeg"
+import nikhitaimg from "./Domain Info/images/ML/nikitha.jpg"
 import suryaimg from "./Domain Info/images/ML/Chittiprolu Suryateja.jpg"
 import sharanimg from "./Domain Info/images/ML/SRI SHARAN TEJ.jpg"
 import keerthikaimg from "./Domain Info/images/ML/KeerthikaGoli.jpg"

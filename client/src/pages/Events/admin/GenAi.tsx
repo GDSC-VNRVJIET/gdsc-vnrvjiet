@@ -31,6 +31,10 @@ function GenAi() {
     } | null
   );
   const [expandedTeam, setExpandedTeam] = useState<string | null>(null);
+  const [topThreeTeams, setTopThreeTeams] = useState<TeamData[] | null>(null);
+  const [topThreeParticipants, setTopThreeParticipants] = useState<
+    UserData[] | null
+  >(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +53,7 @@ function GenAi() {
           }
         );
         setExcelData(sortedTeamData);
+        setTopThreeTeams(sortedTeamData.slice(0, 3));
         const sortedParticipants = res.data.data.sort(
           (a: UserData, b: UserData) => {
             return (
@@ -61,6 +66,7 @@ function GenAi() {
         );
 
         setParticipantData(sortedParticipants);
+        setTopThreeParticipants(sortedParticipants.slice(0, 3));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -148,11 +154,11 @@ function GenAi() {
   const handleTeamClick = (teamName: string) => {
     setExpandedTeam((prev) => (prev === teamName ? null : teamName));
   };
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(true);
 
   const handleCheckboxChange = () => {
-    setIsChecked(!isChecked)
-  }
+    setIsChecked(!isChecked);
+  };
 
   return (
     <div className="wrapper p-8 bg-gray-100 min-h-screen">
@@ -189,7 +195,7 @@ function GenAi() {
       )}
       {/* Teams Leaderboard */}
       <div className="viewer">
-      <div className="flex justify-center mb-5">
+        <div className="flex justify-center mb-5">
           <label className="themeSwitcherTwo relative inline-flex cursor-pointer select-none items-center">
             <input
               type="checkbox"
@@ -198,169 +204,90 @@ function GenAi() {
               className="sr-only"
             />
             <span className="label flex items-center text-md font-medium text-black">
-             Teams Leaderboard
+              Teams Leaderboard
             </span>
             <span
-              className={`slider mx-4 flex h-8 w-[60px] items-center rounded-full p-1 duration-200 ${
-                isChecked ? "bg-green-500" : "bg-[#CCCCCE]"
-              }`}
-            >
-              <span
-                className={`dot h-6 w-6 rounded-full bg-white duration-200 ${
-                  isChecked ? "translate-x-[28px]" : ""
-                }`}
-              ></span>
-            </span>
+  className={`slider mx-4 flex sm:h-8 sm:w-[60px] h-6 w-[55px] items-center rounded-full p-1 duration-200 ${
+    isChecked ? "bg-green-500" : "bg-[#CCCCCE]"
+  }`}
+>
+  <span
+    className={`dot sm:h-6 sm:w-6 h-4 w-4 rounded-full bg-white duration-200 transform ${
+      isChecked ? "sm:translate-x-[28px] translate-x-[13px]" : ""
+    }`}
+  ></span>
+</span>
+
             <span className="label flex items-center text-md font-medium text-black">
-             Participants Leaderboard
+              Participants Leaderboard
             </span>
           </label>
         </div>
-        {
-          !isChecked &&
-        <h1 className="text-4xl text-center mb-4 font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-400 to-blue-400">
-          GEN AI STUDY JAMS LEADERBOARD
-        </h1>
-}
-
-        {excelData && !isChecked ? (
-          <div className="w-full max-w-6xl mx-auto overflow-x-auto">
-            <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
-              <thead>
-                <tr className="bg-gradient-to-r from-blue-500 to-green-500 text-white">
-                  <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    Rank
-                  </th>
-                  <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    Team Name
-                  </th>
-                  {/* <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    Google Cloud Skills Boost Profile URL
-                  </th> */}
-                  <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    Skill Badges Completed
-                  </th>
-                  <th className="py-3 px-6 text-sm font-semibold uppercase">
-                    Arcade Games Completed
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-gray-700">
-                {excelData.map((teamData, index) => (
-                  <>
-                    <tr
-                      key={index}
-                      className={`cursor-pointer hover:bg-gray-100 ${
-                        index % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
-                      }`}
-                      onClick={() => handleTeamClick(teamData.team)}
-                    >
-                      <td className="py-3 px-6 border-b">{index + 1}</td>
-                      <td className="py-3 px-6 border-b">
-                        <strong>Team {teamData.team}</strong>
-                      </td>
-                      <td className="py-3 px-6 border-b">
-                        {teamData.skillBadgesCompleted}
-                      </td>
-                      <td className="py-3 px-6 border-b">
-                        {teamData.arcadeGamesCompleted}
-                      </td>
-                    </tr>
-                    {expandedTeam === teamData.team && (
-                      <tr className="bg-gray-50">
-                        <td colSpan={4}>
-                          <table className="min-w-full text-left">
-                            <tbody>
-                              {teamData.members.map(
-                                (individualData, subIndex) => (
-                                  <tr
-                                    key={subIndex}
-                                    className={`${
-                                      subIndex % 2 === 0
-                                        ? "bg-gray-100"
-                                        : "bg-white"
-                                    } hover:bg-gray-200`}
-                                  >
-                                    <td className="py-3 px-6 border-b">
-                                      {index + 1}.{subIndex + 1}
-                                    </td>
-                                    <td className="py-3 px-6 border-b">
-                                      {individualData["User Name"]}
-                                    </td>
-                                    <td className="py-3 px-6 border-b">
-                                      {individualData[
-                                        "Google Cloud Skills Boost Profile URL"
-                                      ] && (
-                                        <a
-                                          href={
-                                            individualData[
-                                              "Google Cloud Skills Boost Profile URL"
-                                            ]
-                                          }
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="text-blue-500 hover:underline"
-                                        >
-                                          {
-                                            individualData[
-                                              "Google Cloud Skills Boost Profile URL"
-                                            ]
-                                          }
-                                        </a>
-                                      )}
-                                    </td>
-                                    <td className="py-3 px-6 border-b">
-                                      {
-                                        individualData[
-                                          "# of Skill Badges Completed"
-                                        ]
-                                      }
-                                    </td>
-                                    <td className="py-3 px-6 border-b">
-                                      {
-                                        individualData[
-                                          "# of Arcade Games Completed"
-                                        ]
-                                      }
-                                    </td>
-                                  </tr>
-                                )
-                              )}
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                    )}
-                  </>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <div className=""></div>
+        {!isChecked && (
+          <h1 className="sm:text-4xl text-xl text-center mb-4 font-bold m-6">
+            GEN AI STUDY JAMS LEADERBOARD
+          </h1>
         )}
 
-        {/* Participant Leaderboard */}
-        { isChecked &&
-        <div className="viewer mb-8">
-          <h1 className="text-4xl text-center mb-4 font-bold m-6">
-            PARTICIPANT LEADERBOARD
-          </h1>
+        {excelData && !isChecked ? (
+          <>
+            {topThreeTeams && (
+              <div className="flex justify-center mb-6 w-5/6 lg-w-1/3 mx-auto items-end space-x-1 ">
+                <div className="flex flex-col w-40 h-80 ">
+                  <div className="mb-4 sm:text-xl text-md font-bold text-center">
+                    Team {topThreeTeams[1].team}
+                  </div>
+                  <div className="flex flex-col justify-end items-center bg-gray-200 rounded-t-3xl w-full h-full p-5">
+                    <div className="text-xl font-semibold mb-3">2nd</div>
+                    <div className=" font-bold bg-slate-100 px-5 text-center rounded-xl">
+                      {topThreeTeams[1].skillBadgesCompleted +
+                        topThreeTeams[1].arcadeGamesCompleted}{" "}
+                      Badges
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col w-40 h-96 ">
+                  <div className="mb-4 sm:text-xl text-md font-bold text-center">
+                    Team {topThreeTeams[0].team}
+                  </div>
+                  <div className="flex flex-col justify-end items-center bg-amber-200 rounded-t-3xl w-full h-full p-5">
+                    <div className="text-xl font-semibold mb-3">1st</div>
+                    <div className="font-bold bg-slate-100 px-5 text-center rounded-xl">
+                      {topThreeTeams[0].skillBadgesCompleted +
+                        topThreeTeams[0].arcadeGamesCompleted}{" "}
+                      Badges
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col w-40 h-64">
+                  <div className="mb-4 sm:text-xl text-md font-bold text-center">
+                    Team {topThreeTeams[2].team}
+                  </div>
+                  <div className="flex flex-col justify-end items-center bg-orange-200 rounded-t-3xl w-full h-full p-5">
+                    <div className="text-xl font-semibold mb-3">3rd</div>
+                    <div className=" font-bold bg-slate-100 px-5 text-center rounded-xl">
+                      {topThreeTeams[2].skillBadgesCompleted +
+                        topThreeTeams[2].arcadeGamesCompleted}{" "}
+                      Badges
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
-          {participantData ? (
             <div className="w-full max-w-6xl mx-auto overflow-x-auto">
               <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
                 <thead>
-                  <tr className="bg-gradient-to-r from-blue-500 to-green-500 text-white">
+                  <tr className="bg-red-500 text-white">
                     <th className="py-3 px-6 text-sm font-semibold uppercase">
                       Rank
                     </th>
                     <th className="py-3 px-6 text-sm font-semibold uppercase">
-                      User Name
+                      Team Name
                     </th>
-                    <th className="py-3 px-6 text-sm font-semibold uppercase">
-                      Google Cloud Skills Boost Profile URL
-                    </th>
+                    {/* <th className="py-3 px-6 text-sm font-semibold uppercase">
+                    Google Cloud Skills Boost Profile URL
+                  </th> */}
                     <th className="py-3 px-6 text-sm font-semibold uppercase">
                       Skill Badges Completed
                     </th>
@@ -370,55 +297,238 @@ function GenAi() {
                   </tr>
                 </thead>
                 <tbody className="text-gray-700">
-                  {participantData.map((individualData, index) => (
-                    <tr
-                      key={index}
-                      className={`${
-                        index % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
-                      } hover:bg-gray-200`}
-                    >
-                      <td className="py-3 px-6 border-b">{index + 1}</td>
-                      <td className="py-3 px-6 border-b">
-                        {individualData["User Name"]}
-                      </td>
-                      <td className="py-3 px-6 border-b">
-                        {individualData[
-                          "Google Cloud Skills Boost Profile URL"
-                        ] && (
-                          <a
-                            href={
-                              individualData[
-                                "Google Cloud Skills Boost Profile URL"
-                              ]
-                            }
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-500 hover:underline"
-                          >
-                            {
-                              individualData[
-                                "Google Cloud Skills Boost Profile URL"
-                              ]
-                            }
-                          </a>
-                        )}
-                      </td>
-                      <td className="py-3 px-6 border-b">
-                        {individualData["# of Skill Badges Completed"]}
-                      </td>
-                      <td className="py-3 px-6 border-b">
-                        {individualData["# of Arcade Games Completed"]}
-                      </td>
-                    </tr>
+                  {excelData.map((teamData, index) => (
+                    <>
+                      <tr
+                        key={index}
+                        className={`cursor-pointer hover:bg-gray-100 ${
+                          index % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
+                        }`}
+                        onClick={() => handleTeamClick(teamData.team)}
+                      >
+                        <td className="py-3 px-6 border-b">{index + 1}</td>
+                        <td className="py-3 px-6 border-b">
+                          <strong>Team {teamData.team}</strong>
+                        </td>
+                        <td className="py-3 px-6 border-b">
+                          {teamData.skillBadgesCompleted}
+                        </td>
+                        <td className="py-3 px-6 border-b">
+                          {teamData.arcadeGamesCompleted}
+                        </td>
+                      </tr>
+                      {expandedTeam === teamData.team && (
+                        <tr className="bg-gray-50">
+                          <td colSpan={4}>
+                            <table className="min-w-full text-left">
+                              <tbody>
+                                {teamData.members.map(
+                                  (individualData, subIndex) => (
+                                    <tr
+                                      key={subIndex}
+                                      className={`${
+                                        subIndex % 2 === 0
+                                          ? "bg-gray-100"
+                                          : "bg-white"
+                                      } hover:bg-gray-200`}
+                                    >
+                                      <td className="py-3 px-6 border-b">
+                                        {index + 1}.{subIndex + 1}
+                                      </td>
+                                      <td className="py-3 px-6 border-b">
+                                        {individualData["User Name"]}
+                                      </td>
+                                      <td className="py-3 px-6 border-b">
+                                        {individualData[
+                                          "Google Cloud Skills Boost Profile URL"
+                                        ] && (
+                                          <a
+                                            href={
+                                              individualData[
+                                                "Google Cloud Skills Boost Profile URL"
+                                              ]
+                                            }
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-blue-500 hover:underline"
+                                          >
+                                            {
+                                              individualData[
+                                                "Google Cloud Skills Boost Profile URL"
+                                              ]
+                                            }
+                                          </a>
+                                        )}
+                                      </td>
+                                      <td className="py-3 px-6 border-b">
+                                        {
+                                          individualData[
+                                            "# of Skill Badges Completed"
+                                          ]
+                                        }
+                                      </td>
+                                      <td className="py-3 px-6 border-b">
+                                        {
+                                          individualData[
+                                            "# of Arcade Games Completed"
+                                          ]
+                                        }
+                                      </td>
+                                    </tr>
+                                  )
+                                )}
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      )}
+                    </>
                   ))}
                 </tbody>
               </table>
             </div>
-          ) : (
-            <div className="text-center text-gray-500">Loading...</div>
-          )}
-        </div>
-}
+          </>
+        ) : (
+          <div className=""></div>
+        )}
+
+        {/* Participant Leaderboard */}
+        {isChecked && (
+          <div className="viewer mb-8">
+            <h1 className="sm:text-4xl text-xl text-center mb-4 font-bold m-6">
+              PARTICIPANT LEADERBOARD
+            </h1>
+
+            {participantData ? (
+              <>
+                {topThreeParticipants && (
+                  <div className="flex justify-center mb-6 w-5/6 lg-w-1/3 mx-auto items-end space-x-1 ">
+                    <div className="flex flex-col w-40 h-80 ">
+                      <div className="mb-4 sm:text-xl text-md font-bold text-center">
+                        {topThreeParticipants[1]["User Name"]}
+                      </div>
+                      <div className="flex flex-col justify-end items-center bg-gray-200 rounded-t-3xl w-full h-full p-5">
+                        <div className="text-xl font-semibold mb-3">2nd</div>
+                        <div className=" font-bold bg-slate-100 px-5 text-center rounded-xl">
+                          {topThreeParticipants[1][
+                            "# of Skill Badges Completed"
+                          ] +
+                            topThreeParticipants[1][
+                              "# of Arcade Games Completed"
+                            ]}{" "}
+                          Badges
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col w-40 h-96 ">
+                      <div className="mb-4 sm:text-xl text-md font-bold text-center">
+                        {topThreeParticipants[0]["User Name"]}
+                      </div>
+                      <div className="flex flex-col justify-end items-center bg-amber-200 rounded-t-3xl w-full h-full p-5">
+                        <div className="text-xl font-semibold mb-3">1st</div>
+                        <div className="font-bold bg-slate-100 px-5 text-center rounded-xl">
+                          {topThreeParticipants[0][
+                            "# of Skill Badges Completed"
+                          ] +
+                            topThreeParticipants[0][
+                              "# of Arcade Games Completed"
+                            ]}{" "}
+                          Badges
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col w-40 h-60">
+                      <div className="mb-4 sm:text-xl text-md font-bold text-center">
+                        {topThreeParticipants[2]["User Name"]}
+                      </div>
+                      <div className="flex flex-col justify-end items-center bg-orange-200 rounded-t-3xl w-full h-full p-5">
+                        <div className="text-xl font-semibold mb-3">3rd</div>
+                        <div className=" font-bold bg-slate-100 px-5 text-center rounded-xl">
+                          {topThreeParticipants[2][
+                            "# of Skill Badges Completed"
+                          ] +
+                            topThreeParticipants[2][
+                              "# of Arcade Games Completed"
+                            ]}{" "}
+                          Badges
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <div className="w-full max-w-6xl mx-auto overflow-x-auto">
+                  <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
+                    <thead>
+                      <tr className="text-white bg-blue-500">
+                        <th className="py-3 px-6 text-sm font-semibold uppercase">
+                          Rank
+                        </th>
+                        <th className="py-3 px-6 text-sm font-semibold uppercase">
+                          User Name
+                        </th>
+                        <th className="py-3 px-6 text-sm font-semibold uppercase">
+                          Google Cloud Skills Boost Profile URL
+                        </th>
+                        <th className="py-3 px-6 text-sm font-semibold uppercase">
+                          Skill Badges Completed
+                        </th>
+                        <th className="py-3 px-6 text-sm font-semibold uppercase">
+                          Arcade Games Completed
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-gray-700">
+                      {participantData.map((individualData, index) => (
+                        <tr
+                          key={index}
+                          className={`${
+                            index % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
+                          } hover:bg-gray-100`}
+                        >
+                          <td className="py-3 px-6 border-b">{index + 1}</td>
+                          <td className="py-3 px-6 border-b">
+                            {individualData["User Name"]}
+                          </td>
+                          <td className="py-3 px-6 border-b">
+                            {individualData[
+                              "Google Cloud Skills Boost Profile URL"
+                            ] && (
+                              <a
+                                href={
+                                  individualData[
+                                    "Google Cloud Skills Boost Profile URL"
+                                  ]
+                                }
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-600 hover:underline"
+                              >
+                                {
+                                  individualData[
+                                    "Google Cloud Skills Boost Profile URL"
+                                  ]
+                                }
+                              </a>
+                            )}
+                          </td>
+                          <td className="py-3 px-6 border-b">
+                            {individualData["# of Skill Badges Completed"]}
+                          </td>
+                          <td className="py-3 px-6 border-b">
+                            {individualData["# of Arcade Games Completed"]}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            ) : (
+              <div className="text-center text-gray-500">Loading...</div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
