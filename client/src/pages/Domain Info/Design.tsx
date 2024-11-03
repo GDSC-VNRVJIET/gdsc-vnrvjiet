@@ -9,7 +9,7 @@ import ChAnirudhImage from "../Domain Info/images/design/Anirudh.jpg";
 // import AnirudhPImage from "../Domain Info/images/design/Anirudh P.jpg";
 import AryaImage from "../Domain Info/images/design/Arya Joshi.jpg";
 import RishithaImage from "../Domain Info/images/design/Rishitha.jpg";
-import PavanPraneethaImage from "../Domain Info/images/design/PavanPraneetha.jpg"
+import PavanPraneethaImage from "../Domain Info/images/design/Praneetha.jpg"
 import TanmayeeKyramImage from "../Domain Info/images/design/Tanmayee_kyram.jpg"
 
 function ML() {

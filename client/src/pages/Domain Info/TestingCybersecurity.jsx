@@ -13,7 +13,7 @@ function Hardware() {
   }, []);
 
   const gifUrl =
-    "https://i.pinimg.com/originals/f0/15/d0/f015d055fa134e08ab33ce00733e233f.gif";
+    "https://www.jtsecurity.net/wp-content/uploads/2021/03/mdr.gif";
   const members = [
     {
       name: "GVK",
