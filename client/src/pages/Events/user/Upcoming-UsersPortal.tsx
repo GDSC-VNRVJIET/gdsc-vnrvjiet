@@ -21,7 +21,7 @@ interface Event {
   startDate: string;
   endDate: string;
   venue: string;
-  description: string;
+  description: any;
   // image: string;
 }
 
@@ -143,8 +143,9 @@ const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
                   <p>
                     {" "}
                     <strong>What's Happening : </strong>
-                    {event.description}
+                  
                   </p>
+                  <p dangerouslySetInnerHTML={{ __html: event.description }}></p>
                   <p className="py-2">
                     {/* To be announced is kept directly in the database now */}
                     <strong>When : </strong>{" "}

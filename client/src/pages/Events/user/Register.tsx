@@ -35,7 +35,7 @@ interface Event {
   startDate: string;
   endDate: string;
   venue: string;
-  description: string;
+  description: any;
 }
 
 interface FormData {
@@ -426,8 +426,8 @@ const PaymentGatewayRazorpay: React.FC = () => {
             </button>
           </div>
         </div>
-      <p className="text-justify  text-md font-normal text-gray-500 lg:text-xl sm:px-16 mb-2 ">
-        {states?.description}  
+      <p dangerouslySetInnerHTML={{ __html: states?.description }} className="text-justify text-md text-gray-500 lg:text-xl sm:px-16 mb-2 ">
+        {/* {states?.description}   */}
       </p>
       </div>  
         {states?.name === "Webathon3.O"? (
