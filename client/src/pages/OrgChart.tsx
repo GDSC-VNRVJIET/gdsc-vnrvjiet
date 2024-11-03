@@ -327,8 +327,12 @@ const OrgChart: React.FC = () => {
               />
             </div>
             <h2 className="text-xl font-semibold">{dataToDisplay.facultyAdvisor.role}</h2>
-            <p className="text-md text-gray-700">{dataToDisplay.facultyAdvisor.name}</p>
-          </div>
+            {/* <p className="text-md text-gray-700">{dataToDisplay.facultyAdvisor.name}</p> */}
+            
+<p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey' }}>
+  {dataToDisplay.facultyAdvisor.name}
+</p>
+</div>
           <div className="flex flex-col items-center space-y-4 mb-6">
             <div className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden">
               <img
@@ -338,7 +342,11 @@ const OrgChart: React.FC = () => {
               />
             </div>
             <h2 className="text-xl font-semibold">{dataToDisplay.lead.role}</h2>
-            <p className="text-md text-gray-700">{dataToDisplay.lead.name}</p>
+            {/* <p className="text-md text-gray-700">{dataToDisplay.lead.name}</p> */}
+            <p className="text-md" style={{ fontFamily: 'Roboto, sans-serif',color:'gray' }}>
+  {dataToDisplay.lead.name}
+</p>
+
           </div>
           <div className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${year===2025?"xl:grid-cols-5":"xl:grid-cols-6"} justify-around gap-y-10 relative`}>
             {dataToDisplay.domainLeads
@@ -362,33 +370,45 @@ const OrgChart: React.FC = () => {
                 <h2 className="text-lg font-medium text-center">
                   {person.role}
                 </h2>
-                <p className="text-md text-gray-700 text-center">
+                {/* <p className="text-md text-gray-700 text-center">
                   {person.name}
-                </p>
+                </p> */}
+                
+<p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'Gray ' }}>
+  {person.name}
+</p>
                 <div className={`lg:absolute ${(year===2024 || index<5)?"lg:top-[15.5rem]":"lg:top-[33rem]"} relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out ${(selectedDomain===index ) ? '':'hidden'} ${fadein?'opacity-100':'opacity-0'}`}>
-                  {person.coordinators.length > 0 && 
-                  <h3 className="text-md font-semibold text-center mb-2">
-                  Coordinators
-                </h3>
-                }
-                    
-                    <div className="flex justify-center flex-wrap mb-4">
-                      {person.coordinators.map((coordinator, idx) => (
-                        <div
-                          key={idx}
-                          className="flex flex-col items-center mb-2 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
-                        >
-                          <img
-                            src={coordinator.img}
-                            alt={coordinator.name}
-                            className="shrink-0 rounded-full w-full h-full object-cover"
-                          />
-                          <p className="text-sm text-gray-700 text-center mt-2">
-                            {coordinator.name}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
+                 
+{person.coordinators.length > 0 && (
+  <div className="bg-blue-50 rounded-md mb-4 p-4">
+    <h3 className="text-md font-semibold text-center mb-2 text-blue-700">Coordinators</h3>
+    <div className="flex justify-center flex-wrap mb-4">
+      {person.coordinators.map((coordinator, idx) => (
+        <div
+          key={idx}
+          className="flex flex-col items-center mb-2 mx-2 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
+        >
+          <img
+            src={coordinator.img}
+            alt={coordinator.name}
+            className="shrink-0 rounded-full w-full h-full object-cover"
+          />
+          {/* <p className="text-md font-semibold text-blue-800 text-center mt-2" style={{ fontFamily: 'Roboto, sans-serif', color: '#4A4E69' }}>
+  {coordinator.name}
+</p> */}
+<p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'gray' }}>
+  {coordinator.name}
+</p>
+
+          
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+   
+   
                     {person.volunteers.length > 0 && 
                     <h3 className="text-md font-semibold text-center mb-2">
                       Volunteers
@@ -404,9 +424,13 @@ const OrgChart: React.FC = () => {
                             alt={volunteer.name}
                             className="shrink-0 rounded-full w-full h-full object-cover"
                           />
-                          <p className="text-sm text-gray-700 text-center mt-2">
+                          {/* <p className="text-sm text-gray-700 text-center mt-2">
                             {volunteer.name}
-                          </p>
+                          </p> */}
+                          <p className="text-sm" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey' }}>
+  {volunteer.name}
+</p>
+
                         </div>
                       ))}
                     </div>
@@ -421,3 +445,5 @@ const OrgChart: React.FC = () => {
 };
 
 export default OrgChart;
+
+
