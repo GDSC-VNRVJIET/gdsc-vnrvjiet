@@ -327,7 +327,7 @@ const OrgChart: React.FC = () => {
               />
             </div>
             <h2 className="text-xl font-semibold">{dataToDisplay.facultyAdvisor.role}</h2>
-            {/* <p className="text-md text-gray-700">{dataToDisplay.facultyAdvisor.name}</p> */}
+            
             
 <p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey' }}>
   {dataToDisplay.facultyAdvisor.name}
@@ -342,7 +342,7 @@ const OrgChart: React.FC = () => {
               />
             </div>
             <h2 className="text-xl font-semibold">{dataToDisplay.lead.role}</h2>
-            {/* <p className="text-md text-gray-700">{dataToDisplay.lead.name}</p> */}
+            
             <p className="text-md" style={{ fontFamily: 'Roboto, sans-serif',color:'gray' }}>
   {dataToDisplay.lead.name}
 </p>
@@ -370,9 +370,7 @@ const OrgChart: React.FC = () => {
                 <h2 className="text-lg font-medium text-center">
                   {person.role}
                 </h2>
-                {/* <p className="text-md text-gray-700 text-center">
-                  {person.name}
-                </p> */}
+                
                 
 <p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'Gray ' }}>
   {person.name}
@@ -393,9 +391,7 @@ const OrgChart: React.FC = () => {
             alt={coordinator.name}
             className="shrink-0 rounded-full w-full h-full object-cover"
           />
-          {/* <p className="text-md font-semibold text-blue-800 text-center mt-2" style={{ fontFamily: 'Roboto, sans-serif', color: '#4A4E69' }}>
-  {coordinator.name}
-</p> */}
+         
 <p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'gray' }}>
   {coordinator.name}
 </p>
@@ -424,9 +420,7 @@ const OrgChart: React.FC = () => {
                             alt={volunteer.name}
                             className="shrink-0 rounded-full w-full h-full object-cover"
                           />
-                          {/* <p className="text-sm text-gray-700 text-center mt-2">
-                            {volunteer.name}
-                          </p> */}
+                         
                           <p className="text-sm" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey' }}>
   {volunteer.name}
 </p>
