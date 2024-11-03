@@ -419,22 +419,22 @@ const OrgChart: React.FC = () => {
                 <div className={`lg:absolute ${(year===2024 || index<5)?"lg:top-[15.5rem]":"lg:top-[33rem]"} relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out ${(selectedDomain===index ) ? '':'hidden'} ${fadein?'opacity-100':'opacity-0'}`}>
                  
 {person.coordinators.length > 0 && (
-  <div className="bg-blue-50 rounded-md mb-4 p-4">
+  <div className="bg-blue-50 rounded-md mb-3 p-3">
     <h3 className="text-md font-semibold text-center mb-2 text-blue-700">Coordinators</h3>
     <div className="flex justify-center flex-wrap mb-4">
       {person.coordinators.map((coordinator, idx) => (
         <div
           key={idx}
-          className="flex flex-col items-center mb-2 mx-2 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
+          className="flex flex-col items-center mb-2 mx-2 w-36 h-36 md:w-48 md:h-48"
         >
-          {/* <p className="text-center">{coordinator.name}</p> */}
+        
           <img
             src={coordinator.img}
             alt={coordinator.name}
-            className="shrink-0 rounded-full w-full h-full object-cover"
+            className="shrink-0 rounded-full w-full h-full object-cover mb-2"
           />
-         
-<p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
+        
+<p className="text-md text-center " style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
   {coordinator.name}
 </p>
 
