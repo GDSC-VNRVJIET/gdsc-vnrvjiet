@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import ReactQuill from "react-quill";
 import axios from "axios";
 import {
   createEvent,
@@ -37,13 +38,43 @@ interface PastProps {
 }
 
 const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+  ];
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link", "image"],
+      ["clean"],
+    ],
+  };
+
   const [events, setEvents] = useState<Event[]>(eventsprop);
+  const [description, setDescription] = useState<string>("");
   const [newEvent, setNewEvent] = useState<NewEvent>({
     name: "",
     startDate: "",
     endDate: "",
     venue: "",
-    description: "",
+    description: description,
     //image: "",
   });
   const [editEvent, setEditEvent] = useState<Event | null>();
@@ -52,7 +83,7 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
   const navigate = useNavigate();
 
   function viewRegistrations(eventName: string) {
-      navigate(`/viewregistrations/${eventName}`);
+    navigate(`/viewregistrations/${eventName}`);
   }
 
   async function fetchData() {
@@ -66,7 +97,6 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
   }
 
   useEffect(() => {
-
     if (eventsprop && eventsprop.length > 0) {
       setEvents(eventsprop);
     } else {
@@ -100,7 +130,7 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
         startDate: "",
         endDate: "",
         venue: "",
-        description: "",
+        description: description,
         //image: "",
       });
       setIsCreatingEvent(false);
@@ -128,9 +158,12 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
     }
   };
 
-  
+  function addDesc(value : any){
+    setDescription(value);
+    setNewEvent({ ...newEvent, description: description });
+  }
 
-  return(
+  return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4 ">Admin Portal</h2>
       <button
@@ -160,15 +193,17 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
               }
               className="border border-[#323434] rounded px-2 py-1 w-[80vw] mb-4 input-validation bg-slate-100 text-black"
             />
-            <input
-              type="text"
+            <ReactQuill
+              modules={modules}
+              formats={formats}
               placeholder="Event Description"
-              value={newEvent.description}
-              onChange={(e) =>
-                setNewEvent({ ...newEvent, description: e.target.value })
+              value={description}
+              onChange={
+                (value) => addDesc(value)
               }
               className="border border-[#323434] rounded px-2 py-1 w-[80vw] mb-4 input-validation bg-slate-100 text-black"
             />
+
             <label>
               <br />
               Start date & time :{" "}
@@ -250,9 +285,13 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
               </p>
               <p>
                 <strong>When : </strong>
-                {isValid(new Date(event.startDate)) ? format(new Date(event.startDate), "yyyy-MM-dd") : "Invalid Start Date"} to{" "}
-                {isValid(new Date(event.endDate)) ? format(new Date(event.endDate), "yyyy-MM-dd") : "Invalid End Date"}
-
+                {isValid(new Date(event.startDate))
+                  ? format(new Date(event.startDate), "yyyy-MM-dd")
+                  : "Invalid Start Date"}{" "}
+                to{" "}
+                {isValid(new Date(event.endDate))
+                  ? format(new Date(event.endDate), "yyyy-MM-dd")
+                  : "Invalid End Date"}
               </p>
 
               <p>
@@ -278,7 +317,6 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
                 >
                   Delete
                 </button> */}
-                
               </div>
             </div>
           ))}
@@ -360,6 +398,6 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
       )}
     </div>
   );
-}
+};
 
 export default AdminPortalUpcoming;
