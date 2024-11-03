@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { getUserById } from "../../../Apis/users";
 import Loader from "../../Loader";
 
 interface Blog {
-  id: string; // Assuming each blog has a unique ID
+  id: string;
   thumbnail: string;
   title: string;
   description: string;
   author: string;
   category: string;
   [key: string]: any;
-  date:string;
+  date: string;
 }
 
 const UserShowBlogs: React.FC = () => {
@@ -50,12 +49,6 @@ const UserShowBlogs: React.FC = () => {
     fetchBlogs();
   }, []);
 
-  const [user] = useState(
-    JSON.parse(localStorage.getItem("userObjGDSC") || "null") as {
-      userId: number;
-    } | null
-  );
-
   const handleBlogClick = (blogId: string) => {
     navigate(`/blogs/${blogId}`);
   };
@@ -88,101 +81,75 @@ const UserShowBlogs: React.FC = () => {
                 key={blog._id}
                 className="flex flex-col justify-center antialiased mb-20"
               >
-                <div className="max-w-6xl mx-auto p-4 sm:px-6 h-full">
-                  <article className="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
-                    <a className="relative block group">
+                <div className="max-w-6xl mx-auto px-8 py-2">
+                  <article
+                    className="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center cursor-pointer transition-all duration-300 ease-out hover:-translate-y-1 group"
+                    onClick={() => handleBlogClick(blog._id)}
+                  >
+                    <div className="relative block group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-xl p-2">
                       <div
-                        className="absolute inset-0 bg-gray-200 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none"
+                        className="absolute inset-0 bg-gray-200 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none rounded-xl"
                         aria-hidden="true"
                       ></div>
-                      <figure className="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
+                      <figure className="relative h-[400px] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out rounded-xl">
                         <img
-                          className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out"
+                          className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out rounded-xl"
                           src={blog.thumbnail}
-                          onClick={() => handleBlogClick(blog._id)}
-                          style={{ cursor: "pointer" }}
                           width="540"
                           height="303"
                           alt="Blog post"
                         />
                       </figure>
-                    </a>
-                    <div>
+                    </div>
+                    <div className="flex flex-col h-[400px] justify-between group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-xl p-6">
                       <header>
-                        <h3 className="text-2xl lg:text-3xl font-bold leading-tight mb-2">
+                        <h3 className="text-2xl lg:text-3xl font-bold leading-tight mb-3">
                           <a className="hover:text-blue-500 transition duration-150 ease-in-out">
                             {blog.title}
                           </a>
                         </h3>
                       </header>
-                      {/* <p className="text-lg text-gray-400 flex-grow">
-                        {blog.description}
-                      </p> */}
-                      {blog.description.length < 140 ? (
-                        <p
-                          className="text-gray-600 text-lg two-lines"
-                          dangerouslySetInnerHTML={{ __html: blog.description }}
-                        ></p>
-                      ) : (
-                        <p
-                          className="text-gray-600 text-lg two-lines"
+                      <div className="flex-grow overflow-hidden mb-4">
+                        <div
+                          className="text-gray-600 text-lg prose max-w-none line-clamp-6"
                           dangerouslySetInnerHTML={{
-                            __html: blog.description.substring(0, 136) + "...",
+                            __html: blog.description,
                           }}
-                        ></p>
-                      )}
-                      <a
-                        style={{ cursor: "pointer" }}
-                        className="inline-flex items-center py-2 space-x-2 text-sm dark:text-violet-600 hover:underline"
-                        onClick={() => handleBlogClick(blog._id)}
-                      >
-                        <span style={{ color: "#3b82f6" }}>Read more</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="#3b82f6"
-                          className="w-4 h-4"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                            clip-rule="evenodd"
-                          ></path>
-                        </svg>
-                      </a>
-                      <div className="mb-3 flex flex-wrap font-medium text-sm -m-1">
-                        {blog.category.split(",").map((cat, idx) => (
-                          <ul className="">
-                            <li className="m-1">
-                              <a
+                        />
+                      </div>
+                      <div>
+                        <div className="mb-3 flex flex-wrap font-medium text-sm -m-1">
+                          {blog.category.split(",").map((cat, idx) => (
+                            <span key={idx} className="m-1">
+                              <span
                                 className={`inline-flex text-center text-gray-100 py-2 px-4 rounded-full transition duration-150 ease-in-out ${
                                   colors[idx % colors.length]
                                 }`}
                               >
                                 {cat.trim()}
-                              </a>
-                            </li>
-                          </ul>
-                        ))}
-                      </div>
-                      <footer className="flex items-center mt-4">
-                        <a>
-                          <img
-                            className="rounded-full flex-shrink-0 mr-4"
-                            src="https://tse2.mm.bing.net/th?id=OIP.XadmtOiEEI6Zv388n5l2dQHaHx&pid=Api&P=0&h=220"
-                            width="40"
-                            height="40"
-                            alt="Author 04"
-                          />
-                        </a>
-                        <div>
-                          <a className="font-medium text-gray-800 hover:text-green-400 transition duration-150 ease-in-out">
-                            {blog.author}
-                          </a>
-                          <span className="text-gray-700"> - </span>
-                          <span className="text-gray-500">{blog.date}</span>
+                              </span>
+                            </span>
+                          ))}
                         </div>
-                      </footer>
+                        <footer className="flex items-center mt-4">
+                          <a>
+                            <img
+                              className="rounded-full flex-shrink-0 mr-4"
+                              src="https://tse2.mm.bing.net/th?id=OIP.XadmtOiEEI6Zv388n5l2dQHaHx&pid=Api&P=0&h=220"
+                              width="40"
+                              height="40"
+                              alt="Author 04"
+                            />
+                          </a>
+                          <div>
+                            <a className="font-medium text-gray-800 hover:text-green-400 transition duration-150 ease-in-out">
+                              {blog.author}
+                            </a>
+                            <span className="text-gray-700"> - </span>
+                            <span className="text-gray-500">{blog.date}</span>
+                          </div>
+                        </footer>
+                      </div>
                     </div>
                   </article>
                 </div>
