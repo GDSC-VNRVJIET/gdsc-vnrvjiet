@@ -42,9 +42,13 @@ import WebDev from "./pages/Domain Info/WebDev";
 import CompetitiveProgramming from "./pages/Domain Info/CompetitiveProgramming";
 import ML from "./pages/Domain Info/ML";
 import Management from "./pages/Domain Info/Management";
+import AppDev from './pages/Domain Info/AppDev';
 import Teams from "./pages/leaderboard/Teams";
 import Events from "./pages/Events/Events";
 import CheckRegistrations from "./pages/Events/admin/CheckRegistrations";
+import Hardware from "./pages/Domain Info/Hardware";
+import WomenInTech from "./pages/Domain Info/WomenInTech";
+import TestingCybersecurity from "./pages/Domain Info/TestingCybersecurity";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -154,6 +158,10 @@ function Root() {
         <Route path="/competitive-programming" element={<CompetitiveProgramming />} />
         <Route path="/machine-learning" element={<ML />} />
         <Route path="/management" element={<Management />} />
+        <Route path="/app-development" element={<AppDev />} />
+        <Route path="/hardware" element={<Hardware />} />
+        <Route path="/women-in-tech" element={<WomenInTech/>} />
+        <Route path="/testing-cybersecutiry" element={<TestingCybersecurity />} />
         <Route path="/events" element={<Events />} >
           <Route path="" element={<UpcomingEvents />} />
           <Route path="upcoming-events" element={<UpcomingEvents />} />

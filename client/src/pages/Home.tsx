@@ -39,11 +39,42 @@ const cards = [
   {
     image:
       "https://cdn.dribbble.com/users/3943049/screenshots/14032596/media/9e39cf22d33b4d2b77e9f270f2f06f6e.gif",
-    title: "Design",
+    title: "Social Media and Design",
     description:
       "Engages students in learning and applying best practices to secure digital systems, prevent cyber threats, and promote online safety.",
     path: "/design",
-  }
+  },
+  {
+    image:
+      "https://appsolution.co.za/wp-content/uploads/2021/11/image-mbl-development.gif",
+    title: "App Development",
+    description:
+      "Students explore the art of creating mobile apps, transforming their ideas into engaging, user-friendly experiences. They focus on intuitive design, feature integration, and performance optimization, equipping themselves with the skills to launch standout applications in the digital marketplace.",
+    path: "/app-development",
+  },
+  {
+    image: "https://i.pinimg.com/originals/f0/15/d0/f015d055fa134e08ab33ce00733e233f.gif",
+    title: "Hardware",
+    description:
+      "The world of hardware development invites individuals to craft physical devices through hands-on projects in circuit design, microcontroller programming, and component integration. This practical approach enhances functionality and troubleshooting skills, enabling the creation of innovative hardware solutions. The immersive experience fosters creativity and problem-solving, empowering participants to drive technological innovation and meet real-world demands.",
+    path: "/hardware",
+  },
+  {
+    image:
+      "https://cdn.dribbble.com/users/1187278/screenshots/15719501/media/02b128a761010ed25d595a82daff17d4.gif",
+    title: "Women in tech",
+    description:
+      "Empowers women in technology through mentorship, resources, and a supportive community, inspiring growth and innovation for future leaders in STEM.",
+    path: "/women-in-tech",
+  },
+  {
+    image:
+      "https://www.jtsecurity.net/wp-content/uploads/2021/03/mdr.gif",
+    title: "Testing and Cybersecurity",
+    description:
+      "Explore the critical fields of Cybersecurity and Testing, where we work to secure digital assets and ensure software reliability. From vulnerability assessments to penetration testing and quality assurance, our focus is on developing skills to identify, mitigate, and prevent cyber threats. Join us to build a safer digital world and deliver secure, high-quality tech solutions.",
+    path: "/testing-cybersecutiry",
+  },
 ];
 
 const getTitleColor = (index: number) => {
@@ -120,7 +151,7 @@ function Home() {
                   }`}
                 >
                   <Reveal>
-                    <div className="flex-shrink-0 h-[222px] overflow-hidden hidden md:block">
+                    <div className="flex-shrink-0 w-[350px] h-[222px] overflow-hidden hidden md:block pt-4 pb-4">
                       <img
                         src={card.image}
                         alt="image"
