@@ -425,7 +425,7 @@ const OrgChart: React.FC = () => {
       {person.coordinators.map((coordinator, idx) => (
         <div
           key={idx}
-          className="flex flex-col items-center mb-2 mx-2 w-36 h-36 md:w-48 md:h-48"
+          className="flex flex-col items-center mb-9 mx-2 w-36 h-36 md:w-48 md:h-48"
         >
         
           <img
@@ -434,7 +434,7 @@ const OrgChart: React.FC = () => {
             className="shrink-0 rounded-full w-full h-full object-cover mb-2"
           />
         
-<p className="text-md text-center " style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
+<p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
   {coordinator.name}
 </p>
 
