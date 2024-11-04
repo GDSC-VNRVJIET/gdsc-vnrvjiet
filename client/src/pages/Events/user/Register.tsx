@@ -47,6 +47,7 @@ interface FormData {
   name: string;
   event: string;
   year:number;
+  interest:string;
 }
 
 const PaymentGatewayRazorpay: React.FC = () => {
@@ -407,10 +408,10 @@ const PaymentGatewayRazorpay: React.FC = () => {
       <div className="product mt-6 flex flex-col items-center">
         <div className=" lg:w-4/6 px-4 lg:px-1 p-4 bg-white shadow-lg rounded-xl mt-5 mb-10">
         <div className="flex justify-center items-center ">
-          {states?.name === "Tensor Flow" && (
+          {states?.name === "HackSprint" && (
             <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6JGGZMfhZhqwUSTg79d0vEvu_V8a6pk8njQ&s"  
-            alt="TensorFlow Logo"
+            src="https://avatars.githubusercontent.com/u/31746234?s=280&v=4"  
+            alt="HackSprint Logo"
             className="w-20 h-20 rounded-full object-cover"  
           />)}
           
@@ -430,7 +431,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
         {/* {states?.description}   */}
       </p>
       </div>  
-        {states?.name === "Webathon3.O"? (
+        {states?.name !== "HackSprint"? (
           <div className="text-center">
             <p className="text-gray-600 text-xl">To be announced Soon!</p>
             <img src={tobeannounced} className="mx-auto" alt="" />
@@ -461,7 +462,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 ></div>
               </div>
               <div className="flex">
-              <h2 className="text-white rounded-full text-base bg-yellow-400 lg:text-lg mr-3 ps-2 pr-2 pt-1 pb-1">{`Seats left: ${count}`}</h2>
+              <h2 className="text-white rounded-full text-base bg-blue-400 lg:text-lg mr-3 ps-2 pr-2 pt-1 pb-1">{`Seats left: ${count}`}</h2>
               <RxLapTimer className="mt-1 mr-1 text-xl sm:text-2xl lg:text-3xl text-red-300" />
 
               </div>
@@ -594,6 +595,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
                   {...register("year", { required: true })}
                   className="bg-white border border-gray-300 text-gray-900 mt-3 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 >
+                  <option value="1">1st Year</option>
                   <option value="2">2nd Year</option>
                   <option value="3">3rd Year</option>
                   <option value="4">4th Year</option>
@@ -622,6 +624,18 @@ const PaymentGatewayRazorpay: React.FC = () => {
                     <p className="text-red-500">Enter Section (Keep '-' for no section)</p>
                   )}
                 </div>
+              </div>
+              <div className="w-full lg:w-11/12 mx-auto mt-6">
+                <label htmlFor="interest" className="ms-1 text-gray-500">
+                What interests you to join the challenge?
+                </label>
+                <textarea
+                  {...register("interest")}
+                  className="bg-white border border-gray-300 text-gray-900 mt-3 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 outline outline-0 focus:outline-0"
+                >
+                  
+                </textarea>
+                
               </div>
               
             </div>
