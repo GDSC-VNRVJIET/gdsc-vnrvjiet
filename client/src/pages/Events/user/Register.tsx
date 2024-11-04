@@ -428,7 +428,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
             </button>
           </div>
         </div>
-      <p dangerouslySetInnerHTML={{ __html: states?.description }} className="text-justify text-md text-gray-500 lg:text-xl sm:px-16 mb-2 ">
+      <p dangerouslySetInnerHTML={{ __html: states?.description }} className="text-justify text-md text-gray-600 lg:text-xl sm:px-16 mb-2 ">
         {/* {states?.description}   */}
       </p>
       </div>  
