@@ -64,6 +64,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
   const [checkModal, setCheckModal] = useState<boolean>(false);
   const [maxSeatModal, setMaxSeatModal] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
+  const [loadingmodal, setLoadingModal] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -99,6 +100,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
 
   const handleFormSubmit = (formData: FormData) => {
     if (states) formData.event = states.name;
+    setLoadingModal(true);
     paymentHandler(formData);
   };
 
@@ -197,10 +199,12 @@ const PaymentGatewayRazorpay: React.FC = () => {
         color: "#3399cc",
       },
     };
+    setLoadingModal(false);
     const rzp1 = new (window as any).Razorpay(option);
     rzp1.on("payment.failed", (res: any) => {
       alert("Payment failed");
     });
+
     rzp1.open();
   };
 
@@ -232,6 +236,14 @@ const PaymentGatewayRazorpay: React.FC = () => {
     <Loader />
   ) : (
     <>
+    {
+      loadingmodal && <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md relative">
+        <h2 className="text-center text-xl mb-4">Loading...</h2>
+        <p>Please wait while we process your request.</p>
+      </div>
+    </div>
+    }
       {modal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md relative">
