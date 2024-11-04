@@ -17,6 +17,7 @@ interface RegistrationData {
   mailSent: boolean;
   paymentSuccess: boolean;
   year: string;
+  interest: string;
 }
 
 const CheckRegistrations: React.FC = () => {
@@ -86,6 +87,7 @@ const CheckRegistrations: React.FC = () => {
             <th className="border px-4 py-2">Entered</th>
             <th className="border px-4 py-2">mailSent</th>
             <th className="border px-4 py-2">paymentSuccess</th>
+            <th className="border px-4 py-2">Interest</th>
           </tr>
         </thead>
         <tbody>
@@ -102,6 +104,7 @@ const CheckRegistrations: React.FC = () => {
               <td className="border px-4 py-2">{registration.entered ? 'Yes' : 'No'}</td>
               <td className="border px-4 py-2">{registration.mailSent ? 'Yes' : 'No'}</td>
               <td className="border px-4 py-2">{registration.paymentSuccess ? 'Yes' : 'No'}</td>
+              <td className="border px-4 py-2">{registration.interest}</td>
             </tr>
           ))}
         </tbody>

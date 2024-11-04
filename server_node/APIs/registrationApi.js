@@ -59,6 +59,7 @@ registrationApp.get(
         Entered: e.entered,
         MailSent:e.mailSent,
         PaymentSuccess:e.paymentSuccess,
+        Interest:e.interest,
       }));
   
       const csvFields = ["Name", "RollNo","Year","Branch","Section" ,"WhatsApp", "Email", "Entered","MailSent","PaymentSuccess"];
