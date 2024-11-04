@@ -624,8 +624,10 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 </label>
                 <select
                   {...register("section", { required: true })}
+                  defaultValue={""}
                   className="bg-white border border-gray-300 text-gray-900 mt-3 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 >
+                  <option value="" disabled>Select Section</option>
                   <option value="-">Section unavailable</option>
                   <option value="A">A</option>
                   <option value="B">B</option>
@@ -634,7 +636,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 </select>
                 <div className="">
                   {errors.section?.type === "required" && (
-                    <p className="text-red-500">Enter Section (Keep '-' for no section)</p>
+                    <p className="text-red-500">Enter Section ('-' for no section)</p>
                   )}
                 </div>
               </div>
@@ -643,11 +645,20 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 What interests you to join the challenge?
                 </label>
                 <textarea
-                  {...register("interest")}
+                  {...register("interest",{required:true,
+                    validate: (value) => value.trim().split(/\s+/).length >= 30,
+                  })}
                   className="bg-white border border-gray-300 text-gray-900 mt-3 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 outline outline-0 focus:outline-0"
                 >
                   
+                  
                 </textarea>
+                {errors.interest?.type === "required" && (
+                  <p className="text-red-500">Mention interest</p>
+                )}
+                {errors.interest?.type === "validate" && (
+                  <p className="text-red-500">At least 30 words.</p>
+                )}
                 
               </div>
               
