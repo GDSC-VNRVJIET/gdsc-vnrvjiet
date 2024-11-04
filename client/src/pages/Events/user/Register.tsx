@@ -152,7 +152,8 @@ const PaymentGatewayRazorpay: React.FC = () => {
           name: formdata.name,
           event: formdata.event,
           section: formdata.section,
-          year:formdata.year
+          year:formdata.year,
+          interest:formdata.interest,
         }),
       }
     );
