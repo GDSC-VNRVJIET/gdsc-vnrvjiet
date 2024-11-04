@@ -283,6 +283,7 @@ if (!emailRegex.test(email)) {
       event: req.body.event,
       year: req.body.year,
       section: req.body.section,
+      interest: req.body.interest,
       razorpay_order_id: order.id,
       mailSent: false,
       entered: false,
