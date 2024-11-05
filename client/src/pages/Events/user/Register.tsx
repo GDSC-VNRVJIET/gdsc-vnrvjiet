@@ -610,6 +610,8 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 >
                   <option value="1">1st Year</option>
                   <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
                 </select>
                 {errors.year?.type === "required" && (
                   <p className="text-red-500">Enter year</p>
@@ -643,13 +645,20 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 What interests you to join the challenge?
                 </label>
                 <textarea
-                  {...register("interest")}
+                  {...register("interest",{required:true,
+                    validate: (value) => value.trim().split(/\s+/).length >= 30,
+                  })}
                   className="bg-white border border-gray-300 text-gray-900 mt-3 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 outline outline-0 focus:outline-0"
                 >
                   
                   
                 </textarea>
-                
+                {errors.interest?.type === "required" && (
+                  <p className="text-red-500">Mention interest</p>
+                )}
+                {errors.interest?.type === "validate" && (
+                  <p className="text-red-500">At least 30 words.</p>
+                )}
                 
               </div>
               
