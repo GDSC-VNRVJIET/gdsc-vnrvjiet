@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import * as XLSX from "xlsx";
 import axios from "axios";
+import genai from './GenAi.json'
 
 interface UserData {
   "User Name": string;
@@ -476,6 +477,9 @@ function GenAi() {
                         <th className="py-3 px-6 text-sm font-semibold uppercase">
                           Arcade Games Completed
                         </th>
+                        <th className="py-3 px-6 text-sm font-semibold uppercase">
+                          Roll Number
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="text-gray-700">
@@ -517,6 +521,18 @@ function GenAi() {
                           </td>
                           <td className="py-3 px-6 border-b">
                             {individualData["# of Arcade Games Completed"]}
+                          </td>
+                          <td>
+                            {
+                              genai.map((user) => {
+                                if (
+                                  user["Full Name"] ===
+                                  individualData["User Name"]
+                                ) {
+                                  return user["Roll number"];
+                                }
+                              })
+                            }
                           </td>
                         </tr>
                       ))}
