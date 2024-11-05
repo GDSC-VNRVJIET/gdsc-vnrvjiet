@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import * as XLSX from "xlsx";
 import axios from "axios";
-import genai from './GenAi.json'
+import genai from "./GenAi.json";
 
 interface UserData {
   "User Name": string;
@@ -208,16 +208,16 @@ function GenAi() {
               Teams Leaderboard
             </span>
             <span
-  className={`slider mx-4 flex sm:h-8 sm:w-[60px] h-6 w-[55px] items-center rounded-full p-1 duration-200 ${
-    isChecked ? "bg-green-500" : "bg-[#CCCCCE]"
-  }`}
->
-  <span
-    className={`dot sm:h-6 sm:w-6 h-4 w-4 rounded-full bg-white duration-200 transform ${
-      isChecked ? "sm:translate-x-[28px] translate-x-[13px]" : ""
-    }`}
-  ></span>
-</span>
+              className={`slider mx-4 flex sm:h-8 sm:w-[60px] h-6 w-[55px] items-center rounded-full p-1 duration-200 ${
+                isChecked ? "bg-green-500" : "bg-[#CCCCCE]"
+              }`}
+            >
+              <span
+                className={`dot sm:h-6 sm:w-6 h-4 w-4 rounded-full bg-white duration-200 transform ${
+                  isChecked ? "sm:translate-x-[28px] translate-x-[13px]" : ""
+                }`}
+              ></span>
+            </span>
 
             <span className="label flex items-center text-md font-medium text-black">
               Participants Leaderboard
@@ -323,8 +323,15 @@ function GenAi() {
                           <td colSpan={4}>
                             <table className="min-w-full text-left">
                               <tbody>
-                                {teamData.members.map(
-                                  (individualData, subIndex) => (
+                                {teamData.members
+                                  .sort(
+                                    (a, b) =>
+                                      b["# of Skill Badges Completed"] +
+                                      b["# of Arcade Games Completed"] -
+                                      (a["# of Skill Badges Completed"] +
+                                        a["# of Arcade Games Completed"])
+                                  )
+                                  .map((individualData, subIndex) => (
                                     <tr
                                       key={subIndex}
                                       className={`${
@@ -466,7 +473,10 @@ function GenAi() {
                           Rank
                         </th>
                         <th className="py-3 px-6 text-sm font-semibold uppercase">
-                          User Name
+                          Roll Number
+                        </th>
+                        <th className="py-3 px-6 text-sm font-semibold uppercase">
+                          Name
                         </th>
                         <th className="py-3 px-6 text-sm font-semibold uppercase">
                           Google Cloud Skills Boost Profile URL
@@ -476,9 +486,6 @@ function GenAi() {
                         </th>
                         <th className="py-3 px-6 text-sm font-semibold uppercase">
                           Arcade Games Completed
-                        </th>
-                        <th className="py-3 px-6 text-sm font-semibold uppercase">
-                          Roll Number
                         </th>
                       </tr>
                     </thead>
@@ -491,6 +498,16 @@ function GenAi() {
                           } hover:bg-gray-100`}
                         >
                           <td className="py-3 px-6 border-b">{index + 1}</td>
+                          <td>
+                            {genai.map((user) => {
+                              if (
+                                user["Full Name"] ===
+                                individualData["User Name"]
+                              ) {
+                                return user["Roll number"];
+                              }
+                            })}
+                          </td>
                           <td className="py-3 px-6 border-b">
                             {individualData["User Name"]}
                           </td>
@@ -521,18 +538,6 @@ function GenAi() {
                           </td>
                           <td className="py-3 px-6 border-b">
                             {individualData["# of Arcade Games Completed"]}
-                          </td>
-                          <td>
-                            {
-                              genai.map((user) => {
-                                if (
-                                  user["Full Name"] ===
-                                  individualData["User Name"]
-                                ) {
-                                  return user["Roll number"];
-                                }
-                              })
-                            }
                           </td>
                         </tr>
                       ))}
