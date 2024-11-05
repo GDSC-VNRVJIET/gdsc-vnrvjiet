@@ -73,7 +73,8 @@ const CheckRegistrations: React.FC = () => {
         {showunsentMails?"Show all":"Show unsent mails"}
         </button>
         </div>
-      <table className='mt-10 mx-auto border border-gray-300 shadow-md rounded-lg'>
+        <div className="w-full min-h-screen max-w-6xl mx-auto overflow-x-auto text-sm sm:text-base">
+      <table className='table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg'>
         <thead>
           <tr>
             <th className="border px-4 py-2">S.No.</th>
@@ -109,6 +110,7 @@ const CheckRegistrations: React.FC = () => {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 };
