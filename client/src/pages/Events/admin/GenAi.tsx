@@ -383,8 +383,7 @@ function GenAi() {
                                         }
                                       </td>
                                     </tr>
-                                  )
-                                )}
+                                  ))}
                               </tbody>
                             </table>
                           </td>
@@ -415,9 +414,9 @@ function GenAi() {
                       <div className="mb-4 sm:text-xl text-md font-bold text-center">
                         {topThreeParticipants[1]["User Name"]}
                       </div>
-                      <div className="flex flex-col justify-end items-center bg-gray-200 rounded-t-3xl w-full h-full p-5">
-                        <div className="text-xl font-semibold mb-3">2nd</div>
-                        <div className=" font-bold bg-slate-100 px-5 text-center rounded-xl">
+                      <div className="flex flex-col justify-end items-center bg-gray-200 rounded-t-3xl w-4/5 sm:w-full h-full p-3 sm:p-5">
+                        <div className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">2nd</div>
+                        <div className="font-bold bg-slate-100 px-3 sm:px-5 text-center rounded-xl text-sm sm:text-base">
                           {topThreeParticipants[1][
                             "# of Skill Badges Completed"
                           ] +
@@ -432,9 +431,11 @@ function GenAi() {
                       <div className="mb-4 sm:text-xl text-md font-bold text-center">
                         {topThreeParticipants[0]["User Name"]}
                       </div>
-                      <div className="flex flex-col justify-end items-center bg-amber-200 rounded-t-3xl w-full h-full p-5">
-                        <div className="text-xl font-semibold mb-3">1st</div>
-                        <div className="font-bold bg-slate-100 px-5 text-center rounded-xl">
+                      <div className="flex flex-col justify-end items-center bg-amber-200 rounded-t-3xl w-4/5 sm:w-full h-full p-3 sm:p-5">
+                        <div className="text-lg sm:text-sm font-semibold mb-2 sm:mb-3">
+                          1st
+                        </div>
+                        <div className="font-bold bg-slate-100 px-3 sm:px-5 text-center rounded-xl text-sm sm:text-base">
                           {topThreeParticipants[0][
                             "# of Skill Badges Completed"
                           ] +
@@ -449,9 +450,9 @@ function GenAi() {
                       <div className="mb-4 sm:text-xl text-md font-bold text-center">
                         {topThreeParticipants[2]["User Name"]}
                       </div>
-                      <div className="flex flex-col justify-end items-center bg-orange-200 rounded-t-3xl w-full h-full p-5">
-                        <div className="text-xl font-semibold mb-3">3rd</div>
-                        <div className=" font-bold bg-slate-100 px-5 text-center rounded-xl">
+                      <div className="flex flex-col justify-end items-center bg-orange-200 rounded-t-3xl w-4/5 sm:w-full h-full p-3 sm:p-5">
+                        <div className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">3rd</div>
+                        <div className="font-bold bg-slate-100 px-3 sm:px-5 text-center rounded-xl text-sm sm:text-base">
                           {topThreeParticipants[2][
                             "# of Skill Badges Completed"
                           ] +
@@ -465,7 +466,7 @@ function GenAi() {
                   </div>
                 )}
 
-                <div className="w-full max-w-6xl mx-auto overflow-x-auto">
+                <div className="w-full min-h-screen max-w-6xl mx-auto overflow-x-auto text-sm sm:text-base">
                   <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
                     <thead>
                       <tr className="text-white bg-blue-500">
