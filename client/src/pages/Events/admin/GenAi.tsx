@@ -403,6 +403,7 @@ function GenAi() {
         {isChecked && (
           <div className="viewer mb-8">
             <h1 className="sm:text-4xl text-xl text-center mb-4 font-bold m-6">
+              
               PARTICIPANT LEADERBOARD
             </h1>
 
