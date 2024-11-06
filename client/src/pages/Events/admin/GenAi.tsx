@@ -283,6 +283,7 @@ function GenAi() {
                     <th className="py-3 px-6 text-sm font-semibold uppercase">
                       Rank
                     </th>
+                    
                     <th className="py-3 px-6 text-sm font-semibold uppercase">
                       Team Name
                     </th>
@@ -343,6 +344,16 @@ function GenAi() {
                                       <td className="py-3 px-6 border-b">
                                         {index + 1}.{subIndex + 1}
                                       </td>
+                                      <td>
+                            {genai.map((user) => {
+                              if (
+                                user["Name"] ===
+                                individualData["User Name"]
+                              ) {
+                                return user["Roll No"];
+                              }
+                            })}
+                          </td>
                                       <td className="py-3 px-6 border-b">
                                         {individualData["User Name"]}
                                       </td>
@@ -503,10 +514,10 @@ function GenAi() {
                           <td>
                             {genai.map((user) => {
                               if (
-                                user["Full Name"] ===
+                                user["Name"] ===
                                 individualData["User Name"]
                               ) {
-                                return user["Roll number"];
+                                return user["Roll No"];
                               }
                             })}
                           </td>
