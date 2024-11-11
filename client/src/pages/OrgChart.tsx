@@ -13,6 +13,10 @@ import karthikimg from "./Domain Info/images/WEB DEV/Karthik.jpg"
 import varunimg from "./Domain Info/images/WEB DEV/Varun.jpg"
 import dedeepyaimg from "./Domain Info/images/WEB DEV/Vellanki Chenchu Dedeepya .jpg"
 import lakshitaimg from "./Domain Info/images/WEB DEV/Lakshita Goyal.jpg"
+import vigneshvardhan from "./Domain Info/images/CP/VighneshVangari.jpg"
+import sailokesh from './Domain Info/images/CP/CP1.jpeg'
+import vishnuvardhan from './Domain Info/images/CP/CP2.jpg'
+import udayyadav from './Domain Info/images/CP/GUdhayYadav.jpg'
 import harshaimg from "./Domain Info/images/CP/Harsha.jpg"
 import divyaimg from "./Domain Info/images/CP/Divya Sri.jpg"
 import vighneshimg from "./Domain Info/images/CP/VighneshVangari.jpg"
@@ -39,7 +43,15 @@ import harikaimg from "./Domain Info/images/MANAGEMENT/Harika.jpg"
 import panirudhimg from "./Domain Info/images/design/Anirudh P.jpg"
 import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg"
 import rishithaimg from "./Domain Info/images/design/Rishitha.jpg"
+import tanmayeeimg from "./Domain Info/images/design/Tanmayee_kyram.jpg"
 import bharathsirimg from "./images/facultyCord copy.jpg"
+import Harshitha from "./Domain Info/images/TandC/Harshithamandadi.jpg"
+import UdaySagar from "./Domain Info/images/AppDev/UdaySagar.jpeg"
+import VinayKumar from "./Domain Info/images/AppDev/VinayKumarKajjapu.jpg"
+import nishmaimg from "./Domain Info/images/Hardware/HardwareC1.jpg"
+import durgamadhavimg from "./Domain Info/images/Hardware/HardwareC2.jpg";
+import hardwarelead from "./Domain Info/images/Hardware/Hardwarelead.jpg"
+import Dhruva from "./Domain Info/images/Hardware/Dhruva.jpeg";
 
 import { set } from "date-fns";
 
@@ -102,6 +114,9 @@ const data2025: OrgChartData = {
       name: "Harsha Vardhan",
       img: harshaimg,
       coordinators: [
+        {name:"Sai Lokesh",img:sailokesh},
+        {name:"N Vishnu Vardhan",img:vishnuvardhan},
+        {name:"G Udhay Yadav",img:udayyadav}
       ],
       volunteers: [
       ],
@@ -126,7 +141,7 @@ const data2025: OrgChartData = {
       img: suryaimg ,
       coordinators: [
         { name: "Keerthika", img: keerthikaimg },
-        { name: "Roshini", img: roshiniimg },
+        // { name: "Roshini", img: roshiniimg },
         { name: "Bharath Chandra", img: bharathimg },
       ],
       volunteers: [
@@ -140,16 +155,33 @@ const data2025: OrgChartData = {
       coordinators: [
         { name: "Ch. Anirudh", img: chanirudhimg },
         { name: "Arya Joshi", img: aryaimg },
+        {name:"Rishitha",img:rishithaimg},
+        {name:"Tanmayee Kyram",img:tanmayeeimg}
       ],
       volunteers: [
       ],
       type: "nonTechnical",
     },
     {
+      role: "Social Media Lead",
+      name: "Pavanpraneetha Kunuku",
+      img: praneethaimg,
+      coordinators: [
+        {name:"Ch.Anirudh",img:chanirudhimg},
+        {name:"Tanmayee Kyram",img:tanmayeeimg},
+        {name:"Arya Joshi",img:aryaimg},
+        {name:"Rishitha",img:rishithaimg}
+      ],
+      volunteers: [],
+      type: "nonTechnical",
+    },
+    {
       role: "Testing and Cybersecurity Lead",
       name: "Vinay Gajula",
       img: vinayimg,
-      coordinators: [],
+      coordinators: [
+        {name:"Harshitha Mandadi",img:Harshitha}
+      ],
       volunteers: [],
       type:"technical",
     },
@@ -157,26 +189,36 @@ const data2025: OrgChartData = {
       role: "AppDev Lead",
       name: "Jahnavi Reddy",
       img: jahnavireddyimg,
-      coordinators: [],
+      coordinators: [
+        {name:"Uday Sagar",img:UdaySagar},
+        {name:"Vinay Kumar",img:VinayKumar}
+      ],
       volunteers: [],
       type:"technical",
     },
     {
-      role: "Social Media Lead",
-      name: "Pavanpraneetha Kunuku",
-      img: praneethaimg,
-      coordinators: [],
-      volunteers: [],
-      type: "nonTechnical",
+      role:"Hardware Lead",
+      name:"Avaneesh",
+      img:hardwarelead,
+      coordinators:[
+        {name:"Nishma Reddy",img:nishmaimg},
+        {name:"Durga Madhav",img:durgamadhavimg},
+        {name:"Dhruva",img:Dhruva}
+      ],
+      volunteers:[],
+      type:"non technical"
     },
     {
       role: "Women In Tech Lead",
       name: "Nikhita Kashyap D",
       img: nikhitaimg,
-      coordinators: [],
+      coordinators: [
+        {name:"Roshini Kotagiri",img:roshiniimg}
+      ],
       volunteers: [],
       type:"technical",
     },
+    
   ],
 };
 
@@ -268,6 +310,7 @@ const data2024: OrgChartData = {
         { name: "Rishitha", img: rishithaimg },
       ],
     },
+   
   ],
 };
 
@@ -327,8 +370,12 @@ const OrgChart: React.FC = () => {
               />
             </div>
             <h2 className="text-xl font-semibold">{dataToDisplay.facultyAdvisor.role}</h2>
-            <p className="text-md text-gray-700">{dataToDisplay.facultyAdvisor.name}</p>
-          </div>
+            
+            
+<p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
+  {dataToDisplay.facultyAdvisor.name}
+</p>
+</div>
           <div className="flex flex-col items-center space-y-4 mb-6">
             <div className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden">
               <img
@@ -338,7 +385,11 @@ const OrgChart: React.FC = () => {
               />
             </div>
             <h2 className="text-xl font-semibold">{dataToDisplay.lead.role}</h2>
-            <p className="text-md text-gray-700">{dataToDisplay.lead.name}</p>
+            
+            <p className="text-md" style={{ fontFamily: 'Roboto, sans-serif',color:'grey-200' }}>
+  {dataToDisplay.lead.name}
+</p>
+
           </div>
           <div className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${year===2025?"xl:grid-cols-5":"xl:grid-cols-6"} justify-around gap-y-10 relative`}>
             {dataToDisplay.domainLeads
@@ -362,33 +413,42 @@ const OrgChart: React.FC = () => {
                 <h2 className="text-lg font-medium text-center">
                   {person.role}
                 </h2>
-                <p className="text-md text-gray-700 text-center">
-                  {person.name}
-                </p>
+                
+                
+<p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'Grey-200 ' }}>
+  {person.name}
+</p>
                 <div className={`lg:absolute ${(year===2024 || index<5)?"lg:top-[15.5rem]":"lg:top-[33rem]"} relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out ${(selectedDomain===index ) ? '':'hidden'} ${fadein?'opacity-100':'opacity-0'}`}>
-                  {person.coordinators.length > 0 && 
-                  <h3 className="text-md font-semibold text-center mb-2">
-                  Coordinators
-                </h3>
-                }
-                    
-                    <div className="flex justify-center flex-wrap mb-4">
-                      {person.coordinators.map((coordinator, idx) => (
-                        <div
-                          key={idx}
-                          className="flex flex-col items-center mb-2 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
-                        >
-                          <img
-                            src={coordinator.img}
-                            alt={coordinator.name}
-                            className="shrink-0 rounded-full w-full h-full object-cover"
-                          />
-                          <p className="text-sm text-gray-700 text-center mt-2">
-                            {coordinator.name}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
+                 
+{person.coordinators.length > 0 && (
+  <div className="bg-blue-50 rounded-md mb-3 p-3">
+    <h3 className="text-md font-semibold text-center mb-2 text-blue-700">Coordinators</h3>
+    <div className="flex justify-center flex-wrap mb-4">
+      {person.coordinators.map((coordinator, idx) => (
+        <div
+          key={idx}
+          className="flex flex-col items-center mb-9 mx-2 w-36 h-36 md:w-48 md:h-48"
+        >
+        
+          <img
+            src={coordinator.img}
+            alt={coordinator.name}
+            className="shrink-0 rounded-full w-full h-full object-cover mb-2"
+          />
+        
+<p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
+  {coordinator.name}
+</p>
+
+          
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+   
+   
                     {person.volunteers.length > 0 && 
                     <h3 className="text-md font-semibold text-center mb-2">
                       Volunteers
@@ -404,9 +464,11 @@ const OrgChart: React.FC = () => {
                             alt={volunteer.name}
                             className="shrink-0 rounded-full w-full h-full object-cover"
                           />
-                          <p className="text-sm text-gray-700 text-center mt-2">
-                            {volunteer.name}
-                          </p>
+                         
+                          <p className="text-sm" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
+  {volunteer.name}
+</p>
+
                         </div>
                       ))}
                     </div>
@@ -421,3 +483,5 @@ const OrgChart: React.FC = () => {
 };
 
 export default OrgChart;
+
+

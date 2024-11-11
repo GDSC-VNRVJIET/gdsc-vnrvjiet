@@ -59,6 +59,7 @@ registrationApp.get(
         Entered: e.entered,
         MailSent:e.mailSent,
         PaymentSuccess:e.paymentSuccess,
+        Interest:e.interest,
       }));
   
       const csvFields = ["Name", "RollNo","Year","Branch","Section" ,"WhatsApp", "Email", "Entered","MailSent","PaymentSuccess"];
@@ -114,7 +115,7 @@ registrationApp.post(
             event: eventname,
             paymentSuccess: true,
         }).toArray();
-        response.send({ message: "Successful", cnt:150-count.length });
+        response.send({ message: "Successful", cnt:100-count.length });
       } catch (error) {
         response.send({ message: "Error" });
       }

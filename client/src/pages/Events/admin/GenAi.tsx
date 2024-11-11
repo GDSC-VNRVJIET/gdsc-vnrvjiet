@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import * as XLSX from "xlsx";
 import axios from "axios";
 import Timer from "./Timer";
+import genai from "./GenAi.json";
 
 interface UserData {
   "User Name": string;
@@ -209,16 +210,16 @@ function GenAi() {
               Teams Leaderboard
             </span>
             <span
-  className={`slider mx-4 flex sm:h-8 sm:w-[60px] h-6 w-[55px] items-center rounded-full p-1 duration-200 ${
-    isChecked ? "bg-green-500" : "bg-[#CCCCCE]"
-  }`}
->
-  <span
-    className={`dot sm:h-6 sm:w-6 h-4 w-4 rounded-full bg-white duration-200 transform ${
-      isChecked ? "sm:translate-x-[28px] translate-x-[13px]" : ""
-    }`}
-  ></span>
-</span>
+              className={`slider mx-4 flex sm:h-8 sm:w-[60px] h-6 w-[55px] items-center rounded-full p-1 duration-200 ${
+                isChecked ? "bg-green-500" : "bg-[#CCCCCE]"
+              }`}
+            >
+              <span
+                className={`dot sm:h-6 sm:w-6 h-4 w-4 rounded-full bg-white duration-200 transform ${
+                  isChecked ? "sm:translate-x-[28px] translate-x-[13px]" : ""
+                }`}
+              ></span>
+            </span>
 
             <span className="label flex items-center text-md font-medium text-black">
               Participants Leaderboard
@@ -284,6 +285,7 @@ function GenAi() {
                     <th className="py-3 px-6 text-sm font-semibold uppercase">
                       Rank
                     </th>
+                    
                     <th className="py-3 px-6 text-sm font-semibold uppercase">
                       Team Name
                     </th>
@@ -324,8 +326,15 @@ function GenAi() {
                           <td colSpan={4}>
                             <table className="min-w-full text-left">
                               <tbody>
-                                {teamData.members.map(
-                                  (individualData, subIndex) => (
+                                {teamData.members
+                                  .sort(
+                                    (a, b) =>
+                                      b["# of Skill Badges Completed"] +
+                                      b["# of Arcade Games Completed"] -
+                                      (a["# of Skill Badges Completed"] +
+                                        a["# of Arcade Games Completed"])
+                                  )
+                                  .map((individualData, subIndex) => (
                                     <tr
                                       key={subIndex}
                                       className={`${
@@ -337,6 +346,16 @@ function GenAi() {
                                       <td className="py-3 px-6 border-b">
                                         {index + 1}.{subIndex + 1}
                                       </td>
+                                      <td>
+                            {genai.map((user) => {
+                              if (
+                                user["Name"] ===
+                                individualData["User Name"]
+                              ) {
+                                return user["Roll No"];
+                              }
+                            })}
+                          </td>
                                       <td className="py-3 px-6 border-b">
                                         {individualData["User Name"]}
                                       </td>
@@ -377,8 +396,7 @@ function GenAi() {
                                         }
                                       </td>
                                     </tr>
-                                  )
-                                )}
+                                  ))}
                               </tbody>
                             </table>
                           </td>
@@ -409,9 +427,9 @@ function GenAi() {
                       <div className="mb-4 sm:text-xl text-md font-bold text-center">
                         {topThreeParticipants[1]["User Name"]}
                       </div>
-                      <div className="flex flex-col justify-end items-center bg-gray-200 rounded-t-3xl w-full h-full p-5">
-                        <div className="text-xl font-semibold mb-3">2nd</div>
-                        <div className=" font-bold bg-slate-100 px-5 text-center rounded-xl">
+                      <div className="flex flex-col justify-end items-center bg-gray-200 rounded-t-3xl w-4/5 sm:w-full h-full p-3 sm:p-5">
+                        <div className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">2nd</div>
+                        <div className="font-bold bg-slate-100 px-3 sm:px-5 text-center rounded-xl text-sm sm:text-base">
                           {topThreeParticipants[1][
                             "# of Skill Badges Completed"
                           ] +
@@ -426,9 +444,11 @@ function GenAi() {
                       <div className="mb-4 sm:text-xl text-md font-bold text-center">
                         {topThreeParticipants[0]["User Name"]}
                       </div>
-                      <div className="flex flex-col justify-end items-center bg-amber-200 rounded-t-3xl w-full h-full p-5">
-                        <div className="text-xl font-semibold mb-3">1st</div>
-                        <div className="font-bold bg-slate-100 px-5 text-center rounded-xl">
+                      <div className="flex flex-col justify-end items-center bg-amber-200 rounded-t-3xl w-4/5 sm:w-full h-full p-3 sm:p-5">
+                        <div className="text-lg sm:text-sm font-semibold mb-2 sm:mb-3">
+                          1st
+                        </div>
+                        <div className="font-bold bg-slate-100 px-3 sm:px-5 text-center rounded-xl text-sm sm:text-base">
                           {topThreeParticipants[0][
                             "# of Skill Badges Completed"
                           ] +
@@ -443,9 +463,9 @@ function GenAi() {
                       <div className="mb-4 sm:text-xl text-md font-bold text-center">
                         {topThreeParticipants[2]["User Name"]}
                       </div>
-                      <div className="flex flex-col justify-end items-center bg-orange-200 rounded-t-3xl w-full h-full p-5">
-                        <div className="text-xl font-semibold mb-3">3rd</div>
-                        <div className=" font-bold bg-slate-100 px-5 text-center rounded-xl">
+                      <div className="flex flex-col justify-end items-center bg-orange-200 rounded-t-3xl w-4/5 sm:w-full h-full p-3 sm:p-5">
+                        <div className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">3rd</div>
+                        <div className="font-bold bg-slate-100 px-3 sm:px-5 text-center rounded-xl text-sm sm:text-base">
                           {topThreeParticipants[2][
                             "# of Skill Badges Completed"
                           ] +
@@ -459,7 +479,7 @@ function GenAi() {
                   </div>
                 )}
 
-                <div className="w-full max-w-6xl mx-auto overflow-x-auto">
+                <div className="w-full min-h-screen max-w-6xl mx-auto overflow-x-auto text-sm sm:text-base">
                   <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
                     <thead>
                       <tr className="text-white bg-blue-500">
@@ -467,7 +487,10 @@ function GenAi() {
                           Rank
                         </th>
                         <th className="py-3 px-6 text-sm font-semibold uppercase">
-                          User Name
+                          Roll Number
+                        </th>
+                        <th className="py-3 px-6 text-sm font-semibold uppercase">
+                          Name
                         </th>
                         <th className="py-3 px-6 text-sm font-semibold uppercase">
                           Google Cloud Skills Boost Profile URL
@@ -489,6 +512,16 @@ function GenAi() {
                           } hover:bg-gray-100`}
                         >
                           <td className="py-3 px-6 border-b">{index + 1}</td>
+                          <td>
+                            {genai.map((user) => {
+                              if (
+                                user["Name"] ===
+                                individualData["User Name"]
+                              ) {
+                                return user["Roll No"];
+                              }
+                            })}
+                          </td>
                           <td className="py-3 px-6 border-b">
                             {individualData["User Name"]}
                           </td>
