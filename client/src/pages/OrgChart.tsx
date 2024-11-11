@@ -140,7 +140,7 @@ const data2025: OrgChartData = {
       img: suryaimg ,
       coordinators: [
         { name: "Keerthika", img: keerthikaimg },
-        { name: "Roshini", img: roshiniimg },
+        // { name: "Roshini", img: roshiniimg },
         { name: "Bharath Chandra", img: bharathimg },
       ],
       volunteers: [
