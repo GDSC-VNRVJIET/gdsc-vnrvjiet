@@ -51,6 +51,7 @@ import VinayKumar from "./Domain Info/images/AppDev/VinayKumarKajjapu.jpg"
 import nishmaimg from "./Domain Info/images/Hardware/HardwareC1.jpg"
 import durgamadhavimg from "./Domain Info/images/Hardware/HardwareC2.jpg";
 import hardwarelead from "./Domain Info/images/Hardware/Hardwarelead.jpg"
+import Dhruva from "./Domain Info/images/Hardware/Dhruva.jpeg";
 
 import { set } from "date-fns";
 
@@ -201,7 +202,8 @@ const data2025: OrgChartData = {
       img:hardwarelead,
       coordinators:[
         {name:"Nishma Reddy",img:nishmaimg},
-        {name:"Durga Madhav",img:durgamadhavimg}
+        {name:"Durga Madhav",img:durgamadhavimg},
+        {name:"Dhruva",img:Dhruva}
       ],
       volunteers:[],
       type:"non technical"
