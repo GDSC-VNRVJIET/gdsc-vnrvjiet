@@ -50,7 +50,6 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
       <div style="max-width:800px;margin:0 auto;">
         <img src="cid:gdg_banner" alt="" style="max-height:250px;max-width:100%;display:block;margin:auto;">
         <h3>Welcome to the GDGC VNRVJIET's ${event} Event, ${name}!</h3>
-        <img src="${qrCode}" alt="QR Code" style="width:30%;" />
         <p>Thank you for registering for our upcoming event at GDGC VNRVJIET. We're thrilled to have you join us.</p>
         <p>Your registration details are as follows:</p>
         <ul>
@@ -59,9 +58,9 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
           <li><strong>Section:</strong> ${section}</li>
         </ul>
         <p>To stay informed and ensure you don't miss any crucial updates, please join the <strong>WhatsApp group for event participants</strong> by clicking the link below:
-        <b><a href="https://chat.whatsapp.com/LwoCq0gprrBLb6IuN2tPZB" style="text-decoration:none;color:#1a73e8;">TensorFlow Participants 2024</a>.<b>
+        <b><a href="https://chat.whatsapp.com/EVlAPfSxxWaCMg7AfR2CMv" style="text-decoration:none;color:#1a73e8;">HackSprint Participants 2024</a>.<b>
         </p>
-        <p>You can use the QR code above for a smooth check-in process at the event.</p>
+        <!-- <p>You can use the QR code above for a smooth check-in process at the event.</p> -->
         <p>If you have any questions or need further assistance, feel free to reach out to us.</p>
         <br>
     <div>
@@ -108,7 +107,10 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
   }
 };
 
-
+// mailApp.get("/send-email", async (req, res) => {
+//   await sendEmail("1","laksita2004@gmail.com","22071A12F6","8008908113","IT","Lakshita","HackSprint","C");
+//   res.send({msg:"Email sent"});
+// });
 
 function sendGiveAccessEmail(email, blogId) {
   try {
@@ -240,7 +242,7 @@ mailApp.post("/order", async (req, res) => {
         event: eventname,
         paymentSuccess: true,
     }).toArray();
-    if(count.length >= 150){
+    if(count.length >= 100){
       return res.status(400).json({
         message: "Registrations closed. Maximum seats filled."
     });
@@ -281,6 +283,7 @@ if (!emailRegex.test(email)) {
       event: req.body.event,
       year: req.body.year,
       section: req.body.section,
+      interest: req.body.interest,
       razorpay_order_id: order.id,
       mailSent: false,
       entered: false,

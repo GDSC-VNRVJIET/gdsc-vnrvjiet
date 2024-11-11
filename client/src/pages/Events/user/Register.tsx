@@ -47,6 +47,7 @@ interface FormData {
   name: string;
   event: string;
   year:number;
+  interest:string;
 }
 
 const PaymentGatewayRazorpay: React.FC = () => {
@@ -63,6 +64,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
   const [checkModal, setCheckModal] = useState<boolean>(false);
   const [maxSeatModal, setMaxSeatModal] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
+  const [loadingmodal, setLoadingModal] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -98,6 +100,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
 
   const handleFormSubmit = (formData: FormData) => {
     if (states) formData.event = states.name;
+    setLoadingModal(true);
     paymentHandler(formData);
   };
 
@@ -151,7 +154,8 @@ const PaymentGatewayRazorpay: React.FC = () => {
           name: formdata.name,
           event: formdata.event,
           section: formdata.section,
-          year:formdata.year
+          year:formdata.year,
+          interest:formdata.interest,
         }),
       }
     );
@@ -195,10 +199,12 @@ const PaymentGatewayRazorpay: React.FC = () => {
         color: "#3399cc",
       },
     };
+    setLoadingModal(false);
     const rzp1 = new (window as any).Razorpay(option);
     rzp1.on("payment.failed", (res: any) => {
       alert("Payment failed");
     });
+
     rzp1.open();
   };
 
@@ -230,6 +236,14 @@ const PaymentGatewayRazorpay: React.FC = () => {
     <Loader />
   ) : (
     <>
+    {
+      loadingmodal && <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md relative">
+        <h2 className="text-center text-xl mb-4">Loading...</h2>
+        <p>Please wait while we process your request for registration.</p>
+      </div>
+    </div>
+    }
       {modal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md relative">
@@ -407,10 +421,10 @@ const PaymentGatewayRazorpay: React.FC = () => {
       <div className="product mt-6 flex flex-col items-center">
         <div className=" lg:w-4/6 px-4 lg:px-1 p-4 bg-white shadow-lg rounded-xl mt-5 mb-10">
         <div className="flex justify-center items-center ">
-          {states?.name === "Tensor Flow" && (
+          {states?.name === "HackSprint" && (
             <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6JGGZMfhZhqwUSTg79d0vEvu_V8a6pk8njQ&s"  
-            alt="TensorFlow Logo"
+            src="https://avatars.githubusercontent.com/u/31746234?s=280&v=4"  
+            alt="HackSprint Logo"
             className="w-20 h-20 rounded-full object-cover"  
           />)}
           
@@ -426,11 +440,11 @@ const PaymentGatewayRazorpay: React.FC = () => {
             </button>
           </div>
         </div>
-      <p dangerouslySetInnerHTML={{ __html: states?.description }} className="text-justify text-md text-gray-500 lg:text-xl sm:px-16 mb-2 ">
+      <p dangerouslySetInnerHTML={{ __html: states?.description }} className="text-justify text-md text-gray-600 lg:text-xl sm:px-16 mb-2 ">
         {/* {states?.description}   */}
       </p>
       </div>  
-        {states?.name === "Webathon3.O"? (
+        {states?.name !== "HackSprint"? (
           <div className="text-center">
             <p className="text-gray-600 text-xl">To be announced Soon!</p>
             <img src={tobeannounced} className="mx-auto" alt="" />
@@ -461,7 +475,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 ></div>
               </div>
               <div className="flex">
-              <h2 className="text-white rounded-full text-base bg-yellow-400 lg:text-lg mr-3 ps-2 pr-2 pt-1 pb-1">{`Seats left: ${count}`}</h2>
+              <h2 className="text-white rounded-full text-base bg-blue-400 lg:text-lg mr-3 ps-2 pr-2 pt-1 pb-1">{`Seats left: ${count}`}</h2>
               <RxLapTimer className="mt-1 mr-1 text-xl sm:text-2xl lg:text-3xl text-red-300" />
 
               </div>
@@ -594,6 +608,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
                   {...register("year", { required: true })}
                   className="bg-white border border-gray-300 text-gray-900 mt-3 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 >
+                  <option value="1">1st Year</option>
                   <option value="2">2nd Year</option>
                   <option value="3">3rd Year</option>
                   <option value="4">4th Year</option>
@@ -609,8 +624,10 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 </label>
                 <select
                   {...register("section", { required: true })}
+                  defaultValue={""}
                   className="bg-white border border-gray-300 text-gray-900 mt-3 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 >
+                  <option value="" disabled>Select Section</option>
                   <option value="-">Section unavailable</option>
                   <option value="A">A</option>
                   <option value="B">B</option>
@@ -619,9 +636,23 @@ const PaymentGatewayRazorpay: React.FC = () => {
                 </select>
                 <div className="">
                   {errors.section?.type === "required" && (
-                    <p className="text-red-500">Enter Section (Keep '-' for no section)</p>
+                    <p className="text-red-500">Enter Section ('-' for no section)</p>
                   )}
                 </div>
+              </div>
+              <div className="w-full lg:w-11/12 mx-auto mt-6">
+                <label htmlFor="interest" className="ms-1 text-gray-500">
+                What interests you to join the challenge?
+                </label>
+                <textarea
+                  {...register("interest")}
+                  className="bg-white border border-gray-300 text-gray-900 mt-3 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 outline outline-0 focus:outline-0"
+                >
+                  
+                  
+                </textarea>
+                
+                
               </div>
               
             </div>
