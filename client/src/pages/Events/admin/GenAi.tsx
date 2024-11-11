@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import * as XLSX from "xlsx";
 import axios from "axios";
+import Timer from "./Timer";
 
 interface UserData {
   "User Name": string;
@@ -162,6 +163,7 @@ function GenAi() {
 
   return (
     <div className="wrapper p-8 bg-gray-100 min-h-screen">
+      <Timer/>
       {user && user.role === process.env.REACT_APP_ADMIN_ROLE && (
         <div>
           <h3 className="text-2xl font-bold text-gray-700 mb-6 text-center">
@@ -225,7 +227,7 @@ function GenAi() {
         </div>
         {!isChecked && (
           <h1 className="sm:text-4xl text-xl text-center mb-4 font-bold m-6">
-            GEN AI STUDY JAMS LEADERBOARD
+            TEAMS LEADERBOARD
           </h1>
         )}
 
@@ -396,7 +398,7 @@ function GenAi() {
         {isChecked && (
           <div className="viewer mb-8">
             <h1 className="sm:text-4xl text-xl text-center mb-4 font-bold m-6">
-              PARTICIPANT LEADERBOARD
+              GEN AI STUDY JAMS LEADERBOARD
             </h1>
 
             {participantData ? (
