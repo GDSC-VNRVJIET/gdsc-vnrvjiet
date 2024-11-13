@@ -421,7 +421,7 @@ function GenAi() {
 
             {participantData ? (
               <>
-                {topThreeParticipants && (
+                {/* {topThreeParticipants && (
                   <div className="flex justify-center mb-6 w-5/6 lg-w-1/3 mx-auto items-end space-x-1 ">
                     <div className="flex flex-col w-40 h-80 ">
                       <div className="mb-4 sm:text-xl text-md font-bold text-center">
@@ -477,7 +477,7 @@ function GenAi() {
                       </div>
                     </div>
                   </div>
-                )}
+                )} */}
 
                 <div className="w-full min-h-screen max-w-6xl mx-auto overflow-x-auto text-sm sm:text-base">
                   <table className="table-auto min-w-full text-left border-collapse bg-white shadow-md rounded-lg">
