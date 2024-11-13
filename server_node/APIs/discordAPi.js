@@ -13,11 +13,15 @@ discordApp.use(cors());
 discordApp.get(
     "/users",
     expressAsyncHandler(async (request, response) => {
-        const { email } = request.query;
-    if (email === '123@gmail.com') {
+        const { email,secretKey } = request.query;
+    if (secretKey === process.env.SECRET_KEY) {
       let communityCollectionObject = await getDBObj("communityCollectionObject");
-      let communityMembers = await communityCollectionObject.find().toArray();
-      response.status(200).send({ message: "users list", payload: communityMembers });
+      let communityMember = await communityCollectionObject.findOne({email});
+      if (communityMember) {
+        response.status(200).send({ message: "User details", payload: communityMember });
+      } else {
+        response.status(404).send({ message: "User not found" });
+      }
     } else {
       response.status(403).send({ message: "Invalid access" });
     }
