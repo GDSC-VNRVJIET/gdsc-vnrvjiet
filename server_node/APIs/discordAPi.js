@@ -13,7 +13,7 @@ discordApp.get(
     "/users",
     expressAsyncHandler(async (request, response) => {
         const { email,secretKey } = request.query;
-    if (secretKey === "FBKNa5P4uqvRPULB ") {
+    if (secretKey === "FBKNa5P4uqvRPULB") {
       let communityCollectionObject = await getDBObj("communityCollectionObject");
       let communityMember = await communityCollectionObject.findOne({email});
       if (communityMember) {
