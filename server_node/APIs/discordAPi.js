@@ -4,7 +4,6 @@ const discordApp = exp.Router();
 const expressAsyncHandler = require("express-async-handler");
 const getDBObj = require("./DBConnection");
 const { ObjectId } = require('mongodb');
-
 require("dotenv").config();
 
 discordApp.use(exp.json());
