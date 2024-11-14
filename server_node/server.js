@@ -13,6 +13,7 @@ const registrationApp = require('./APIs/registrationApi');
 const mailApp = require("./APIs/mailApi");
 const blogApp = require("./APIs/blogApi");
 const genAiApp = require("./APIs/genAiApi");
+const discordApp=require("./APIs/discordAPi");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./swaggerSpec");
@@ -39,6 +40,7 @@ app.use("/registration", registrationApp);
 app.use("/sendmail", mailApp);
 app.use("/addblog", blogApp);
 app.use("/genAi", genAiApp);
+app.use("/discord", discordApp);
 
 // Default route
 app.use("/", (req, res) => {
