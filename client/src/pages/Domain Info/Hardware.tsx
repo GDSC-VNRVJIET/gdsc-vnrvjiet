@@ -5,6 +5,7 @@ import React,{useEffect} from "react";
 import HardwareLeadImage from "./images/Hardware/Hardwarelead.jpg";
 import HardwareC1 from './images/Hardware/HardwareC1.jpg';
 import HardwareC2 from './images/Hardware/HardwareC2.jpg';
+import dhruva from './images/Hardware/Dhruva.jpeg';
 
 
 function Hardware() {
@@ -40,6 +41,14 @@ function Hardware() {
       github: "#",
       instagram: "#",
     },
+    {
+      name:"Dhruva",
+      role:"Hardware Coordinator",
+      image:dhruva,
+      linkedin:"#",
+      github:"#",
+      instagram:"#",
+    }
   ];
 
   return (
