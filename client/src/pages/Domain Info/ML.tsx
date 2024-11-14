@@ -21,23 +21,23 @@ function ML() {
   const members = [
     {
       name: "Surya Teja",
-      role: "Machine Learning Lead",
+      role: "AIML Lead",
       image: SuryaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
-    {
-      name: "Roshini",
-      role: "Machine Learning Coordinator",
-      image: RoshiniImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
+    // {
+    //   name: "Roshini",
+    //   role: "Machine Learning Coordinator",
+    //   image: RoshiniImage,
+    //   linkedin: "#",
+    //   github: "#",
+    //   instagram: "#",
+    // },
     {
       name: "Keerthika",
-      role: "Machine Learning Volunteer",
+      role: "AIML Coordinator",
       image: KeerthikaImage,
       linkedin: "#",
       github: "#",
@@ -46,7 +46,7 @@ function ML() {
     
     {
       name: "Bharath Chandra",
-      role: "Machine Learning Volunteer",
+      role: "AIML Coordinator",
       image: BharathImage,
       linkedin: "#",
       github: "#",
@@ -76,7 +76,7 @@ function ML() {
       <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-6xl mx-auto">
         <div className="p-6">
           <h3 className="text-2xl sm:text-3xl md:text-4xl text-center font-extrabold mb-6 sm:mb-8 md:mb-10 text-yellow-600">
-            Machine Learning
+            AIML
           </h3>
           <div className="flex flex-col md:flex-row justify-center mb-20 items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
             <img
@@ -85,7 +85,7 @@ function ML() {
               className="rounded-lg shadow-lg w-full sm:w-2/3 md:w-1/4 mb-4 md:mb-0"
             />
             <p className="text-gray-700 text-lg leading-relaxed text-center md:text-left">
-              The Machine Learning Domain at GDSC VNRVJIET is where innovation
+              The Artificial Intelligence and Machine learning Domain at GDSC VNRVJIET is where innovation
               meets application. Our team is focused on exploring the full
               potential of machine learning, from data analysis to building
               adaptive systems. We conduct events and workshops to simplify

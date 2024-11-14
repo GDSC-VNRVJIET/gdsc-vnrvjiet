@@ -23,7 +23,7 @@ const cards = [
   {
     image:
       "https://connect.ignatiuz.com/hs-fs/hubfs/AI%20and%20Deep%20Learning.gif?width=1000&name=AI%20and%20Deep%20Learning.gif",
-    title: "Machine Learning",
+    title: "Artificial Intelligence and Machine learning",
     description:
       "Immerses students in the intricacies of Machine Learning, motivating them to delve into and apply sophisticated algorithms, conduct data analysis, and create predictive models to address intricate problems.",
     path: "/machine-learning",
