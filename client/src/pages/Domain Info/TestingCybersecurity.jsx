@@ -4,6 +4,7 @@ import React,{useEffect} from "react";
 // import { FaGithub } from "react-icons/fa";
 import GVKImage from "./images/TandC/GVK.jpeg";
 import HarshithaImage from './images/TandC/Harshithamandadi.jpg';
+import Shahid from "./images/TandC/Shahid.jpg"
 
 
 function Hardware() {
@@ -31,6 +32,14 @@ function Hardware() {
       github: "#",
       instagram: "#",
     },
+    {
+      name:"Shahid",
+      role:"Testing and Cybersecurity Coordinator",
+      image:Shahid,
+      linkedin:"#",
+      github:"#",
+      instagram:"#",
+    }
   ];
 
   return (

@@ -52,7 +52,7 @@ import nishmaimg from "./Domain Info/images/Hardware/HardwareC1.jpg"
 import durgamadhavimg from "./Domain Info/images/Hardware/HardwareC2.jpg";
 import hardwarelead from "./Domain Info/images/Hardware/Hardwarelead.jpg"
 import Dhruva from "./Domain Info/images/Hardware/Dhruva.jpeg";
-
+import Shahid from "./Domain Info/images/TandC/Shahid.jpg";
 import { set } from "date-fns";
 
 interface Person {
@@ -180,7 +180,8 @@ const data2025: OrgChartData = {
       name: "Vinay Gajula",
       img: vinayimg,
       coordinators: [
-        {name:"Harshitha Mandadi",img:Harshitha}
+        {name:"Harshitha Mandadi",img:Harshitha},
+        {name:"Shahid",img:Shahid},
       ],
       volunteers: [],
       type:"technical",
@@ -332,7 +333,7 @@ const OrgChart: React.FC = () => {
     }, 10) }, [selectedDomain])
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 relative">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 relative overflow-x-hidden">
       <h1 className="text-4xl font-bold mb-6 text-center">
         Organizational Chart
       </h1>
