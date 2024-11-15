@@ -240,9 +240,9 @@ function GenAi() {
                   <div className="mb-4 sm:text-xl text-md font-bold text-center">
                     Team {topThreeTeams[1].team}
                   </div>
-                  <div className="flex flex-col justify-end items-center bg-gray-200 rounded-t-3xl w-full h-full p-5">
-                    <div className="text-xl font-semibold mb-3">2nd</div>
-                    <div className=" font-bold bg-slate-100 px-5 text-center rounded-xl">
+                  <div className="flex flex-col justify-end items-center bg-gray-200 rounded-t-3xl w-4/5 sm:w-full h-full p-3 sm:p-5">
+                    <div className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">2nd</div>
+                    <div className="font-bold bg-slate-100 px-3 sm:px-5 text-center rounded-xl text-sm sm:text-base">
                       {topThreeTeams[1].skillBadgesCompleted +
                         topThreeTeams[1].arcadeGamesCompleted}{" "}
                       Badges
@@ -253,9 +253,9 @@ function GenAi() {
                   <div className="mb-4 sm:text-xl text-md font-bold text-center">
                     Team {topThreeTeams[0].team}
                   </div>
-                  <div className="flex flex-col justify-end items-center bg-amber-200 rounded-t-3xl w-full h-full p-5">
-                    <div className="text-xl font-semibold mb-3">1st</div>
-                    <div className="font-bold bg-slate-100 px-5 text-center rounded-xl">
+                  <div className="flex flex-col justify-end items-center bg-amber-200 rounded-t-3xl w-4/5 sm:w-full h-full p-3 sm:p-5">
+                    <div className="text-lg sm:text-sm font-semibold mb-2 sm:mb-3">1st</div>
+                    <div className="font-bold bg-slate-100 px-3 sm:px-5 text-center rounded-xl text-sm sm:text-base">
                       {topThreeTeams[0].skillBadgesCompleted +
                         topThreeTeams[0].arcadeGamesCompleted}{" "}
                       Badges
@@ -266,9 +266,9 @@ function GenAi() {
                   <div className="mb-4 sm:text-xl text-md font-bold text-center">
                     Team {topThreeTeams[2].team}
                   </div>
-                  <div className="flex flex-col justify-end items-center bg-orange-200 rounded-t-3xl w-full h-full p-5">
-                    <div className="text-xl font-semibold mb-3">3rd</div>
-                    <div className=" font-bold bg-slate-100 px-5 text-center rounded-xl">
+                  <div className="flex flex-col justify-end items-center bg-orange-200 rounded-t-3xl w-4/5 sm:w-full h-full p-3 sm:p-5">
+                    <div className="text-lg sm:text-sm font-semibold mb-2 sm:mb-3">3rd</div>
+                    <div className="font-bold bg-slate-100 px-3 sm:px-5 text-center rounded-xl text-sm sm:text-base">
                       {topThreeTeams[2].skillBadgesCompleted +
                         topThreeTeams[2].arcadeGamesCompleted}{" "}
                       Badges
