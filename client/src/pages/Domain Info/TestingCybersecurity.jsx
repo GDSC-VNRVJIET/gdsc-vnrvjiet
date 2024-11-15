@@ -2,7 +2,7 @@ import React,{useEffect} from "react";
 // import { FiInstagram } from "react-icons/fi";
 // import { FaLinkedinIn } from "react-icons/fa";
 // import { FaGithub } from "react-icons/fa";
-import GVKImage from "./images/TandC/GVK.jpeg";
+import GVKImage from "./images/TandC/GVK.jpg";
 import HarshithaImage from './images/TandC/Harshithamandadi.jpg';
 import Shahid from "./images/TandC/Shahid.jpg"
 
