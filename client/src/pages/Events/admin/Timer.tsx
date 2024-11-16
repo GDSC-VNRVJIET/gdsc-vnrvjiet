@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 function Timer() {
-  const targetDate = new Date('2024-11-16T23:59:59');
+  const targetDate = new Date('2024-11-18T23:50:00');
   const [diff, setDiff] = useState<number>(targetDate.getTime() - new Date().getTime());
 
   useEffect(() => {
