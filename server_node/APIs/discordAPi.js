@@ -27,6 +27,35 @@ discordApp.get(
     })
   );
 
+  discordApp.post(
+    "/register",
+    expressAsyncHandler(async (request, response) => {
+      const communityCollectionObject = await getDBObj("communityCollectionObject");
+  
+      let newRegister = request.body;
+      newRegister.rollNumber= newRegister.rollNumber.toUpperCase();
+      const otp = Math.floor(100000 + Math.random() * 900000);
+      newRegister.otp = otp;
+      await communityCollectionObject.insertOne(newRegister);
+      response.send({ message: "Registration successful" });
+    })
+  );
+
+  discordApp.post(
+    "/check-register",
+    expressAsyncHandler(async (request, response) => {
+      let communityCollectionObject = await getDBObj("communityCollectionObject");
+      let {rollNumber} = request.body;
+      let userData = await communityCollectionObject
+        .find({ rollNumber: rollNumber})
+        .toArray();
+      if (userData.length !== 0) {
+        response.send({status:false})
+      }
+      response.send({ status: true });
+    })
+  );
+
 
 module.exports = discordApp;
   
