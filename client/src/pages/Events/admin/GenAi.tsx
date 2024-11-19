@@ -164,7 +164,7 @@ function GenAi() {
 
   return (
     <div className="wrapper p-8 bg-gray-100 min-h-screen">
-      <Timer/>
+      {/* <Timer/> */}
       {user && user.role === process.env.REACT_APP_ADMIN_ROLE && (
         <div>
           <h3 className="text-2xl font-bold text-gray-700 mb-6 text-center">
