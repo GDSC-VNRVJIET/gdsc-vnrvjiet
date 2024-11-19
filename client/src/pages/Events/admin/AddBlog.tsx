@@ -7,16 +7,19 @@ import "react-quill/dist/quill.snow.css";
 import { useLocation } from "react-router-dom";
 
 interface FormData {
-  author: string;
-  title: string;
+  author?: string;
+  title?: string;
   description: string;
-  category: string;
-  thumbnail: string;
+  category?: string;
+  thumbnail?: string;
+  domain?: string;
   show: boolean;
+  isCommunity: boolean;
 }
 const AddBlog: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const blogType = state?.blogType;
   const [description, setDescription] = useState<string>('');
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("userObjGDSC") || "null") as {
@@ -77,12 +80,18 @@ const AddBlog: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     const formData = new FormData();
-    formData.append("title", state[1]);
-    formData.append("description", description);
-    formData.append("category", state[2]);
-    formData.append("thumbnail", state[0]);
-    formData.append("author", state[3]);
-    formData.append("show", false.toString());
+    if (blogType === "achiever") {
+      formData.append("title", state?.blogTitle);
+      formData.append("description", description);
+      formData.append("category", state?.categories);
+      formData.append("thumbnail", state?.base64Image);
+      formData.append("author", state?.author);
+    } else if (blogType === "community") {
+      formData.append("domain", state?.domain);
+      formData.append("description", description); 
+    }
+    formData.append("show", "false"); 
+    formData.append("isCommunity", blogType === "community" ? "true" : "false");
     createBlog(formData as any);
   };
 
