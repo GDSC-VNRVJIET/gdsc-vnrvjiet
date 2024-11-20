@@ -164,7 +164,7 @@ const SingleBlog: React.FC = () => {
             <span className="block font-bold text-sm">By : {blog.author}</span>
           </div>
           <div className="mb-3 flex flex-wrap mt-3 justify-center font-medium text-xs md:text-sm -m-1">
-            {blog.category.split(",").map((cat, idx) => (
+          {(blog.category || "").split(",").map((cat, idx) => (
               <ul key={idx} className="">
                 <li className="m-1">
                   <a

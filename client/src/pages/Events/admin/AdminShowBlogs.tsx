@@ -15,6 +15,8 @@ interface Blog {
 }
 
 interface CommunityBlog {
+  title: string;
+  thumbnail: string;
   domain: string;
   description: string;
   [key: string]: any; // In case there are other fields not mentioned
@@ -93,7 +95,7 @@ const AdminShowBlogs: React.FC = () => {
     const blogData =
       blogType === "achiever"
         ? { blogType, base64Image, blogTitle, categories, author }
-        : { blogType, domain };
+        : { blogType, base64Image, blogTitle, domain };
 
     navigate("/add-blog", { state: blogData });
     setShowModal(false);
@@ -302,7 +304,16 @@ const AdminShowBlogs: React.FC = () => {
                   </div>
                 </>
               ) : (
+                <>
                 <div className="flex flex-col gap-4">
+                  <input
+                    type="text"
+                    value={blogTitle}
+                    onChange={handleTitleChange}
+                    required
+                    placeholder="Title"
+                    className="p-2 border border-gray-300 rounded"
+                  />
                   <select
                     value={domain}
                     onChange={handleDomainChange}
@@ -317,6 +328,35 @@ const AdminShowBlogs: React.FC = () => {
                     <option value="cloud-computing">Cloud Computing</option>
                   </select>
                 </div>
+                <div className="flex flex-col items-center">
+                    {fileName ? (
+                      <div className="flex items-center justify-between w-full p-4 border-dashed border-2 border-gray-500 rounded">
+                        <span className="text-gray-700">{fileName}</span>
+                        <button
+                          type="button"
+                          onClick={handleDelete}
+                          className="bg-red-500 text-white py-1 px-3 rounded"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    ) : (
+                      <label className="border-dashed border-2 border-gray-500 p-4 rounded cursor-pointer flex flex-col items-center">
+                        <span className="text-gray-700">
+                          Drop Thumbnail here
+                        </span>{" "}
+                        (or)
+                        <input
+                          className="hidden"
+                          type="file"
+                          id="images"
+                          accept="image/png, image/jpg, image/jpeg"
+                          onChange={handleImageChange}
+                        />
+                      </label>
+                    )}
+                  </div>
+                </>
               )}
               <button
                 type="button"
