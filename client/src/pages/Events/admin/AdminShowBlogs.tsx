@@ -3,6 +3,23 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CurrentBlogs from "./CurrentBlogs";
 import Loader from "../../Loader";
+import { motion } from "framer-motion";
+import { Swiper as SwiperType } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Carousel,
+  Typography,
+  Avatar,
+} from "@material-tailwind/react";
+
 interface Blog {
   author?: string;
   thumbnail?: string;
@@ -64,6 +81,7 @@ const AdminShowBlogs: React.FC = () => {
           setDisplayLoader(false);
         } else {
           console.error("Unexpected response format: payload is not an array");
+          console.log(response.data.payload);
           setBlogs([]);
           setDisplayLoader(false);
         }
@@ -98,6 +116,10 @@ const AdminShowBlogs: React.FC = () => {
     navigate("/add-blog", { state: blogData });
     setShowModal(false);
   };
+
+  function replaceBlackWithWhite(htmlContent: string) {
+    return htmlContent.replace(/rgb\(0, 0, 0\)/g, "rgb(255, 255, 255)");
+  }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -389,154 +411,92 @@ const AdminShowBlogs: React.FC = () => {
           </li>
         </ul>
         {activeTab === "tab1" ? (
-          <ul className="mt-3">
-            {blogs.length > 0 ? (
-              blogs.map((blog, index) => (
-                <section
-                  key={blog._id}
-                  className="relative flex flex-col justify-center antialiased mb-20"
-                >
-                  {blog.isCommunity === "false" ? (
-                    <div className="max-w-6xl mx-auto p-4 sm:px-6 h-full">
-                      <article className="relative max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
-                        <a className="relative block group">
-                          <div
-                            className="absolute inset-0 bg-gray-200 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none"
-                            aria-hidden="true"
-                          ></div>
-                          <figure className="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
-                            <img
-                              className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out"
-                              src={blog.thumbnail}
-                              onClick={() => handleBlogClick(blog._id)}
-                              style={{ cursor: "pointer" }}
-                              width="540"
-                              height="303"
-                              alt="Blog post"
-                            />
-                          </figure>
-                        </a>
-                        <div>
-                          <header>
-                            <h3 className="text-2xl lg:text-3xl font-bold leading-tight mb-2">
-                              <a className="hover:text-blue-500 transition duration-150 ease-in-out">
-                                {blog.title}
-                              </a>
-                            </h3>
-                          </header>
-                          <p
-                            className="text-gray-600 text-lg two-lines"
-                            dangerouslySetInnerHTML={{
-                              __html:
-                                blog.description.length < 140
-                                  ? blog.description
-                                  : blog.description.substring(0, 136) + "...",
-                            }}
-                          ></p>
+          <div className="relative mt-3">
+            <Swiper
+              spaceBetween={30}
+              slidesPerView={3}
+              loop={true}
+              navigation={true}
+              modules={[Navigation]}
+              pagination={{ clickable: true }}
+              breakpoints={{
+                350: {
+                  slidesPerView: 1,
+                },
+                768: {
+                  slidesPerView: 2,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+              }}
+            >
+              {blogs.length > 0 ? (
+                blogs.map((blog, index) => (
+                  <SwiperSlide key={blog._id}>
+                    <Card
+                      shadow={false}
+                      className="relative grid w-11/12 min-h-[340px] mx-auto items-end justify-center overflow-hidden cursor-pointer"
+                      onClick={() => handleBlogClick(blog._id)}
+                    >
+                      <CardHeader
+                        floated={false}
+                        shadow={false}
+                        color="transparent"
+                        className={`absolute inset-0 m-0 h-full  w-full rounded-none bg-cover bg-center `}
+                        style={{ backgroundImage: `url(${blog.thumbnail})` }}
+                      >
+                        <div className="to-bg-black-10 absolute inset-0 h-full  w-full bg-gradient-to-t from-black/80 via-black/50" />
+                      </CardHeader>
 
-                          {/* Radio button for selecting a blog */}
-                          {showRadioButtons && (
-                            <input
-                              type="radio"
-                              name="selectedBlog"
-                              value={blog._id}
-                              onChange={() => handleBlogSelection(blog._id)}
-                              className="absolute top-4 right-4 z-10 border-8 border-blue-600"
-                              style={{ width: "20px", height: "20px" }}
-                            />
-                          )}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileHover={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute inset-0 flex justify-center bg-black/70 text-white p-6 opacity-0 group-hover:opacity-100"
+                      >
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html:
+                              blog.description.length < 200
+                                ? replaceBlackWithWhite(blog.description)
+                                : replaceBlackWithWhite(
+                                    blog.description.substring(0, 196) + "..."
+                                  ),
+                          }}
+                        />
+                      </motion.div>
 
-                          <a
-                            style={{ cursor: "pointer" }}
-                            className="inline-flex items-center py-2 space-x-2 text-sm dark:text-violet-600 hover:underline"
-                            onClick={() => handleBlogClick(blog._id)}
-                          >
-                            <span>Read more</span>
-
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-4 h-4"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                clipRule="evenodd"
-                              ></path>
-                            </svg>
-                          </a>
-                          <div className="mb-3 flex flex-wrap font-medium text-sm -m-1">
-                            {blog?.category &&
-                              blog.category.split(",").map((cat, idx) => (
-                                <ul key={idx}>
-                                  <li className="m-1">
-                                    <a
-                                      className={`inline-flex text-center text-gray-100 py-2 px-4 rounded-full transition duration-150 ease-in-out ${
-                                        colors[idx % colors.length]
-                                      }`}
-                                    >
-                                      {cat.trim()}
-                                    </a>
-                                  </li>
-                                </ul>
-                              ))}
-                          </div>
-                          <footer className="flex items-center mt-4">
-                            <a>
-                              <img
-                                className="rounded-full flex-shrink-0 mr-4"
-                                src="https://tse2.mm.bing.net/th?id=OIP.XadmtOiEEI6Zv388n5l2dQHaHx&pid=Api&P=0&h=220"
-                                width="40"
-                                height="40"
-                                alt="Author 04"
-                              />
-                            </a>
-                            <div>
-                              <a className="font-medium text-gray-800 hover:text-cyan-600 transition duration-150 ease-in-out">
-                                {blog.author}
-                              </a>
-                              <span className="text-gray-700"> - </span>
-                              <span className="text-gray-500">{blog.date}</span>
-                            </div>
-                          </footer>
-                        </div>
-                      </article>
-                    </div>
-                  ) : (
-                    <div className="max-w-4xl mx-auto p-4 sm:px-6 h-full">
-                      <div className="border rounded-lg shadow-md hover:shadow-lg transition duration-300">
-                        <div className="p-6">
-                          <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                            Domain: {blog.domain}
-                          </h3>
-                          <p
-                            className="text-gray-600 text-lg two-lines"
-                            dangerouslySetInnerHTML={{
-                              __html:
-                                blog.description.length < 140
-                                  ? blog.description
-                                  : blog.description.substring(0, 136) + "...",
-                            }}
-                          ></p>
-                          <div className="mt-4">
-                            <button
-                              className="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700"
-                              onClick={() => handleBlogClick(blog._id)}
-                            >
-                              View Blog
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </section>
-              ))
-            ) : (
-              <p>No blogs available.</p>
-            )}
-          </ul>
+                      <CardFooter className="align-bottom absolute z-10 px-10 py-10 text-left w-full text-white group-hover:opacity-0 transition-opacity duration-300">
+                        <Typography className="text-white " variant="h4">
+                          {blog.title}
+                        </Typography>
+                        <Typography className="text-gray-300 " variant="small">
+                          {blog.date} •
+                          <img
+                            className="rounded-full flex-shrink-0 mr-2 mb-4 inline w-6 ms-4"
+                            src="https://tse2.mm.bing.net/th?id=OIP.XadmtOiEEI6Zv388n5l2dQHaHx&pid=Api&P=0&h=220"
+                            width="40"
+                            height="40"
+                            alt="Author 04"
+                          />
+                          {blog.author} <br />
+                          {blog?.category &&
+                            blog.category.split(",").map((cat, idx) => (
+                              <span key={idx}>
+                                <u className="me-2 cursor-pointer">#{cat}</u>
+                              </span>
+                            ))}
+                        </Typography>
+                      </CardFooter>
+                    </Card>
+                  </SwiperSlide>
+                ))
+              ) : (
+                <p>No blogs available.</p>
+              )}
+            </Swiper>
+          </div>
         ) : (
           <CurrentBlogs />
         )}
