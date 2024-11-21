@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loader from "../../Loader";
+import CarouselBlog from "../CarouselBlog";
 
 interface Blog {
   id: string;
@@ -24,6 +25,7 @@ const UserShowBlogs: React.FC = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>([]);
   const [displayLoader, setDisplayLoader] = useState(true);
+  const [blogType, setBlogType] = useState("all");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -90,21 +92,28 @@ const UserShowBlogs: React.FC = () => {
 
       <div className="flex justify-center space-x-4 mt-6">
         <button
-          onClick={showAllBlogs}
+          onClick={()=>{
+            showAllBlogs()
+            setBlogType("all")
+          }}
           className="bg-gray-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-gray-700"
         >
           All Posts
         </button>
 
         <button
-          onClick={() => filterBlogsByType("false")}
+          onClick={() => {filterBlogsByType("false")
+          setBlogType("achievers")
+          }}
           className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-green-700"
         >
           Blogs by Achievers
         </button>
 
         <button
-          onClick={() => filterBlogsByType("true")}
+          onClick={() => {filterBlogsByType("true")
+            setBlogType("community")
+          }}
           className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700"
         >
           Community Blogs
@@ -112,6 +121,7 @@ const UserShowBlogs: React.FC = () => {
       </div>
 
       <div>
+        {blogType ==="community" ? (
         <ul className="mt-10">
           {filteredBlogs.length > 0 ? (
             filteredBlogs.map((blog) => (
@@ -201,6 +211,9 @@ const UserShowBlogs: React.FC = () => {
             <p>No blogs available.</p>
           )}
         </ul>
+        ) : (
+          <CarouselBlog blogs={filteredBlogs} type={blogType} />
+        )}
       </div>
     </div>
   );
