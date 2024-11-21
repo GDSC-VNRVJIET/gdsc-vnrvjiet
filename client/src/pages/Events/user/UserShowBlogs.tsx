@@ -12,6 +12,7 @@ interface Blog {
   category: string;
   [key: string]: any;
   date: string;
+  isCommunity: string; // "true" or "false"
 }
 
 const UserShowBlogs: React.FC = () => {
@@ -21,6 +22,7 @@ const UserShowBlogs: React.FC = () => {
     "bg-gradient-to-r from-yellow-500 to-yellow-500",
   ];
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>([]);
   const [displayLoader, setDisplayLoader] = useState(true);
   const navigate = useNavigate();
 
@@ -33,16 +35,19 @@ const UserShowBlogs: React.FC = () => {
 
         if (Array.isArray(response.data.payload)) {
           setBlogs(response.data.payload);
+          setFilteredBlogs(response.data.payload);
           setDisplayLoader(false);
         } else {
           console.error("Unexpected response format: payload is not an array");
           setDisplayLoader(false);
           setBlogs([]);
+          setFilteredBlogs([]);
         }
       } catch (error) {
         console.error("Error fetching blogs:", error);
         setDisplayLoader(false);
         setBlogs([]);
+        setFilteredBlogs([]);
       }
     };
 
@@ -51,6 +56,16 @@ const UserShowBlogs: React.FC = () => {
 
   const handleBlogClick = (blogId: string) => {
     navigate(`/blogs/${blogId}`);
+  };
+
+  const filterBlogsByType = (isCommunity: string) => {
+    const filtered = blogs.filter((blog) => blog.isCommunity === isCommunity);
+    setFilteredBlogs(filtered);
+  };
+
+  // Show all blogs
+  const showAllBlogs = () => {
+    setFilteredBlogs(blogs);
   };
 
   return displayLoader ? (
@@ -73,10 +88,33 @@ const UserShowBlogs: React.FC = () => {
         </div>
       </div>
 
+      <div className="flex justify-center space-x-4 mt-6">
+        <button
+          onClick={showAllBlogs}
+          className="bg-gray-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-gray-700"
+        >
+          All Posts
+        </button>
+
+        <button
+          onClick={() => filterBlogsByType("false")}
+          className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-green-700"
+        >
+          Blogs by Achievers
+        </button>
+
+        <button
+          onClick={() => filterBlogsByType("true")}
+          className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700"
+        >
+          Community Blogs
+        </button>
+      </div>
+
       <div>
         <ul className="mt-10">
-          {blogs.length > 0 ? (
-            blogs.map((blog) => (
+          {filteredBlogs.length > 0 ? (
+            filteredBlogs.map((blog) => (
               <section
                 key={blog._id}
                 className="flex flex-col justify-center antialiased mb-20"
@@ -117,39 +155,43 @@ const UserShowBlogs: React.FC = () => {
                           }}
                         />
                       </div>
-                      <div>
-                        <div className="mb-3 flex flex-wrap font-medium text-sm -m-1">
-                          {blog.category.split(",").map((cat, idx) => (
-                            <span key={idx} className="m-1">
-                              <span
-                                className={`inline-flex text-center text-gray-100 py-2 px-4 rounded-full transition duration-150 ease-in-out ${
-                                  colors[idx % colors.length]
-                                }`}
-                              >
-                                {cat.trim()}
+                      {blog.isCommunity === "false" && (
+                        <div>
+                          <div className="mb-3 flex flex-wrap font-medium text-sm -m-1">
+                            {(blog.category || "").split(",").map((cat, idx) => (
+                              <span key={idx} className="m-1">
+                                <span
+                                  className={`inline-flex text-center text-gray-100 py-2 px-4 rounded-full transition duration-150 ease-in-out ${
+                                    colors[idx % colors.length]
+                                  }`}
+                                >
+                                  {cat.trim()}
+                                </span>
                               </span>
-                            </span>
-                          ))}
-                        </div>
-                        <footer className="flex items-center mt-4">
-                          <a>
-                            <img
-                              className="rounded-full flex-shrink-0 mr-4"
-                              src="https://tse2.mm.bing.net/th?id=OIP.XadmtOiEEI6Zv388n5l2dQHaHx&pid=Api&P=0&h=220"
-                              width="40"
-                              height="40"
-                              alt="Author 04"
-                            />
-                          </a>
-                          <div>
-                            <a className="font-medium text-gray-800 hover:text-green-400 transition duration-150 ease-in-out">
-                              {blog.author}
-                            </a>
-                            <span className="text-gray-700"> - </span>
-                            <span className="text-gray-500">{blog.date}</span>
+                            ))}
                           </div>
-                        </footer>
-                      </div>
+                          <footer className="flex items-center mt-4">
+                            <a>
+                              <img
+                                className="rounded-full flex-shrink-0 mr-4"
+                                src="https://tse2.mm.bing.net/th?id=OIP.XadmtOiEEI6Zv388n5l2dQHaHx&pid=Api&P=0&h=220"
+                                width="40"
+                                height="40"
+                                alt="Author"
+                              />
+                            </a>
+                            <div>
+                              <a className="font-medium text-gray-800 hover:text-green-400 transition duration-150 ease-in-out">
+                                {blog.author}
+                              </a>
+                              <span className="text-gray-700"> - </span>
+                              <span className="text-gray-500">
+                                {blog.date}
+                              </span>
+                            </div>
+                          </footer>
+                        </div>
+                      )}
                     </div>
                   </article>
                 </div>

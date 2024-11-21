@@ -136,7 +136,7 @@ const CurrentBlogs: React.FC = () => {
                         </svg>
                       </a>
                       <div className="mb-3 flex flex-wrap font-medium text-sm -m-1">
-                          {blog.category.split(",").map((cat, idx) => (
+                      {(blog.category || "").split(",").map((cat, idx) => (
                             <ul className="">
                               <li className="m-1">
                                 <a

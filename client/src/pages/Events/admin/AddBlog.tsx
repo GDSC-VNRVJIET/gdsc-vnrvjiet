@@ -88,7 +88,9 @@ const AddBlog: React.FC = () => {
       formData.append("author", state?.author);
     } else if (blogType === "community") {
       formData.append("domain", state?.domain);
-      formData.append("description", description); 
+      formData.append("title", state?.blogTitle);
+      formData.append("description", description);
+      formData.append("thumbnail", state?.base64Image); 
     }
     formData.append("show", "false"); 
     formData.append("isCommunity", blogType === "community" ? "true" : "false");
