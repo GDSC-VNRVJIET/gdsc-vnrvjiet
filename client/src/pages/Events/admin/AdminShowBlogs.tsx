@@ -344,10 +344,14 @@ const AdminShowBlogs: React.FC = () => {
                   >
                     <option value="">Select Domain</option>
                     <option value="web-development">Web Development</option>
-                    <option value="machine-learning">Machine Learning</option>
-                    <option value="cybersecurity">Cybersecurity</option>
-                    <option value="design">Design</option>
-                    <option value="cloud-computing">Cloud Computing</option>
+                    <option value="cp">Competitive Programming</option>
+                    <option value="aiml">Artificial Intelligence and Machine Learning</option>
+                    <option value="management">Management</option>
+                    <option value="design">Social Media and Design</option>
+                    <option value="app-development">App Development</option>
+                    <option value="hardware">Hardware</option>
+                    <option value="women-in-tech">Women in Tech</option>
+                    <option value="testing">Testing and Cyber Security</option>
                   </select>
                 </div>
                 <div className="flex flex-col items-center">
