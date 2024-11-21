@@ -1,24 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CurrentBlogs from "./CurrentBlogs";
 import Loader from "../../Loader";
-import { motion } from "framer-motion";
-import { Swiper as SwiperType } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
 
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Carousel,
-  Typography,
-  Avatar,
-} from "@material-tailwind/react";
 
 interface Blog {
   author?: string;
@@ -28,14 +13,6 @@ interface Blog {
   category?: string;
   domain?: string;
   isCommunity: string;
-  [key: string]: any; // In case there are other fields not mentioned
-}
-
-interface CommunityBlog {
-  title: string;
-  thumbnail: string;
-  domain: string;
-  description: string;
   [key: string]: any; // In case there are other fields not mentioned
 }
 
@@ -118,10 +95,6 @@ const AdminShowBlogs: React.FC = () => {
     navigate("/add-blog", { state: blogData });
     setShowModal(false);
   };
-
-  function replaceBlackWithWhite(htmlContent: string) {
-    return htmlContent.replace(/rgb\(0, 0, 0\)/g, "rgb(255, 255, 255)");
-  }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -341,6 +314,7 @@ const AdminShowBlogs: React.FC = () => {
                     onChange={handleDomainChange}
                     required
                     className="p-2 border border-gray-300 rounded"
+                    defaultValue={""}
                   >
                     <option value="">Select Domain</option>
                     <option value="Web-Development">Web Development</option>
@@ -352,6 +326,21 @@ const AdminShowBlogs: React.FC = () => {
                     <option value="Hardware">Hardware</option>
                     <option value="Women-in-Tech">Women in Tech</option>
                     <option value="Testing and Cyber Security">Testing and Cyber Security</option>
+                    <option value="" disabled>Select Domain</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="App Development">App Development</option>
+                    <option value="Cyber Security and Testing">
+                      Cyber Security and Testing
+                    </option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Competitive Programming">
+                      Competitive Programming
+                    </option>
+                    <option value="AI and ML">AI and ML</option>
+                    <option value="WIT (Women in Tech)">
+                      WIT (Women in Tech)
+                    </option>
+                    <option value="UI/UX and Design">UI/UX and Design</option>
                   </select>
                 </div>
                 <div className="flex flex-col items-center">
@@ -455,91 +444,96 @@ const AdminShowBlogs: React.FC = () => {
           </li>
         </ul>
         {activeTab === "tab1" ? (
-          <div className="relative mt-3">
-            <Swiper
-              spaceBetween={30}
-              slidesPerView={3}
-              loop={true}
-              navigation={true}
-              modules={[Navigation]}
-              pagination={{ clickable: true }}
-              breakpoints={{
-                350: {
-                  slidesPerView: 1,
-                },
-                768: {
-                  slidesPerView: 2,
-                },
-                1024: {
-                  slidesPerView: 3,
-                },
-              }}
-            >
-              {blogs.length > 0 ? (
-                blogs.map((blog, index) => (
-                  <SwiperSlide key={blog._id}>
-                    <Card
-                      shadow={false}
-                      className="relative grid w-11/12 min-h-[340px] mx-auto items-end justify-center overflow-hidden cursor-pointer"
-                      onClick={() => handleBlogClick(blog._id)}
-                    >
-                      <CardHeader
-                        floated={false}
-                        shadow={false}
-                        color="transparent"
-                        className={`absolute inset-0 m-0 h-full  w-full rounded-none bg-cover bg-center `}
-                        style={{ backgroundImage: `url(${blog.thumbnail})` }}
-                      >
-                        <div className="to-bg-black-10 absolute inset-0 h-full  w-full bg-gradient-to-t from-black/80 via-black/50" />
-                      </CardHeader>
-
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileHover={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="absolute inset-0 flex justify-center bg-black/70 text-white p-6 opacity-0 group-hover:opacity-100"
-                      >
+          <div className="relative mt-3 lg:mx-8">
+            <ul className="mt-10">
+          {blogs.length > 0 ? (
+            blogs.map((blog) => (
+              <section
+                key={blog._id}
+                className="flex flex-col justify-center antialiased mb-20"
+              >
+                <div className="max-w-6xl mx-auto px-8 py-2">
+                  <article
+                    className="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center cursor-pointer transition-all duration-300 ease-out hover:-translate-y-1 group"
+                    onClick={() => handleBlogClick(blog._id)}
+                  >
+                    <div className="relative block group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-xl p-2">
+                      <div
+                        className="absolute inset-0 bg-gray-200 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none rounded-xl"
+                        aria-hidden="true"
+                      ></div>
+                      <figure className="relative h-[400px] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out rounded-xl">
+                        <img
+                          className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out rounded-xl"
+                          src={blog.thumbnail}
+                          width="540"
+                          height="303"
+                          alt="Blog post"
+                        />
+                      </figure>
+                    </div>
+                    <div className="flex flex-col h-[400px] justify-between group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-xl p-6">
+                      <header>
+                        <h3 className="text-2xl lg:text-3xl font-bold leading-tight mb-3">
+                          <a className="hover:text-blue-500 transition duration-150 ease-in-out">
+                            {blog.title}
+                          </a>
+                        </h3>
+                      </header>
+                      <div className="flex-grow overflow-hidden mb-4">
                         <div
+                          className="text-gray-600 text-lg prose max-w-none line-clamp-6"
                           dangerouslySetInnerHTML={{
-                            __html:
-                              blog.description.length < 200
-                                ? replaceBlackWithWhite(blog.description)
-                                : replaceBlackWithWhite(
-                                    blog.description.substring(0, 196) + "..."
-                                  ),
+                            __html: blog.description,
                           }}
                         />
-                      </motion.div>
-
-                      <CardFooter className="align-bottom absolute z-10 px-10 py-10 text-left w-full text-white group-hover:opacity-0 transition-opacity duration-300">
-                        <Typography className="text-white " variant="h4">
-                          {blog.title}
-                        </Typography>
-                        <Typography className="text-gray-300 " variant="small">
-                          {blog.date} •
-                          <img
-                            className="rounded-full flex-shrink-0 mr-2 mb-4 inline w-6 ms-4"
-                            src="https://tse2.mm.bing.net/th?id=OIP.XadmtOiEEI6Zv388n5l2dQHaHx&pid=Api&P=0&h=220"
-                            width="40"
-                            height="40"
-                            alt="Author 04"
-                          />
-                          {blog.author} <br />
-                          {blog?.category &&
-                            blog.category.split(",").map((cat, idx) => (
-                              <span key={idx}>
-                                <u className="me-2 cursor-pointer">#{cat}</u>
+                      </div>
+                      {blog.isCommunity === "false" && (
+                        <div>
+                          <div className="mb-3 flex flex-wrap font-medium text-sm -m-1">
+                            {(blog.category || "").split(",").map((cat, idx) => (
+                              <span key={idx} className="m-1">
+                                <span
+                                  className={`inline-flex text-center text-gray-100 py-2 px-4 rounded-full transition duration-150 ease-in-out ${
+                                    colors[idx % colors.length]
+                                  }`}
+                                >
+                                  {cat.trim()}
+                                </span>
                               </span>
                             ))}
-                        </Typography>
-                      </CardFooter>
-                    </Card>
-                  </SwiperSlide>
-                ))
-              ) : (
-                <p>No blogs available.</p>
-              )}
-            </Swiper>
+                          </div>
+                          <footer className="flex items-center mt-4">
+                            <a>
+                              <img
+                                className="rounded-full flex-shrink-0 mr-4"
+                                src="https://tse2.mm.bing.net/th?id=OIP.XadmtOiEEI6Zv388n5l2dQHaHx&pid=Api&P=0&h=220"
+                                width="40"
+                                height="40"
+                                alt="Author"
+                              />
+                            </a>
+                            <div>
+                              <a className="font-medium text-gray-800 hover:text-green-400 transition duration-150 ease-in-out">
+                                {blog.author}
+                              </a>
+                              <span className="text-gray-700"> - </span>
+                              <span className="text-gray-500">
+                                {blog.date}
+                              </span>
+                            </div>
+                          </footer>
+                        </div>
+                      )}
+                    </div>
+                  </article>
+                </div>
+              </section>
+            ))
+          ) : (
+            <p>No blogs available.</p>
+          )}
+        </ul>
           </div>
         ) : (
           <CurrentBlogs />
