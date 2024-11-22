@@ -316,7 +316,7 @@ const AdminShowBlogs: React.FC = () => {
                     className="p-2 border border-gray-300 rounded"
                     defaultValue={""}
                   >
-                    <option value="">Select Domain</option>
+                    <option value="" disabled>Select Domain</option>
                     <option value="Web-Development">Web Development</option>
                     <option value="Competitive Programming">Competitive Programming</option>
                     <option value="Artificial Intelligence and Machine Learning">Artificial Intelligence and Machine Learning</option>
@@ -326,21 +326,6 @@ const AdminShowBlogs: React.FC = () => {
                     <option value="Hardware">Hardware</option>
                     <option value="Women-in-Tech">Women in Tech</option>
                     <option value="Testing and Cyber Security">Testing and Cyber Security</option>
-                    <option value="" disabled>Select Domain</option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="App Development">App Development</option>
-                    <option value="Cyber Security and Testing">
-                      Cyber Security and Testing
-                    </option>
-                    <option value="Hardware">Hardware</option>
-                    <option value="Competitive Programming">
-                      Competitive Programming
-                    </option>
-                    <option value="AI and ML">AI and ML</option>
-                    <option value="WIT (Women in Tech)">
-                      WIT (Women in Tech)
-                    </option>
-                    <option value="UI/UX and Design">UI/UX and Design</option>
                   </select>
                 </div>
                 <div className="flex flex-col items-center">
