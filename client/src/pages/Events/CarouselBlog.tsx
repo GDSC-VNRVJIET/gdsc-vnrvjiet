@@ -81,10 +81,10 @@ const CarouselBlog: React.FC<CarouselBlogProps> = ({ blogs, type }) => {
             {blogs.length > 0 ? (
               blogs.map((blog, index) => (
                 <SwiperSlide key={blog._id}>
-                  {type === "achievers" ? (
+                  {(type === "achievers" || type === "community") ? (
                     <Card
                       shadow={false}
-                      className="relative grid w-11/12 min-h-[340px] mx-auto items-end justify-center overflow-hidden cursor-pointer mt-6"
+                      className="relative grid w-11/12 lg:w-full min-h-[340px] mx-auto items-end justify-center overflow-hidden cursor-pointer mt-6"
                       onClick={() => handleBlogClick(blog._id)}
                     >
                       <CardHeader
@@ -119,8 +119,10 @@ const CarouselBlog: React.FC<CarouselBlogProps> = ({ blogs, type }) => {
                         <Typography className="text-white " variant="h4">
                           {blog?.domain} {blog.title}
                         </Typography>
-                        <Typography className="text-gray-300 " variant="small">
+                        <Typography className="text-gray-300 my-3 " variant="small">
                           {blog.date} •
+                          {blog.isCommunity === "false" ? (
+                            <>
                           <img
                             className="rounded-full flex-shrink-0 mr-2 mb-4 inline w-6 ms-4"
                             src="https://tse2.mm.bing.net/th?id=OIP.XadmtOiEEI6Zv388n5l2dQHaHx&pid=Api&P=0&h=220"
@@ -135,6 +137,17 @@ const CarouselBlog: React.FC<CarouselBlogProps> = ({ blogs, type }) => {
                                 <u className="me-2 cursor-pointer">#{cat}</u>
                               </span>
                             ))}
+                          </>
+                          ) : (
+                            <>
+                            {(blog.domain?.length && blog.domain.length > 35) && (
+                              <><br /><br /></>
+                            )}
+                              <span className="ms-2 bg-gray-300 opacity-75 text-gray-700 p-1 px-2 rounded-lg">
+                                {blog.domain}
+                              </span>
+                              </>
+                          )}
                         </Typography>
                       </CardFooter>
                     </Card>
@@ -162,9 +175,14 @@ const CarouselBlog: React.FC<CarouselBlogProps> = ({ blogs, type }) => {
                               {blog.author}
                             </span>
                           ) : (
-                            <span className="ms-2 mt-2 bg-slate-300 text-white p-1 rounded-lg">
+                            <>
+                            {(blog.domain?.length && blog.domain.length > 35) && (
+                              <><br /><br /></>
+                            )}
+                            <span className="ms-2 mt-2 bg-gray-400 text-white p-1 px-2 rounded-lg">
                               {blog.domain}
                             </span>
+                            </>
                           )}
                         </p>
 
