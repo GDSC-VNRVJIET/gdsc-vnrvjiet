@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Loader from "../../Loader";
 import CarouselBlog from "../CarouselBlog";
@@ -86,7 +87,6 @@ const UserShowBlogs: React.FC = () => {
           </div>
           <div className="ml-4">
             <h1 className="text-xl font-bold">Blogs</h1>
-            <p className="text-gray-600">Blogs by GDGC achievers</p>
           </div>
         </div>
       </div>
@@ -97,7 +97,7 @@ const UserShowBlogs: React.FC = () => {
             showAllBlogs()
             setBlogType("all")
           }}
-          className="bg-gray-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-gray-700"
+          className=" text-black px-6 py-2 rounded-lg shadow-md hover"
         >
           All Posts
         </button>
@@ -106,16 +106,15 @@ const UserShowBlogs: React.FC = () => {
           onClick={() => {filterBlogsByType("false")
           setBlogType("achievers")
           }}
-          className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-green-700"
+          className=" text-black px-6 py-2 rounded-lg shadow-md"
         >
           Blogs by Achievers
         </button>
-
         <button
           onClick={() => {filterBlogsByType("true")
             setBlogType("community")
           }}
-          className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700"
+          className=" text-black px-6 py-2 rounded-lg shadow-md"
         >
           Community Blogs
         </button>
