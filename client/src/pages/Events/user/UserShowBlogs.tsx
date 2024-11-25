@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Loader from "../../Loader";
 import CarouselBlog from "../CarouselBlog";
+import { motion } from "framer-motion";
 
 interface Blog {
   id: string;
@@ -19,15 +19,10 @@ interface Blog {
 }
 
 const UserShowBlogs: React.FC = () => {
-  const colors = [
-    "bg-gradient-to-b from-green-600 to-green-600",
-    "bg-gradient-to-r from-blue-600 to-blue-600",
-    "bg-gradient-to-r from-yellow-500 to-yellow-500",
-  ];
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>([]);
   const [displayLoader, setDisplayLoader] = useState(true);
-  const [blogType, setBlogType] = useState("all");
+  const [activeTab, setActiveTab] = useState("all");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -76,7 +71,7 @@ const UserShowBlogs: React.FC = () => {
     <Loader />
   ) : (
     <div>
-      <div className="bg-gray-100 p-4 flex items-center justify-between">
+      {/* <div className="bg-gray-100 p-4 flex items-center justify-between">
         <div className="flex items-center ml-6">
           <div className="bg-white rounded-lg p-2 shadow-md flex items-center justify-center h-20">
             <img
@@ -89,42 +84,66 @@ const UserShowBlogs: React.FC = () => {
             <h1 className="text-xl font-bold">Blogs</h1>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="flex justify-center space-x-4 mt-6">
+      <div className="flex  items-center space-x-4 mt-6 ml-6 relative">
         <button
-          onClick={()=>{
-            showAllBlogs()
-            setBlogType("all")
+          onClick={() => {
+            showAllBlogs();
+            setActiveTab("all");
           }}
-          className=" text-black px-6 py-2 rounded-lg shadow-md hover"
+          className="relative text-black px-4 py-2 font-semibold text-xl focus:outline-none"
         >
-          All Posts
+          All Blogs
+          {activeTab === "all" && (
+            <motion.div
+              className="absolute bottom-0 left-0 h-[2px] w-full bg-black"
+              layoutId="underline"
+            />
+          )}
+        </button>
+
+        <div className="h-10 w-[2px] bg-gray-600"></div>
+
+        <button
+          onClick={() => {
+            filterBlogsByType("false");
+            setActiveTab("achievers");
+          }}
+          className="relative text-black px-4 py-2 font-semibold focus:outline-none"
+        >
+          Blogs by GDGC Achievers
+          {activeTab === "achievers" && (
+            <motion.div
+              className="absolute bottom-0 left-0 h-[2px] w-full bg-black"
+              layoutId="underline"
+            />
+          )}
         </button>
 
         <button
-          onClick={() => {filterBlogsByType("false")
-          setBlogType("achievers")
+          onClick={() => {
+            filterBlogsByType("true");
+            setActiveTab("community");
           }}
-          className=" text-black px-6 py-2 rounded-lg shadow-md"
-        >
-          Blogs by Achievers
-        </button>
-        <button
-          onClick={() => {filterBlogsByType("true")
-            setBlogType("community")
-          }}
-          className=" text-black px-6 py-2 rounded-lg shadow-md"
+          className="relative text-black px-4 py-2 font-semibold focus:outline-none"
         >
           Community Blogs
+          {activeTab === "community" && (
+            <motion.div
+              className="absolute bottom-0 left-0 h-[2px] w-full bg-black"
+              layoutId="underline"
+            />
+          )}
         </button>
       </div>
 
       <div>
-          <CarouselBlog blogs={filteredBlogs} type={blogType} />
+        <CarouselBlog blogs={filteredBlogs} type={activeTab} />
       </div>
     </div>
   );
 };
 
 export default UserShowBlogs;
+
