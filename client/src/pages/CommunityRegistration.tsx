@@ -19,6 +19,7 @@ type FormData = {
   rollNumber: string;
   discordUsername: string;
   year: string;
+  phone:string;
   firstChoice: string;
   secondChoice: string;
   thirdChoice: string;
@@ -372,6 +373,32 @@ const CommunityRegistration: React.FC = () => {
                   {errors.discordUsername && (
                     <p className="text-red-500 text-sm">
                       {errors.discordUsername.message}
+                    </p>
+                  )}
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-600 font-medium mb-2">
+                    Phone Number
+                  </label>
+                  <input
+                    {...register("phone", {
+                      required: "Phone number is required",
+                      minLength: {
+                        value: 10,
+                        message: "Phone number must be 10 digits",
+                      },
+                      maxLength: {
+                        value: 10,
+                        message: "Phone number must be 10 digits",
+                      },
+                    })}
+                    type="number"
+                    placeholder="your whatsapp number"
+                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  {errors.phone && (
+                    <p className="text-red-500 text-sm">
+                      {errors.phone.message}
                     </p>
                   )}
                 </div>
