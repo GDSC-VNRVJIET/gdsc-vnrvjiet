@@ -435,20 +435,20 @@ const CommunityRegistration: React.FC = () => {
                     <option value="" disabled>
                       Select a Domain
                     </option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="App Development">App Development</option>
-                    <option value="Cyber Security and Testing">
+                    <option value="web-dev">Web Development</option>
+                    <option value="app-dev">App Development</option>
+                    <option value="cys">
                       Cyber Security and Testing
                     </option>
-                    <option value="Hardware">Hardware</option>
-                    <option value="Competitive Programming">
+                    <option value="hardware">Hardware</option>
+                    <option value="cp">
                       Competitive Programming
                     </option>
-                    <option value="AI and ML">AI and ML</option>
-                    <option value="WIT (Women in Tech)">
+                    <option value="aiml">AI and ML</option>
+                    <option value="wit">
                       WIT (Women in Tech)
                     </option>
-                    <option value="UI/UX and Design">UI/UX and Design</option>
+                    <option value="ui-ux">UI/UX and Design</option>
                   </select>
                   {errors.firstChoice && (
                     <p className="text-red-500 text-sm">
@@ -459,7 +459,7 @@ const CommunityRegistration: React.FC = () => {
 
                 <div className="mb-4">
                   <label className="block text-gray-600 font-medium mb-2">
-                    2nd Priority
+                    2nd Priority (optional)
                   </label>
                   <select
                     {...register("secondChoice", {
@@ -471,20 +471,20 @@ const CommunityRegistration: React.FC = () => {
                     className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="">Select a Domain</option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="App Development">App Development</option>
-                    <option value="Cyber Security and Testing">
+                    <option value="web-dev">Web Development</option>
+                    <option value="app-dev">App Development</option>
+                    <option value="cys">
                       Cyber Security and Testing
                     </option>
-                    <option value="Hardware">Hardware</option>
-                    <option value="Competitive Programming">
+                    <option value="hardware">Hardware</option>
+                    <option value="cp">
                       Competitive Programming
                     </option>
-                    <option value="AI and ML">AI and ML</option>
-                    <option value="WIT (Women in Tech)">
+                    <option value="aiml">AI and ML</option>
+                    <option value="wit">
                       WIT (Women in Tech)
                     </option>
-                    <option value="UI/UX and Design">UI/UX and Design</option>
+                    <option value="ui-ux">UI/UX and Design</option>
                   </select>
                   {errors.secondChoice && (
                     <p className="text-red-500 text-sm">
@@ -495,7 +495,7 @@ const CommunityRegistration: React.FC = () => {
 
                 <div className="mb-4">
                   <label className="block text-gray-600 font-medium mb-2">
-                    3rd Priority
+                    3rd Priority (optional)
                   </label>
                   <select
                     {...register("thirdChoice", {
@@ -508,20 +508,20 @@ const CommunityRegistration: React.FC = () => {
                     className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="">Select a Domain</option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="App Development">App Development</option>
-                    <option value="Cyber Security and Testing">
+                    <option value="web-dev">Web Development</option>
+                    <option value="app-dev">App Development</option>
+                    <option value="cys">
                       Cyber Security and Testing
                     </option>
-                    <option value="Hardware">Hardware</option>
-                    <option value="Competitive Programming">
+                    <option value="hardware">Hardware</option>
+                    <option value="cp">
                       Competitive Programming
                     </option>
-                    <option value="AI and ML">AI and ML</option>
-                    <option value="WIT (Women in Tech)">
+                    <option value="aiml">AI and ML</option>
+                    <option value="wit">
                       WIT (Women in Tech)
                     </option>
-                    <option value="UI/UX and Design">UI/UX and Design</option>
+                    <option value="ui-ux">UI/UX and Design</option>
                   </select>
                   {errors.thirdChoice && (
                     <p className="text-red-500 text-sm">
