@@ -119,6 +119,7 @@ discordApp.post(
 
     let newRegister = request.body;
     newRegister.email = newRegister.email.toLowerCase();
+    newRegister.discordUsername=newRegister.discordUsername.toLowerCase();
     const emailRegex = /^[a-zA-Z0-9._%+-]+@vnrvjiet\.in$/;
     if (!emailRegex.test(newRegister.email)) {
       return response
