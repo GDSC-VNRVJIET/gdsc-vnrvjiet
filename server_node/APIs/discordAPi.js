@@ -37,7 +37,7 @@ const sendRegistrationEmail = async (name, email, otp) => {
   <p>Steps to verify your registration:</p>
   <ul>
     <li>1. Copy the OTP above.</li>
-    <li>2. Join our Discord server by clicking the link: <a href="https://discord.gg/DH3ffaJj" style="text-decoration:none;color:#1a73e8;">Join GDGC VNRVJIET Discord</a></li>
+    <li>2. Join our Discord server by clicking the link: <a href="https://discord.gg/7e6kZE8RQK" style="text-decoration:none;color:#1a73e8;">Join GDGC VNRVJIET Discord</a></li>
     <li>3. In the <strong>bot-commands</strong> channel, use the command <strong>/verify {email}</strong> to verify your registration.</li>
     <li>4. Paste the OTP in the chat when prompted to and you will be verified.</li>
   </ul>
