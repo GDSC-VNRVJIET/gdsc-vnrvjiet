@@ -20,6 +20,7 @@ type FormData = {
   discordUsername: string;
   year: string;
   phone:string;
+  gender:string;
   firstChoice: string;
   secondChoice: string;
   thirdChoice: string;
@@ -33,6 +34,17 @@ const CommunityRegistration: React.FC = () => {
   const [loadingButton, setLoadingButton] = useState<boolean>(false);
   const [isDetailsSubmitted, setIsDetailsSubmitted] = useState(false);
 
+  const options = [
+    {value: "web-dev", label: "Web Development", description:"Connect with others passionate about crafting interactive and user-friendly web experiences!"},
+    {value: "app-dev", label: "App Development",description:"Connect with others who share your passion for building innovative mobile experiences!"},
+    {value: "cys", label: "Cyber Security and Testing", description:"Connect with peers and experts, tackle real-world challenges, and sharpen your skills through hands-on projects and exclusive workshops."},
+    {value: "hardware", label: "Hardware",description:"Build skills step-by-step, going from basics to advanced projects"},
+    {value: "cp", label: "Competitive Programming",description:"Connect with others who share your passion for algorithms, logic, and efficiency!"},
+    {value: "aiml", label: "AI and ML",description:"Our AI/ML community is the perfect place to dive deep into this field, learn, grow, and connect with others who share your enthusiasm!"},
+    //{value: "wit", label:"Women in Tech"},
+    {value: "ui-ux", label: "UI/UX and Design",description:"Explore fresh ideas, master the latest tools, and collaborate on real-world projects. "},
+  ];
+
   const {
     register,
     handleSubmit,
@@ -42,6 +54,9 @@ const CommunityRegistration: React.FC = () => {
   } = useForm<FormData>();
 
   const watchFields = watch(["firstChoice", "secondChoice", "thirdChoice"]);
+  const selectedOption1 = options.find(option => option.value === watchFields[0]);
+  const selectedOption2 = options.find(option => option.value === watchFields[1]);
+  const selectedOption3 = options.find(option => option.value === watchFields[2]);
 
   const onSubmitDetails: SubmitHandler<FormData> = async (data) => {
     setIsDetailsSubmitted(true);
@@ -191,7 +206,7 @@ const CommunityRegistration: React.FC = () => {
             className={`${
               activeTab !== "details" ? "text-gray-300" : "text-blue-500"
             } transition-colors my-16`}
-            onClick={() => setActiveTab("details")}
+            // onClick={() => setActiveTab("details")}
           >
             <SlUser className="h-10 w-6 mx-auto" />
             <p>Details</p>
@@ -200,13 +215,14 @@ const CommunityRegistration: React.FC = () => {
             className={`${
               activeTab === "details" ? "text-gray-300" : "text-blue-500"
             } transition-colors mt-16 mb-4`}
-            onClick={() => {
-              if (isDetailsSubmitted) {
-                setActiveTab("interests");
-              } else {
-                setCheckModal(true);
-              }
-            }}
+            // onClick={() => {
+            //   if (isDetailsSubmitted) {
+            //     console.log("");
+            //     setActiveTab("interests");
+            //   } else {
+            //     setCheckModal(true);
+            //   }
+            // }}
           >
             <SlPuzzle className="h-10 w-6 mx-auto" />
             <p>Interests</p>
@@ -402,6 +418,44 @@ const CommunityRegistration: React.FC = () => {
                     </p>
                   )}
                 </div>
+                <div className="mb-4 ">
+                  <div className="flex items-center space-x-4 justify-around w-full">
+                  <label className="block text-gray-600 font-medium">
+                    Gender
+                  </label>
+                    <label htmlFor="male">
+                  <input
+                    {...register("gender", {
+                      required: "Gender is required",
+                    })}
+                    type="radio"
+                    value="male"
+                    id="male"
+                    className="mr-2"
+                  />
+                  Male
+                  </label>
+                  <label htmlFor="female">
+                  <input
+                    {...register("gender", {
+                      required: "Gender is required",
+                    })}
+                    type="radio"
+                    value="female"
+                    id="female"
+                    className="mr-2"
+                  />
+                  Female
+                  </label>
+                  
+                  </div>  
+
+                  {errors.gender && (
+                    <p className="text-red-500 text-sm">
+                      {errors.gender.message}
+                    </p>
+                  )}
+                </div>
 
                 <button
                   type="submit"
@@ -435,24 +489,20 @@ const CommunityRegistration: React.FC = () => {
                     <option value="" disabled>
                       Select a Domain
                     </option>
-                    <option value="web-dev">Web Development</option>
-                    <option value="app-dev">App Development</option>
-                    <option value="cys">
-                      Cyber Security and Testing
-                    </option>
-                    <option value="hardware">Hardware</option>
-                    <option value="cp">
-                      Competitive Programming
-                    </option>
-                    <option value="aiml">AI and ML</option>
-                    <option value="wit">
-                      WIT (Women in Tech)
-                    </option>
-                    <option value="ui-ux">UI/UX and Design</option>
+                    {options.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
                   </select>
                   {errors.firstChoice && (
                     <p className="text-red-500 text-sm">
                       {errors.firstChoice.message}
+                    </p>
+                  )}
+                  {selectedOption1 && (
+                    <p className="text-gray-500 text-xs my-4">
+                      {selectedOption1?.description}
                     </p>
                   )}
                 </div>
@@ -471,24 +521,20 @@ const CommunityRegistration: React.FC = () => {
                     className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="">Select a Domain</option>
-                    <option value="web-dev">Web Development</option>
-                    <option value="app-dev">App Development</option>
-                    <option value="cys">
-                      Cyber Security and Testing
-                    </option>
-                    <option value="hardware">Hardware</option>
-                    <option value="cp">
-                      Competitive Programming
-                    </option>
-                    <option value="aiml">AI and ML</option>
-                    <option value="wit">
-                      WIT (Women in Tech)
-                    </option>
-                    <option value="ui-ux">UI/UX and Design</option>
+                    {options.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
                   </select>
                   {errors.secondChoice && (
                     <p className="text-red-500 text-sm">
                       {errors.secondChoice.message}
+                    </p>
+                  )}
+                  {selectedOption2 && (
+                    <p className="text-gray-500 text-xs my-4">
+                      {selectedOption2?.description}
                     </p>
                   )}
                 </div>
@@ -508,24 +554,22 @@ const CommunityRegistration: React.FC = () => {
                     className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="">Select a Domain</option>
-                    <option value="web-dev">Web Development</option>
-                    <option value="app-dev">App Development</option>
-                    <option value="cys">
-                      Cyber Security and Testing
-                    </option>
-                    <option value="hardware">Hardware</option>
-                    <option value="cp">
-                      Competitive Programming
-                    </option>
-                    <option value="aiml">AI and ML</option>
-                    <option value="wit">
-                      WIT (Women in Tech)
-                    </option>
-                    <option value="ui-ux">UI/UX and Design</option>
+                    {options.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                    
+                    
                   </select>
                   {errors.thirdChoice && (
                     <p className="text-red-500 text-sm">
                       {errors.thirdChoice.message}
+                    </p>
+                  )}
+                  {selectedOption3 && (
+                    <p className="text-gray-500 text-xs my-4">
+                      {selectedOption3?.description}
                     </p>
                   )}
                 </div>
