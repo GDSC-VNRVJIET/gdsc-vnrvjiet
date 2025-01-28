@@ -57,7 +57,7 @@ const Login = () => {
 
     try {
       const loggedInUser = await getUserByMail(formData);
-      const userId = loggedInUser.userObj.userId;
+      const userId = loggedInUser.userObj?.userId;
       const encryptedUserId = encryptData(String(userId));
       setUser(loggedInUser.userObj);
       setFormData({
@@ -75,13 +75,12 @@ const Login = () => {
         };
         const userObjString = JSON.stringify(userObj);
         localStorage.setItem("userObjGDSC", userObjString);
-        console.log(process.env.REACT_APP_ADMIN_ROLE);
         if (userObj.role == process.env.REACT_APP_JURY_ROLE)
           navigate("/enter", { state: { user: loggedInUser.userObj } });
-        if (userObj.role == process.env.REACT_APP_ADMIN_ROLE)
+        else if (userObj.role == process.env.REACT_APP_ADMIN_ROLE)
           navigate("/leaderboard", { state: { user: loggedInUser.userObj } });
-          if (userObj.role == "user")
-          navigate("/upcoming-events", { state: { user: loggedInUser.userObj } });
+         else
+          navigate("/events", { state: { user: loggedInUser.userObj } });
       }
     } catch (error) {
       console.log(error);
