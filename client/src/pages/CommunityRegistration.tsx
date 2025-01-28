@@ -471,10 +471,13 @@ const CommunityRegistration: React.FC = () => {
                 activeTab === "interests" ? "translate-y-0" : "translate-y-full"
               } transition-transform duration-500 ease-in-out transform`}
             >
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+              <h2 className="text-2xl font-semibold text-gray-800">
                 Select Your Interested Domains
+                
               </h2>
-              <form onSubmit={handleSubmit(onSubmitInterests)}>
+              <a href="/blogs/community" className="text-sm text-gray-500 -mt-10 mb-10 underline" target="_blank">(Click here to know more)</a>
+              
+              <form onSubmit={handleSubmit(onSubmitInterests)} className="mt-10">
                 <div className="mb-4">
                   <label className="block text-gray-600 font-medium mb-2">
                     1st Priority

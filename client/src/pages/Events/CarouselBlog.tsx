@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
@@ -33,12 +33,9 @@ interface Blog {
   [key: string]: any;
 }
 
-interface CarouselBlogProps {
-  blogs: Blog[];
-  type: string;
-}
 
-const CarouselBlog: React.FC<CarouselBlogProps> = ({ blogs, type }) => {
+const CarouselBlog: React.FC = () => {
+  const { blogs, type } = useOutletContext<{ blogs: Blog[]; type: string }>();
   const navigate = useNavigate();
 
   function replaceBlackWithWhite(htmlContent: string) {

@@ -50,6 +50,7 @@ import Hardware from "./pages/Domain Info/Hardware";
 import WomenInTech from "./pages/Domain Info/WomenInTech";
 import TestingCybersecurity from "./pages/Domain Info/TestingCybersecurity";
 import CommunityRegistration from "./pages/CommunityRegistration";
+import CarouselBlog from "./pages/Events/CarouselBlog";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -141,7 +142,11 @@ function Root() {
         <Route path="upcoming-events/:eventname" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/blogs" element={<Blog />}></Route>
+        <Route path="/blogs" element={<Blog />}>
+          <Route path="" element={<CarouselBlog />}/>
+          <Route path="achievers" element={<CarouselBlog />}/>
+          <Route path="community" element={<CarouselBlog />}/>
+        </Route>
         <Route path="/forum" element={<Forum />} />
         <Route path="/team" element={<Team />} />
         <Route path="/orgchart" element={<OrgChart />} />

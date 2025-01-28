@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import axios from "axios";
 import Loader from "../../Loader";
 import CarouselBlog from "../CarouselBlog";
@@ -24,6 +24,7 @@ const UserShowBlogs: React.FC = () => {
   const [displayLoader, setDisplayLoader] = useState(true);
   const [activeTab, setActiveTab] = useState("all");
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -52,6 +53,19 @@ const UserShowBlogs: React.FC = () => {
 
     fetchBlogs();
   }, []);
+
+  useEffect(() => {
+    if (location.pathname === "/blogs/achievers") {
+      filterBlogsByType("false");
+      setActiveTab("achievers");
+    } else if (location.pathname === "/blogs/community") {
+      filterBlogsByType("true");
+      setActiveTab("community");
+    } else {
+      showAllBlogs();
+      setActiveTab("all");
+    }
+  }, [location.pathname]);
 
   const handleBlogClick = (blogId: string) => {
     navigate(`/blogs/${blogId}`);
@@ -89,8 +103,7 @@ const UserShowBlogs: React.FC = () => {
       <div className="flex  items-center space-x-4 mt-6 ml-6 relative">
         <button
           onClick={() => {
-            showAllBlogs();
-            setActiveTab("all");
+            navigate("/blogs");
           }}
           className="relative text-black px-4 py-2 font-semibold text-xl focus:outline-none"
         >
@@ -107,8 +120,7 @@ const UserShowBlogs: React.FC = () => {
 
         <button
           onClick={() => {
-            filterBlogsByType("false");
-            setActiveTab("achievers");
+            navigate("/blogs/achievers");
           }}
           className="relative text-black px-4 py-2 font-semibold focus:outline-none"
         >
@@ -123,8 +135,7 @@ const UserShowBlogs: React.FC = () => {
 
         <button
           onClick={() => {
-            filterBlogsByType("true");
-            setActiveTab("community");
+            navigate("/blogs/community");
           }}
           className="relative text-black px-4 py-2 font-semibold focus:outline-none"
         >
@@ -139,7 +150,7 @@ const UserShowBlogs: React.FC = () => {
       </div>
 
       <div>
-        <CarouselBlog blogs={filteredBlogs} type={activeTab} />
+        <Outlet context={{blogs:filteredBlogs,type:activeTab}}></Outlet>
       </div>
     </div>
   );
