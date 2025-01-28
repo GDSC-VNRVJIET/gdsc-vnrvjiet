@@ -35,7 +35,6 @@ const UserShowBlogs: React.FC = () => {
 
         if (Array.isArray(response.data.payload)) {
           setBlogs(response.data.payload);
-          setFilteredBlogs(response.data.payload);
           setDisplayLoader(false);
         } else {
           console.error("Unexpected response format: payload is not an array");
@@ -55,6 +54,7 @@ const UserShowBlogs: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (blogs.length === 0) return; 
     if (location.pathname === "/blogs/achievers") {
       filterBlogsByType("false");
       setActiveTab("achievers");
@@ -65,7 +65,7 @@ const UserShowBlogs: React.FC = () => {
       showAllBlogs();
       setActiveTab("all");
     }
-  }, [location.pathname]);
+  }, [location.pathname,blogs]);
 
   const handleBlogClick = (blogId: string) => {
     navigate(`/blogs/${blogId}`);
