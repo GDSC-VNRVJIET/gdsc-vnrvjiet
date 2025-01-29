@@ -6,7 +6,7 @@ import { motion, useInView, useAnimation } from "framer-motion";
 const cards = [
   {
     image:
-      "https://global.discourse-cdn.com/business6/uploads/codeorgforum/original/2X/5/5850a08813648555f34c29bea7b6d1de15f01655.gif",
+      "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYW0xemNkdzFteWQ5eTF4cTh4bzJpMzZoaGRtYjNjODlxMmluem1kbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2ikwIgNrmPZICNmRyX/giphy.gif",
     title: "Web Development",
     description:
       "Focuses on empowering students to build responsive, user-friendly websites and web applications using modern web technologies and frameworks.",
