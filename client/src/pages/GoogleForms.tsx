@@ -3,6 +3,12 @@ import Gen from "../images/sc.png";
 
 const TabComponent: React.FC = () => {
 
+  const [isLoading, setIsLoading] = useState(true);
+
+    const handleIframeLoad = () => {
+      setIsLoading(false); // Hide the loading indicator when iframe content is fully loaded
+  };
+
   return (
     <div className="w-full md:px-0">
       <div className="content">
@@ -14,12 +20,19 @@ const TabComponent: React.FC = () => {
                 className="w-full lg:w-[646px] lg:pr-3 mt-1 rounded mx-auto"
               />
             </div>
+            {isLoading && (
+                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white z-10">
+                    <p className="text-lg font-semibold">Loading...</p>
+                </div>
+            )}
             <iframe
               src="https://docs.google.com/forms/d/e/1FAIpQLSeMOw5PDbM7uXx9YIaDtl0v-jK5Hm-mBhiytshpmGYYqEMhiA/viewform?embedded=true"
               className="w-full h-full relative z-0 mt-[10px]"
               style={{ border: 0 }}
               allowFullScreen
+              onLoad={handleIframeLoad}
               title="Third Year Google Form"
+              id="gform"
             >
               Loading…
             </iframe>

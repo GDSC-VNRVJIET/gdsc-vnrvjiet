@@ -137,9 +137,10 @@ function Root() {
         {/* <Route path="/admin-signup" element={<Signup />} />
         <Route path="/admin-login" element={<Login />} /> */}
         <Route path="/signup" element={<Signup />} />
-        <Route path="/solution-challenge-register" element={<GoogleForms />} >
+        {/* <Route path="upcoming-events/:eventname" element={<Register />} /> */}
+        <Route path="/upcoming-events/Solution Challenge 2025" element={<GoogleForms />} >
         </Route>
-        <Route path="upcoming-events/:eventname" element={<Register />} />
+        
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/blogs" element={<Blog />}>
