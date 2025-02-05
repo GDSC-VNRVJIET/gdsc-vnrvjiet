@@ -51,6 +51,7 @@ import WomenInTech from "./pages/Domain Info/WomenInTech";
 import TestingCybersecurity from "./pages/Domain Info/TestingCybersecurity";
 import CommunityRegistration from "./pages/CommunityRegistration";
 import CarouselBlog from "./pages/Events/CarouselBlog";
+import EventWindow from "./pages/Events/EventWindow";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -170,7 +171,7 @@ function Root() {
         <Route path="/women-in-tech" element={<WomenInTech/>} />
         <Route path="/testing-cybersecutiry" element={<TestingCybersecurity />} />
         <Route path="/community-signup" element={<CommunityRegistration/>} />
-        <Route path="/events" element={<Events />} >
+        <Route path="/events" element={<EventWindow />} >
           <Route path="" element={<UpcomingEvents />} />
           <Route path="upcoming-events" element={<UpcomingEvents />} />
           <Route path="past-events" element={<PastEvents />} />

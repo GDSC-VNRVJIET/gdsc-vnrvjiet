@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+
 import {
   createEvent,
   getAllEvents,
@@ -35,9 +36,7 @@ const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
   const [events, setEvents] = useState<Event[]>([]);
   const userId = localStorage.getItem("userIdGDSC");
   const [userData, setUserData] = useState<{ id: number; name: string }>();
-  const [explodingEvent, setExplodingEvent] = React.useState<number | null>(
-    null
-  );
+  const [explodingEvent, setExplodingEvent] = React.useState<number | null>(null);
   const [message, setMessage] = useState("No upcoming events for now :(");
   // const [displayLoader, setDisplayLoader] = useState(true);
 
@@ -61,7 +60,6 @@ const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
   // }
 
   useEffect(() => {
-
     if (eventsprop && eventsprop.length > 0) {
       setEvents(eventsprop);
       setMessage(""); // Clear message if events are available
@@ -70,7 +68,7 @@ const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
       setMessage("No upcoming events for now :(");
     }
   }, [eventsprop]);
-  
+
   function gotoRegister(event: Event) {
     navigate(`${event.name}`, { state: event });
   }
@@ -117,7 +115,7 @@ const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
   return (
     <div className="min-h-full p-4">
       {/* <div
-        className="HeroSection flex flex-col  bg-cover bg-center bg-no-repeat m-4"
+        className="HeroSection flex flex-col bg-cover bg-center bg-no-repeat m-4"
         style={heroStyle}
       >
         <img src="" />
@@ -130,67 +128,35 @@ const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
       <div>
         {events.length ? (
           <>
-            <h3 className="text-2xl font-semibold mb-7 mt-5 text-center">
-                Upcoming Events
-              </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {events.map((event) => (
                 <div
                   key={event.eventId}
-                  className="bg-white rounded shadow-lg max-w-sm hover:scale-105 duration-200 border border-slate-400 p-4"
+                  className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
-                  <h4 className="text-lg font-semibold mb-3">{event.name}</h4>
-                  <p>
-                    {" "}
-                    <strong>What's Happening : </strong>
-                  
+                  <h4 className="text-xl font-semibold mb-4">{event.name}</h4>
+                  <p className="mb-2">
+                    <strong>What's Happening:</strong>
                   </p>
                   <div
-                          className="text-gray-600 text-md prose max-w-none line-clamp-6"
-                          dangerouslySetInnerHTML={{
-                            __html: event.description,
-                          }}
-                        />
-                  <p className="py-2">
-                    {/* To be announced is kept directly in the database now */}
-                    <strong>When : </strong>{" "}
-                    {/* {format(new Date(event.startDate), "yyyy-MM-dd HH:mm")} to{" "}
-                    {format(new Date(event.endDate), "yyyy-MM-dd HH:mm")} */}
-                    {event.startDate}
-                    {" - "}  
-                    {event.endDate}
+                    className="text-gray-600 text-md prose max-w-none line-clamp-6 mb-4"
+                    dangerouslySetInnerHTML={{ __html: event.description }}
+                  />
+                  <p className="text-gray-800 mb-2">
+                    <strong>When:</strong>{" "}
+                    {event.startDate && !isNaN(new Date(event.startDate).getTime()) ? 
+                      format(new Date(event.startDate), "MMM d, yyyy") : "Undeclared Date"}{" "}
+                    -{" "}
+                    {event.endDate && !isNaN(new Date(event.endDate).getTime()) ? 
+                      format(new Date(event.endDate), "MMM d, yyyy") : "Undeclared Date"}
+                </p>
+                  <p className="text-gray-800 mb-4">
+                    <strong>Where:</strong> {event.venue}
                   </p>
-                  <p>
-                    <strong>Where : </strong>
-                    {event.venue}
-                  </p>
-                  {/* <button
-                    onClick={() => handleRegisterForEvent(event.eventId)}
-                    className="bg-[#0F71F2] rounded px-3 py-1 mt-2 hover:ring-4 text-white font-semibold  "
-                  >
-                    {explodingEvent === event.eventId && (
-                      <ConfettiExplosion
-                        force={0.5}
-                        duration={2500}
-                        particleCount={80}
-                        width={1000}
-                        colors={[
-                          "#0F71F2",
-                          "#318C07",
-                          "#F2A20C",
-                          "#D92929",
-                          "#868686",
-                        ]}
-                      />
-                    )}
-                    {isEventRegistered(event.eventId)
-                      ? "Registered !"
-                      : "Register"}
-                  </button> */}
-                  <div className="mt-2">
+                  <div className="mt-4">
                     <Link
                       to={`/upcoming-events/${event.name}`}
-                      className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                      className="inline-block text-white bg-blue-600 border border-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium rounded-lg text-sm px-5 py-2.5 transition"
                     >
                       Register
                     </Link>
@@ -200,12 +166,12 @@ const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
             </div>
           </>
         ) : (
-          <div className="flex items-center justify-center">
-            <p>{message}</p>
+          <div className="flex flex-col items-center justify-center mt-8">
+            <p className="text-lg text-gray-700 mb-4">{message}</p>
             <img
               src="https://hadibuttt.github.io/GDSC-Portfolio-Site/img/main.png"
-              alt="image"
-              className="w-[75vw] md:w-[40vw]"
+              alt="No events"
+              className="w-3/4 md:w-1/2"
             />
           </div>
         )}
@@ -235,6 +201,6 @@ const UserPortalUpcoming: React.FC<UpcomingProps> = ({ eventsprop }) => {
       </div> */}
     </div>
   );
-}
+};
 
 export default UserPortalUpcoming;

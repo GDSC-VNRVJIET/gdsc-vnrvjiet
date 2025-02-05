@@ -53,32 +53,32 @@ const Events: React.FC = () => {
     setActiveTab(tabName);
   };
 
-  const handleScroll = () => {
-    const target = document.getElementById('navLinks');
-    const navbarHeight = 95;
-    if (target) {
-      const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;  
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth',
-      });
-      setScrolled(true);
-    }
-  };
+  // const handleScroll = () => {
+  //   const target = document.getElementById('navLinks');
+  //   const navbarHeight = 95;
+  //   if (target) {
+  //     const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;  
+  //     window.scrollTo({
+  //       top: targetPosition,
+  //       behavior: 'smooth',
+  //     });
+  //     setScrolled(true);
+  //   }
+  // };
 
-  const handleScrollEvent = () => {
-    if (window.scrollY > 50) { 
-      if (!scrolled) {
-        handleScroll();  
-      }
-    } 
-  };
+  // const handleScrollEvent = () => {
+  //   if (window.scrollY > 50) { 
+  //     if (!scrolled) {
+  //       handleScroll();  
+  //     }
+  //   } 
+  // };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScrollEvent);
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScrollEvent);
 
-    return () => window.removeEventListener('scroll', handleScrollEvent);
-  }, [scrolled]);
+  //   return () => window.removeEventListener('scroll', handleScrollEvent);
+  // }, [scrolled]);
 
   return displayLoader ? (
     <Loader/>
@@ -86,7 +86,7 @@ const Events: React.FC = () => {
     <div className="w-full h-full p-4">
       <div className={`HeroSection flex flex-col bg-cover bg-center bg-no-repeat mt-4 relative ${scrolled ? 'static mt-4' : ''}`}>
         <div className={`relative flex justify-center ${scrolled ? 'static' : ''}`}>
-          <video
+          {/* <video
             className="lg:w-4/5 sm:w-full animate-fadeIn"
             autoPlay
             loop
@@ -161,9 +161,9 @@ const Events: React.FC = () => {
                   d="M30,37H18c-3.859,0-7-3.14-7-7V18c0-3.86,3.141-7,7-7h12c3.859,0,7,3.14,7,7v12	C37,33.86,33.859,37,30,37z M18,13c-2.757,0-5,2.243-5,5v12c0,2.757,2.243,5,5,5h12c2.757,0,5-2.243,5-5V18c0-2.757-2.243-5-5-5H18z"
                 ></path>
             </svg>
-          </a>
+          </a> */}
         </div>
-        {!scrolled && (
+        {/* {!scrolled && (
           <div className='absolute bottom-0 left-0 right-0 bg-opacity-25 p-2 backdrop-blur-lg lg:w-4/5 sm:w-full m-auto'>
             <div className="w-full flex items-center justify-center mt-2">
               <h1 className="text-3xl font-bold text-gray-200">Events</h1>
@@ -174,10 +174,10 @@ const Events: React.FC = () => {
               </p>
             </div>
           </div>
-        )}
+        )} */}
       </div>
 
-      {!scrolled && (
+      {/* {!scrolled && (
         <div className="flex justify-center my-4">
           <button onClick={handleScroll} className="text-gray-800 scale-150 hover:scale-[200%] mb-10">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-chevron-down">
@@ -194,7 +194,7 @@ const Events: React.FC = () => {
             GDGC hosts diverse events like workshops, hackathons, speaker sessions, and study jams to help students learn and grow.
           </p>
         </div>
-      )}
+      )} */}
 
       <div id="navLinks" className="relative flex justify-center my-4">
       <span
@@ -209,7 +209,7 @@ const Events: React.FC = () => {
             activeTab === "upcoming-events" ? 'text-white' : 'text-gray-700'}`}
           onClick={() => handleTabClick("upcoming-events")}
         >
-          Upcoming Events
+          Upcoming Workshops
         </Link>
         <Link
           to="past-events"
@@ -218,13 +218,14 @@ const Events: React.FC = () => {
           className={`px-4 py-2 font-semibold text-lg rounded-e-lg z-0 ${activeTab === "past-events" ? 'text-white' : 'text-gray-700'}`}
           onClick={() => handleTabClick("past-events")}
         >
-          Past Events
+          Past Workshops
         </Link>
       </div>
 
       <div className="w-full">
         <Outlet context={{ upcomingEvents, pastEvents }}/>
       </div>
+      {/* <EventWindow/> */}
     </div>
   );
 };
