@@ -7,7 +7,7 @@ const Hackathons: React.FC = () => {
   const location = useLocation();
   const isPast = location.pathname.includes("past");
   const [scrolled, setScrolled] = useState(window.innerWidth <= 1024);
-  const [activeTab, setActiveTab] = useState(isPast ? "past-events" : "upcoming-events");
+  const [activeTab, setActiveTab] = useState(isPast ? "past-hackathons" : "upcoming-hackathons");
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0);
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0);
   const [upcomingHackathons, setUpcomingHackathons] = useState([]);
@@ -68,21 +68,21 @@ const Hackathons: React.FC = () => {
           style={{ left: tabUnderlineLeft, width: tabUnderlineWidth,height: "40px" }}
         ></span>
         <Link
-          to="upcoming-events"
-          id="upcoming-events"
+          to="upcoming-hackathons"
+          id="upcoming-hackathons"
           ref={(el) => (tabsRef.current[0] = el)}
           className={`px-4 py-2 font-semibold text-lg rounded-s-lg z-0 ${
-            activeTab === "upcoming-events" ? 'text-white' : 'text-gray-700'}`}
-          onClick={() => handleTabClick("upcoming-events")}
+            activeTab === "upcoming-hackathons" ? 'text-white' : 'text-gray-700'}`}
+          onClick={() => handleTabClick("upcoming-hackathons")}
         >
           Upcoming Hackathons
         </Link>
         <Link
-          to="past-events"
-          id='past-events'
+          to="past-hackathons"
+          id='past-hackathons'
           ref={(el) => (tabsRef.current[1] = el)}
-          className={`px-4 py-2 font-semibold text-lg rounded-e-lg z-0 ${activeTab === "past-events" ? 'text-white' : 'text-gray-700'}`}
-          onClick={() => handleTabClick("past-events")}
+          className={`px-4 py-2 font-semibold text-lg rounded-e-lg z-0 ${activeTab === "past-hackathons" ? 'text-white' : 'text-gray-700'}`}
+          onClick={() => handleTabClick("past-hackathons")}
         >
           Past Hackathons
         </Link>

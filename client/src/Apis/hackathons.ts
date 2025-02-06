@@ -76,7 +76,7 @@ export const updateHackathon = async (eventDto: any) => {
   }
 };
 
-export const handleDownloadCSV = async (eventName: String) => {
+export const handleDownloadHackathonCSV = async (eventName: String) => {
   try {
     const response = await axios.get(`${API_URL}/registration/export-event-csv/${eventName}`, {
       responseType: "blob", 
