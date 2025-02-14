@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { getPastEvents } from "../../../Apis/events";
-import { getPastHackathons } from "../../../Apis/hackathons";
-import Loader from "../../Loader";
+import { useNavigate, Link } from "react-router-dom";
+import { format } from "date-fns";
 
+// Define interfaces for event and hackathon data
 interface Event {
   eventId: number;
   name: string;
@@ -24,83 +23,59 @@ interface Hackathon {
   image: string;
 }
 
+// Props for Past component; note: type must be "Workshops" or "Hackathons"
 interface PastProps {
-  eventsprop: any[];
-  hackathonsprop?: any[];
+  eventsprop?: any[];
+  type: "Workshops" | "Hackathons";
 }
 
-const UserPortalPast: React.FC<PastProps> = ({ eventsprop, hackathonsprop }) => {
-  const [events, setEvents] = useState<Event[]>([]);
-  const [hackathons, setHackathons] = useState<Hackathon[]>([]);
-  const [message, setMessage] = useState("No past events for now :(");
-  const [hackathonMessage, setHackathonMessage] = useState("No past hackathons for now :(");
+const UserPortalPast: React.FC<PastProps> = ({ eventsprop, type }) => {
   const navigate = useNavigate();
 
-  // Update events state from prop
-  useEffect(() => {
-    if (eventsprop && eventsprop.length > 0) {
-      setEvents(eventsprop);
-      setMessage("");
-    } else {
-      setEvents([]);
-      setMessage("No past events for now :(");
-    }
-  }, [eventsprop]);
+  // State for past events (Workshops)
+  const [events, setEvents] = useState<Event[]>([]);
+  const [message, setMessage] = useState("No past events for now :(");
 
-  // Update hackathons state from prop, if provided
-  useEffect(() => {
-    if (hackathonsprop && hackathonsprop.length > 0) {
-      setHackathons(hackathonsprop);
-      setHackathonMessage("");
-    } else {
-      setHackathons([]);
-      setHackathonMessage("No past hackathons for now :(");
-    }
-  }, [hackathonsprop]);
+  // State for past hackathons
+  const [hackathons, setHackathons] = useState<Hackathon[]>([]);
+  const [hackathonMessage, setHackathonMessage] = useState("No past hackathons for now :(");
 
-  // Optional: If you prefer to fetch data instead of using props, you can uncomment these functions.
-  /*
+  // Update state based on provided data and type
   useEffect(() => {
-    const fetchPastData = async () => {
-      try {
-        const pastEvents = await getPastEvents();
-        setEvents(pastEvents.payload.reverse());
-      } catch (error) {
-        console.error("Error fetching past events:", error);
+    if (type === "Workshops") {
+      if (eventsprop && eventsprop.length > 0) {
+        setEvents(eventsprop);
+        setMessage("");
+      } else {
+        setEvents([]);
+        setMessage("No past events for now :(");
       }
-    };
-    fetchPastData();
-  }, []);
-
-  useEffect(() => {
-    const fetchPastHackathons = async () => {
-      try {
-        const pastHackathons = await getPastHackathons();
-        setHackathons(pastHackathons.payload.reverse());
-      } catch (error) {
-        console.error("Error fetching past hackathons:", error);
+    } else if (type === "Hackathons") {
+      if (eventsprop && eventsprop.length > 0) {
+        // For hackathons, the same prop is used (or you could pass a separate prop)
+        setHackathons(eventsprop);
+        setHackathonMessage("");
+      } else {
+        setHackathons([]);
+        setHackathonMessage("No past hackathons for now :(");
       }
-    };
-    fetchPastHackathons();
-  }, []);
-  */
+    }
+  }, [eventsprop, type]);
 
-  // Handler for event card click – for example, navigate to a dedicated page
+  // Handler for past event card click – navigate to a past event detail page
   const handleCardClick = (event: Event) => {
-    if (event.name === "GDSC Solution Challenge") {
-      navigate("/solution-challenge");
-    }
+    navigate(`/past-events/${event.name}`, { state: event });
   };
 
-  // Handler for hackathon card click – navigate to a hackathon detail page
+  // Handler for past hackathon card click – navigate to a past hackathon detail page
   const handleHackathonCardClick = (hackathon: Hackathon) => {
     navigate(`/past-hackathons/${hackathon.name}`, { state: hackathon });
   };
 
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-evenly p-4 space-y-12">
-      {/* Past Events Section */}
-      <div>
+  if (type === "Workshops") {
+    return (
+      <div className="min-h-full p-4">
+        <h3 className="text-2xl font-bold mb-4">Past Events</h3>
         {events.length ? (
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {events.map((event) => (
@@ -131,7 +106,7 @@ const UserPortalPast: React.FC<PastProps> = ({ eventsprop, hackathonsprop }) => 
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center">
-            <p>{message}</p>
+            <p className="text-lg text-gray-700 mb-4">{message}</p>
             <img
               src="https://hadibuttt.github.io/GDSC-Portfolio-Site/img/main.png"
               alt="No events"
@@ -140,9 +115,11 @@ const UserPortalPast: React.FC<PastProps> = ({ eventsprop, hackathonsprop }) => 
           </div>
         )}
       </div>
-
-      {/* Past Hackathons Section */}
-      <div>
+    );
+  } else if (type === "Hackathons") {
+    return (
+      <div className="min-h-full p-4">
+        <h3 className="text-2xl font-bold mb-4">Past Hackathons</h3>
         {hackathons.length ? (
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {hackathons.map((hackathon) => (
@@ -173,7 +150,7 @@ const UserPortalPast: React.FC<PastProps> = ({ eventsprop, hackathonsprop }) => 
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center">
-            <p>{hackathonMessage}</p>
+            <p className="text-lg text-gray-700 mb-4">{hackathonMessage}</p>
             <img
               src="https://hadibuttt.github.io/GDSC-Portfolio-Site/img/main.png"
               alt="No hackathons"
@@ -182,8 +159,10 @@ const UserPortalPast: React.FC<PastProps> = ({ eventsprop, hackathonsprop }) => 
           </div>
         )}
       </div>
-    </div>
-  );
+    );
+  } else {
+    return null;
+  }
 };
 
 export default UserPortalPast;

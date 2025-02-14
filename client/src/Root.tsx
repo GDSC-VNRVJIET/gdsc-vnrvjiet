@@ -1,109 +1,121 @@
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
-import CheckUsers from "./pages/Events/admin/CheckUsers";
-import GenAiLeaderboard from "./pages/Events/admin/GenAi";
-import GoogleForms from "./pages/GoogleForms";
-import EditBlog from "./pages/Events/user/EditBlog";
-import Register from "./pages/Events/user/Register";
-import Signup from "./pages/SignIn";
+import React, { useEffect, useState } from "react";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+
+// Import your page components
 import Home from "./pages/Home";
-import PastEvents from "./pages/Events/PastEvents";
+import Signup from "./pages/SignIn";
 import Login from "./pages/Login";
-import Forum from "./pages/Forum";
-import Team from "./pages/Team";
-import OrgChart from "./pages/OrgChart";
-import UpcomingEvents from "./pages/Events/UpcomingEvents";
-import SolutionChallenge from "./pages/SolutionChallenge";
-import CommunityGuidelines from "./pages/CommunityGuidelines";
-import Leaderboard from "./pages/leaderboard/leaderboard-multiplejurues";
-import FinalLeaderboard from "./pages/leaderboard/leaderboard"
-import LeaderboardRound2 from "./pages/leaderboard/leaderboard-finalround"
-import Enter from "./pages/leaderboard/enter";
-import Score from "./pages/leaderboard/score";
-import accessDenied from "./images/accessDenied.png";
-import deniedAccess from "./images/deniedaccess.png";
 import ForgotPassword from "./pages/ForgotPassword";
-import Analysis from "./pages/leaderboard/analysis";
 import Blog from "./pages/Events/Blog";
-import AddBlog from "./pages/Events/admin/AddBlog";
-import Design from "./pages/Domain Info/Design"
+import CarouselBlog from "./pages/Events/CarouselBlog";
+import EditBlog from "./pages/Events/user/EditBlog";
+import Registration from "./pages/Events/Registration"; // Registration component for hackathon registration
 import Contactus from "./pages/Contactus";
-import TermsAndConditions from "./pages/TermsandConditions";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import RefundPolicy from "./pages/RefundPolicy";
-import SingleBlog from "./pages/Events/admin/SingleBlog";
+import Design from "./pages/Domain Info/Design";
 import WebDev from "./pages/Domain Info/WebDev";
 import CompetitiveProgramming from "./pages/Domain Info/CompetitiveProgramming";
 import ML from "./pages/Domain Info/ML";
 import Management from "./pages/Domain Info/Management";
-import AppDev from './pages/Domain Info/AppDev';
-import Teams from "./pages/leaderboard/Teams";
-import Events from "./pages/Events/Events";
-import CheckRegistrations from "./pages/Events/admin/CheckRegistrations";
+import AppDev from "./pages/Domain Info/AppDev";
 import Hardware from "./pages/Domain Info/Hardware";
 import WomenInTech from "./pages/Domain Info/WomenInTech";
 import TestingCybersecurity from "./pages/Domain Info/TestingCybersecurity";
 import CommunityRegistration from "./pages/CommunityRegistration";
-import CarouselBlog from "./pages/Events/CarouselBlog";
+import OrgChart from "./pages/OrgChart";
+import Forum from "./pages/Forum";
+import Team from "./pages/Team";
+import SolutionChallenge from "./pages/SolutionChallenge";
+import CommunityGuidelines from "./pages/CommunityGuidelines";
+import TermsAndConditions from "./pages/TermsandConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import RefundPolicy from "./pages/RefundPolicy";
+import SingleBlog from "./pages/Events/admin/SingleBlog";
+import AddBlog from "./pages/Events/admin/AddBlog";
+
+// Leaderboard and ProtectedRoute components
+import Leaderboard from "./pages/leaderboard/leaderboard-multiplejurues";
+import FinalLeaderboard from "./pages/leaderboard/leaderboard";
+import LeaderboardRound2 from "./pages/leaderboard/leaderboard-finalround";
+import Enter from "./pages/leaderboard/enter";
+import Score from "./pages/leaderboard/score";
+import Analysis from "./pages/leaderboard/analysis";
+import CheckUsers from "./pages/Events/admin/CheckUsers";
+import CheckRegistrations from "./pages/Events/admin/CheckRegistrations";
+import GenAiLeaderboard from "./pages/Events/admin/GenAi";
+import deniedAccess from "./images/deniedaccess.png";
+
+// Import our EventWindow (handles both workshops and hackathons)
 import EventWindow from "./pages/Events/EventWindow";
 
-const isAdmin = () => {
-  const userObjGDSC = localStorage.getItem("userObjGDSC");
-  if (userObjGDSC) {
-    const userRole = JSON.parse(userObjGDSC);
-    return userRole && userRole.role == process.env.REACT_APP_ADMIN_ROLE;
+// Import nested child components for workshops and hackathons
+import UpcomingEvents from "./pages/Events/UpcomingEvents";
+import PastEvents from "./pages/Events/PastEvents";
+import Events from "./pages/Events/Events"; // Parent for workshops
+import Hackathons from "./pages/Events/Hackathons"; // Parent for hackathons
+import UpcomingHackathons from "./pages/Events/UpcomingHackathons";
+import PastHackathons from "./pages/Events/PastHackathons";
+
+// --- Helper Functions for Role Check ---
+const isAdmin = (): boolean => {
+  const userObj = localStorage.getItem("userObjGDSC");
+  if (userObj) {
+    const userRole = JSON.parse(userObj);
+    return userRole && userRole.role === process.env.REACT_APP_ADMIN_ROLE;
   }
   return false;
 };
 
-const isJury = () => {
-  const userObjGDSC = localStorage.getItem("userObjGDSC");
-  if (userObjGDSC) {
-    const userRole = JSON.parse(userObjGDSC);
-    return userRole && userRole.role == process.env.REACT_APP_JURY_ROLE;
+const isJury = (): boolean => {
+  const userObj = localStorage.getItem("userObjGDSC");
+  if (userObj) {
+    const userRole = JSON.parse(userObj);
+    return userRole && userRole.role === process.env.REACT_APP_JURY_ROLE;
   }
   return false;
 };
 
-const ProtectedRoute: React.FC<{ element: React.ReactNode; path: string }> = ({
-  element,
-  path,
-}) => {
+// --- ProtectedRoute Component ---
+interface ProtectedRouteProps {
+  element: React.ReactNode;
+  path: string;
+}
+
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element, path }) => {
   const navigate = useNavigate();
-  if ((path == "/leaderboard" || path == "/analysis" || path=="/viewregistrations") && !isAdmin()) {
+  if (
+    (path === "/leaderboard" ||
+      path === "/analysis" ||
+      path === "/viewregistrations") &&
+    !isAdmin()
+  ) {
     return (
-      <div className="">
-        <div className="inset-0 flex flex-col items-center justify-center pt-10 text-sm md:text-2xl font-bold">
-          <p className="text-center">If you're a Jury, you can Evaluate
-           <button className="text-blue-500 px-2 hover:underline" onClick={()=>navigate('/enter')}>from here.</button></p>
-           <img
-          className="w-screen"
-          src={deniedAccess}
-          alt="Access Denied"
-        />
-        </div>
+      <div className="flex flex-col items-center justify-center pt-10 text-center text-sm md:text-2xl font-bold">
+        <p>
+          If you're a Jury, you can Evaluate{" "}
+          <button
+            className="text-blue-500 px-2 hover:underline"
+            onClick={() => navigate("/enter")}
+          >
+            from here.
+          </button>
+        </p>
+        <img className="w-screen" src={deniedAccess} alt="Access Denied" />
       </div>
     );
-  } else if ((path == "/enter" || path == "/score") && !isJury()) {
+  } else if ((path === "/enter" || path === "/score") && !isJury()) {
     return (
-      <div className="">
-      
-      <div className="inset-0 flex flex-col items-center justify-center pt-10 text-sm md:text-2xl font-bold">
-        <p className="text-center">If you're an admin, you can access 
-         <button className="text-blue-500 px-2 hover:underline" onClick={()=>navigate('/leaderboard')}>Leaderboard</button></p>
-         <img
-        className="w-screen"
-        src={deniedAccess}
-        alt="Access Denied"
-      />
+      <div className="flex flex-col items-center justify-center pt-10 text-center text-sm md:text-2xl font-bold">
+        <p>
+          If you're an admin, you can access{" "}
+          <button
+            className="text-blue-500 px-2 hover:underline"
+            onClick={() => navigate("/leaderboard")}
+          >
+            Leaderboard
+          </button>
+        </p>
+        <img className="w-screen" src={deniedAccess} alt="Access Denied" />
       </div>
-    </div>
     );
   } else {
     return <>{element}</>;
@@ -111,7 +123,6 @@ const ProtectedRoute: React.FC<{ element: React.ReactNode; path: string }> = ({
 };
 
 function Root() {
-
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
   useEffect(() => {
@@ -135,19 +146,13 @@ function Root() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/admin-signup" element={<Signup />} />
-        <Route path="/admin-login" element={<Login />} /> */}
         <Route path="/signup" element={<Signup />} />
-        {/* <Route path="upcoming-events/:eventname" element={<Register />} /> */}
-        <Route path="/upcoming-events/Solution Challenge 2025" element={<GoogleForms />} >
-        </Route>
-        
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/blogs" element={<Blog />}>
-          <Route path="" element={<CarouselBlog />}/>
-          <Route path="achievers" element={<CarouselBlog />}/>
-          <Route path="community" element={<CarouselBlog />}/>
+          <Route index element={<CarouselBlog />} />
+          <Route path="achievers" element={<CarouselBlog />} />
+          <Route path="community" element={<CarouselBlog />} />
         </Route>
         <Route path="/forum" element={<Forum />} />
         <Route path="/team" element={<Team />} />
@@ -168,34 +173,41 @@ function Root() {
         <Route path="/management" element={<Management />} />
         <Route path="/app-development" element={<AppDev />} />
         <Route path="/hardware" element={<Hardware />} />
-        <Route path="/women-in-tech" element={<WomenInTech/>} />
+        <Route path="/women-in-tech" element={<WomenInTech />} />
         <Route path="/testing-cybersecutiry" element={<TestingCybersecurity />} />
-        <Route path="/community-signup" element={<CommunityRegistration/>} />
-        <Route path="/events" element={<EventWindow />} >
-          <Route path="" element={<UpcomingEvents />} />
-          <Route path="upcoming-events" element={<UpcomingEvents />} />
-          <Route path="past-events" element={<PastEvents />} />
+        <Route path="/community-signup" element={<CommunityRegistration />} />
+
+        {/* The Events section includes nested routes for workshops and hackathons */}
+        <Route path="/events" element={<EventWindow />}>
+          {/* Workshops nested routes */}
+          <Route path="workshops/*" element={<Events />}>
+            <Route index element={<Navigate to="upcoming-events" replace />} />
+            <Route path="upcoming-events" element={<UpcomingEvents />} />
+            <Route path="past-events" element={<PastEvents />} />
+          </Route>
+          {/* Hackathons nested routes */}
+          <Route path="hackathons/*" element={<Hackathons />}>
+            <Route index element={<Navigate to="upcoming-hackathons" replace />} />
+            <Route path="upcoming-hackathons" element={<UpcomingHackathons />} />
+            <Route path="past-hackathons" element={<PastHackathons />} />
+          </Route>
         </Route>
-        <Route 
-          path="/viewregistrations/:eventname" 
-          element= {
-            <ProtectedRoute element={<CheckRegistrations/>} path="/viewregistrations"/>
+
+        <Route
+          path="/viewregistrations/:eventname"
+          element={
+            <ProtectedRoute element={<CheckRegistrations />} path="/viewregistrations" />
           }
         />
         <Route
           path="/leaderboard"
-          element={
-            <ProtectedRoute element={<Leaderboard />} path="/leaderboard" />
-          }
+          element={<ProtectedRoute element={<Leaderboard />} path="/leaderboard" />}
         />
         <Route
           path="/analysis"
           element={<ProtectedRoute element={<Analysis />} path="/analysis" />}
         />
-        <Route
-          path="/gen-ai-leaderboard"
-          element={<GenAiLeaderboard />}
-        />
+        <Route path="/gen-ai-leaderboard" element={<GenAiLeaderboard />} />
         <Route
           path="/enter"
           element={<ProtectedRoute element={<Enter />} path="/enter" />}
@@ -208,9 +220,11 @@ function Root() {
           path="/checkuser"
           element={<ProtectedRoute element={<CheckUsers />} path="/checkuser" />}
         />
-        
-        
+
+        {/* Registration route for hackathon registrations */}
+        <Route path="/registration" element={<Registration />} />
       </Routes>
+
       {showScrollToTop && (
         <button
           onClick={scrollToTop}
@@ -233,7 +247,7 @@ function Root() {
           </svg>
         </button>
       )}
-      </>
+    </>
   );
 }
 

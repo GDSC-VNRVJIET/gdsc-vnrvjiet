@@ -1,5 +1,3 @@
-
-
 import { ChevronLeft, ChevronRight, Users, Presentation as FilePresentation, Rocket } from 'lucide-react';
 import { useState } from 'react';
 

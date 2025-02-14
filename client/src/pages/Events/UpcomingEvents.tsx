@@ -12,6 +12,8 @@ function UpcomingEvents() {
     } | null
   );
   const { upcomingEvents } = useOutletContext<{ upcomingEvents: any[] }>();
+
+  // (Optional) Fetch user if needed
   // useEffect(() => {
   //   const fetchUser = async () => {
   //     if (!user) {
@@ -24,16 +26,14 @@ function UpcomingEvents() {
   //       }
   //     }
   //   };
-
   //   fetchUser();
   // }, [user]);
 
-  
-
   if (user && user.role === process.env.REACT_APP_ADMIN_ROLE) {
-    return <AdminPortalUpcoming eventsprop={upcomingEvents}/>;
+    return <AdminPortalUpcoming eventsprop={upcomingEvents} />;
   } else {
-    return <UserPortalUpcoming eventsprop={upcomingEvents} />;
+    // Pass the required "type" prop here.
+    return <UserPortalUpcoming eventsprop={upcomingEvents} type="Workshops" />;
   }
 }
 

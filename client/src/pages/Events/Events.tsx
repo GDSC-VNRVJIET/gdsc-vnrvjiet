@@ -30,10 +30,12 @@ const Events: React.FC = () => {
   async function fetchData() {
     try {
       const upcomingResponse = await getUpcomingEvents();
+      console.log("Upcoming response:", upcomingResponse);
       if (upcomingResponse.payload != null) {
         setUpcomingEvents(upcomingResponse.payload.reverse());
       }
       const pastResponse = await getPastEvents();
+      console.log("Past response:", pastResponse);
       if (pastResponse.payload != null) {
         setPastEvents(pastResponse.payload.reverse());
       }
@@ -42,7 +44,7 @@ const Events: React.FC = () => {
       setDisplayLoader(false);
       console.log(error);
     }
-  }
+  }  
 
   useEffect(() => {
     fetchData();

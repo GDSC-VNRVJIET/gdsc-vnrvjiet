@@ -17,7 +17,7 @@ import {
   getAllHackathons,
   getUpcomingHackathons,
   updateHackathon,
-  handleDownloadHackathonCSV,
+  // handleDownloadHackathonCSV,
 } from "../../../Apis/hackathons";
 
 import { format, isValid } from "date-fns";

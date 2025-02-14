@@ -4,7 +4,7 @@ const API_URL = process.env.REACT_APP_BACK_URL;
 
 export const createHackathon = async (eventDto: any) => {
   try {
-    const response = await axios.post(`${API_URL}/Events/create`, eventDto);
+    const response = await axios.post(`${API_URL}/Hackathons/create`, eventDto);
     return response.data;
   } catch (error) {
     console.error("Error creating hackathon:", error);
@@ -12,10 +12,10 @@ export const createHackathon = async (eventDto: any) => {
   }
 };
 
-export const getHackathonById = async (eventId: any) => {
+export const getHackathonById = async (hackathonId: any) => {
   try {
     const response = await axios.get(
-      `${API_URL}/Events/get-eventId/${eventId}`
+      `${API_URL}/Hackathons/get-hackathonId/${hackathonId}`
     );
     return response.data;
   } catch (error) {
@@ -26,7 +26,7 @@ export const getHackathonById = async (eventId: any) => {
 
 export const getUpcomingHackathons = async () => {
   try {
-    const response = await axios.get(`${API_URL}/Events/get-upcoming-events`);
+    const response = await axios.get(`${API_URL}/Hackathons/get-upcoming-hackathons`);
     return response.data;
   } catch (error) {
     console.error("Error fetching upcoming hackathons:", error);
@@ -36,7 +36,7 @@ export const getUpcomingHackathons = async () => {
 
 export const getPastHackathons = async () => {
   try {
-    const response = await axios.get(`${API_URL}/Events/get-past-events`);
+    const response = await axios.get(`${API_URL}/Hackathons/get-past-hackathons`);
     return response.data;
   } catch (error) {
     console.error("Error fetching past hackathons:", error);
@@ -46,7 +46,7 @@ export const getPastHackathons = async () => {
 
 export const getAllHackathons = async () => {
   try {
-    const response = await axios.get(`${API_URL}/Events/get-events`);
+    const response = await axios.get(`${API_URL}/Hackathons/get-hackathons`);
     return response.data;
   } catch (error) {
     console.error("Error fetching hackathons:", error);
@@ -57,7 +57,7 @@ export const getAllHackathons = async () => {
 export const deleteHackathonById = async (eventId: any) => {
   try {
     const response = await axios.delete(
-      `${API_URL}/Events/delete-by-id/${eventId}`
+      `${API_URL}/Hackathons/delete-by-id/${eventId}`
     );
     return response.data;
   } catch (error) {
@@ -68,7 +68,7 @@ export const deleteHackathonById = async (eventId: any) => {
 
 export const updateHackathon = async (eventDto: any) => {
   try {
-    const response = await axios.post(`${API_URL}/Events/update`, eventDto);
+    const response = await axios.post(`${API_URL}/Hackathons/update`, eventDto);
     return response.data;
   } catch (error) {
     console.error("Error updating hackathon:", error);
@@ -76,29 +76,29 @@ export const updateHackathon = async (eventDto: any) => {
   }
 };
 
-export const handleDownloadHackathonCSV = async (eventName: String) => {
-  try {
-    const response = await axios.get(`${API_URL}/registration/export-event-csv/${eventName}`, {
-      responseType: "blob", 
-    });
+// export const handleDownloadHackathonCSV = async (eventName: String) => {
+//   try {
+//     const response = await axios.get(`${API_URL}/registration/export-event-csv/${eventName}`, {
+//       responseType: "blob", 
+//     });
     
-    const url = window.URL.createObjectURL(new Blob([response.data]));
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `${eventName}.csv`);
-    document.body.appendChild(link);
-    link.click();
-  } catch (error) {
-    console.error("Error downloading the CSV", error);
-  }
-};
+//     const url = window.URL.createObjectURL(new Blob([response.data]));
+//     const link = document.createElement("a");
+//     link.href = url;
+//     link.setAttribute("download", `${eventName}.csv`);
+//     document.body.appendChild(link);
+//     link.click();
+//   } catch (error) {
+//     console.error("Error downloading the CSV", error);
+//   }
+// };
 
-export const hackathonRegistrations = async (eventName: String) => {
+export const hackathonRegistrations = async (hackathonName: String) => {
   try {
     const userObjGDSC = localStorage.getItem("userObjGDSC");
     if (userObjGDSC) {
       const userRole = JSON.parse(userObjGDSC);
-      const response = await axios.get(`${API_URL}/registration/event-registrations/${eventName}`,{
+      const response = await axios.get(`${API_URL}/registration/event-registrations/${hackathonName}`,{
         headers: {
           'Authorization': `Bearer ${userRole.token}`,
           'Content-Type': 'application/json',

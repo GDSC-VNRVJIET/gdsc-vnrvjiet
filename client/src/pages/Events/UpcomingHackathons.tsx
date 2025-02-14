@@ -14,9 +14,9 @@ function UpcomingHackathons() {
   const { upcomingHackathons } = useOutletContext<{ upcomingHackathons: any[] }>();
 
   if (user && user.role === process.env.REACT_APP_ADMIN_ROLE) {
-    return <AdminPortalUpcoming eventsprop={upcomingHackathons}/>;
+    return <AdminPortalUpcoming eventsprop={upcomingHackathons} />;
   } else {
-    return <UserPortalUpcoming eventsprop={upcomingHackathons} />;
+    return <UserPortalUpcoming eventsprop={upcomingHackathons} type="Hackathons" />;
   }
 }
 

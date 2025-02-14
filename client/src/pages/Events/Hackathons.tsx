@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useRef,useLayoutEffect } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { getPastHackathons, getUpcomingHackathons } from '../../Apis/hackathons';
 import Loader from '../Loader';
 
 const Hackathons: React.FC = () => {
   const location = useLocation();
-  const isPast = location.pathname.includes("past");
+  // Derive the active tab from the URL instead of using state
+  const activeTab = location.pathname.includes("past") ? "past-hackathons" : "upcoming-hackathons";
+
   const [scrolled, setScrolled] = useState(window.innerWidth <= 1024);
-  const [activeTab, setActiveTab] = useState(isPast ? "past-hackathons" : "upcoming-hackathons");
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0);
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0);
-  const [upcomingHackathons, setUpcomingHackathons] = useState([]);
-  const [pastHackathons, setPastHackathons] = useState([]);
+  const [upcomingHackathons, setUpcomingHackathons] = useState<any[]>([]);
+  const [pastHackathons, setPastHackathons] = useState<any[]>([]);
   const tabsRef = useRef<(HTMLElement | null)[]>([]);
-  const ref = useRef<HTMLDivElement | null>(null);
   const [displayLoader, setDisplayLoader] = useState(true);
 
   useEffect(() => {
@@ -22,10 +22,10 @@ const Hackathons: React.FC = () => {
     if (currentTab) {
       setTabUnderlineLeft(currentTab.offsetLeft);
       setTabUnderlineWidth(currentTab.clientWidth);
-    }else {
+    } else {
       console.error("currentTab is not found. Check if refs are set correctly.");
     }
-  }, [activeTab,displayLoader]);
+  }, [activeTab, displayLoader, location.pathname]);
 
   async function fetchData() {
     try {
@@ -40,7 +40,7 @@ const Hackathons: React.FC = () => {
       setDisplayLoader(false);
     } catch (error) {
       setDisplayLoader(false);
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -48,48 +48,53 @@ const Hackathons: React.FC = () => {
     fetchData();
   }, []);
 
-
-  const handleTabClick = (tabName: string) => {
-    setActiveTab(tabName);
-  };
-
   return displayLoader ? (
-    <Loader/>
+    <Loader />
   ) : (
     <div className="w-full h-full p-4">
-      <div className={`HeroSection flex flex-col bg-cover bg-center bg-no-repeat mt-4 relative ${scrolled ? 'static mt-4' : ''}`}>
+      <div
+        className={`HeroSection flex flex-col bg-cover bg-center bg-no-repeat mt-4 relative ${
+          scrolled ? 'static mt-4' : ''
+        }`}
+      >
         <div className={`relative flex justify-center ${scrolled ? 'static' : ''}`}>
+          {/* You can include hero content here if needed */}
         </div>
       </div>
 
       <div id="navLinks" className="relative flex justify-center my-4">
-      <span
+        <span
           className="absolute bottom-0 h-full -z-4 transition-all duration-300 bg-blue-500 rounded-lg"
-          style={{ left: tabUnderlineLeft, width: tabUnderlineWidth,height: "40px" }}
+          style={{ left: tabUnderlineLeft, width: tabUnderlineWidth, height: "40px" }}
         ></span>
-        <Link
+        <NavLink
           to="upcoming-hackathons"
           id="upcoming-hackathons"
           ref={(el) => (tabsRef.current[0] = el)}
-          className={`px-4 py-2 font-semibold text-lg rounded-s-lg z-0 ${
-            activeTab === "upcoming-hackathons" ? 'text-white' : 'text-gray-700'}`}
-          onClick={() => handleTabClick("upcoming-hackathons")}
+          className={({ isActive }) =>
+            `px-4 py-2 font-semibold text-lg rounded-s-lg z-0 ${
+              isActive ? 'text-white' : 'text-gray-700'
+            }`
+          }
         >
           Upcoming Hackathons
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="past-hackathons"
-          id='past-hackathons'
+          id="past-hackathons"
           ref={(el) => (tabsRef.current[1] = el)}
-          className={`px-4 py-2 font-semibold text-lg rounded-e-lg z-0 ${activeTab === "past-hackathons" ? 'text-white' : 'text-gray-700'}`}
-          onClick={() => handleTabClick("past-hackathons")}
+          className={({ isActive }) =>
+            `px-4 py-2 font-semibold text-lg rounded-e-lg z-0 ${
+              isActive ? 'text-white' : 'text-gray-700'
+            }`
+          }
         >
           Past Hackathons
-        </Link>
+        </NavLink>
       </div>
 
       <div className="w-full">
-        <Outlet context={{ upcomingHackathons, pastHackathons }}/>
+        <Outlet context={{ upcomingHackathons, pastHackathons }} />
       </div>
     </div>
   );
