@@ -56,6 +56,7 @@ import CommunityRegistration from "./pages/CommunityRegistration";
 import CarouselBlog from "./pages/Events/CarouselBlog";
 import FinalRoundScoring from "./pages/CampusAuto/FinalRoundScoring";
 import FinalTeamScoring from "./pages/CampusAuto/FinalTeamScoring";
+import CompleteRoundOne from "./pages/CampusAuto/CompleteRoundOne";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -80,7 +81,7 @@ const ProtectedRoute: React.FC<{ element: React.ReactNode; path: string }> = ({
   path,
 }) => {
   const navigate = useNavigate();
-  if ((path == "/leaderboard" || path == "/analysis" || path=="/viewregistrations") && !isAdmin()) {
+  if ((path == "/leaderboard" || path == "/analysis" || path=="/viewregistrations" || path=="/complete-round-one") && !isAdmin()) {
     return (
       <div className="">
         <div className="inset-0 flex flex-col items-center justify-center pt-10 text-sm md:text-2xl font-bold">
@@ -94,7 +95,7 @@ const ProtectedRoute: React.FC<{ element: React.ReactNode; path: string }> = ({
         </div>
       </div>
     );
-  } else if ((path == "/enter" || path == "/score") && !isJury()) {
+  } else if ((path == "/enter" || path == "/score"  || path=="/scoring" || path=="/final-scoring" || path=="/scoring/:id" || path=="/final-scoring/:id") && !isJury()) {
     return (
       <div className="">
       
@@ -139,10 +140,11 @@ function Root() {
     <>
       <Routes>
         {/* <Route path="/campus-teams" element={<CampusTeams />}></Route> */}
-        <Route path="/scoring" element={<Scoring />}></Route>
-        <Route path="/scoring/:id" element={<TeamScoringForm />}></Route>
-        <Route path="/final-scoring" element={<FinalRoundScoring />}></Route>
-        <Route path="/final-scoring/:id" element={<FinalTeamScoring />}></Route>
+        <Route path="/scoring" element={<ProtectedRoute element={<Scoring />} path="/scoring" />}></Route>
+        <Route path="/scoring/:id" element={<ProtectedRoute element={<TeamScoringForm />} path="/scoring/:id" />}></Route>
+        <Route path="/final-scoring" element={<ProtectedRoute element={<FinalRoundScoring />} path="/final-scoring" />}></Route>
+        <Route path="/final-scoring/:id" element={<ProtectedRoute element={<FinalTeamScoring />} path="/final-scoring/:id" />}></Route>
+        <Route path="/complete-round-one" element={<ProtectedRoute element={<CompleteRoundOne />} path="/complete-round-one" />}></Route>
         <Route path="/" element={<Home />} />
         {/* <Route path="/admin-signup" element={<Signup />} />
         <Route path="/admin-login" element={<Login />} /> */}

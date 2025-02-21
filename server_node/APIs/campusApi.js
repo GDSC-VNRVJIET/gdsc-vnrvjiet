@@ -115,17 +115,27 @@ campusApp.post("/complete-round-one", expressAsyncHandler(async (req, res) => {
         //     res.status(400);
         //     throw new Error(`${unevaluatedTeams.length} teams still need evaluation`);
         // }
+        const getTopTeamsWithTies = (teams, topN) => {
+            // Sort teams by score in descending order
+            teams.sort((a, b) => b.score - a.score);
+
+            // Get the score of the topN-th team
+            const cutoffScore = teams[topN - 1]?.score;
+
+            // Include all teams with the same score as the cutoff score
+            return teams.filter(team => team.score >= cutoffScore);
+        };
 
         // Select top 3 from each panel
-        const panel1Teams = allTeams
-            .filter(team => team.panel === "panel-1")
-            .sort((a, b) => b.score - a.score)
-            .slice(0, 3);
+        const panel1Teams = getTopTeamsWithTies(
+            allTeams.filter(team => team.panel === "panel-1"),
+            3 // Top 3
+        );
 
-        const panel2Teams = allTeams
-            .filter(team => team.panel === "panel-2")
-            .sort((a, b) => b.score - a.score)
-            .slice(0, 3);
+        const panel2Teams = getTopTeamsWithTies(
+            allTeams.filter(team => team.panel === "panel-2"),
+            3 // Top 3
+        );
 
         // Mark finalists and reset their scores
         const finalists = [...panel1Teams, ...panel2Teams];
