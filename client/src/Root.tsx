@@ -7,6 +7,9 @@ import {
   useNavigate,
 } from "react-router-dom";
 import CheckUsers from "./pages/Events/admin/CheckUsers";
+import Scoring from "./pages/CampusAuto/Scoring";
+import CampusTeams from "./pages/CampusAuto/CampusTeams";
+import TeamScoringForm from "./pages/CampusAuto/TeamScoringForm";
 import GenAiLeaderboard from "./pages/Events/admin/GenAi";
 import GoogleForms from "./pages/GoogleForms";
 import EditBlog from "./pages/Events/user/EditBlog";
@@ -133,6 +136,9 @@ function Root() {
   return (
     <>
       <Routes>
+        {/* <Route path="/campus-teams" element={<CampusTeams />}></Route> */}
+        <Route path="/scoring" element={<Scoring />}></Route>
+        <Route path="/scoring/:id" element={<TeamScoringForm />}></Route>
         <Route path="/" element={<Home />} />
         {/* <Route path="/admin-signup" element={<Signup />} />
         <Route path="/admin-login" element={<Login />} /> */}
@@ -176,7 +182,7 @@ function Root() {
           <Route path="past-events" element={<PastEvents />} />
         </Route>
         <Route 
-          path="/viewregistrations/:eventname" 
+          path="/viewregistrations/:eventname"
           element= {
             <ProtectedRoute element={<CheckRegistrations/>} path="/viewregistrations"/>
           }
