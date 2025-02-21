@@ -54,6 +54,8 @@ import WomenInTech from "./pages/Domain Info/WomenInTech";
 import TestingCybersecurity from "./pages/Domain Info/TestingCybersecurity";
 import CommunityRegistration from "./pages/CommunityRegistration";
 import CarouselBlog from "./pages/Events/CarouselBlog";
+import FinalRoundScoring from "./pages/CampusAuto/FinalRoundScoring";
+import FinalTeamScoring from "./pages/CampusAuto/FinalTeamScoring";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -139,6 +141,8 @@ function Root() {
         {/* <Route path="/campus-teams" element={<CampusTeams />}></Route> */}
         <Route path="/scoring" element={<Scoring />}></Route>
         <Route path="/scoring/:id" element={<TeamScoringForm />}></Route>
+        <Route path="/final-scoring" element={<FinalRoundScoring />}></Route>
+        <Route path="/final-scoring/:id" element={<FinalTeamScoring />}></Route>
         <Route path="/" element={<Home />} />
         {/* <Route path="/admin-signup" element={<Signup />} />
         <Route path="/admin-login" element={<Login />} /> */}

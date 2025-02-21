@@ -17,7 +17,7 @@ interface APIResponse {
   data: Team[];
 }
 
-const Scoring: React.FC = () => {
+const FinalRoundScoring: React.FC = () => {
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
@@ -26,10 +26,11 @@ const Scoring: React.FC = () => {
     try {
       setLoading(true);
     const response = await axios.get<APIResponse>(
-      `${process.env.REACT_APP_BACK_URL}/campus/teams`
+      `${process.env.REACT_APP_BACK_URL}/campus/final-leaderboard`
     );
     const filteredTeams = response.data.data.filter(team => team.evaluated === 0);
     setTeams(filteredTeams);
+      setTeams(response.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -137,17 +138,16 @@ const Scoring: React.FC = () => {
                 <div className="p-4 sm:p-6 bg-gray-50 border-t border-gray-200">
                     <button 
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 text-sm sm:text-base rounded-lg transition-colors duration-200"
-                        onClick={()=>navigate(`/scoring/${team.teamID}`)}
+                        onClick={()=>navigate(`/final-scoring/${team.teamID}`)}
                     >
                         Give Score
                     </button>
                 </div>
             </div>
         ))}
-        
     </div>
 </div>
   );
 };
 
-export default Scoring;
+export default FinalRoundScoring;
