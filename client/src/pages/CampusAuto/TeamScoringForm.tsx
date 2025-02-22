@@ -38,13 +38,13 @@ const TeamScoringForm: React.FC = () => {
 
   useEffect(() => {
     // Calculate total score
-    const total = (
-      formData.implementation +
-      formData.presentation +
-      formData.uiUx +
-      formData.creativity +
-      formData.feasibility
-    ) / 5;
+    const total = 
+      parseFloat((formData.implementation*30/100).toFixed(3)) +
+      parseFloat((formData.presentation*10/100).toFixed(3)) +
+      parseFloat((formData.uiUx*10/100).toFixed(3)) +
+      parseFloat((formData.creativity*20/100).toFixed(3)) +
+      parseFloat((formData.feasibility*30/100).toFixed(3));
+    
     
     setFormData(prev => ({
       ...prev,

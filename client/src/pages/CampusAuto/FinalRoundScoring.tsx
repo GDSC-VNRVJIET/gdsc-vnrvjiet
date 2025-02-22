@@ -30,7 +30,6 @@ const FinalRoundScoring: React.FC = () => {
     );
     const filteredTeams = response.data.data.filter(team => team.evaluated === 0);
     setTeams(filteredTeams);
-      setTeams(response.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -52,7 +51,7 @@ const FinalRoundScoring: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4 sm:p-6">
-    <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-8 text-center text-gray-800">Team Scoring Dashboard</h1>
+    <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-8 text-center text-gray-800">Finalist Teams Scoring Dashboard</h1>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {teams.map((team) => (
             <div key={team.teamID} className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-200">

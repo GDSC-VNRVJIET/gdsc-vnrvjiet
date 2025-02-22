@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const FinalTeamScoring: React.FC = () => {
-  const {id: teamId} = useParams<{id: string}>();
+  const { id: teamId } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [isEvaluated, setIsEvaluated] = useState(false);
+  const [isFinalist, setIsFinalist] = useState(false);
   const [previousScores, setPreviousScores] = useState<any>(null);
+  const [oldScore, setOldScore] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     implementation: 5,
     presentation: 5,
@@ -13,7 +16,7 @@ const FinalTeamScoring: React.FC = () => {
     creativity: 5,
     feasibility: 5,
     feedback: '',
-    totalScore: 5
+    totalScore: 5,
   });
 
   useEffect(() => {
@@ -23,6 +26,24 @@ const FinalTeamScoring: React.FC = () => {
         const response = await axios.get(`${process.env.REACT_APP_BACK_URL}/campus/team/${teamId}`);
         const teamData = response.data.data;
 
+        // Check if the team is a finalist
+        if (teamData.final) {
+          setIsFinalist(true);
+          // Calculate the old score average
+            const averageScore = (
+            parseFloat((teamData.scoreDetails.implementation * 30 / 100).toFixed(3)) +
+            parseFloat((teamData.scoreDetails.presentation * 10 / 100).toFixed(3)) +
+            parseFloat((teamData.scoreDetails.uiUx * 10 / 100).toFixed(3)) +
+            parseFloat((teamData.scoreDetails.creativity * 20 / 100).toFixed(3)) +
+            parseFloat((teamData.scoreDetails.feasibility * 30 / 100).toFixed(3))
+            );
+          setOldScore(parseFloat(averageScore.toFixed(1)));
+        } else {
+          // If the team is not a finalist, show invalid team message
+          setIsFinalist(false);
+        }
+
+        // Check if the team has been evaluated
         if (teamData.evaluated === 1) {
           setIsEvaluated(true);
           setPreviousScores(teamData.scoreDetails);
@@ -38,36 +59,36 @@ const FinalTeamScoring: React.FC = () => {
   useEffect(() => {
     // Calculate total score
     const total = (
-      formData.implementation +
-      formData.presentation +
-      formData.uiUx +
-      formData.creativity +
-      formData.feasibility
-    ) / 5;
-    
-    setFormData(prev => ({
+    parseFloat((formData.implementation*30/100).toFixed(3)) +
+    parseFloat((formData.presentation*10/100).toFixed(3)) +
+    parseFloat((formData.uiUx*10/100).toFixed(3)) +
+    parseFloat((formData.creativity*20/100).toFixed(3)) +
+    parseFloat((formData.feasibility*30/100).toFixed(3))
+    );
+
+    setFormData((prev) => ({
       ...prev,
-      totalScore: parseFloat(total.toFixed(1))
+      totalScore: parseFloat(total.toFixed(1)),
     }));
   }, [
     formData.implementation,
     formData.presentation,
     formData.uiUx,
     formData.creativity,
-    formData.feasibility
+    formData.feasibility,
   ]);
 
   const handleInputChange = (field: string, value: number) => {
     setFormData({
       ...formData,
-      [field]: value
+      [field]: value,
     });
   };
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
-      feedback: e.target.value
+      feedback: e.target.value,
     });
   };
 
@@ -87,7 +108,7 @@ const FinalTeamScoring: React.FC = () => {
 
       if (response.status === 200) {
         alert('Evaluation submitted successfully!');
-        // You might want to redirect or clear the form here
+        navigate('/final-scoring');
       }
     } catch (error) {
       console.error('Error submitting evaluation:', error);
@@ -95,9 +116,46 @@ const FinalTeamScoring: React.FC = () => {
     }
   };
 
+  // If the team is not a finalist, show invalid team message
+  if (!isFinalist) {
+    return (
+      <div className="max-w-md mx-auto p-6 bg-white rounded-2xl shadow-lg border border-gray-200">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Invalid Team</h2>
+        <p className="mb-4 text-gray-600 text-center">This team is not eligible for final round evaluation.</p>
+      </div>
+    );
+  }
+
+  // If the team is already evaluated, show previous scores
+  if (isEvaluated) {
+    return (
+      <div className="max-w-md mx-auto p-6 bg-white rounded-2xl shadow-lg border border-gray-200">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Team Evaluation</h2>
+        <p className="mb-4 text-gray-600 text-center">This team has already been evaluated.</p>
+        
+        <div className="mb-6 bg-gray-100 p-4 rounded-lg">
+          <h3 className="font-semibold text-gray-700 mb-2">Previous Scores:</h3>
+          <ul className="grid grid-cols-2 gap-3 text-gray-800">
+            <li className="flex justify-between"><span>Implementation:</span> <span className="font-medium">{previousScores.implementation}</span></li>
+            <li className="flex justify-between"><span>Presentation:</span> <span className="font-medium">{previousScores.presentation}</span></li>
+            <li className="flex justify-between"><span>UI/UX:</span> <span className="font-medium">{previousScores.uiUx}</span></li>
+            <li className="flex justify-between"><span>Creativity:</span> <span className="font-medium">{previousScores.creativity}</span></li>
+            <li className="flex justify-between"><span>Feasibility:</span> <span className="font-medium">{previousScores.feasibility}</span></li>
+          </ul>
+        </div>
+  
+        <div className="mb-4 bg-gray-50 p-4 rounded-lg">
+          <h3 className="font-semibold text-gray-700 mb-2">Feedback:</h3>
+          <p className="text-gray-800 italic">{previousScores.feedback}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Render the evaluation form for finalist teams
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-6">Team Evaluation Form</h2>
+      <h2 className="text-xl font-bold mb-6">Final Team Evaluation Form</h2>
       
       <form onSubmit={handleSubmit}>
         {/* Implementation */}
