@@ -171,12 +171,20 @@ const FireworksCanvas: React.FC = () => {
       <div className="leaderboard">
         <h2 className="leaderboard-title">CAMS Leaderboard</h2>
         <ul className="leaderboard-list">
-          {details.map((team) => (
-            <li key={team.rank} className="leaderboard-item">
-              <span className="rank">{team.rank}</span>
-              <span className="team-name">{team.teamName}</span>
+          
+            <li className="leaderboard-item">
+              <span className="rank">1</span>
+              <span className="team-name">Innovate & Excel</span>
             </li>
-          ))}
+            <li className="leaderboard-item">
+              <span className="rank">2</span>
+              <span className="team-name">Ternary Coders</span>
+            </li>
+            <li className="leaderboard-item">
+              <span className="rank">3</span>
+              <span className="team-name">VJ Bus</span>
+            </li>
+         
         </ul>
       </div>
     </div>
