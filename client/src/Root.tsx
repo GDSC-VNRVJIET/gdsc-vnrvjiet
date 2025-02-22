@@ -7,6 +7,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import CheckUsers from "./pages/Events/admin/CheckUsers";
+import CampusLeaderBoard from "./pages/CampusAuto/CampusLeaderBoard";
 import Scoring from "./pages/CampusAuto/Scoring";
 import CampusTeams from "./pages/CampusAuto/CampusTeams";
 import TeamScoringForm from "./pages/CampusAuto/TeamScoringForm";
@@ -180,6 +181,7 @@ function Root() {
         <Route path="/women-in-tech" element={<WomenInTech/>} />
         <Route path="/testing-cybersecutiry" element={<TestingCybersecurity />} />
         <Route path="/community-signup" element={<CommunityRegistration/>} />
+        <Route path="/cams-leaderboard" element={<CampusLeaderBoard />}></Route>
         <Route path="/events" element={<Events />} >
           <Route path="" element={<UpcomingEvents />} />
           <Route path="upcoming-events" element={<UpcomingEvents />} />
