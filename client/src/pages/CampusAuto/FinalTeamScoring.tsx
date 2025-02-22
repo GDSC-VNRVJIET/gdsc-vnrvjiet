@@ -27,7 +27,7 @@ const FinalTeamScoring: React.FC = () => {
         const teamData = response.data.data;
 
         // Check if the team is a finalist
-        if (teamData.final) {
+        if (teamData.final===true) {
           setIsFinalist(true);
           // Calculate the old score average
             const averageScore = (

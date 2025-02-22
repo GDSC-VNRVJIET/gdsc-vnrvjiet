@@ -5,25 +5,32 @@ import { useEffect, useRef, useState } from "react"
 import axios from "axios"
 import "./FireWorks.css"
 
+interface Team {
+  teamName: string
+  rank: number
+}
+
 const FireworksCanvas: React.FC = () => {
-  const [details , setDetails] = useState([])
-  async function getDetails() {
-    const res = await axios.get( `${process.env.REACT_APP_BACK_URL}/campus/final-leaderboard`);
-    setDetails(res.data.data);
-    console.log(details);
-  }
-  useEffect(() => {
-    getDetails();
-  })
+  const [details, setDetails] = useState<Team[]>([])
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  // let wonaudio = new Audio("./fireworks-225207.mp3");
 
-  // useEffect(() => {
-  //   wonaudio.play();
-  // }, []);
+  async function getDetails() {
+    const res = await axios.get(`${process.env.REACT_APP_BACK_URL}/campus/final-leaderboard`)
+    console.log(res.data.data)
+    const topThreeTeams = res.data.data.slice(0, 3).map((team: any, index: number) => ({
+      teamName: team.teamName,
+      rank: index + 1,
+    }))
+    setDetails(topThreeTeams)
+    console.log(details)
+  }
 
   useEffect(() => {
-    const canvas :any= canvasRef.current
+    getDetails()
+  }, [])
+
+  useEffect(() => {
+    const canvas: any = canvasRef.current
     if (!canvas) return
 
     const context = canvas.getContext("2d")
@@ -33,8 +40,8 @@ const FireworksCanvas: React.FC = () => {
     const fireRocketsSparklesArray: FireRocketSparkle[] = []
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      canvas.width = window.innerWidth 
+      canvas.height = window.innerHeight - 1
     }
 
     resizeCanvas()
@@ -161,8 +168,16 @@ const FireworksCanvas: React.FC = () => {
   return (
     <div className="fireworks-container">
       <canvas ref={canvasRef} id="canvas"></canvas>
-      <div className="heading">
-        
+      <div className="leaderboard">
+        <h2 className="leaderboard-title">CAMS Leaderboard</h2>
+        <ul className="leaderboard-list">
+          {details.map((team) => (
+            <li key={team.rank} className="leaderboard-item">
+              <span className="rank">{team.rank}</span>
+              <span className="team-name">{team.teamName}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )
