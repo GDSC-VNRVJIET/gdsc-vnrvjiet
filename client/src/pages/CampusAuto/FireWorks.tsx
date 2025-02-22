@@ -1,33 +1,27 @@
 "use client"
 
 import type React from "react"
-import { useEffect, useRef, useState } from "react"
-import axios from "axios"
+import { useEffect, useRef } from "react"
 import "./FireWorks.css"
 
 interface Team {
   teamName: string
   rank: number
+  category?: string // Optional field for special categories
 }
 
 const FireworksCanvas: React.FC = () => {
-  const [details, setDetails] = useState<Team[]>([])
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  async function getDetails() {
-    const res = await axios.get(`${process.env.REACT_APP_BACK_URL}/campus/final-leaderboard`)
-    console.log(res.data.data)
-    const topThreeTeams = res.data.data.slice(0, 3).map((team: any, index: number) => ({
-      teamName: team.teamName,
-      rank: index + 1,
-    }))
-    setDetails(topThreeTeams)
-    console.log(details)
-  }
-
-  useEffect(() => {
-    getDetails()
-  }, [])
+  // Static leaderboard data
+  const leaderboardData: Team[] = [
+    { teamName: "Innovate & Excel", rank: 1 },
+    { teamName: "Ternary Coders", rank: 2 },
+    { teamName: "VJ Bus", rank: 3 },
+    { teamName: "stacKmaps", rank: 4, category: "Jury Favorite" },
+    { teamName: "spartans", rank: 5, category: "Consolation" },
+    { teamName: "SAB", rank: 6, category: "Consolation" },
+  ]
 
   useEffect(() => {
     const canvas: any = canvasRef.current
@@ -171,20 +165,15 @@ const FireworksCanvas: React.FC = () => {
       <div className="leaderboard">
         <h2 className="leaderboard-title">CAMS Leaderboard</h2>
         <ul className="leaderboard-list">
-          
-            <li className="leaderboard-item">
-              <span className="rank">1</span>
-              <span className="team-name">Innovate & Excel</span>
+          {leaderboardData.map((team, index) => (
+            <li className="leaderboard-item" key={index}>
+              <span className="rank">{team.rank}</span>
+              <span className="team-name">
+                {team.teamName}
+                {team.category && <span className="category"> - {team.category}</span>}
+              </span>
             </li>
-            <li className="leaderboard-item">
-              <span className="rank">2</span>
-              <span className="team-name">Ternary Coders</span>
-            </li>
-            <li className="leaderboard-item">
-              <span className="rank">3</span>
-              <span className="team-name">VJ Bus</span>
-            </li>
-         
+          ))}
         </ul>
       </div>
     </div>
