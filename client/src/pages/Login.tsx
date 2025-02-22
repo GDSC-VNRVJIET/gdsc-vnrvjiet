@@ -76,7 +76,7 @@ const Login = () => {
         const userObjString = JSON.stringify(userObj);
         localStorage.setItem("userObjGDSC", userObjString);
         if (userObj.role == process.env.REACT_APP_JURY_ROLE)
-          navigate("/enter", { state: { user: loggedInUser.userObj } });
+          navigate("/scoring", { state: { user: loggedInUser.userObj } });
         else if (userObj.role == process.env.REACT_APP_ADMIN_ROLE)
           navigate("/leaderboard", { state: { user: loggedInUser.userObj } });
          else
