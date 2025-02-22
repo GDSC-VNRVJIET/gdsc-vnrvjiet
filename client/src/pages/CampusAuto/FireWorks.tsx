@@ -162,7 +162,7 @@ const FireworksCanvas: React.FC = () => {
     <div className="fireworks-container">
       <canvas ref={canvasRef} id="canvas"></canvas>
       <div className="heading">
-
+        
       </div>
     </div>
   )

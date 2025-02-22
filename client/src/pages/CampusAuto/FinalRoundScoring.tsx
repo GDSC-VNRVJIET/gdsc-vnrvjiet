@@ -12,6 +12,7 @@ interface Team {
   contact: number;
   panel: string;
   evaluated: number;
+  final: boolean;
 }
 interface APIResponse {
   data: Team[];
@@ -28,7 +29,7 @@ const FinalRoundScoring: React.FC = () => {
     const response = await axios.get<APIResponse>(
       `${process.env.REACT_APP_BACK_URL}/campus/final-leaderboard`
     );
-    const filteredTeams = response.data.data.filter(team => team.evaluated === 0);
+    const filteredTeams = response.data.data.filter(team => team.evaluated === 0 && team.final === true);
     setTeams(filteredTeams);
     } catch (error) {
       console.error("Error fetching data:", error);
