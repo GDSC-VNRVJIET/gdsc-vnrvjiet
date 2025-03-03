@@ -26,8 +26,8 @@ import UpcomingEvents from "./pages/Events/UpcomingEvents";
 import SolutionChallenge from "./pages/SolutionChallenge";
 import CommunityGuidelines from "./pages/CommunityGuidelines";
 import Leaderboard from "./pages/leaderboard/leaderboard-multiplejurues";
-import FinalLeaderboard from "./pages/leaderboard/leaderboard"
-import LeaderboardRound2 from "./pages/leaderboard/leaderboard-finalround"
+import FinalLeaderboard from "./pages/leaderboard/leaderboard";
+import LeaderboardRound2 from "./pages/leaderboard/leaderboard-finalround";
 import Enter from "./pages/leaderboard/enter";
 import Score from "./pages/leaderboard/score";
 import accessDenied from "./images/accessDenied.png";
@@ -36,7 +36,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Analysis from "./pages/leaderboard/analysis";
 import Blog from "./pages/Events/Blog";
 import AddBlog from "./pages/Events/admin/AddBlog";
-import Design from "./pages/Domain Info/Design"
+import Design from "./pages/Domain Info/Design";
 import Contactus from "./pages/Contactus";
 import TermsAndConditions from "./pages/TermsandConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -46,7 +46,7 @@ import WebDev from "./pages/Domain Info/WebDev";
 import CompetitiveProgramming from "./pages/Domain Info/CompetitiveProgramming";
 import ML from "./pages/Domain Info/ML";
 import Management from "./pages/Domain Info/Management";
-import AppDev from './pages/Domain Info/AppDev';
+import AppDev from "./pages/Domain Info/AppDev";
 import Teams from "./pages/leaderboard/Teams";
 import Events from "./pages/Events/Events";
 import CheckRegistrations from "./pages/Events/admin/CheckRegistrations";
@@ -58,12 +58,13 @@ import CarouselBlog from "./pages/Events/CarouselBlog";
 import FinalRoundScoring from "./pages/CampusAuto/FinalRoundScoring";
 import FinalTeamScoring from "./pages/CampusAuto/FinalTeamScoring";
 import CompleteRoundOne from "./pages/CampusAuto/CompleteRoundOne";
+import Practice from "./pages/Practice";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
   if (userObjGDSC) {
     const userRole = JSON.parse(userObjGDSC);
-    return userRole && userRole.role == process.env.REACT_APP_ADMIN_ROLE;
+    return userRole && userRole.role === process.env.REACT_APP_ADMIN_ROLE;
   }
   return false;
 };
@@ -72,7 +73,7 @@ const isJury = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
   if (userObjGDSC) {
     const userRole = JSON.parse(userObjGDSC);
-    return userRole && userRole.role == process.env.REACT_APP_JURY_ROLE;
+    return userRole && userRole.role === process.env.REACT_APP_JURY_ROLE;
   }
   return false;
 };
@@ -82,34 +83,47 @@ const ProtectedRoute: React.FC<{ element: React.ReactNode; path: string }> = ({
   path,
 }) => {
   const navigate = useNavigate();
-  if ((path == "/leaderboard" || path == "/analysis" || path=="/viewregistrations" || path=="/complete-round-one") && !isAdmin()) {
+  if (
+    (path === "/leaderboard" ||
+      path === "/analysis" ||
+      path === "/viewregistrations" ||
+      path === "/complete-round-one") &&
+    !isAdmin()
+  ) {
     return (
       <div className="">
         <div className="inset-0 flex flex-col items-center justify-center pt-10 text-sm md:text-2xl font-bold">
-          <p className="text-center">If you're a Jury, you can Evaluate
-           <button className="text-blue-500 px-2 hover:underline" onClick={()=>navigate('/enter')}>from here.</button></p>
-           <img
-          className="w-screen"
-          src={deniedAccess}
-          alt="Access Denied"
-        />
+          <p className="text-center">
+            If you're a Jury, you can Evaluate
+            <button className="text-blue-500 px-2 hover:underline" onClick={() => navigate('/enter')}>
+              from here.
+            </button>
+          </p>
+          <img className="w-screen" src={deniedAccess} alt="Access Denied" />
         </div>
       </div>
     );
-  } else if ((path == "/enter" || path == "/score"  || path=="/scoring" || path=="/final-scoring" || path=="/scoring/:id" || path=="/final-scoring/:id") && !isJury()) {
+  } else if (
+    (path === "/enter" ||
+      path === "/score" ||
+      path === "/scoring" ||
+      path === "/final-scoring" ||
+      path === "/scoring/:id" ||
+      path === "/final-scoring/:id") &&
+    !isJury()
+  ) {
     return (
       <div className="">
-      
-      <div className="inset-0 flex flex-col items-center justify-center pt-10 text-sm md:text-2xl font-bold">
-        <p className="text-center">If you're an admin, you can access 
-         <button className="text-blue-500 px-2 hover:underline" onClick={()=>navigate('/leaderboard')}>Leaderboard</button></p>
-         <img
-        className="w-screen"
-        src={deniedAccess}
-        alt="Access Denied"
-      />
+        <div className="inset-0 flex flex-col items-center justify-center pt-10 text-sm md:text-2xl font-bold">
+          <p className="text-center">
+            If you're an admin, you can access
+            <button className="text-blue-500 px-2 hover:underline" onClick={() => navigate('/leaderboard')}>
+              Leaderboard
+            </button>
+          </p>
+          <img className="w-screen" src={deniedAccess} alt="Access Denied" />
+        </div>
       </div>
-    </div>
     );
   } else {
     return <>{element}</>;
@@ -117,7 +131,6 @@ const ProtectedRoute: React.FC<{ element: React.ReactNode; path: string }> = ({
 };
 
 function Root() {
-
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
   useEffect(() => {
@@ -141,25 +154,23 @@ function Root() {
     <>
       <Routes>
         {/* <Route path="/campus-teams" element={<CampusTeams />}></Route> */}
-        <Route path="/scoring" element={<ProtectedRoute element={<Scoring />} path="/scoring" />}></Route>
-        <Route path="/scoring/:id" element={<ProtectedRoute element={<TeamScoringForm />} path="/scoring/:id" />}></Route>
-        <Route path="/final-scoring" element={<ProtectedRoute element={<FinalRoundScoring />} path="/final-scoring" />}></Route>
-        <Route path="/final-scoring/:id" element={<ProtectedRoute element={<FinalTeamScoring />} path="/final-scoring/:id" />}></Route>
-        <Route path="/complete-round-one" element={<ProtectedRoute element={<CompleteRoundOne />} path="/complete-round-one" />}></Route>
+        <Route path="/scoring" element={<ProtectedRoute element={<Scoring />} path="/scoring" />} />
+        <Route path="/scoring/:id" element={<ProtectedRoute element={<TeamScoringForm />} path="/scoring/:id" />} />
+        <Route path="/final-scoring" element={<ProtectedRoute element={<FinalRoundScoring />} path="/final-scoring" />} />
+        <Route path="/final-scoring/:id" element={<ProtectedRoute element={<FinalTeamScoring />} path="/final-scoring/:id" />} />
+        <Route path="/complete-round-one" element={<ProtectedRoute element={<CompleteRoundOne />} path="/complete-round-one" />} />
         <Route path="/" element={<Home />} />
         {/* <Route path="/admin-signup" element={<Signup />} />
-        <Route path="/admin-login" element={<Login />} /> */}
+            <Route path="/admin-login" element={<Login />} /> */}
         <Route path="/signup" element={<Signup />} />
         {/* <Route path="upcoming-events/:eventname" element={<Register />} /> */}
-        <Route path="/upcoming-events/Solution Challenge 2025" element={<GoogleForms />} >
-        </Route>
-        
+        <Route path="/upcoming-events/Solution Challenge 2025" element={<GoogleForms />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/blogs" element={<Blog />}>
-          <Route path="" element={<CarouselBlog />}/>
-          <Route path="achievers" element={<CarouselBlog />}/>
-          <Route path="community" element={<CarouselBlog />}/>
+          <Route path="" element={<CarouselBlog />} />
+          <Route path="achievers" element={<CarouselBlog />} />
+          <Route path="community" element={<CarouselBlog />} />
         </Route>
         <Route path="/forum" element={<Forum />} />
         <Route path="/team" element={<Team />} />
@@ -180,49 +191,24 @@ function Root() {
         <Route path="/management" element={<Management />} />
         <Route path="/app-development" element={<AppDev />} />
         <Route path="/hardware" element={<Hardware />} />
-        <Route path="/women-in-tech" element={<WomenInTech/>} />
+        <Route path="/women-in-tech" element={<WomenInTech />} />
         <Route path="/testing-cybersecutiry" element={<TestingCybersecurity />} />
-        <Route path="/community-signup" element={<CommunityRegistration/>} />
-        <Route path="/cams-leaderboard" element={<CampusLeaderBoard />}></Route>
-        <Route path="/events" element={<Events />} >
+        <Route path="/community-signup" element={<CommunityRegistration />} />
+        <Route path="/cams-leaderboard" element={<CampusLeaderBoard />} />
+        <Route path="/events" element={<Events />}> 
           <Route path="" element={<UpcomingEvents />} />
           <Route path="upcoming-events" element={<UpcomingEvents />} />
           <Route path="past-events" element={<PastEvents />} />
         </Route>
-        <Route 
-          path="/viewregistrations/:eventname"
-          element= {
-            <ProtectedRoute element={<CheckRegistrations/>} path="/viewregistrations"/>
-          }
-        />
-        <Route
-          path="/leaderboard"
-          element={
-            <ProtectedRoute element={<Leaderboard />} path="/leaderboard" />
-          }
-        />
-        <Route
-          path="/analysis"
-          element={<ProtectedRoute element={<Analysis />} path="/analysis" />}
-        />
-        <Route
-          path="/gen-ai-leaderboard"
-          element={<GenAiLeaderboard />}
-        />
-        <Route
-          path="/enter"
-          element={<ProtectedRoute element={<Enter />} path="/enter" />}
-        />
-        <Route
-          path="/score"
-          element={<ProtectedRoute element={<Score />} path="/score" />}
-        />
-        <Route
-          path="/checkuser"
-          element={<ProtectedRoute element={<CheckUsers />} path="/checkuser" />}
-        />
-        
-        
+        <Route path="/viewregistrations/:eventname" element={<ProtectedRoute element={<CheckRegistrations />} path="/viewregistrations" />} />
+        <Route path="/leaderboard" element={<ProtectedRoute element={<Leaderboard />} path="/leaderboard" />} />
+        <Route path="/analysis" element={<ProtectedRoute element={<Analysis />} path="/analysis" />} />
+        <Route path="/gen-ai-leaderboard" element={<GenAiLeaderboard />} />
+        <Route path="/enter" element={<ProtectedRoute element={<Enter />} path="/enter" />} />
+        <Route path="/score" element={<ProtectedRoute element={<Score />} path="/score" />} />
+        <Route path="/checkuser" element={<ProtectedRoute element={<CheckUsers />} path="/checkuser" />} />
+        {/* New Practice route */}
+        <Route path="/practice" element={<Practice />} />
       </Routes>
       {showScrollToTop && (
         <button
@@ -246,7 +232,7 @@ function Root() {
           </svg>
         </button>
       )}
-      </>
+    </>
   );
 }
 
