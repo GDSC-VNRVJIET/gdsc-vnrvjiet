@@ -188,23 +188,29 @@ const SingleBlog: React.FC = () => {
         </div>
         <hr className="my-6 border-t-2 border-gray-200" />
         <p
-          className="mb-4 text-gray-600 text-justify leading-relaxed"
+          className="mb-4 text-gray-600 text-justify leading-relaxed md:text-lg sm:text-base text-sm"
           style={{ textAlignLast: "left" }}
           dangerouslySetInnerHTML={{
-            __html: blog.description.replace(
-              /<img/g,
-              '<img style="display: block; margin: 0 auto; padding-top:20px; padding-bottom:20px;"'
-            ),
+            __html: blog.description
+              .replace(
+                /<img/g,
+                '<img style="display: block; margin: 0 auto; padding-top: 20px; padding-bottom: 20px; max-width: 100%; height: auto;"'
+              )
+              .replace(
+                /<a /g,
+                '<a target="_blank" rel="noopener noreferrer" style="color: #1A0DAB; text-decoration: underline; word-break: break-word;" '
+              ),
           }}
         ></p>
-        {user?.role === process.env.REACT_APP_ADMIN_ROLE && blog.show === "false" && (
-          <button
-            onClick={handleClick}
-            className="w-full md:w-1/3 mx-auto mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Post Blog
-          </button>
-        )}
+        {user?.role === process.env.REACT_APP_ADMIN_ROLE &&
+          blog.show === "false" && (
+            <button
+              onClick={handleClick}
+              className="w-full md:w-1/3 mx-auto mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Post Blog
+            </button>
+          )}
       </article>
       {isModalVisible && (
         <div
