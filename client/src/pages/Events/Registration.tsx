@@ -64,6 +64,7 @@ function Registration() {
     if (teamMembers.length < Number(curL)) {
       setTeamMembers(prev => [...prev, { ...initialMemberState }]);
       // Don't automatically navigate to the new member
+      // goToNextMember();
     }
   };
 
@@ -73,18 +74,27 @@ function Registration() {
     }
   };
 
+  // const goToNextMember = () => {
+  //   if (currentMemberIndex < teamMembers.length - 1) {
+  //     setCurrentMemberIndex(currentMemberIndex + 1);
+  //   } 
+  //   // else if(){
+
+  //   // }
+  //   else if (isCurrentStepValid() && currentMemberIndex === teamMembers.length - 1) {
+  //     setCurrentStep(1);
+  //   }
+  // };
+
   const goToNextMember = () => {
     if (currentMemberIndex < teamMembers.length - 1) {
       setCurrentMemberIndex(currentMemberIndex + 1);
-    } 
-    // else if(){
-
-    // }
-    else if (isCurrentStepValid() && currentMemberIndex === teamMembers.length - 1) {
+    } else if (currentMemberIndex === Number(curL) - 1) { 
+      // Ensure transition to next step only after last member
       setCurrentStep(1);
     }
   };
-
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isFormValid()) {
@@ -180,7 +190,7 @@ function Registration() {
                     <span className="ml-2 text-sm font-medium">Team Details</span>
                   </div>
                   <div className="flex-1 h-1 mx-4 bg-gray-200">
-                    <div className={`h-full bg-indigo-600 transition-all duration-300`} style={{ width: `${(currentStep / 1) * 100}%` }}></div>
+                    <div className={`h-full bg-indigo-600 transition-all duration-300} style={{ width: ${(currentStep / 1) * 100}% }`}></div>
                   </div>
                   <div className="flex items-center">
                     <div className={`rounded-full h-10 w-10 flex items-center justify-center ${currentStep === 1 ? 'bg-indigo-600 text-white' : 'bg-gray-200'}`}>
@@ -370,9 +380,19 @@ function Registration() {
                         )} */}
                         <button
                           type="button"
-                          onClick={
-                            teamMembers.length < Number(curL) ? addTeamMember :  goToNextMember
-                          }
+                          // onClick={
+                          //   teamMembers.length < Number(curL) ? addTeamMember :  goToNextMember
+
+                          // }
+                          onClick={() => {
+                            if (teamMembers.length < Number(curL)) {
+                              addTeamMember();
+                              setCurrentMemberIndex(currentMemberIndex + 1); // Navigate immediately after adding
+                            } else {
+                              goToNextMember();
+                            }
+                          }}
+                          
                           disabled={!isCurrentStepValid()}
                           className={`inline-flex items-center px-4 py-2 rounded-md ${
                             !isCurrentStepValid()
