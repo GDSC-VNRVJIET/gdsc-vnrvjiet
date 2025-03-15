@@ -1,4 +1,3 @@
-// client/src/pages/Practice.tsx
 import React, { useState, useEffect } from "react";
 
 interface Question {
@@ -12,6 +11,7 @@ interface Company {
   questions: Question[];
 }
 
+// Sample Data
 const practiceData: Company[] = [
   {
     name: "Google",
@@ -485,19 +485,7 @@ const practiceData: Company[] = [
   },
 ];
 
-const platformLogos: { [key: string]: string } = {
-  LeetCode:
-    "https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png",
-  HackerRank:
-    "https://upload.wikimedia.org/wikipedia/commons/6/65/HackerRank_logo.png",
-  CodeChef:
-    "https://img.icons8.com/?size=100&id=O4SEeX66BY8o&format=png&color=000000",
-  CodeForces:
-    "https://img.icons8.com/?size=100&id=jldAN67IAsrW&format=png&color=000000",
-  GeeksforGeeks:
-    "https://img.icons8.com/?size=100&id=AbQBhN9v62Ob&format=png&color=000000",
-};
-
+// Company Logos
 const companyLogos: { [key: string]: string } = {
   Google:
     "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
@@ -517,39 +505,81 @@ const companyLogos: { [key: string]: string } = {
     "https://img.icons8.com/?size=100&id=PKQUMGZF1SKL&format=png&color=000000",
 };
 
-const Practice: React.FC = () => {
-  const [completed, setCompleted] = useState<{ [key: string]: boolean }>(() => {
-    if (typeof window !== "undefined") {
-      const storedProgress = localStorage.getItem("practiceProgress");
-      return storedProgress ? JSON.parse(storedProgress) : {};
-    }
-    return {};
-  });
+// Platform Logos
+const platformLogos: { [key: string]: string } = {
+  LeetCode:
+    "https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png",
+  HackerRank:
+    "https://upload.wikimedia.org/wikipedia/commons/6/65/HackerRank_logo.png",
+  CodeChef:
+    "https://img.icons8.com/?size=100&id=O4SEeX66BY8o&format=png&color=000000",
+  CodeForces:
+    "https://img.icons8.com/?size=100&id=jldAN67IAsrW&format=png&color=000000",
+  GeeksforGeeks:
+    "https://img.icons8.com/?size=100&id=AbQBhN9v62Ob&format=png&color=000000",
+};
 
+
+const Practice: React.FC = () => {
+  const [companyData, setCompanyData] = useState(practiceData);
+  const [showForm, setShowForm] = useState(false);
+  const [completed, setCompleted] = useState<{ [key: string]: boolean }>({});
   const [expanded, setExpanded] = useState<{ [key: number]: boolean }>({});
 
   useEffect(() => {
-    localStorage.setItem("practiceProgress", JSON.stringify(completed));
+    const storedProgress = localStorage.getItem("practiceProgress");
+    if (storedProgress) {
+      setCompleted(JSON.parse(storedProgress));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (Object.keys(completed).length > 0) {
+      localStorage.setItem("practiceProgress", JSON.stringify(completed));
+    }
   }, [completed]);
 
-  const toggleExpanded = (index: number) => {
-    setExpanded((prev) => ({ ...prev, [index]: !prev[index] }));
-  };
-
-  const handleCheckboxChange = (companyIndex: number, questionIndex: number) => {
-    const key = `${companyIndex}-${questionIndex}`;
-    setCompleted((prev) => ({ ...prev, [key]: !prev[key] }));
+  const toggleCompleted = (companyIndex: number, questionIndex: number) => {
+    setCompleted((prev) => {
+      const updated = {
+        ...prev,
+        [`${companyIndex}-${questionIndex}`]: !prev[`${companyIndex}-${questionIndex}`],
+      };
+      localStorage.setItem("practiceProgress", JSON.stringify(updated));
+      return updated;
+    });
   };
 
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Practice - Placement PYQs</h1>
-      {practiceData.map((company, compIndex) => {
+
+      {/* Button to Show/Hide Google Form */}
+      <button
+        onClick={() => setShowForm(!showForm)}
+        className="mb-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      >
+        {showForm ? "Hide Form" : "Add Question"}
+      </button>
+
+      {/* Embedded Google Form */}
+      {showForm && (
+       <iframe
+       src="https://docs.google.com/forms/d/e/1FAIpQLSdy8ymxbMurWlCIg7VCY95Djn3tCO0xQo4eAoOeH7cFylEbiQ/viewform?embedded=true"
+       className="w-full h-[600px] relative z-0 mt-4 border rounded shadow"
+       allowFullScreen
+       title="Submit a Question"
+     >
+       Loading…
+     </iframe>
+      )}
+
+      {companyData.map((company, compIndex) => {
         const total = company.questions.length;
-        const completedCount = company.questions.reduce((acc, _, qIndex) => {
-          const key = `${compIndex}-${qIndex}`;
-          return acc + (completed[key] ? 1 : 0);
-        }, 0);
+        const completedCount = company.questions.reduce(
+          (acc, _, qIndex) => acc + (completed[`${compIndex}-${qIndex}`] ? 1 : 0),
+          0
+        );
         const progressPercentage = Math.round((completedCount / total) * 100);
 
         return (
@@ -558,7 +588,7 @@ const Practice: React.FC = () => {
             className="mb-6 border rounded shadow p-4 transition-all duration-300 hover:shadow-xl"
           >
             <div
-              onClick={() => toggleExpanded(compIndex)}
+              onClick={() => setExpanded((prev) => ({ ...prev, [compIndex]: !prev[compIndex] }))}
               className="cursor-pointer flex items-center justify-between"
             >
               <div className="flex items-center">
@@ -571,6 +601,7 @@ const Practice: React.FC = () => {
               </div>
               <span className="text-3xl">{expanded[compIndex] ? "−" : "+"}</span>
             </div>
+
             <div className="mt-2">
               <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
                 <div
@@ -582,43 +613,32 @@ const Practice: React.FC = () => {
                 {completedCount} / {total} Completed ({progressPercentage}%)
               </p>
             </div>
+
             {expanded[compIndex] && (
               <ul className="mt-4 space-y-2 transition-all duration-300">
-                {company.questions.map((q, qIndex) => {
-                  const key = `${compIndex}-${qIndex}`;
-                  return (
-                    <li
-                      key={qIndex}
-                      className="flex items-center p-2 bg-white rounded shadow hover:shadow-md hover:bg-gray-100 transition"
+                {company.questions.map((q, qIndex) => (
+                  <li key={qIndex} className="flex items-center p-2 bg-white rounded shadow">
+                    <input
+                      type="checkbox"
+                      checked={!!completed[`${compIndex}-${qIndex}`]}
+                      onChange={() => toggleCompleted(compIndex, qIndex)}
+                      className="mr-2 w-6 h-6"
+                    />
+                    <a
+                      href={q.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 text-gray-900 font-medium"
                     >
-                      <input
-                        type="checkbox"
-                        checked={!!completed[key]}
-                        onChange={() => handleCheckboxChange(compIndex, qIndex)}
-                        className="mr-2 w-6 h-6 transition-transform duration-200 ease-in-out active:scale-95"
-                      />
-                      <a
-                        href={q.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 text-gray-900"
-                      >
-                        <span className="font-medium">{q.question}</span>
-                      </a>
-                      <a
-                        href={q.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <img
-                          src={platformLogos[q.platform] || ""}
-                          alt={q.platform}
-                          className="w-6 h-6 object-contain"
-                        />
-                      </a>
-                    </li>
-                  );
-                })}
+                      {q.question}
+                    </a>
+                    <img
+                      src={platformLogos[q.platform] || ""}
+                      alt={q.platform}
+                      className="w-6 h-6 ml-2"
+                    />
+                  </li>
+                ))}
               </ul>
             )}
           </div>
