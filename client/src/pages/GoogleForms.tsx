@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import Gen from "../images/Flutter.png";
+import Gen from "../images/FFDG Dark.png";
 
 const TabComponent: React.FC = () => {
 
@@ -17,7 +17,7 @@ const TabComponent: React.FC = () => {
               <img
                 src={Gen}
                 alt="Coordinator"
-                className="w-full lg:w-[646px] lg:h-[350px] lg:pr-3 mt-1 rounded mx-auto" // Dont use height next tym !!
+                className="w-full lg:w-[646px] lg:pr-3 mt-1 rounded mx-auto" // Dont use height next tym !!
               />
             </div>
             {isLoading && (
