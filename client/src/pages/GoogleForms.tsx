@@ -17,7 +17,7 @@ const TabComponent: React.FC = () => {
               <img
                 src={Gen}
                 alt="Coordinator"
-                className="w-full lg:w-[546px] lg:pr-3 mt-1 rounded mx-auto"
+                className="w-full lg:w-[646px] lg:h-[350px] lg:pr-3 mt-1 rounded mx-auto" // Dont use height next tym !!
               />
             </div>
             {isLoading && (
