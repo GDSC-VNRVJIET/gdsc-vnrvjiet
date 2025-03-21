@@ -178,6 +178,7 @@ function Root() {
         <Route path="/orgchart" element={<OrgChart />} />
         <Route path="/solution-challenge" element={<SolutionChallenge />} />
         <Route path="/community-guidelines" element={<CommunityGuidelines />} />
+        <Route path="/demo" element={<CampusTeams />} />
         <Route path="/add-blog" element={<AddBlog />} />
         <Route path="/contact-us" element={<Contactus />} />
         <Route path="/design" element={<Design />} />

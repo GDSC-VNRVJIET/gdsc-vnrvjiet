@@ -28,6 +28,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.PASS,
   },
 });
+
 transporter.verify((error, success) => {
   if (error) {
     console.log(error);

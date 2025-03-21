@@ -9,6 +9,8 @@ require("dotenv").config();
 
 registrationApp.use(exp.json());
 
+// manually inserting for the 
+
 registrationApp.put('/register',expressAsyncHandler(async(req,res)=>{
     let scannercollection = await getDBObj("scannerCollection");
     const newRegister = req.body;
