@@ -48,8 +48,8 @@ const CampusTeams: React.FC = () => {
     }
 
     try {
-      // const response = await axios.post(`${process.env.REACT_APP_BACK_URL}/campus/teams`, { data: jsonData });
-      // alert(response.data.message);
+      const response = await axios.post(`${process.env.REACT_APP_BACK_URL}/sendmail/send-many-mails`, { data: jsonData });
+      alert(response.data.message);
       console.log(jsonData)
     } catch (error) {
       console.error("Error uploading data:", error);
