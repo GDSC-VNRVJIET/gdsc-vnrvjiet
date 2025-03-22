@@ -35,7 +35,8 @@ eventApp.get(
         isPast: 1,
       })
       .toArray();
-    events.reverse();
+      events.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+      // events.reverse();
     response.send({ message: "Events list", payload: events });
   })
 );
@@ -60,8 +61,10 @@ eventApp.get(
       .find({
         isPast: 0,
       })
+      .sort({ startDate: -1 })
       .toArray();
-    events.reverse();
+      events.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+    // events.reverse();
     response.send({ message: "Events list", payload: events });
   })
 );

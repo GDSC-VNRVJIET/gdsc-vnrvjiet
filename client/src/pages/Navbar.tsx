@@ -174,7 +174,7 @@ function Navbar() {
                 }`
               }
             >
-              <span className="absolute inset-0 group-hover:bg-indigo-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
+              <span className="absolute inset-0 group-hover:bg-blue-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
               <span className="relative">Practice</span>
             </NavLink>
           </button>
