@@ -28,6 +28,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.PASS,
   },
 });
+
 transporter.verify((error, success) => {
   if (error) {
     console.log(error);
@@ -44,24 +45,34 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
         address: process.env.USER,
       },
       to: `${email}`,
-      subject: `You're Registered! Welcome to the ${event} Event by GDGC VNRVJIET`,
+      subject: `Confirm Your Attendance for ${event} – Limited Seats Available`,
       attachDataUrls: true,
       html: `
       <div style="max-width:800px;margin:0 auto;">
         <img src="cid:gdg_banner" alt="" style="max-height:250px;max-width:100%;display:block;margin:auto;">
         <h3>Welcome to the GDGC VNRVJIET's ${event} Event, ${name}!</h3>
-        <p>Thank you for registering for our upcoming event at GDGC VNRVJIET. We're thrilled to have you join us.</p>
+        <p>Dear Participant,</p>
+
+    <p>Thank you for registering for the FlutterFlow workshop! We’re excited to have you join us. Due to high demand, we request you to confirm your attendance by filling out the interest form below.</p>
+
+    <p>🔹 <b>Only the first 150 confirmed participants will be admitted.</b></p>
+    <p>🔹 <b>Attendance and certificates will only be given to those who attend both the morning and afternoon sessions.</b></p>
+
+    <p>👉 <b><a href="https://forms.gle/9sBU4VLekN1CRnxq5">Fill the Interest Form</a></b> by 11:59 PM today to secure your spot.</p>
+
+    <p>We look forward to seeing you!</p>
         <p>Your registration details are as follows:</p>
         <ul>
           <li><strong>Name:</strong>${name}</li>
           <li><strong>Branch:</strong>${branch}</li>
-          <li><strong>Section:</strong> ${section}</li>
+          <li><strong>Roll No:</strong>${rollno}</li>
         </ul>
-        <p>To stay informed and ensure you don't miss any crucial updates, please join the <strong>WhatsApp group for event participants</strong> by clicking the link below:
-        <b><a href="https://chat.whatsapp.com/EVlAPfSxxWaCMg7AfR2CMv" style="text-decoration:none;color:#1a73e8;">HackSprint Participants 2024</a>.<b>
-        </p>
-        <!-- <p>You can use the QR code above for a smooth check-in process at the event.</p> -->
+        <img src="${qrCode}" alt="QR Code" style="width:30%;" />
+        <p>You can use the QR code above for a smooth check-in process at the event.</p>
         <p>If you have any questions or need further assistance, feel free to reach out to us.</p>
+        <p>Manikanta: 7075659983 </p>
+        <p>Keerthika: 9346755165 </p>
+        </p>
         <br>
     <div>
         <span>Best regards,</span>
@@ -459,5 +470,60 @@ mailApp.post(
     }
   })
 );
+
+
+mailApp.post("/send-many-mails", async (req, res) => {
+  try {
+    if (!req.body || !Array.isArray(req.body.data)) {
+      // console.log(req.body)
+      // return res.status(400).send("Bad Request");
+    }
+    
+    let scannerCollection = await getDBObj("scannerCollection");
+    
+    const registrations = req.body.data.map(student => ({
+      rollno: student.rollno,
+      email: student.email,
+      whatsapp: student.whatsapp,
+      branch: student.branch,
+      name: student.name,
+      event: "Flutter Flow Workshop",
+      year: student.year,
+      section: "",
+      interest: "",
+      mailSent: false,
+      entered: false,
+    }));
+    
+    await scannerCollection.insertMany(registrations);
+    
+    for (const student of registrations) {
+      try {
+        await sendEmail(
+          student.rollno,
+          student.email,
+          student.rollno,
+          student.whatsapp,
+          student.branch,
+          student.name,
+          student.event,
+          student.section
+        );
+        await scannerCollection.updateOne(
+          { email: student.email },
+          { $set: { mailSent: true } }
+        );
+        console.log(`Mail sent and updated for ${student.email}`);
+      } catch (err) {
+        console.error(`Failed to send mail to ${student.email}:`, err);
+      }
+    }
+    
+    res.json({ message: "Mails processed" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 module.exports = mailApp;
