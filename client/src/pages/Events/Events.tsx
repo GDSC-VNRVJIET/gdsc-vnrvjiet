@@ -45,7 +45,7 @@ const Events: React.FC = () => {
   }
 
   useEffect(() => {
-    fetchData();
+    fetchData()
   }, []);
 
 
@@ -78,7 +78,7 @@ const Events: React.FC = () => {
     window.addEventListener('scroll', handleScrollEvent);
 
     return () => window.removeEventListener('scroll', handleScrollEvent);
-  }, [scrolled]);
+  }, [scrolled])
 
   return displayLoader ? (
     <Loader/>

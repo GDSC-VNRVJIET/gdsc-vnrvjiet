@@ -39,7 +39,7 @@ function PastEvents() {
         <p className="mt-1">Click / Hover </p> <TbBulb className="ml-1" style={{fontSize:"1.5rem"}} />
       </span>
       </div>
-    <UserPortalPast eventsprop={pastEvents}/>;
+    <UserPortalPast eventsprop={pastEvents}/>
     </>
   }
 }
