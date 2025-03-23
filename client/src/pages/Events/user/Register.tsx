@@ -122,7 +122,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
     }
   }, [isValid, formFields]);
   const paymentHandler = async (formdata: FormData) => {
-    const amount = 100.0;
+    const amount = 5000.0;
     const currency = "INR";
     const receiptId = "1235823";
     const check = await axios.post(
