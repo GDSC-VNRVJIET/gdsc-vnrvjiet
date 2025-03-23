@@ -14,14 +14,14 @@ registrationApp.use(exp.json());
 registrationApp.put('/register',expressAsyncHandler(async(req,res)=>{
     let scannercollection = await getDBObj("scannerCollection");
     const newRegister = req.body;
-    // const dbuser = await scannercollection.findOne({razorpay_order_id:newRegister.order_id});
-    const dbuser = await scannercollection.findOne({rollno:newRegister.rollno});
+    const dbuser = await scannercollection.findOne({razorpay_order_id:newRegister.order_id});
+    //const dbuser = await scannercollection.findOne({rollno:newRegister.rollno});
     if(dbuser!==null)
         {
             if(dbuser.entered===false){
                 res.send({message:"Allow To Workshop" , payload : dbuser})
-                // await scannercollection.updateOne({razorpay_order_id:newRegister.order_id},{$set:{entered:true}});
-                await scannercollection.updateOne({rollno:newRegister.rollno},{$set:{entered:true}});
+                await scannercollection.updateOne({razorpay_order_id:newRegister.order_id},{$set:{entered:true}});
+                //await scannercollection.updateOne({rollno:newRegister.rollno},{$set:{entered:true}});
             }
             else
             res.send({message:"Already Scanned Dont Allow to Workshop" , payload:dbuser})
@@ -45,7 +45,7 @@ registrationApp.get(
   
       let eventData = await eventCollectionObject.find({
          event: eventName,
-        // paymentSuccess: true,
+         paymentSuccess: true,
 
         }).toArray();
   
@@ -58,17 +58,17 @@ registrationApp.get(
         RollNo: e.rollno,
         Year: e.year,
         Branch: e.branch,
-        // Section:e.section,
+        Section:e.section,
         WhatsApp: e.whatsapp,
         Email: e.email,
         Entered: e.entered,
         MailSent:e.mailSent,
-        // PaymentSuccess:e.paymentSuccess,
-        // Interest:e.interest,
+        PaymentSuccess:e.paymentSuccess,
+        Interest:e.interest,
       }));
   
-      // const csvFields = ["Name", "RollNo","Year","Branch","Section" ,"WhatsApp", "Email", "Entered","MailSent","PaymentSuccess"];
-      const csvFields = ["Name", "RollNo","Year","Branch" ,"WhatsApp", "Email", "Entered","MailSent"];
+      const csvFields = ["Name", "RollNo","Year","Branch","Section" ,"WhatsApp", "Email", "Entered","MailSent","PaymentSuccess"];
+      //const csvFields = ["Name", "RollNo","Year","Branch" ,"WhatsApp", "Email", "Entered","MailSent"];
       const json2csvParser = new Parser({ csvFields });
       const csv = json2csvParser.parse(csvData);
 
@@ -85,7 +85,7 @@ registrationApp.get(
       let eventName = request.params.eventName;
       let eventData = await eventCollectionObject.find({ 
         event: eventName,
-        // paymentSuccess: true,
+        paymentSuccess: true,
       }).toArray();
       if (eventData.length === 0) {
         return response.status(404).send({ message: "No data found for this event" });

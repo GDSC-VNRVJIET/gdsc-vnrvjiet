@@ -122,7 +122,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
     }
   }, [isValid, formFields]);
   const paymentHandler = async (formdata: FormData) => {
-    const amount = 4900.0;
+    const amount = 5000.0;
     const currency = "INR";
     const receiptId = "1235823";
     const check = await axios.post(
@@ -582,6 +582,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
                   id="countries"
                   className="bg-white border border-gray-300 text-gray-900 mt-3 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 >
+                  <option value="" disabled>Select your branch</option>
                   <option value="CSE">CSE</option>
                   <option value="CSBS">CSBS</option>
                   <option value="IT">IT</option>
