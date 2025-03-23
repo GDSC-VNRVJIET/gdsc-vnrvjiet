@@ -30,14 +30,17 @@ eventApp.get(
   "/get-past-events",
   expressAsyncHandler(async (request, response) => {
     let eventCollectionObject = await getDBObj("eventCollectionObject");
-    let events = await eventCollectionObject
-      .find({
-        isPast: 1,
-      })
-      .toArray();
+    // let events = await eventCollectionObject
+    //   .find({
+    //     isPast: 1,
+    //   })
+    //   .toArray();
+    let events = await eventCollectionObject.find({}).toArray();
+let pastEvents = events.filter(event => new Date(event.endDate) < new Date());
       events.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
       // events.reverse();
-    response.send({ message: "Events list", payload: events });
+    // response.send({ message: "Events list", payload: events });
+    response.send({ message: "Past Events", payload: pastEvents });
   })
 );
 
@@ -57,15 +60,20 @@ eventApp.get(
   "/get-upcoming-events",
   expressAsyncHandler(async (request, response) => {
     let eventCollectionObject = await getDBObj("eventCollectionObject");
-    let events = await eventCollectionObject
-      .find({
-        isPast: 0,
-      })
-      .sort({ startDate: -1 })
-      .toArray();
+    // let events = await eventCollectionObject
+    //   .find({
+    //     isPast: 0,
+    //   })
+    let events = await eventCollectionObject.find({}).toArray();
+let upcomingEvents = events.filter(event => new Date(event.startDate) >= new Date());
+
+      // .sort({ startDate: -1 })
+      // .toArray();
       events.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
     // events.reverse();
-    response.send({ message: "Events list", payload: events });
+    response.send({ message: "Upcoming Events", payload: upcomingEvents });
+
+    // response.send({ message: "Events list", payload: events });
   })
 );
 
