@@ -48,7 +48,7 @@ const CampusTeams: React.FC = () => {
     }
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACK_URL}/sendmail/send-many-mails`, { data: jsonData });
+      const response = await axios.post(`${process.env.REACT_APP_BACK_URL}/sendmail/normal-mail`, { data: jsonData });
       alert(response.data.message);
       console.log(jsonData)
     } catch (error) {

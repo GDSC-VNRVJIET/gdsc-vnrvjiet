@@ -35,6 +35,87 @@ transporter.verify((error, success) => {
   }
 });
 
+const sendNormalEmailsWithData = async (data) => {
+  console.log("In function")
+  console.log(data);
+  try {
+    const mailOptions = {
+      from: {
+        name: "GDGC VNRVJIET",
+        address: process.env.USER,
+      },
+      to: data.email,
+      subject: 'Join Us in Empowering Women in Tech – Support "Tech Her Forward"',
+      attachDataUrls: true,
+      html:
+      `
+      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; padding: 20px;">
+
+    <p>Dear ${data.name},</p>
+
+    <p>I hope you’re doing well. As a proud alumnus of VNR VJIET, your achievements inspire us all. Today, we’re reaching out with an exciting chance to make a real difference for the next generation of tech leaders.</p>
+
+    <p>We’re excited to introduce <strong>"Tech Her Forward"</strong>, a 24-hour hackathon organized by the Google Developers Group (GDG) at VNR VJIET, aimed at empowering women in technology. This initiative will provide a platform for women to innovate, collaborate, and lead in the tech field, promoting a culture of inclusivity and excellence.</p>
+
+    <p>As someone connected to the VNR VJIET legacy, you understand how important mentorship and support can be. We invite you to be a sponsor or mentor for <strong>"Tech Her Forward."</strong> Your involvement will not only give participants the resources they need but also inspire them to reach their full potential.</p>
+
+    <h3>Why Partner with "Tech Her Forward"?</h3>
+    <ul>
+        <li><strong>Elevate Your Brand:</strong> Get noticed by a vibrant community of aspiring developers, industry leaders, and academics.</li>
+        <li><strong>Access Top Talent:</strong> Meet bright, motivated students and discover potential candidates for internships or jobs.</li>
+        <li><strong>Drive Innovation:</strong> Mentor teams, judge projects, and contribute to creative solutions for real-world problems.</li>
+        <li><strong>Champion Diversity:</strong> Help advance gender diversity and inclusion in the tech world.</li>
+    </ul>
+
+    <p>We offer customizable sponsorship tiers to fit your organization’s goals, including benefits like:</p>
+    <ul>
+        <li>Prominent branding on event materials and digital platforms.</li>
+        <li>Opportunities for keynote speeches or workshops.</li>
+        <li>Direct engagement with participants through mentorship or networking sessions.</li>
+    </ul>
+
+    <p>Attached is our detailed sponsorship brochure for your review:<br>
+    <a href="https://drive.google.com/file/d/1UNxhdCz5tB5yWWz9JOkLgDbJJSrfcGZs/view?usp=sharing" target="_blank" style="color: blue; text-decoration: underline;">
+        <strong>View Sponsorship Brochure</strong>
+    </a></p>
+
+    <p>We’d love to discuss how we can create a partnership that aligns with your vision. Please let us know a good time for a quick call or meeting to explore this opportunity further.</p>
+
+    <p>Together, we can empower the next generation of women in tech and make a lasting impact in the industry. Your support will elevate this initiative and create a legacy at VNR VJIET.</p>
+
+    <p>Thank you for considering this chance to make a difference. We look forward to hearing from you soon.</p>
+
+    <p>Warm regards,</p>
+
+    <p><strong>Sri Kruthi</strong><br>
+    Google Developers Group - VNR VJIET<br>
+    <a href="mailto:srikruthi.ksk@gmail.com" style="color: blue; text-decoration: underline;">srikruthi.ksk@gmail.com</a> | 9492357897<br>
+    <a href="https://www.gdgcvnrvjiet.org/" target="_blank" style="color: blue; text-decoration: underline;">https://www.gdgcvnrvjiet.org/</a></p>
+
+</div>`
+      ,
+      attachments: [
+        {
+          filename: 'gdgbanner.png',
+          path: __dirname+'/../images/gdgbanner.png',
+          cid: 'gdg_banner'
+        },
+        {
+          filename: 'gdgfooter.png',
+          path: __dirname+'/../images/gdgfooter.png',
+          cid: 'gdg_footer'
+        },
+      ]
+    }
+    await transporter.sendMail(mailOptions).catch(err => {
+      console.error('Email failed:', err);
+    });
+    console.log("Mail sent successfully",data.email);
+  } catch (error) {
+    console.error("Error sending email:", err);
+  }
+};
+
 const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event, section) => {
   const qrCode = await QRCode.toDataURL(order_id);
   const qrCodeImage = new Buffer.from(qrCode.split("base64,")[1], "base64");
@@ -45,35 +126,26 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
         address: process.env.USER,
       },
       to: `${email}`,
-      subject: `Confirm Your Attendance for ${event} – Limited Seats Available`,
+      subject: `You're Registered! Welcome to the ${event} Event by GDGC VNRVJIET`,
       attachDataUrls: true,
       html: `
       <div style="max-width:800px;margin:0 auto;">
         <img src="cid:gdg_banner" alt="" style="max-height:250px;max-width:100%;display:block;margin:auto;">
         <h3>Welcome to the GDGC VNRVJIET's ${event} Event, ${name}!</h3>
-        <p>Dear Participant,</p>
-
-    <p>Thank you for registering for the FlutterFlow workshop! We’re excited to have you join us. Due to high demand, we request you to confirm your attendance by filling out the interest form below.</p>
-
-    <p>🔹 <b>Only the first 150 confirmed participants will be admitted.</b></p>
-    <p>🔹 <b>Attendance and certificates will only be given to those who attend both the morning and afternoon sessions.</b></p>
-
-    <p>👉 <b><a href="https://forms.gle/9sBU4VLekN1CRnxq5">Fill the Interest Form</a></b> by 11:59 PM today to secure your spot.</p>
-
-    <p>We look forward to seeing you!</p>
+        <p>Thank you for registering for our upcoming event at GDGC VNRVJIET. We're thrilled to have you join us.</p>
         <p>Your registration details are as follows:</p>
         <ul>
           <li><strong>Name:</strong>${name}</li>
           <li><strong>Branch:</strong>${branch}</li>
           <li><strong>Roll No:</strong>${rollno}</li>
         </ul>
+        <p>To stay informed and ensure you don't miss any crucial updates, please join the <strong>WhatsApp group for event participants</strong> by clicking the link below:
+        <b><a href="https://chat.whatsapp.com/IHB12bBWZLjLAuDsT9vYed" style="text-decoration:none;color:#1a73e8;">Blockchain Workshop Participants 2025</a>.<b>
+        </p>
         <img src="${qrCode}" alt="QR Code" style="width:30%;" />
         <p>You can use the QR code above for a smooth check-in process at the event.</p>
         <p>If you have any questions or need further assistance, feel free to reach out to us.</p>
-        <p>Manikanta: 7075659983 </p>
-        <p>Keerthika: 9346755165 </p>
-        </p>
-        <br>
+        
     <div>
         <span>Best regards,</span>
         <hr width="400px" style="margin: 5px 0px;border:none;background-color: rgb(88, 140, 236); height: 1px;">
@@ -112,16 +184,12 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
     await transporter.sendMail(mailOptions).catch(err => {
       console.error('Email failed:', err);
     });
-    console.log("Mail sent successfully",email);
+    console.log("Mail sent successfully ",email);
   } catch (err) {
     console.error("Error sending email:", err);
   }
 };
 
-// mailApp.get("/send-email", async (req, res) => {
-//   await sendEmail("1","laksita2004@gmail.com","22071A12F6","8008908113","IT","Lakshita","HackSprint","C");
-//   res.send({msg:"Email sent"});
-// });
 
 function sendGiveAccessEmail(email, blogId) {
   try {
@@ -384,6 +452,23 @@ mailApp.post(
     } catch (error) {
       console.error("Error during thanking author:", error.message);
       return res.json({ status: "error", message: error.message });
+    }
+  })
+);
+
+mailApp.post(
+  "/normal-mail",
+  expressAsyncHandler(async (req, res) => {
+    const data = req.body.data;
+    console.log(data);
+    try {
+      for (const alumni of data) {
+        await sendNormalEmailsWithData(alumni);
+      }
+      res.json({ status: "success", message: "Emails sent successfully" });
+    } catch (error) {
+      console.error("Error during access grant:", error);
+      res.status(500).json({ status: "Error", message: error.message });
     }
   })
 );
