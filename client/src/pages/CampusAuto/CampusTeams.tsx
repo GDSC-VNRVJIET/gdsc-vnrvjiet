@@ -47,14 +47,14 @@ const CampusTeams: React.FC = () => {
       return;
     }
 
-    // try {
-    //   const response = await axios.post(`${process.env.REACT_APP_BACK_URL}/sendmail/send-many-mails`, { data: jsonData });
-    //   alert(response.data.message);
-    //   console.log(jsonData)
-    // } catch (error) {
-    //   console.error("Error uploading data:", error);
-    //   alert("Upload failed!");
-    // }
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_BACK_URL}/sendmail/normal-mail`, { data: jsonData });
+      alert(response.data.message);
+      console.log(jsonData)
+    } catch (error) {
+      console.error("Error uploading data:", error);
+      alert("Upload failed!");
+    }
   };
 
   return (

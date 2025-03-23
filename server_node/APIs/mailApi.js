@@ -36,11 +36,83 @@ transporter.verify((error, success) => {
 });
 
 const sendNormalEmailsWithData = async (data) => {
+  console.log("In function")
+  console.log(data);
   try {
-    const info = await transporter.sendMail(data);
-    console.log("Email sent successfully:", info.response);
+    const mailOptions = {
+      from: {
+        name: "GDGC VNRVJIET",
+        address: process.env.USER,
+      },
+      to: data.email,
+      subject: 'Join Us in Empowering Women in Tech – Support "Tech Her Forward"',
+      attachDataUrls: true,
+      html:
+      `
+      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; padding: 20px;">
+
+    <p>Dear ${data.name},</p>
+
+    <p>I hope you’re doing well. As a proud alumnus of VNR VJIET, your achievements inspire us all. Today, we’re reaching out with an exciting chance to make a real difference for the next generation of tech leaders.</p>
+
+    <p>We’re excited to introduce <strong>"Tech Her Forward"</strong>, a 24-hour hackathon organized by the Google Developers Group (GDG) at VNR VJIET, aimed at empowering women in technology. This initiative will provide a platform for women to innovate, collaborate, and lead in the tech field, promoting a culture of inclusivity and excellence.</p>
+
+    <p>As someone connected to the VNR VJIET legacy, you understand how important mentorship and support can be. We invite you to be a sponsor or mentor for <strong>"Tech Her Forward."</strong> Your involvement will not only give participants the resources they need but also inspire them to reach their full potential.</p>
+
+    <h3>Why Partner with "Tech Her Forward"?</h3>
+    <ul>
+        <li><strong>Elevate Your Brand:</strong> Get noticed by a vibrant community of aspiring developers, industry leaders, and academics.</li>
+        <li><strong>Access Top Talent:</strong> Meet bright, motivated students and discover potential candidates for internships or jobs.</li>
+        <li><strong>Drive Innovation:</strong> Mentor teams, judge projects, and contribute to creative solutions for real-world problems.</li>
+        <li><strong>Champion Diversity:</strong> Help advance gender diversity and inclusion in the tech world.</li>
+    </ul>
+
+    <p>We offer customizable sponsorship tiers to fit your organization’s goals, including benefits like:</p>
+    <ul>
+        <li>Prominent branding on event materials and digital platforms.</li>
+        <li>Opportunities for keynote speeches or workshops.</li>
+        <li>Direct engagement with participants through mentorship or networking sessions.</li>
+    </ul>
+
+    <p>Attached is our detailed sponsorship brochure for your review:<br>
+    <a href="https://drive.google.com/file/d/1UNxhdCz5tB5yWWz9JOkLgDbJJSrfcGZs/view?usp=sharing" target="_blank" style="color: blue; text-decoration: underline;">
+        <strong>View Sponsorship Brochure</strong>
+    </a></p>
+
+    <p>We’d love to discuss how we can create a partnership that aligns with your vision. Please let us know a good time for a quick call or meeting to explore this opportunity further.</p>
+
+    <p>Together, we can empower the next generation of women in tech and make a lasting impact in the industry. Your support will elevate this initiative and create a legacy at VNR VJIET.</p>
+
+    <p>Thank you for considering this chance to make a difference. We look forward to hearing from you soon.</p>
+
+    <p>Warm regards,</p>
+
+    <p><strong>Sri Kruthi</strong><br>
+    Google Developers Group - VNR VJIET<br>
+    <a href="mailto:srikruthi.ksk@gmail.com" style="color: blue; text-decoration: underline;">srikruthi.ksk@gmail.com</a> | 9492357897<br>
+    <a href="https://www.gdgcvnrvjiet.org/" target="_blank" style="color: blue; text-decoration: underline;">https://www.gdgcvnrvjiet.org/</a></p>
+
+</div>`
+      ,
+      attachments: [
+        {
+          filename: 'gdgbanner.png',
+          path: __dirname+'/../images/gdgbanner.png',
+          cid: 'gdg_banner'
+        },
+        {
+          filename: 'gdgfooter.png',
+          path: __dirname+'/../images/gdgfooter.png',
+          cid: 'gdg_footer'
+        },
+      ]
+    }
+    await transporter.sendMail(mailOptions).catch(err => {
+      console.error('Email failed:', err);
+    });
+    console.log("Mail sent successfully",data.email);
   } catch (error) {
-    console.error("Error sending emails:", error);
+    console.error("Error sending email:", err);
   }
 };
 
@@ -112,7 +184,7 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
     await transporter.sendMail(mailOptions).catch(err => {
       console.error('Email failed:', err);
     });
-    console.log("Mail sent successfully",email);
+    console.log("Mail sent successfully ",email);
   } catch (err) {
     console.error("Error sending email:", err);
   }
@@ -380,6 +452,23 @@ mailApp.post(
     } catch (error) {
       console.error("Error during thanking author:", error.message);
       return res.json({ status: "error", message: error.message });
+    }
+  })
+);
+
+mailApp.post(
+  "/normal-mail",
+  expressAsyncHandler(async (req, res) => {
+    const data = req.body.data;
+    console.log(data);
+    try {
+      for (const alumni of data) {
+        await sendNormalEmailsWithData(alumni);
+      }
+      res.json({ status: "success", message: "Emails sent successfully" });
+    } catch (error) {
+      console.error("Error during access grant:", error);
+      res.status(500).json({ status: "Error", message: error.message });
     }
   })
 );

@@ -86,6 +86,7 @@ const ProtectedRoute: React.FC<{ element: React.ReactNode; path: string }> = ({
   if (
     (path === "/leaderboard" ||
       path === "/analysis" ||
+      path === "/demo" ||
       path === "/viewregistrations" ||
       path === "/complete-round-one") &&
     !isAdmin()
@@ -178,7 +179,7 @@ function Root() {
         <Route path="/orgchart" element={<OrgChart />} />
         <Route path="/solution-challenge" element={<SolutionChallenge />} />
         <Route path="/community-guidelines" element={<CommunityGuidelines />} />
-        <Route path="/demo" element={<CampusTeams />} />
+        <Route path="/demo" element={<ProtectedRoute element={<CampusTeams />} path="/demo" />} />
         <Route path="/add-blog" element={<AddBlog />} />
         <Route path="/contact-us" element={<Contactus />} />
         <Route path="/design" element={<Design />} />
