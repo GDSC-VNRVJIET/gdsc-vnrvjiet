@@ -99,9 +99,10 @@ registrationApp.post(
     expressAsyncHandler(async (request, response) => {
       let scannerCollectionObject = await getDBObj("scannerCollection");
       let {rollno} = request.body;
+      let {event} = request.body;
       // based on the roll no find all the users in scanner collection and check paymentSuccessfull for false
       let eventData = await scannerCollectionObject
-        .find({ rollno: rollno, paymentSuccess: true })
+        .find({ rollno: rollno,event:event, paymentSuccess: true })
         .toArray();
       if (eventData.length !== 0) {
         response.send({status:false})
@@ -121,7 +122,7 @@ registrationApp.post(
             event: eventname,
             paymentSuccess: true,
         }).toArray();
-        response.send({ message: "Successful", cnt:100-count.length });
+        response.send({ message: "Successful", cnt:160-count.length });
       } catch (error) {
         response.send({ message: "Error" });
       }

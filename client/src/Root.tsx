@@ -163,7 +163,7 @@ function Root() {
         {/* <Route path="/admin-signup" element={<Signup />} />
             <Route path="/admin-login" element={<Login />} /> */}
         <Route path="/signup" element={<Signup />} />
-        {/* <Route path="upcoming-events/:eventname" element={<Register />} /> */}
+        <Route path="upcoming-events/:eventname" element={<Register />} />
         {/* <Route path="/upcoming-events/Solution Challenge 2025" element={<GoogleForms />} /> */}
         <Route path="/flutterflow-register" element={<GoogleForms />} />
         <Route path="/login" element={<Login />} />
