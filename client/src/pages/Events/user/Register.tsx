@@ -122,13 +122,14 @@ const PaymentGatewayRazorpay: React.FC = () => {
     }
   }, [isValid, formFields]);
   const paymentHandler = async (formdata: FormData) => {
-    const amount = 9900.0;
+    const amount = 100.0;
     const currency = "INR";
     const receiptId = "1235823";
     const check = await axios.post(
       `${process.env.REACT_APP_BACK_URL}/registration/check-register`,
       {
-        rollno:formdata.rollno.toUpperCase()
+        rollno:formdata.rollno.toUpperCase(),
+        event:formdata.event
       }
     )
 
@@ -421,10 +422,10 @@ const PaymentGatewayRazorpay: React.FC = () => {
       <div className="product mt-6 flex flex-col items-center">
         <div className=" lg:w-4/6 px-4 lg:px-1 p-4 bg-white shadow-lg rounded-xl mt-5 mb-10">
         <div className="flex justify-center items-center ">
-          {states?.name === "HackSprint" && (
+          {states?.name === "Blockchain Workshop" && (
             <img
-            src="https://avatars.githubusercontent.com/u/31746234?s=280&v=4"  
-            alt="HackSprint Logo"
+            src="https://www.shutterstock.com/image-vector/blockchain-vector-icon-design-element-600nw-715544491.jpg"  
+            alt="Blockchain Workshop Logo"
             className="w-20 h-20 rounded-full object-cover"  
           />)}
           
@@ -440,11 +441,11 @@ const PaymentGatewayRazorpay: React.FC = () => {
             </button>
           </div>
         </div>
-      <p dangerouslySetInnerHTML={{ __html: states?.description }} className="text-justify text-md text-gray-600 lg:text-xl sm:px-16 mb-2 ">
+      <p dangerouslySetInnerHTML={{ __html: states?.description }} className="text-justify text-md text-gray-600 lg:text-lg mt-5 sm:px-16 mb-2 ">
         {/* {states?.description}   */}
       </p>
       </div>  
-        {states?.name !== "HackSprint"? (
+        {states?.name !== "Blockchain Workshop"? (
           <div className="text-center">
             <p className="text-gray-600 text-xl">To be announced Soon!</p>
             <img src={tobeannounced} className="mx-auto" alt="" />

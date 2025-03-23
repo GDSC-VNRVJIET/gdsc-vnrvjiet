@@ -45,35 +45,26 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
         address: process.env.USER,
       },
       to: `${email}`,
-      subject: `Confirm Your Attendance for ${event} – Limited Seats Available`,
+      subject: `You're Registered! Welcome to the ${event} Event by GDGC VNRVJIET`,
       attachDataUrls: true,
       html: `
       <div style="max-width:800px;margin:0 auto;">
         <img src="cid:gdg_banner" alt="" style="max-height:250px;max-width:100%;display:block;margin:auto;">
         <h3>Welcome to the GDGC VNRVJIET's ${event} Event, ${name}!</h3>
-        <p>Dear Participant,</p>
-
-    <p>Thank you for registering for the FlutterFlow workshop! We’re excited to have you join us. Due to high demand, we request you to confirm your attendance by filling out the interest form below.</p>
-
-    <p>🔹 <b>Only the first 150 confirmed participants will be admitted.</b></p>
-    <p>🔹 <b>Attendance and certificates will only be given to those who attend both the morning and afternoon sessions.</b></p>
-
-    <p>👉 <b><a href="https://forms.gle/9sBU4VLekN1CRnxq5">Fill the Interest Form</a></b> by 11:59 PM today to secure your spot.</p>
-
-    <p>We look forward to seeing you!</p>
+        <p>Thank you for registering for our upcoming event at GDGC VNRVJIET. We're thrilled to have you join us.</p>
         <p>Your registration details are as follows:</p>
         <ul>
           <li><strong>Name:</strong>${name}</li>
           <li><strong>Branch:</strong>${branch}</li>
           <li><strong>Roll No:</strong>${rollno}</li>
         </ul>
+        <p>To stay informed and ensure you don't miss any crucial updates, please join the <strong>WhatsApp group for event participants</strong> by clicking the link below:
+        <b><a href="https://chat.whatsapp.com/IHB12bBWZLjLAuDsT9vYed" style="text-decoration:none;color:#1a73e8;">Blockchain Workshop Participants 2025</a>.<b>
+        </p>
         <img src="${qrCode}" alt="QR Code" style="width:30%;" />
         <p>You can use the QR code above for a smooth check-in process at the event.</p>
         <p>If you have any questions or need further assistance, feel free to reach out to us.</p>
-        <p>Manikanta: 7075659983 </p>
-        <p>Keerthika: 9346755165 </p>
-        </p>
-        <br>
+        
     <div>
         <span>Best regards,</span>
         <hr width="400px" style="margin: 5px 0px;border:none;background-color: rgb(88, 140, 236); height: 1px;">
@@ -118,10 +109,6 @@ const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event,
   }
 };
 
-// mailApp.get("/send-email", async (req, res) => {
-//   await sendEmail("1","laksita2004@gmail.com","22071A12F6","8008908113","IT","Lakshita","HackSprint","C");
-//   res.send({msg:"Email sent"});
-// });
 
 function sendGiveAccessEmail(email, blogId) {
   try {
