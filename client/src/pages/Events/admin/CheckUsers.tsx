@@ -40,8 +40,8 @@ function CheckUsers() {
   async function handleAllow(result: string) {
     console.log(result);
     setLoading(true);
-    // let posted = { order_id: result };
-    let posted = { rollno: result };
+    let posted = { order_id: result };
+    //let posted = { rollno: result };
     let res = await axios.put(
       `${process.env.REACT_APP_BACK_URL}/registration/register`,
       posted
