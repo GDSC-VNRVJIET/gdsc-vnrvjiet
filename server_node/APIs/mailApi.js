@@ -35,6 +35,15 @@ transporter.verify((error, success) => {
   }
 });
 
+const sendNormalEmailsWithData = async (data) => {
+  try {
+    const info = await transporter.sendMail(data);
+    console.log("Email sent successfully:", info.response);
+  } catch (error) {
+    console.error("Error sending emails:", error);
+  }
+};
+
 const sendEmail = async (order_id,email, rollno , whatsapp, branch, name, event, section) => {
   const qrCode = await QRCode.toDataURL(order_id);
   const qrCodeImage = new Buffer.from(qrCode.split("base64,")[1], "base64");
