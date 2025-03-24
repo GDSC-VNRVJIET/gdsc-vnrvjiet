@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiCheckCircle } from "react-icons/fi";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import axios from "axios";
 import { eventRegistrations } from "../../../Apis/events";
 import { json2csv } from "json-2-csv";
 // import { saveAs } from "file-saver";
