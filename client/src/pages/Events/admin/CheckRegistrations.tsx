@@ -54,6 +54,23 @@ const CheckRegistrations: React.FC = () => {
     setShowunsentMails(!showunsentMails);
   }
 
+  function resendMail(rollno:string){
+    axios.post(`${process.env.REACT_APP_BACK_URL}/sendmail/resend-mail/${eventName}`,{rollno:rollno})
+    .then((res)=>{
+      if(res.data.message==="Mail sent successfully"){
+        alert("Mail sent successfully");
+        setShowunsentMails(false);
+        fetchData();
+      }
+      else{
+        alert("Error sending mail");
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+
   return err ? (
     <div className="text-center text-3xl font-bold">Error Fetching Data : ${err}</div>
   ):(
@@ -106,13 +123,16 @@ const CheckRegistrations: React.FC = () => {
               <td className="border px-4 py-2">{registration.mailSent ? 'Yes' : 'No'}</td>
               <td className="border px-4 py-2">{registration.paymentSuccess ? 'Yes' : 'No'}</td>
               <td className="border px-4 py-2">{registration.interest}</td>
+              {showunsentMails && <td className="border px-4 py-2">
+                <button className="bg-blue-500 text-white rounded px-2 py-1 hover:bg-blue-700" onClick={()=>{resendMail(registration.rollno)}}>Send Mail</button>
+                </td>}
             </tr>
           ))}
         </tbody>
       </table>
       </div>
     </div>
-  );
+  ); 
 };
 
 export default CheckRegistrations;
