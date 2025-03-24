@@ -60,6 +60,23 @@ const CheckRegistrations: React.FC = () => {
     }
     setShowunsentMails(!showunsentMails);
   }
+
+  function resendMail(rollno:string){
+    axios.post(`${process.env.REACT_APP_BACK_URL}/sendmail/resend-mail/${eventName}`,{rollno:rollno})
+    .then((res)=>{
+      if(res.data.message==="Mail sent successfully"){
+        alert("Mail sent successfully");
+        setShowunsentMails(false);
+        fetchData();
+      }
+      else{
+        alert("Error sending mail");
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
   const downloadCSV = () => {
     try {
       let filteredData = registrations.map(
@@ -245,7 +262,7 @@ const CheckRegistrations: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  ); 
 };
 
 export default CheckRegistrations;

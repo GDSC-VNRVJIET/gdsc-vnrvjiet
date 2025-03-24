@@ -611,4 +611,42 @@ mailApp.post("/send-many-mails", async (req, res) => {
   }
 });
 
+mailApp.post("/resend-mail/:eventName", async (req, res) => {
+  try {
+    
+    let scannerCollection = await getDBObj("scannerCollection");
+    let eventname = req.params.eventName;
+    const student = await scannerCollection.findOne({ rollno: req.body.rollno, event: eventname });
+    if (!student) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+    if(student.mailSent){
+      return res.status(400).json({ message: "Mail already sent" });
+    }
+    await sendEmail(
+      student.razorpay_order_id,
+      student.email,
+      student.rollno,
+      student.whatsapp,
+      student.branch,
+      student.name,
+      student.event,
+      student.section
+    );
+    await scannerCollection.updateOne(
+      { razorpay_order_id: student.razorpay_order_id },
+      {
+        $set: {
+          mailSent: true
+        },
+      }
+    );
+    console.log('Payment and email process completed for:', student.email);
+    res.json({ message: "Mail Sent" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 module.exports = mailApp;
