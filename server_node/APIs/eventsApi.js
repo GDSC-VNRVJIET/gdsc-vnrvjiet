@@ -30,19 +30,18 @@ eventApp.get(
   "/get-past-events",
   expressAsyncHandler(async (request, response) => {
     let eventCollectionObject = await getDBObj("eventCollectionObject");
-    // let events = await eventCollectionObject
-    //   .find({
-    //     isPast: 1,
-    //   })
-    //   .toArray();
     let events = await eventCollectionObject.find({}).toArray();
-let pastEvents = events.filter(event => new Date(event.endDate) < new Date());
-      events.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-      // events.reverse();
-    // response.send({ message: "Events list", payload: events });
+
+    // Filter past events
+    let pastEvents = events.filter(event => new Date(event.endDate) < new Date());
+
+    // Sort in descending order by startDate
+    pastEvents.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+
     response.send({ message: "Past Events", payload: pastEvents });
   })
 );
+
 
 /**
  * @swagger
@@ -69,7 +68,7 @@ let upcomingEvents = events.filter(event => new Date(event.startDate) >= new Dat
 
       // .sort({ startDate: -1 })
       // .toArray();
-      events.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+      upcomingEvents.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
     // events.reverse();
     response.send({ message: "Upcoming Events", payload: upcomingEvents });
 
