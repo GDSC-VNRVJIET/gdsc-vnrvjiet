@@ -7,8 +7,7 @@ import {
   deleteEventById,
   getAllEvents,
   getUpcomingEvents,
-  updateEvent,
-  handleDownloadCSV,
+  updateEvent
 } from "../../../Apis/events";
 import { format, isValid } from "date-fns";
 import Loader from "../../Loader";
@@ -281,7 +280,8 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
                 <span className=" font-semibold text-lg">
                   What's Happening:{" "}
                 </span>
-                {event.description}
+                {/* Just first few lined needed in the description */}
+                <p className="text-gray-600 text-md prose max-w-none line-clamp-6" dangerouslySetInnerHTML={{ __html: event.description }}></p>
               </p>
               <p>
                 <strong>When : </strong>
@@ -301,13 +301,13 @@ const AdminPortalUpcoming: React.FC<PastProps> = ({ eventsprop }) => {
               <div className="mt-2">
                 <button
                   onClick={() => setEditEvent(event)}
-                  className="bg-[#F2A20C] text-white rounded px-2 py-1 ml-2 "
+                  className="bg-yellow-500 text-white rounded px-2 py-1 ml-2 hover:bg-yellow-600"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => viewRegistrations(event.name)}
-                  className="bg-[#318C07] text-white rounded px-2 py-1 ml-2 hover:bg-green-700"
+                  className="bg-green-600 text-white rounded px-2 py-1 ml-2 hover:bg-green-700"
                 >
                   View registrations
                 </button>

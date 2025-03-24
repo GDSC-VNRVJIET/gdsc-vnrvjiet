@@ -35,9 +35,7 @@ transporter.verify((error, success) => {
   }
 });
 
-const sendNormalEmailsWithData = async (data) => {
-  console.log("In function")
-  console.log(data);
+const sendNormalEmailsWithData = async (data,cnt) => {
   try {
     const mailOptions = {
       from: {
@@ -110,7 +108,7 @@ const sendNormalEmailsWithData = async (data) => {
     await transporter.sendMail(mailOptions).catch(err => {
       console.error('Email failed:', err);
     });
-    console.log("Mail sent successfully",data.email);
+    console.log("Mail sent successfully ",data.email," ",cnt);
   } catch (error) {
     console.error("Error sending email:", err);
   }
@@ -461,9 +459,11 @@ mailApp.post(
   expressAsyncHandler(async (req, res) => {
     const data = req.body.data;
     console.log(data);
+    let cnt = 0;
     try {
       for (const alumni of data) {
-        await sendNormalEmailsWithData(alumni);
+      cnt++;
+        await sendNormalEmailsWithData(alumni,cnt);
       }
       res.json({ status: "success", message: "Emails sent successfully" });
     } catch (error) {

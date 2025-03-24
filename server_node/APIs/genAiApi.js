@@ -2,7 +2,6 @@ const exp = require("express");
 const genAiApp = exp.Router();
 const expressAsyncHandler = require("express-async-handler");
 const getDBObj = require("./DBConnection");
-const { Parser } = require("json2csv");
 
 require("dotenv").config();
 

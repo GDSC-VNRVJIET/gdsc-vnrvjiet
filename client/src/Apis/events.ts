@@ -76,23 +76,6 @@ export const updateEvent = async (eventDto: any) => {
   }
 };
 
-export const handleDownloadCSV = async (eventName: String) => {
-  try {
-    const response = await axios.get(`${API_URL}/registration/export-event-csv/${eventName}`, {
-      responseType: "blob", 
-    });
-    
-    const url = window.URL.createObjectURL(new Blob([response.data]));
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `${eventName}.csv`);
-    document.body.appendChild(link);
-    link.click();
-  } catch (error) {
-    console.error("Error downloading the CSV", error);
-  }
-};
-
 export const eventRegistrations = async (eventName: String) => {
   try {
     const userObjGDSC = localStorage.getItem("userObjGDSC");
