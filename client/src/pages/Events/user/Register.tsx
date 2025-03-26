@@ -558,7 +558,7 @@ const PaymentGatewayRazorpay: React.FC = () => {
                     ></div>
                   </div>
                   <div className="flex">
-                    <h2 className="text-white rounded-full text-base bg-blue-400 lg:text-lg mr-3 ps-2 pr-2 pt-1 pb-1">{`Seats left: ${count}`}</h2>
+                    {/* <h2 className="text-white rounded-full text-base bg-blue-400 lg:text-lg mr-3 ps-2 pr-2 pt-1 pb-1">{`Seats left: ${count}`}</h2> */}
                     {/* <RxLapTimer className="mt-1 mr-1 text-xl sm:text-2xl lg:text-3xl text-red-300" /> */}
                   </div>
                 </div>
