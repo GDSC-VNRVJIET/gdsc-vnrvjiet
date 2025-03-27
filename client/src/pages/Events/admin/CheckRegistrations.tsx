@@ -256,6 +256,9 @@ const CheckRegistrations: React.FC = () => {
                     )}
                   </td>
                   <td className="border px-4 py-3">{registration.interest}</td>
+                  {showunsentMails && <td className="border px-4 py-2">
+                 <button className="bg-blue-500 text-white rounded px-2 py-1 hover:bg-blue-700" onClick={()=>{resendMail(registration.rollno)}}>Send Mail</button>
+                 </td>}
                 </tr>
               ))}
             </tbody>
