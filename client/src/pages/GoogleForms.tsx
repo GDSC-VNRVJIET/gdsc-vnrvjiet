@@ -20,7 +20,7 @@ const TabComponent: React.FC = () => {
           </p>
         </div>
 
-        <div className="relative bg-white rounded-lg shadow-lg overflow-hidden min-h-[600px] sm:min-h-[1600px]">
+        <div className="relative bg-white rounded-lg shadow-lg overflow-hidden">
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
               <div className="text-center p-4">
@@ -33,7 +33,7 @@ const TabComponent: React.FC = () => {
           )}
           <iframe
             src="https://docs.google.com/forms/d/e/1FAIpQLSf3QxAnBP6XHvhOLxn8NLxB-wLl3Fmu9aHsdR9oDKAGshGbIQ/viewform?embedded=true"
-            className="w-full h-[600px] sm:h-[1600px] lg:h-[1639px] border-0"
+            className="w-full h-[700px] sm:h-[900px] lg:h-[1000px] border-0"
             allowFullScreen
             onLoad={handleIframeLoad}
             title="Google Cloud Study Jams - Campus Participant Enrolment Form"
