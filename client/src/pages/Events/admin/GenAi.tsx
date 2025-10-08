@@ -346,7 +346,7 @@ function GenAi() {
                                       <td className="py-3 px-6 border-b">
                                         {index + 1}.{subIndex + 1}
                                       </td>
-                                      <td>
+                                      {/* <td>
                             {genai.map((user) => {
                               if (
                                 user["Name"] ===
@@ -355,7 +355,7 @@ function GenAi() {
                                 return user["Roll No"];
                               }
                             })}
-                          </td>
+                          </td> */}
                                       <td className="py-3 px-6 border-b">
                                         {individualData["User Name"]}
                                       </td>
@@ -486,9 +486,9 @@ function GenAi() {
                         <th className="py-3 px-6 text-sm font-semibold uppercase">
                           Rank
                         </th>
-                        <th className="py-3 px-6 text-sm font-semibold uppercase">
+                        {/* <th className="py-3 px-6 text-sm font-semibold uppercase">
                           Roll Number
-                        </th>
+                        </th> */}
                         <th className="py-3 px-6 text-sm font-semibold uppercase">
                           Name
                         </th>
@@ -512,7 +512,7 @@ function GenAi() {
                           } hover:bg-gray-100`}
                         >
                           <td className="py-3 px-6 border-b">{index + 1}</td>
-                          <td>
+                          {/* <td>
                             {genai.map((user) => {
                               if (
                                 user["Name"] ===
@@ -521,7 +521,7 @@ function GenAi() {
                                 return user["Roll No"];
                               }
                             })}
-                          </td>
+                          </td> */}
                           <td className="py-3 px-6 border-b">
                             {individualData["User Name"]}
                           </td>

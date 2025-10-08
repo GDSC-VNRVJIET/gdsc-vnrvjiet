@@ -23,7 +23,10 @@ genAiApp.post("/add-data", expressAsyncHandler(async (request, response) => {
 genAiApp.get("/get-data", expressAsyncHandler(async (request, response) => {
     let genAiCollectionObject = await getDBObj("genAiCollectionObject");
     try {
-        const documents = await genAiCollectionObject.find().toArray();
+        const documents = await genAiCollectionObject.find({ 
+            Year: 2025,
+            "Profile URL Status": "All Good",
+        }).toArray();
         
         response.json({ status: "Data fetched successfully", data: documents });
     } catch (error) {
@@ -45,7 +48,7 @@ genAiApp.put("/update-data", expressAsyncHandler(async (request, response) => {
 
             return {
                 updateOne: {
-                    filter: { "User Email": doc["User Email"] },  // Filter by email, which is unique
+                    filter: { "User Email": doc["User Email"], Year: 2025 },  // Filter by email, which is unique
                     update: { $set: { ...doc } },  // Update the whole document using $set
                     upsert: false,  // Don't insert a new document if the email doesn't exist
                 }
