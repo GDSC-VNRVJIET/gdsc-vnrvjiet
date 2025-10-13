@@ -8,8 +8,8 @@ import cplead from "./images/jayachandra_thelukuntla.webp"
 import mllead from "./images/corolead.png"
 import jayasreeimg from "./Domain Info/images/WEB DEV/Jayasree Gondipalle.jpg"
 import jahnaviimg from "./Domain Info/images/WEB DEV/Sai Jahnavi Rallapalli.jpeg"
-import hasnikaimg from "client/src/pages/Domain Info/images/WEB DEV/Sri Hasnika Venigalla .jpg"
-import anitejimg from "client/src/pages/Domain Info/images/WEB DEV/Anitej Annabattuni.jpg"
+import hasnikaimg from "./Domain Info/images/WEB DEV/Sri Hasnika Venigalla .jpg"
+import anitejimg from "./Domain Info/images/WEB DEV/Anitej Annabattuni.jpg"
 import varunimg from "./Domain Info/images/WEB DEV/Varun.jpg"
 import dedeepyaimg from "./Domain Info/images/WEB DEV/Vellanki Chenchu Dedeepya .jpg"
 import vigneshvardhan from "./Domain Info/images/CP/VighneshVangari.jpg"
@@ -150,7 +150,7 @@ const data2026: OrgChartData = {
       name: "Siddeshwari A",
       img: siddeshwariimg,
       coordinators: [
-        { name: "Abdul Raheem", img: abulraheemimg },
+        { name: "Abdul Raheem", img: abdulraheemimg },
         { name: "Abhishek Pothanagari", img: abhishekimg },
         { name: "Hindu Sri Jupelli", img: hindusriimg },
         {name:"Md Zaki",img:zakiimg},
