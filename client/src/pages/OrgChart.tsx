@@ -14,7 +14,7 @@ import varunimg from "./Domain Info/images/WEB DEV/Varun.jpg"
 import dedeepyaimg from "./Domain Info/images/WEB DEV/Vellanki Chenchu Dedeepya .jpg"
 import vigneshvardhan from "./Domain Info/images/CP/VighneshVangari.jpg"
 import bhanuprakash from './Domain Info/images/CP/Bhanu Prakash Kanakamedala.jpg'
-import pavankumar from './Domain Info/images/CP/Pavan Kumar K.jpgg'
+import pavankumar from './Domain Info/images/CP/Pavan Kumar K.jpg'
 import harshaimg from "./Domain Info/images/CP/Harsha.jpg"
 import divyaimg from "./Domain Info/images/CP/Divya Sri.jpg"
 import vighneshimg from "./Domain Info/images/CP/VighneshVangari.jpg"
