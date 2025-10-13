@@ -8,15 +8,13 @@ import cplead from "./images/jayachandra_thelukuntla.webp"
 import mllead from "./images/corolead.png"
 import jayasreeimg from "./Domain Info/images/WEB DEV/Jayasree Gondipalle.jpg"
 import jahnaviimg from "./Domain Info/images/WEB DEV/Sai Jahnavi Rallapalli.jpeg"
-import manikantaimg from "./Domain Info/images/WEB DEV/Manikanta.jpg"
-import karthikimg from "./Domain Info/images/WEB DEV/Karthik.jpg"
+import hasnikaimg from "./Domain Info/images/WEB DEV/Sri Hasnika Venigalla .jpg"
+import anitejimg from "./Domain Info/images/WEB DEV/Anitej Annabattuni.jpg"
 import varunimg from "./Domain Info/images/WEB DEV/Varun.jpg"
 import dedeepyaimg from "./Domain Info/images/WEB DEV/Vellanki Chenchu Dedeepya .jpg"
-import lakshitaimg from "./Domain Info/images/WEB DEV/Lakshita Goyal.jpg"
 import vigneshvardhan from "./Domain Info/images/CP/VighneshVangari.jpg"
-import sailokesh from './Domain Info/images/CP/CP1.jpeg'
-import vishnuvardhan from './Domain Info/images/CP/CP2.jpg'
-import udayyadav from './Domain Info/images/CP/GUdhayYadav.jpg'
+import bhanuprakash from './Domain Info/images/CP/Bhanu Prakash Kanakamedala.jpg'
+import pavankumar from './Domain Info/images/CP/Pavan Kumar K.jpgg'
 import harshaimg from "./Domain Info/images/CP/Harsha.jpg"
 import divyaimg from "./Domain Info/images/CP/Divya Sri.jpg"
 import vighneshimg from "./Domain Info/images/CP/VighneshVangari.jpg"
@@ -26,33 +24,35 @@ import vinayimg from "./Domain Info/images/TandC/GVK.jpg"
 import jahnavireddyimg from "./Domain Info/images/MANAGEMENT/Jahnavi Reddy.png"
 import rakshithaimg from "./Domain Info/images/MANAGEMENT/Sai Rakshita Narsingh.jpg"
 import sadhikimg from "./Domain Info/images/MANAGEMENT/Sadhik.jpg"
-import srikruthiimg from "./Domain Info/images/MANAGEMENT/SriKruthi.jpg"
-import abhijeetimg from "./Domain Info/images/MANAGEMENT/Abhijeet.png"
+import sathwikaimg from "./Domain Info/images/MANAGEMENT/Revoori Sathwika Reddy .jpg"
+import spoorthyimg from "client/src/pages/Domain Info/images/MANAGEMENT/Spoorthy Boga.jpeg"
+import rakshitaimg from "./Domain Info/images/MANAGEMENT/Sai Rakshita Narsingh.jpg"
 import nikhitaimg from "./Domain Info/images/ML/nikitha.jpg"
 import suryaimg from "./Domain Info/images/ML/Chittiprolu Suryateja.jpg"
 import sharanimg from "./Domain Info/images/ML/SRI SHARAN TEJ.jpg"
 import keerthikaimg from "./Domain Info/images/ML/KeerthikaGoli.jpg"
-import roshiniimg from "./Domain Info/images/ML/KotagiriRoshini.jpg"
+import yasaswiniimg from "./Domain Info/images/WomenInTech/Yasaswini Devi.jpg"
 import bharathimg from "./Domain Info/images/ML/BharathChandra.jpg"
 import vishwaimg from "./Domain Info/images/ML/Viswa Prateek Tummala .jpg"
 import poojaimg from "./Domain Info/images/design/Poojasiri.jpg.jpg"
 import siddeshwariimg from "./Domain Info/images/design/Siddeshwari _Adepu.jpg"
 import praneethaimg from "./Domain Info/images/design/Praneetha.jpg"
 import chanirudhimg from "./Domain Info/images/design/Anirudh.jpg"
-import harikaimg from "./Domain Info/images/MANAGEMENT/Harika.jpg"
-import panirudhimg from "./Domain Info/images/design/Anirudh P.jpg"
-import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg"
-import rishithaimg from "./Domain Info/images/design/Rishitha.jpg"
-import tanmayeeimg from "./Domain Info/images/design/Tanmayee_kyram.jpg"
+import abdulraheemimg from "./Domain Info/images/design/Abdul Raheem.png"
+import abhishekimg from "./Domain Info/images/design/Abhishek Pothanagari.jpg"
+import hindusriimg from "./Domain Info/images/design/Hindu Sri Jupelli.png"
+import zakiimg from "./Domain Info/images/design/Md Zaki.jpg"
+import pavitraimg from "./Domain Info/images/design/Pavitra Jasti.jpg"
 import bharathsirimg from "./images/facultyCord copy.jpg"
-import Harshitha from "./Domain Info/images/TandC/Harshithamandadi.jpg"
+import ashraya from "./Domain Info/images/TandC/Ashraya Yelisetty.jpg"
+import harshitha from "./Domain Info/images/TandC/Harshitha.jpg"
+import vardhan from "./Domain Info/images/TandC/M INDRANEELI VARDHAN .jpg"
+import mahesh from "./Domain Info/images/TandC/Mahesh Patnala.jpg"
 import akhilimg from "./Domain Info/images/AppDev/Akhil.png"
 import shivaimg from "./Domain Info/images/AppDev/Shiva.jpg"
-import nishmaimg from "./Domain Info/images/Hardware/HardwareC1.jpg"
-import durgamadhavimg from "./Domain Info/images/Hardware/HardwareC2.jpg";
+import venkatagauravimg from "./Domain Info/images/Hardware/Emani Venkata Gaurav.jpg"
+import harshithaimg from "./Domain Info/images/Hardware/Sri Harshitha Yalla.jpg";
 import hardwarelead from "./Domain Info/images/Hardware/Hardwarelead.jpg"
-import Dhruva from "./Domain Info/images/Hardware/Dhruva.jpeg";
-import Shahid from "./Domain Info/images/TandC/Shahid.jpg";
 import { set } from "date-fns";
 
 interface Person {
@@ -100,9 +100,8 @@ const data2026: OrgChartData = {
       name: "Sai Jahnavi",
       img: jahnaviimg,
       coordinators: [
-        { name: "Sri Manikanta", img: manikantaimg },
-        { name: "Karthik", img: karthikimg },
-        { name: "Lakshita", img: lakshitaimg },
+        { name: "Sri Hasnika Venigalla", img: hasnikaimg },
+        { name: "Anitej Annabattuni", img: anitejimg }
       ],
       volunteers: [
         
@@ -114,9 +113,8 @@ const data2026: OrgChartData = {
       name: "Harsha Vardhan",
       img: harshaimg,
       coordinators: [
-        {name:"Sai Lokesh",img:sailokesh},
-        {name:"N Vishnu Vardhan",img:vishnuvardhan},
-        {name:"G Udhay Yadav",img:udayyadav}
+        {name:"Kanakamedala Bhanu Prakash",img:bhanuprakash},
+        {name:"K Pavan Kumar",img:pavankumar}
       ],
       volunteers: [
       ],
@@ -127,9 +125,9 @@ const data2026: OrgChartData = {
       name: "Sai Rakshita Narsingh",
       img: rakshithaimg,
       coordinators: [
-        { name: "Sri Kruthi", img: srikruthiimg },
-        { name: "Abhijeet", img: abhijeetimg },
-        { name: "Harika", img: harikaimg },
+        { name: "Revoori Sathwika Reddy", img: sathwikaimg },
+        { name: "Sai Rakshita Narsingh", img: rakshitaimg },
+        { name: "Spoorthy Boga", img: spoorthyimg },
       ],
       volunteers: [
       ],
@@ -153,10 +151,11 @@ const data2026: OrgChartData = {
       name: "Siddeshwari A",
       img: siddeshwariimg,
       coordinators: [
-        { name: "Ch. Anirudh", img: chanirudhimg },
-        { name: "Arya Joshi", img: aryaimg },
-        {name:"Rishitha",img:rishithaimg},
-        {name:"Tanmayee Kyram",img:tanmayeeimg}
+        { name: "Abdul Raheem", img: abulraheemimg },
+        { name: "Abhishek Pothanagari", img: abhishekimg },
+        { name: "Hindu Sri Jupelli", img: hindusriimg },
+        {name:"Md Zaki",img:zakiimg},
+        {name:"Pavitra Jasti",img:pavitraimg}
       ],
       volunteers: [
       ],
@@ -180,8 +179,10 @@ const data2026: OrgChartData = {
       name: "Vinay Gajula",
       img: vinayimg,
       coordinators: [
-        {name:"Harshitha Mandadi",img:Harshitha},
-        {name:"Shahid",img:Shahid},
+        {name:"Harshitha",img:Harshitha},
+        {name:"Ashraya Yelisetty",img:ashraya},
+        {name:"M INDRANEELI VARDHAN ",img:vardhan},
+        {name:"Mahesh Patnala",img:mahesh}
       ],
       volunteers: [],
       type:"technical",
@@ -202,9 +203,8 @@ const data2026: OrgChartData = {
       name:"Avaneesh",
       img:hardwarelead,
       coordinators:[
-        {name:"Nishma Reddy",img:nishmaimg},
-        {name:"Durga Madhav",img:durgamadhavimg},
-        {name:"Dhruva",img:Dhruva}
+        {name:"Emani Venkata Gaurav",img:venkatagauravimg},
+        {name:"Sri Harshitha Yalla",img:harshithaimg}
       ],
       volunteers:[],
       type:"non technical"
@@ -214,7 +214,7 @@ const data2026: OrgChartData = {
       name: "Nikhita Kashyap D",
       img: nikhitaimg,
       coordinators: [
-        {name:"Roshini Kotagiri",img:roshiniimg}
+        {name:"Yasaswini Devi",img:yasaswiniimg}
       ],
       volunteers: [],
       type:"technical",
