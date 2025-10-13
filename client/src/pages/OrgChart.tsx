@@ -26,7 +26,6 @@ import rakshitaimg from "./Domain Info/images/MANAGEMENT/Sai Rakshita Narsingh.j
 import sadhikimg from "./Domain Info/images/MANAGEMENT/Sadhik.jpg"
 import sathwikaimg from "./Domain Info/images/MANAGEMENT/Revoori Sathwika Reddy .jpg"
 import spoorthyimg from "client/src/pages/Domain Info/images/MANAGEMENT/Spoorthy Boga.jpeg"
-import rakshitaimg from "./Domain Info/images/MANAGEMENT/Sai Rakshita Narsingh.jpg"
 import nikhitaimg from "./Domain Info/images/ML/nikitha.jpg"
 import suryaimg from "./Domain Info/images/ML/Chittiprolu Suryateja.jpg"
 import sharanimg from "./Domain Info/images/ML/SRI SHARAN TEJ.jpg"
