@@ -83,7 +83,7 @@ interface OrgChartData {
   domainLeads: DomainLead[];
 }
 
-const data2025: OrgChartData = {
+const data2026: OrgChartData = {
   facultyAdvisor: { role: "Faculty Advisor", name: "Bharath Sir", img: bharathsirimg },
   lead: { role: "Lead", name: "Jayasree Gondipalle", img: jayasreeimg },
  
@@ -223,7 +223,7 @@ const data2025: OrgChartData = {
   ],
 };
 
-const data2024: OrgChartData = {
+const data2025: OrgChartData = {
   facultyAdvisor: { role: "Faculty Advisor", name: "Bharath Sir", img: bharathsirimg },
   lead: { role: "Lead", name: "Dushyanth", img: leadimg },
   domainLeads: [
@@ -320,12 +320,12 @@ const OrgChart: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const [year, setYear] = useState<number>(2025);
+  const [year, setYear] = useState<number>(2026);
   const [selectedDomain, setSelectedDomain] = useState<number | null>(null);
   const [fadein, setFadein] = useState<boolean>(false);
   const domainTypes = ["technical", "nonTechnical"];
 
-  const dataToDisplay = year === 2025 ? data2025 : data2024;
+  const dataToDisplay = year === 2026 ? data2026 : data2024;
 
   useEffect(() => {
     setTimeout(() => {
@@ -341,23 +341,23 @@ const OrgChart: React.FC = () => {
       <div className="flex space-x-4 mb-8">
         <button
           className={`px-6 py-2 rounded-full font-semibold transition duration-300 ${
-            year === 2025
+            year === 2026
               ? "bg-yellow-500 text-white"
+              : "bg-gray-200 text-gray-800"
+          }`}
+          onClick={() => setYear(2026)}
+        >
+          2026
+        </button>
+        <button
+          className={`px-6 py-2 rounded-full font-semibold transition duration-300 ${
+            year === 2025
+              ? "bg-red-500 text-white"
               : "bg-gray-200 text-gray-800"
           }`}
           onClick={() => setYear(2025)}
         >
           2025
-        </button>
-        <button
-          className={`px-6 py-2 rounded-full font-semibold transition duration-300 ${
-            year === 2024
-              ? "bg-red-500 text-white"
-              : "bg-gray-200 text-gray-800"
-          }`}
-          onClick={() => setYear(2024)}
-        >
-          2024
         </button>
       </div>
 
