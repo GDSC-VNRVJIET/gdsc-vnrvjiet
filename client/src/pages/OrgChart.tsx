@@ -325,7 +325,7 @@ const OrgChart: React.FC = () => {
   const [fadein, setFadein] = useState<boolean>(false);
   const domainTypes = ["technical", "nonTechnical"];
 
-  const dataToDisplay = year === 2026 ? data2026 : data2024;
+  const dataToDisplay = year === 2026 ? data2026 : data2025;
 
   useEffect(() => {
     setTimeout(() => {
