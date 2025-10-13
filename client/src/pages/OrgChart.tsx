@@ -123,7 +123,7 @@ const data2026: OrgChartData = {
     {
       role: "Management Lead",
       name: "Sai Rakshita Narsingh",
-      img: rakshithaimg,
+      img: rakshitaimg,
       coordinators: [
         { name: "Revoori Sathwika Reddy", img: sathwikaimg },
         { name: "Sai Rakshita Narsingh", img: rakshitaimg },
@@ -179,7 +179,7 @@ const data2026: OrgChartData = {
       name: "Vinay Gajula",
       img: vinayimg,
       coordinators: [
-        {name:"Harshitha",img:Harshitha},
+        {name:"Harshitha",img:harshitha},
         {name:"Ashraya Yelisetty",img:ashraya},
         {name:"M INDRANEELI VARDHAN ",img:vardhan},
         {name:"Mahesh Patnala",img:mahesh}
