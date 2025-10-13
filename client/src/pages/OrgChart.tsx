@@ -46,8 +46,8 @@ import rishithaimg from "./Domain Info/images/design/Rishitha.jpg"
 import tanmayeeimg from "./Domain Info/images/design/Tanmayee_kyram.jpg"
 import bharathsirimg from "./images/facultyCord copy.jpg"
 import Harshitha from "./Domain Info/images/TandC/Harshithamandadi.jpg"
-import UdaySagar from "./Domain Info/images/AppDev/UdaySagar.jpeg"
-import VinayKumar from "./Domain Info/images/AppDev/VinayKumarKajjapu.jpg"
+import akhilimg from "./Domain Info/images/AppDev/Akhil.png"
+import shivaimg from "./Domain Info/images/AppDev/Shiva.jpg"
 import nishmaimg from "./Domain Info/images/Hardware/HardwareC1.jpg"
 import durgamadhavimg from "./Domain Info/images/Hardware/HardwareC2.jpg";
 import hardwarelead from "./Domain Info/images/Hardware/Hardwarelead.jpg"
@@ -191,8 +191,8 @@ const data2026: OrgChartData = {
       name: "Jahnavi Reddy",
       img: jahnavireddyimg,
       coordinators: [
-        {name:"Uday Sagar",img:UdaySagar},
-        {name:"Vinay Kumar",img:VinayKumar}
+        {name:"Akhil",img:akhilimg},
+        {name:"Shiva",img:shivaimg}
       ],
       volunteers: [],
       type:"technical",
