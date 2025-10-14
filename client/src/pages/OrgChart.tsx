@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import leadimg from "./images/lead.png";
 import colead from "./images/colead.png";
 import weblead from "./images/webdevlead.png";
-import managelead from "./images/managementlead.png";
+import managelead from "./images/managementlead.png";/*design*/
 import designlead from "./images/creativelead.png";
 import cplead from "./images/jayachandra_thelukuntla.webp"
 import mllead from "./images/corolead.png"
