@@ -25,7 +25,7 @@ import jahnavireddyimg from "./Domain Info/images/MANAGEMENT/Jahnavi Reddy.png"
 import rakshitaimg from "./Domain Info/images/MANAGEMENT/Sai Rakshita Narsingh.jpg"
 import sadhikimg from "./Domain Info/images/MANAGEMENT/Sadhik.jpg"
 import sathwikaimg from "./Domain Info/images/MANAGEMENT/Revoori Sathwika Reddy .jpg"
-import spoorthyimg from "client/src/pages/Domain Info/images/MANAGEMENT/Spoorthy Boga.jpeg"
+import spoorthyimg from "./Domain Info/images/MANAGEMENT/Spoorthy Boga.jpeg"
 import nikhitaimg from "./Domain Info/images/ML/nikitha.jpg"
 import suryaimg from "./Domain Info/images/ML/Chittiprolu Suryateja.jpg"
 import sharanimg from "./Domain Info/images/ML/SRI SHARAN TEJ.jpg"
@@ -52,6 +52,11 @@ import shivaimg from "./Domain Info/images/AppDev/Shiva.jpg"
 import venkatagauravimg from "./Domain Info/images/Hardware/Emani Venkata Gaurav.jpg"
 import harshithaimg from "./Domain Info/images/Hardware/Sri Harshitha Yalla.jpg";
 import hardwarelead from "./Domain Info/images/Hardware/Hardwarelead.jpg"
+import tanmayeeimg from "./Domain Info/images/design/Tanmayee_kyram.jpg";
+import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg";
+import rishithaimg from "./Domain Info/images/design/Rishitha.jpg";
+import srikruthiimg from "./Domain Info/images/MANAGEMENT/SriKruthi.jpg";
+import abhijeetimg from "./Domain Info/images/MANAGEMENT/Abhijeet.png";
 import { set } from "date-fns";
 
 interface Person {
@@ -242,11 +247,8 @@ const data2025: OrgChartData = {
         { name: "Sai Jahnavi", img: jahnaviimg },
       ],
       volunteers: [
-        { name: "Sri Manikanta", img: manikantaimg },
-        { name: "Karthik", img: karthikimg },
         { name: "Varun", img: varunimg },
         { name: "Dedeepya", img: dedeepyaimg },
-        { name: "Lakshita", img: lakshitaimg },
       ],
     },
     {
@@ -270,7 +272,7 @@ const data2025: OrgChartData = {
         { name: "Sahithi", img: sahithiimg },
         { name: "Vinay Kalyan", img: vinayimg },
         { name: "Jahnavi Reddy", img: jahnavireddyimg },
-        { name: "Sai Rakshitha", img: rakshithaimg },
+        { name: "Sai Rakshitha", img: rakshitaimg },
       ],
       volunteers: [
         { name: "Sadhik", img: sadhikimg },
@@ -289,7 +291,6 @@ const data2025: OrgChartData = {
       volunteers: [
         { name: "Sri Sharan Tej", img: sharanimg },
         { name: "Keerthika", img: keerthikaimg },
-        { name: "Roshini", img: roshiniimg },
         { name: "Bharath Chandra", img: bharathimg },
         { name: "Vishwa Prateek", img: vishwaimg },
       ],
@@ -306,7 +307,6 @@ const data2025: OrgChartData = {
       volunteers: [
         { name: "Ch. Anirudh", img: chanirudhimg },
         { name: "Arya Joshi", img: aryaimg },
-        { name: "P. Anirudh", img: panirudhimg },
         { name: "Rishitha", img: rishithaimg },
       ],
     },
@@ -483,5 +483,3 @@ const OrgChart: React.FC = () => {
 };
 
 export default OrgChart;
-
-
