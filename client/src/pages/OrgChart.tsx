@@ -57,6 +57,28 @@ import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg";
 import rishithaimg from "./Domain Info/images/design/Rishitha.jpg";
 import srikruthiimg from "./Domain Info/images/MANAGEMENT/SriKruthi.jpg";
 import abhijeetimg from "./Domain Info/images/MANAGEMENT/Abhijeet.png";
+import lakshitaimg from "./Domain Info/images/WEB DEV/Lakshita Goyal.jpg"
+import manikantaimg from "./Domain Info/images/WEB DEV/Manikanta.jpg"
+import karthikimg from "./Domain Info/images/WEB DEV/Karthik.jpg"
+import sailokesh from './Domain Info/images/CP/CP1.jpeg'
+import vishnuvardhan from './Domain Info/images/CP/CP2.jpg'
+import udayyadav from './Domain Info/images/CP/GUdhayYadav.jpg'
+import harikaimg from "./Domain Info/images/MANAGEMENT/Harika.jpg"
+import UdaySagar from "./Domain Info/images/AppDev/UdaySagar.jpeg"
+import VinayKumar from "./Domain Info/images/AppDev/VinayKumarKajjapu.jpg"
+import Harshitha from "./Domain Info/images/TandC/Harshithamandadi.jpg"
+import Shahid from "./Domain Info/images/TandC/Shahid.jpg";
+import Dhruva from "./Domain Info/images/Hardware/Dhruva.jpeg";
+import nishmaimg from "./Domain Info/images/Hardware/HardwareC1.jpg"
+import durgamadhavimg from "./Domain Info/images/Hardware/HardwareC2.jpg";
+import roshiniimg from "./Domain Info/images/ML/KotagiriRoshini.jpg"
+import siddharth from "./Domain Info/images/ML/Aimlead.jpg"
+import udaysagar from "./Domain Info/images/AppDev/UdaySagar.jpg"
+import roshini from "./Domain Info/images/WomenInTech/roshini.jpg"
+import lakshitha from "./Domain Info/images/WEB DEV/lakshitha.jpg"
+import durgamadhav from "./Domain Info/images/Hardware/Durgamadhav.jpg"
+import vishnuvardhanimg from "./Domain Info/images/design/vishnuvardhan.png"
+import sarvani from "./Domain Info/images/MANAGEMENT/Sarvani.jpg"
 import { set } from "date-fns";
 
 interface Person {
@@ -101,8 +123,8 @@ const data2026: OrgChartData = {
     },
     {
       role: "WebDev Lead",
-      name: "Sai Jahnavi",
-      img: jahnaviimg,
+      name: "Lakshita Goyal",
+      img: lakshitha,
       coordinators: [
         { name: "Sri Hasnika Venigalla", img: hasnikaimg },
         { name: "Anitej Annabattuni", img: anitejimg }
@@ -130,7 +152,7 @@ const data2026: OrgChartData = {
       img: rakshitaimg,
       coordinators: [
         { name: "Revoori Sathwika Reddy", img: sathwikaimg },
-        { name: "Sai Rakshita Narsingh", img: rakshitaimg },
+        { name: "Sarvani", img: sarvani },
         { name: "Spoorthy Boga", img: spoorthyimg },
       ],
       volunteers: [
@@ -139,8 +161,8 @@ const data2026: OrgChartData = {
     },
     {
       role: "AIML Lead",
-      name: "Surya Teja Chittiprolu",
-      img: suryaimg ,
+      name: "Siddharth",
+      img: siddharth ,
       coordinators: [
         { name: "Keerthika", img: keerthikaimg },
         // { name: "Roshini", img: roshiniimg },
@@ -152,8 +174,8 @@ const data2026: OrgChartData = {
     },
     {
       role: "Design Lead",
-      name: "Siddeshwari A",
-      img: siddeshwariimg,
+      name: "Vishnu Vardhan",
+      img: vishnuvardhanimg,
       coordinators: [
         { name: "Abdul Raheem", img: abdulraheemimg },
         { name: "Abhishek Pothanagari", img: abhishekimg },
@@ -183,7 +205,6 @@ const data2026: OrgChartData = {
       name: "Vinay Gajula",
       img: vinayimg,
       coordinators: [
-        {name:"Harshitha",img:harshitha},
         {name:"Ashraya Yelisetty",img:ashraya},
         {name:"M INDRANEELI VARDHAN ",img:vardhan},
         {name:"Mahesh Patnala",img:mahesh}
@@ -193,8 +214,8 @@ const data2026: OrgChartData = {
     },
     {
       role: "AppDev Lead",
-      name: "Jahnavi Reddy",
-      img: jahnavireddyimg,
+      name: "Uday Sagar",
+      img: udaysagar,
       coordinators: [
         {name:"Akhil",img:akhilimg},
         {name:"Shiva",img:shivaimg}
@@ -204,8 +225,8 @@ const data2026: OrgChartData = {
     },
     {
       role:"Hardware Lead",
-      name:"Avaneesh",
-      img:hardwarelead,
+      name:"Durga Madhav",
+      img:durgamadhav,
       coordinators:[
         {name:"Emani Venkata Gaurav",img:venkatagauravimg},
         {name:"Sri Harshitha Yalla",img:harshithaimg}
@@ -215,8 +236,8 @@ const data2026: OrgChartData = {
     },
     {
       role: "Women In Tech Lead",
-      name: "Nikhita Kashyap D",
-      img: nikhitaimg,
+      name: "Roshini Kotagiri",
+      img: roshini,
       coordinators: [
         {name:"Yasaswini Devi",img:yasaswiniimg}
       ],
@@ -226,8 +247,146 @@ const data2026: OrgChartData = {
     
   ],
 };
-
 const data2025: OrgChartData = {
+  facultyAdvisor: { role: "Faculty Advisor", name: "Bharath Sir", img: bharathsirimg },
+  lead: { role: "Lead", name: "Jayasree Gondipalle", img: jayasreeimg },
+ 
+  domainLeads: [
+    { 
+      role: "Co Lead", 
+      name: "Sahithi Kolla", 
+      img: sahithiimg,
+      coordinators: [],
+      volunteers: [],
+    },
+    {
+      role: "WebDev Lead",
+      name: "Sai Jahnavi",
+      img: jahnaviimg,
+      coordinators: [
+        { name: "Sri Manikanta", img: manikantaimg },
+        { name: "Karthik", img: karthikimg },
+        { name: "Lakshita", img: lakshitaimg },
+      ],
+      volunteers: [
+        
+      ],
+      type:"technical",
+    },
+    {
+      role: "CP Lead",
+      name: "Harsha Vardhan",
+      img: harshaimg,
+      coordinators: [
+        {name:"Sai Lokesh",img:sailokesh},
+        {name:"N Vishnu Vardhan",img:vishnuvardhan},
+        {name:"G Udhay Yadav",img:udayyadav}
+      ],
+      volunteers: [
+      ],
+      type:"technical",
+    },
+    {
+      role: "Management Lead",
+      name: "Sai Rakshita Narsingh",
+      img: rakshitaimg,
+      coordinators: [
+        { name: "Sri Kruthi", img: srikruthiimg },
+        { name: "Abhijeet", img: abhijeetimg },
+        { name: "Harika", img: harikaimg },
+      ],
+      volunteers: [
+      ],
+      type: "nonTechnical",
+    },
+    {
+      role: "AIML Lead",
+      name: "Surya Teja Chittiprolu",
+      img: suryaimg ,
+      coordinators: [
+        { name: "Keerthika", img: keerthikaimg },
+        // { name: "Roshini", img: roshiniimg },
+        { name: "Bharath Chandra", img: bharathimg },
+      ],
+      volunteers: [
+      ],
+      type:"technical",
+    },
+    {
+      role: "Design Lead",
+      name: "Siddeshwari A",
+      img: siddeshwariimg,
+      coordinators: [
+        { name: "Ch. Anirudh", img: chanirudhimg },
+        { name: "Arya Joshi", img: aryaimg },
+        {name:"Rishitha",img:rishithaimg},
+        {name:"Tanmayee Kyram",img:tanmayeeimg}
+      ],
+      volunteers: [
+      ],
+      type: "nonTechnical",
+    },
+    {
+      role: "Social Media Lead",
+      name: "Pavanpraneetha Kunuku",
+      img: praneethaimg,
+      coordinators: [
+        {name:"Ch.Anirudh",img:chanirudhimg},
+        {name:"Tanmayee Kyram",img:tanmayeeimg},
+        {name:"Arya Joshi",img:aryaimg},
+        {name:"Rishitha",img:rishithaimg}
+      ],
+      volunteers: [],
+      type: "nonTechnical",
+    },
+    {
+      role: "Testing and Cybersecurity Lead",
+      name: "Vinay Gajula",
+      img: vinayimg,
+      coordinators: [
+        {name:"Harshitha Mandadi",img:Harshitha},
+        {name:"Shahid",img:Shahid},
+      ],
+      volunteers: [],
+      type:"technical",
+    },
+    {
+      role: "AppDev Lead",
+      name: "Jahnavi Reddy",
+      img: jahnavireddyimg,
+      coordinators: [
+        {name:"Uday Sagar",img:UdaySagar},
+        {name:"Vinay Kumar",img:VinayKumar}
+      ],
+      volunteers: [],
+      type:"technical",
+    },
+    {
+      role:"Hardware Lead",
+      name:"Avaneesh",
+      img:hardwarelead,
+      coordinators:[
+        {name:"Nishma Reddy",img:nishmaimg},
+        {name:"Durga Madhav",img:durgamadhavimg},
+        {name:"Dhruva",img:Dhruva}
+      ],
+      volunteers:[],
+      type:"non technical"
+    },
+    {
+      role: "Women In Tech Lead",
+      name: "Nikhita Kashyap D",
+      img: nikhitaimg,
+      coordinators: [
+        {name:"Roshini Kotagiri",img:roshiniimg}
+      ],
+      volunteers: [],
+      type:"technical",
+    },
+    
+  ],
+};
+const data2024: OrgChartData = {
   facultyAdvisor: { role: "Faculty Advisor", name: "Bharath Sir", img: bharathsirimg },
   lead: { role: "Lead", name: "Dushyanth", img: leadimg },
   domainLeads: [
@@ -324,7 +483,9 @@ const OrgChart: React.FC = () => {
   const [fadein, setFadein] = useState<boolean>(false);
   const domainTypes = ["technical", "nonTechnical"];
 
-  const dataToDisplay = year === 2026 ? data2026 : data2025;
+  /*const dataToDisplay = year === 2026 ? data2026 : data2025;*/
+  const dataToDisplay = year === 2026 ? data2026 : year === 2025 ? data2025 : data2024;
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -357,6 +518,16 @@ const OrgChart: React.FC = () => {
           onClick={() => setYear(2025)}
         >
           2025
+        </button>
+        <button
+          className={`px-6 py-2 rounded-full font-semibold transition duration-300 ${
+            year === 2024
+              ? "bg-red-500 text-white"
+              : "bg-gray-200 text-gray-800"
+          }`}
+          onClick={() => setYear(2024)}
+        >
+          2024
         </button>
       </div>
 
