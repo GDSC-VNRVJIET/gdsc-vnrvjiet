@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+
+body {
+  margin: 0;
+    font-family: "Poppins";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+body::-webkit-scrollbar {
+  display: block;
+  width: 12px;
+  background-color: #27272a;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #737373;
+  border-radius: 100px;
+}
+.mains{
+  font-family: "Rubik Doodle Shadow", system-ui;
+  font-weight: 400;
+  font-size: 1.75rem;
+}
