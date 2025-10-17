@@ -3,9 +3,12 @@ import React,{useEffect} from "react";
 // import { FaLinkedinIn } from "react-icons/fa";
 // import { FaGithub } from "react-icons/fa";
 import GVKImage from "./images/TandC/GVK.jpg";
-import HarshithaImage from './images/TandC/Harshithamandadi.jpg';
-import Shahid from "./images/TandC/Shahid.jpg"
-
+import HarshithaImage from './profile_images/CS/Harshitha.jpg';
+import Shahid from "./images/TandC/Shahid.jpg";
+import ShahidImg from "../Domain Info/profile_images/CS/Shahid Ameed.jpg";
+import AshrayaImg from "../Domain Info/profile_images/CS/Ashraya Yelisetty.jpg";
+import IndraneeliImg from "../Domain Info/profile_images/CS/M INDRANEELI VARDHAN.jpg";
+import MaheshImg from "../Domain Info/profile_images/CS/Mahesh Patnala.jpg";
 
 function Hardware() {
 
@@ -17,29 +20,45 @@ function Hardware() {
     "https://www.jtsecurity.net/wp-content/uploads/2021/03/mdr.gif";
   const members = [
     {
-      name: "GVK",
-      role: "Testing and Cybersecurity Lead",
-      image: GVKImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
+      name:"Shahid",
+      role:"Testing and Cybersecurity Lead",
+      image: ShahidImg,
+      linkedin:"#",
+      github:"#",
+      instagram:"#",
     },
     {
       name: "Harshitha Mandadi",
-      role: "Testing and Cybersecurity Coordinator",
+      role: "Testing and Cybersecurity Lead",
       image: HarshithaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name:"Shahid",
-      role:"Testing and Cybersecurity Coordinator",
-      image:Shahid,
-      linkedin:"#",
-      github:"#",
-      instagram:"#",
-    }
+      name: "Ashraya Yelisetty",
+      role: "Testing and Cybersecurity Coordinator",
+      image: AshrayaImg,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "M Indraneeli Vardhan",
+      role: "Testing and Cybersecurity Coordinator",
+      image: IndraneeliImg,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Mahesh Patnala",
+      role: "Testing and Cybersecurity COordinator",
+      image: MaheshImg,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
   ];
 
   return (

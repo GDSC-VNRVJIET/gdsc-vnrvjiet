@@ -3,8 +3,10 @@ import React,{useEffect} from "react";
 // import { FaLinkedinIn } from "react-icons/fa";
 // import { FaGithub } from "react-icons/fa";
 import JahnaviReddyImage from "./images/AppDev/JahnaviReddy.png";
-import UdaySagarImage from "./images/AppDev/UdaySagar.jpeg";
+import UdaySagarImage from "./profile_images/AppDev/Uday Sagar.jpg";
 import VinayKumarImage from './images/AppDev/VinayKumarKajjapu.jpg';
+import AkhilImage from "../Domain Info/profile_images/AppDev/Akhil Varshpettem.jpg";
+import ShivaImage from "../Domain Info/profile_images/AppDev/Byri Shiva Shankar.jpg";
 
 function Hardware() {
 
@@ -16,25 +18,25 @@ function Hardware() {
     "https://appsolution.co.za/wp-content/uploads/2021/11/image-mbl-development.gif";
   const members = [
     {
-      name: "Jahnavi Reddy",
-      role: "App Development Lead",
-      image: JahnaviReddyImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
       name: "Uday Sagar",
-      role: "App Development Coordinator",
+      role: "App Development Lead",
       image: UdaySagarImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Vinay Kumar",
+      name: "Akhil Varshpettem", // ** confirm name
       role: "App Development Coordinator",
-      image: VinayKumarImage,
+      image: AkhilImage,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Byri Shiva Shankar", // ** confirm name
+      role: "App Development Coordinator",
+      image: ShivaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",

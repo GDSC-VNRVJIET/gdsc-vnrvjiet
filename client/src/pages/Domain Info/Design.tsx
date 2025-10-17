@@ -10,7 +10,13 @@ import ChAnirudhImage from "../Domain Info/images/design/Anirudh.jpg";
 import AryaImage from "../Domain Info/images/design/Arya Joshi.jpg";
 import RishithaImage from "../Domain Info/images/design/Rishitha.jpg";
 import PavanPraneethaImage from "../Domain Info/images/design/Praneetha.jpg"
-import TanmayeeKyramImage from "../Domain Info/images/design/Tanmayee_kyram.jpg"
+import TanmayeeKyramImage from "../Domain Info/profile_images/Design_SM/Tanmayee Kyram.jpg";
+import VishnuImg from "../Domain Info/profile_images/Design_SM/VishnuVardhan.jpg";
+import PavitraImg from "../Domain Info/profile_images/Design_SM/Pavitra Jasti.jpg";
+import ZakiImg from "../Domain Info/profile_images/Design_SM/Md Zaki.jpg";
+import HinduImg from "../Domain Info/profile_images/Design_SM/Hindu Sri Jupelli.jpg";
+import AbhishekImg from "../Domain Info/profile_images/Design_SM/Abhishek Pothanagari.jpg";
+import AbdulImg from "../Domain Info/profile_images/Design_SM/Abdul Raheem.jpg";
 
 function ML() {
 
@@ -22,37 +28,29 @@ function ML() {
     "https://cdn.dribbble.com/users/3943049/screenshots/14032596/media/9e39cf22d33b4d2b77e9f270f2f06f6e.gif";
   const members = [
     {
-      name: "Siddeshwari",
-      role: "Social Media and Design Lead",
-      image: SiddeshwariImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "Pavan Praneetha",
-      role: "Social Media and Design Lead",
-      image: PavanPraneethaImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "Ch.Anirudh",
-      role: "Social Media and Design Coordinator",
-      image: ChAnirudhImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
       name: "Tanmayee Kyram",
-      role: "Social Media and Design Coordinator",
+      role: "Social Media and Design Lead",
       image: TanmayeeKyramImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
+    {
+      name: "Vishnu Vardhan",
+      role: "Social Media and Design Lead",
+      image: VishnuImg,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    // {
+    //   name: "Ch.Anirudh",
+    //   role: "Social Media and Design Coordinator",
+    //   image: ChAnirudhImage,
+    //   linkedin: "#",
+    //   github: "#",
+    //   instagram: "#",
+    // },
     // {
     //   name: "P. Anirudh",
     //   role: "Design Volunteer",
@@ -61,18 +59,58 @@ function ML() {
     //   github: "#",
     //   instagram: "#",
     // },
+    // {
+    //   name: "Arya Joshi",
+    //   role: "Social Media and Design Coordinator",
+    //   image: AryaImage,
+    //   linkedin: "#",
+    //   github: "#",
+    //   instagram: "#",
+    // },
+    // {
+    //   name: "Rishitha",
+    //   role: "Social Media and Design Coordinator",
+    //   image: RishithaImage,
+    //   linkedin: "#",
+    //   github: "#",
+    //   instagram: "#",
+    // },
     {
-      name: "Arya Joshi",
+      name: "Pavitra Jasti",
       role: "Social Media and Design Coordinator",
-      image: AryaImage,
+      image: PavitraImg,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Rishitha",
+      name: "Md Zaki",
       role: "Social Media and Design Coordinator",
-      image: RishithaImage,
+      image: ZakiImg,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Hindu Sri Jupelli",
+      role: "Social Media and Design Coordinator",
+      image: HinduImg,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Abhishek Pothanagari",
+      role: "Social Media and Design Coordinator",
+      image: AbhishekImg,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Abdul Raheem",
+      role: "Social Media and Design Coordinator",
+      image: AbdulImg,
       linkedin: "#",
       github: "#",
       instagram: "#",

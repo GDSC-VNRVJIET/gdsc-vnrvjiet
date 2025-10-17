@@ -5,7 +5,10 @@ import ManikantaImage from "../Domain Info/images/WEB DEV/Manikanta.jpg";
 import KarthikImage from "../Domain Info/images/WEB DEV/Karthik.jpg";
 import VarunImage from "../Domain Info/images/WEB DEV/Varun.jpg";
 import DedeepyaImage from "../Domain Info/images/WEB DEV/Vellanki Chenchu Dedeepya .jpg";
-import lakshitaimg from "../Domain Info/images/WEB DEV/Lakshita Goyal.jpg";
+// import lakshitaimg from "../Domain Info/images/WEB DEV/Lakshita Goyal.jpg";
+import hasnikaimg from "../Domain Info/profile_images/WebDev/Sri Hasnika Venigalla .jpg";
+import lakshitaimg from "../Domain Info/profile_images/WebDev/Lakshita.jpg";
+import anitejimg from "../Domain Info/profile_images/WebDev/Anitej Annabattuni.jpg";
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
@@ -20,33 +23,25 @@ function WebDev() {
 
   const members = [
     {
-      name: "Sai Jahnavi",
-      role: "Web Development Lead",
-      image: JahnaviImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "Sri Manikanta",
-      role: "Web Development Coordinator",
-      image: ManikantaImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "Karthik",
-      role: "Web Development Coordinator",
-      image: KarthikImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
       name: "Lakshita",
-      role: "Web Development Coordinator",
+      role: "Web Development Lead",
       image: lakshitaimg,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Sri Hasnika Venigalla",
+      role: "Web Development Coordinator",
+      image: hasnikaimg,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },  
+    {
+      name: "Anitej Annabattuni",
+      role: "Web Development Coordinator",
+      image: anitejimg,
       linkedin: "#",
       github: "#",
       instagram: "#",

@@ -6,7 +6,9 @@ import HardwareLeadImage from "./images/Hardware/Hardwarelead.jpg";
 import HardwareC1 from './images/Hardware/HardwareC1.jpg';
 import HardwareC2 from './images/Hardware/HardwareC2.jpg';
 import dhruva from './images/Hardware/Dhruva.jpeg';
-
+import DurgamadhabaImage from "../Domain Info/profile_images/Hardware/Durgamadhaba Panda.jpg";
+import GauravImage from "../Domain Info/profile_images/Hardware/Emani Venkata Gaurav.jpg";
+import HarshithaImage from "../Domain Info/profile_images/Hardware/Sri Harshitha Yalla.jpg";
 
 function Hardware() {
 
@@ -18,36 +20,28 @@ function Hardware() {
     "https://i.pinimg.com/originals/f0/15/d0/f015d055fa134e08ab33ce00733e233f.gif";
   const members = [
     {
-      name: "Avaneesh",
-      role: "Hardware Lead",
-      image: HardwareLeadImage,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "Nishma Reddy",
-      role: "Hardware Coordinator",
-      image: HardwareC1,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
       name: "Durga Madhav",
-      role: "Hardware Coordinator",
-      image: HardwareC2,
+      role: "Hardware Lead",
+      image: DurgamadhabaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name:"Dhruva",
-      role:"Hardware Coordinator",
-      image:dhruva,
-      linkedin:"#",
-      github:"#",
-      instagram:"#",
+      name: "Emani Venkata Gaurav",
+      role: "Hardware Coordinator",
+      image: GauravImage,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Sri Harshitha Yalla",
+      role: "Hardware Coordinator",
+      image: HarshithaImage,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
     }
   ];
 

@@ -2,10 +2,10 @@ import React,{useEffect} from "react";
 // import { FiInstagram } from "react-icons/fi";
 // import { FaLinkedinIn } from "react-icons/fa";
 // import { FaGithub } from "react-icons/fa";
-import HardwareLeadImage from "./images/Hardware/Hardwarelead.jpg";
-import HardwareC1 from './images/Hardware/HardwareC1.jpg';
-import HardwareC2 from './images/Hardware/HardwareC2.jpg';
-
+// import HardwareLeadImage from "./images/Hardware/Hardwarelead.jpg";
+// import HardwareC1 from './images/Hardware/HardwareC1.jpg';
+// import HardwareC2 from './images/Hardware/HardwareC2.jpg';
+import DurgamadhabaImage from "../Domain Info/profile_images/Hardware/Durgamadhaba Panda.jpg";
 
 function Hardware() {
 
@@ -17,9 +17,9 @@ function Hardware() {
     "https://i.pinimg.com/originals/f0/15/d0/f015d055fa134e08ab33ce00733e233f.gif";
   const members = [
     {
-      name: "Avaneesh",
+      name: "Durgamadhaba Panda",
       role: "Hardware Lead",
-      image: HardwareLeadImage,
+      image: DurgamadhabaImage,
       linkedin: "#",
       github: "#",
       instagram: "#",

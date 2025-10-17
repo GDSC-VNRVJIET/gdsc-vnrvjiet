@@ -3,8 +3,8 @@ import React,{useEffect} from "react";
 // import { FaLinkedinIn } from "react-icons/fa";
 // import { FaGithub } from "react-icons/fa";
 import NikithaImage from "./images/WomenInTech/D_Nikhita_Kashyap.jpeg";
-import RoshiniImage from './images/WomenInTech/Roshini_Kotagiri.jpg';
-
+import RoshiniImage from './profile_images/WIT/Roshini Kotagiri.jpg';
+import YasaswiniImg from "../Domain Info/profile_images/WIT/Yasaswini Devi.jpg";
 
 function WomenInTech() {
 
@@ -16,17 +16,17 @@ function WomenInTech() {
     "https://cdn.dribbble.com/users/1187278/screenshots/15719501/media/02b128a761010ed25d595a82daff17d4.gif";
   const members = [
     {
-      name: "Nikhita Kashyap",
+      name: "Roshini Kotagiri",
       role: "Women In Tech Lead",
-      image: NikithaImage,
+      image: RoshiniImage,
       linkedin: "#",
       github: "#",
       instagram: "#",
     },
     {
-      name: "Roshini Kotagiri",
+      name: "Yasaswini Devi",
       role: "Women In Tech Coordinator",
-      image: RoshiniImage,
+      image: YasaswiniImg,
       linkedin: "#",
       github: "#",
       instagram: "#",

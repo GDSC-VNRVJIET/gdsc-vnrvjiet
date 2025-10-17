@@ -4,7 +4,9 @@ import HarshaImg from "../Domain Info/images/CP/Harsha.jpg";
 // import DivyaImage from "../Domain Info/images/CP/Divya Sri.jpg";
 import CP1 from '../Domain Info/images/CP/CP1.jpeg';
 import CP2 from '../Domain Info/images/CP/CP2.jpg';
-import UdayImg from '../Domain Info/images/CP/GUdhayYadav.jpg'
+import UdayImg from '../Domain Info/profile_images/CP/GUdhayYadav.jpg';
+import pavanimg from '../Domain Info/profile_images/CP/Pavan Kumar K.jpg';
+import BhanuImg from "../Domain Info/profile_images/CP/Bhanu Prakash Kanakamedala.jpg"
 // import { FiInstagram } from "react-icons/fi";
 // import { FaLinkedinIn } from "react-icons/fa";
 // import { FaGithub } from "react-icons/fa";
@@ -18,33 +20,25 @@ function CompetitiveProgramming() {
     "https://cdn.dribbble.com/users/330915/screenshots/3587000/10_coding_dribbble.gif";
   const members = [
     {
-      name: "Harsha Vardhan",
-      role: "Competitive Programming Lead",
-      image: HarshaImg,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "Sai Lokesh",
-      role: "Competitive Programming Coordinator",
-      image: CP1,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
-      name: "N Vishnu Vardhan",
-      role: "Competitive Programming Coordinator",
-      image: CP2,
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-    },
-    {
       name: "G Udhay Yadav",
-      role: "Competitive Programming Coordinator",
+      role: "Competitive Programming Lead",
       image: UdayImg,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Pavan Kumar K",
+      role: "Competitive Programming Coordinator",
+      image: pavanimg,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Bhanu Prakash Kanakamedala",
+      role: "Competitive Programming Coordinator",
+      image: BhanuImg,
       linkedin: "#",
       github: "#",
       instagram: "#",
