@@ -9,6 +9,7 @@ import DedeepyaImage from "../Domain Info/images/WEB DEV/Vellanki Chenchu Dedeep
 import hasnikaimg from "../Domain Info/profile_images/WebDev/Sri Hasnika Venigalla .jpg";
 import lakshitaimg from "../Domain Info/profile_images/WebDev/Lakshita.jpg";
 import anitejimg from "../Domain Info/profile_images/WebDev/Anitej Annabattuni.jpg";
+import RiteshImg from "../Domain Info/profile_images/WebDev/Sai Ritesh Domakuntla.jpg";
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
@@ -42,6 +43,14 @@ function WebDev() {
       name: "Anitej Annabattuni",
       role: "Web Development Coordinator",
       image: anitejimg,
+      linkedin: "#",
+      github: "#",
+      instagram: "#",
+    },
+    {
+      name: "Sai Ritesh Domakuntla",
+      role: "Web Development Coordinator",
+      image: RiteshImg,
       linkedin: "#",
       github: "#",
       instagram: "#",
