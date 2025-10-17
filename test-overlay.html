@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlay Test</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+        }
+        .card {
+            width: 200px;
+            height: 200px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+        }
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1001;
+            display: none;
+        }
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card" id="testCard">
+            <h3>Hover Me</h3>
+        </div>
+    </div>
+    
+    <div class="overlay" id="overlay"></div>
+    <div class="modal" id="modal">
+        <h3>Overlay Content</h3>
+        <p>This should disappear when you move your mouse away</p>
+    </div>
+
+    <script>
+        const card = document.getElementById('testCard');
+        const overlay = document.getElementById('overlay');
+        const modal = document.getElementById('modal');
+        let hideTimer = null;
+
+        function clearHideTimer() {
+            if (hideTimer) {
+                clearTimeout(hideTimer);
+                hideTimer = null;
+            }
+        }
+
+        function showOverlay() {
+            clearHideTimer();
+            overlay.classList.add('show');
+            modal.classList.add('show');
+        }
+
+        function hideOverlay() {
+            clearHideTimer();
+            hideTimer = setTimeout(() => {
+                overlay.classList.remove('show');
+                modal.classList.remove('show');
+            }, 200);
+        }
+
+        function hideOverlayImmediate() {
+            clearHideTimer();
+            overlay.classList.remove('show');
+            modal.classList.remove('show');
+        }
+
+        // Card events
+        card.addEventListener('mouseenter', showOverlay);
+        card.addEventListener('mouseleave', hideOverlay);
+
+        // Overlay events
+        overlay.addEventListener('mouseenter', clearHideTimer);
+        overlay.addEventListener('mouseleave', hideOverlay);
+        overlay.addEventListener('click', hideOverlayImmediate);
+
+        // Modal events
+        modal.addEventListener('mouseenter', clearHideTimer);
+        modal.addEventListener('mouseleave', hideOverlay);
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import leadimg from "./images/lead.png";
 import colead from "./images/colead.png";
 import weblead from "./images/webdevlead.png";
@@ -29,56 +29,56 @@ import spoorthyimg from "./Domain Info/images/MANAGEMENT/Spoorthy Boga.jpeg"
 import nikhitaimg from "./Domain Info/images/ML/nikitha.jpg"
 import suryaimg from "./Domain Info/images/ML/Chittiprolu Suryateja.jpg"
 import sharanimg from "./Domain Info/images/ML/SRI SHARAN TEJ.jpg"
-import keerthikaimg from "./Domain Info/images/ML/KeerthikaGoli.jpg"
-import yasaswiniimg from "./Domain Info/images/WomenInTech/Yasaswini Devi.jpg"
-import bharathimg from "./Domain Info/images/ML/BharathChandra.jpg"
-import vishwaimg from "./Domain Info/images/ML/Viswa Prateek Tummala .jpg"
-import poojaimg from "./Domain Info/images/design/Poojasiri.jpg.jpg"
-import siddeshwariimg from "./Domain Info/images/design/Siddeshwari _Adepu.jpg"
-import praneethaimg from "./Domain Info/images/design/Praneetha.jpg"
-import chanirudhimg from "./Domain Info/images/design/Anirudh.jpg"
-import abdulraheemimg from "./Domain Info/images/design/Abdul Raheem.png"
-import abhishekimg from "./Domain Info/images/design/Abhishek Pothanagari.jpg"
-import hindusriimg from "./Domain Info/images/design/Hindu Sri Jupelli.png"
-import zakiimg from "./Domain Info/images/design/Md Zaki.jpg"
-import pavitraimg from "./Domain Info/images/design/Pavitra Jasti.jpg"
-import bharathsirimg from "./images/facultyCord copy.jpg"
-import ashraya from "./Domain Info/images/TandC/Ashraya Yelisetty.jpg"
-import harshitha from "./Domain Info/images/TandC/Harshitha.jpg"
-import vardhan from "./Domain Info/images/TandC/M INDRANEELI VARDHAN .jpg"
-import mahesh from "./Domain Info/images/TandC/Mahesh Patnala.jpg"
-import akhilimg from "./Domain Info/images/AppDev/Akhil.png"
-import shivaimg from "./Domain Info/images/AppDev/Shiva.jpg"
-import venkatagauravimg from "./Domain Info/images/Hardware/Emani Venkata Gaurav.jpg"
+import keerthikaimg from "./Domain Info/images/ML/KeerthikaGoli.jpg";
+import yasaswiniimg from "./Domain Info/images/WomenInTech/Yasaswini Devi.jpg";
+import bharathimg from "./Domain Info/images/ML/BharathChandra.jpg";
+import vishwaimg from "./Domain Info/images/ML/Viswa Prateek Tummala .jpg";
+import poojaimg from "./Domain Info/images/design/Poojasiri.jpg.jpg";
+import siddeshwariimg from "./Domain Info/images/design/Siddeshwari _Adepu.jpg";
+import praneethaimg from "./Domain Info/images/design/Praneetha.jpg";
+import chanirudhimg from "./Domain Info/images/design/Anirudh.jpg";
+import abdulraheemimg from "./Domain Info/images/design/Abdul Raheem.png";
+import abhishekimg from "./Domain Info/images/design/Abhishek Pothanagari.jpg";
+import hindusriimg from "./Domain Info/images/design/Hindu Sri Jupelli.png";
+import zakiimg from "./Domain Info/images/design/Md Zaki.jpg";
+import pavitraimg from "./Domain Info/images/design/Pavitra Jasti.jpg";
+import bharathsirimg from "./images/facultyCord copy.jpg";
+import ashraya from "./Domain Info/images/TandC/Ashraya Yelisetty.jpg";
+import harshitha from "./Domain Info/images/TandC/Harshitha.jpg";
+import vardhan from "./Domain Info/images/TandC/M INDRANEELI VARDHAN .jpg";
+import mahesh from "./Domain Info/images/TandC/Mahesh Patnala.jpg";
+import akhilimg from "./Domain Info/images/AppDev/Akhil.png";
+import shivaimg from "./Domain Info/images/AppDev/Shiva.jpg";
+import venkatagauravimg from "./Domain Info/images/Hardware/Emani Venkata Gaurav.jpg";
 import harshithaimg from "./Domain Info/images/Hardware/Sri Harshitha Yalla.jpg";
-import hardwarelead from "./Domain Info/images/Hardware/Hardwarelead.jpg"
+import hardwarelead from "./Domain Info/images/Hardware/Hardwarelead.jpg";
 import tanmayeeimg from "./Domain Info/images/design/Tanmayee_kyram.jpg";
 import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg";
 import rishithaimg from "./Domain Info/images/design/Rishitha.jpg";
 import srikruthiimg from "./Domain Info/images/MANAGEMENT/SriKruthi.jpg";
 import abhijeetimg from "./Domain Info/images/MANAGEMENT/Abhijeet.png";
-import lakshitaimg from "./Domain Info/images/WEB DEV/Lakshita Goyal.jpg"
-import manikantaimg from "./Domain Info/images/WEB DEV/Manikanta.jpg"
-import karthikimg from "./Domain Info/images/WEB DEV/Karthik.jpg"
-import sailokesh from './Domain Info/images/CP/CP1.jpeg'
-import vishnuvardhan from './Domain Info/images/CP/CP2.jpg'
-import udayyadav from './Domain Info/images/CP/GUdhayYadav.jpg'
-import harikaimg from "./Domain Info/images/MANAGEMENT/Harika.jpg"
-import UdaySagar from "./Domain Info/images/AppDev/UdaySagar.jpeg"
-import VinayKumar from "./Domain Info/images/AppDev/VinayKumarKajjapu.jpg"
-import Harshitha from "./Domain Info/images/TandC/Harshithamandadi.jpg"
+import lakshitaimg from "./Domain Info/images/WEB DEV/Lakshita Goyal.jpg";
+import manikantaimg from "./Domain Info/images/WEB DEV/Manikanta.jpg";
+import karthikimg from "./Domain Info/images/WEB DEV/Karthik.jpg";
+import sailokesh from './Domain Info/images/CP/CP1.jpeg';
+import vishnuvardhan from './Domain Info/images/CP/CP2.jpg';
+import udayyadav from './Domain Info/images/CP/GUdhayYadav.jpg';
+import harikaimg from "./Domain Info/images/MANAGEMENT/Harika.jpg";
+import UdaySagar from "./Domain Info/images/AppDev/UdaySagar.jpeg";
+import VinayKumar from "./Domain Info/images/AppDev/VinayKumarKajjapu.jpg";
+import Harshitha from "./Domain Info/images/TandC/Harshithamandadi.jpg";
 import Shahid from "./Domain Info/images/TandC/Shahid.jpg";
 import Dhruva from "./Domain Info/images/Hardware/Dhruva.jpeg";
-import nishmaimg from "./Domain Info/images/Hardware/HardwareC1.jpg"
+import nishmaimg from "./Domain Info/images/Hardware/HardwareC1.jpg";
 import durgamadhavimg from "./Domain Info/images/Hardware/HardwareC2.jpg";
-import roshiniimg from "./Domain Info/images/ML/KotagiriRoshini.jpg"
-import siddharth from "./Domain Info/images/ML/Aimlead.jpg"
-import udaysagar from "./Domain Info/images/AppDev/UdaySagar.jpg"
-import roshini from "./Domain Info/images/WomenInTech/roshini.jpg"
-import lakshitha from "./Domain Info/images/WEB DEV/lakshitha.jpg"
-import durgamadhav from "./Domain Info/images/Hardware/Durgamadhav.jpg"
-import vishnuvardhanimg from "./Domain Info/images/design/vishnuvardhan.png"
-import sarvani from "./Domain Info/images/MANAGEMENT/Sarvani.jpg"
+import roshiniimg from "./Domain Info/images/ML/KotagiriRoshini.jpg";
+import siddharth from "./Domain Info/images/ML/Aimlead.jpg";
+import udaysagar from "./Domain Info/images/AppDev/UdaySagar.jpg";
+import roshini from "./Domain Info/images/WomenInTech/roshini.jpg";
+import lakshitha from "./Domain Info/images/WEB DEV/lakshitha.jpg";
+import durgamadhav from "./Domain Info/images/Hardware/Durgamadhav.jpg";
+import vishnuvardhanimg from "./Domain Info/images/design/vishnuvardhan.png";
+import sarvani from "./Domain Info/images/MANAGEMENT/Sarvani.jpg";
 import { set } from "date-fns";
 
 interface Person {
@@ -479,18 +479,51 @@ const OrgChart: React.FC = () => {
   }, []);
 
   const [year, setYear] = useState<number>(2026);
-  const [selectedDomain, setSelectedDomain] = useState<number | null>(null);
+  const [selectedPerson, setSelectedPerson] = useState<DomainLead | null>(null);
   const [fadein, setFadein] = useState<boolean>(false);
   const domainTypes = ["technical", "nonTechnical"];
 
-  /*const dataToDisplay = year === 2026 ? data2026 : data2025;*/
   const dataToDisplay = year === 2026 ? data2026 : year === 2025 ? data2025 : data2024;
-
 
   useEffect(() => {
     setTimeout(() => {
-      setFadein(selectedDomain !== null);
-    }, 10) }, [selectedDomain])
+      setFadein(selectedPerson !== null);
+    }, 10)
+  }, [selectedPerson])
+
+  // Simplified hover logic without complex mouse tracking
+  const hideTimer = useRef<number | null>(null);
+  const clearHideTimer = () => {
+    if (hideTimer.current) {
+      window.clearTimeout(hideTimer.current);
+      hideTimer.current = null;
+    }
+  };
+  
+  useEffect(() => {
+    return () => clearHideTimer();
+  }, []);
+
+  const showSelected = (person: DomainLead) => {
+    clearHideTimer();
+    if (person.role !== "Co Lead" && (person.coordinators.length + person.volunteers.length > 0)) {
+      setSelectedPerson(person);
+    }
+  };
+
+  const hideSelected = () => {
+    setSelectedPerson(null);
+  };
+
+  const hideSelectedDelayed = (delay = 200) => {
+    clearHideTimer();
+    hideTimer.current = window.setTimeout(() => {
+      hideSelected();
+    }, delay);
+  };
+
+  const handleMouseEnter = (person: DomainLead) => showSelected(person);
+  const handleMouseLeave = () => hideSelectedDelayed();
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 relative overflow-x-hidden">
@@ -531,124 +564,161 @@ const OrgChart: React.FC = () => {
         </button>
       </div>
 
-        <>
+      <>
+        {/* Faculty Advisor */}
           <div className="flex flex-col items-center space-y-4 mb-6">
-            <div className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden">
-              <img
-                src={dataToDisplay.facultyAdvisor.img}
-                alt={dataToDisplay.facultyAdvisor.role}
-                className="shrink-0 rounded-full w-full h-full object-cover"
-              />
-            </div>
-            <h2 className="text-xl font-semibold">{dataToDisplay.facultyAdvisor.role}</h2>
-            
-            
-<p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
-  {dataToDisplay.facultyAdvisor.name}
-</p>
-</div>
-          <div className="flex flex-col items-center space-y-4 mb-6">
-            <div className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden">
-              <img
-                src={dataToDisplay.lead.img}
-                alt={dataToDisplay.lead.role}
-                className="shrink-0 rounded-full w-full h-full object-cover"
-              />
-            </div>
-            <h2 className="text-xl font-semibold">{dataToDisplay.lead.role}</h2>
-            
-            <p className="text-md" style={{ fontFamily: 'Roboto, sans-serif',color:'grey-200' }}>
-  {dataToDisplay.lead.name}
-</p>
-
+          <div
+            className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
+            onMouseEnter={() => handleMouseEnter(dataToDisplay.facultyAdvisor as DomainLead)}
+            onMouseLeave={() => handleMouseLeave()}
+          >
+            <img
+              src={dataToDisplay.facultyAdvisor.img}
+              alt={dataToDisplay.facultyAdvisor.role}
+              className="shrink-0 rounded-full w-full h-full object-cover"
+            />
           </div>
-          <div className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${year===2025?"xl:grid-cols-5":"xl:grid-cols-6"} justify-around gap-y-10 relative`}>
-            {dataToDisplay.domainLeads
-            .map((person, index) => (
+          <h2 className="text-xl font-semibold">{dataToDisplay.facultyAdvisor.role}</h2>
+          <p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
+            {dataToDisplay.facultyAdvisor.name}
+          </p>
+        </div>
+
+        {/* Lead */}
+        <div className="flex flex-col items-center space-y-4 mb-6">
+          <div
+            className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
+            onMouseEnter={() => handleMouseEnter(dataToDisplay.lead as DomainLead)}
+            onMouseLeave={() => handleMouseLeave()}
+          >
+            <img
+              src={dataToDisplay.lead.img}
+              alt={dataToDisplay.lead.role}
+              className="shrink-0 rounded-full w-full h-full object-cover"
+            />
+          </div>
+          <h2 className="text-xl font-semibold">{dataToDisplay.lead.role}</h2>
+          <p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
+            {dataToDisplay.lead.name}
+          </p>
+        </div>
+
+        {/* Domain Leads Grid */}
+        <div className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${year === 2025 ? "xl:grid-cols-5" : "xl:grid-cols-6"} justify-around gap-y-10 relative`}>
+          {dataToDisplay.domainLeads.map((person, index) => {
+            return (
               <div
                 key={index}
                 className="flex flex-col items-center"
-                onMouseLeave={() => setSelectedDomain(null)}
+                onMouseEnter={() => handleMouseEnter(person)}
+                onMouseLeave={() => handleMouseLeave()}
               >
-                <div className="shrink-0 w-36 h-36 md:w-48 md:h-48"
-                onMouseEnter={() => person.role !== "Co Lead" && (person.coordinators.length+person.volunteers.length>0) && setSelectedDomain(index)}
-                onMouseLeave={() => window.innerWidth<=1024 && setSelectedDomain(null)}
-                
-                >
-                  <img
-                    src={person.img}
-                    alt={person.role}
-                    className="shrink-0 rounded-full w-full h-full object-cover transition-transform duration-500 transform hover:scale-105"
-                  />
-                </div>
-                <h2 className="text-lg font-medium text-center">
-                  {person.role}
-                </h2>
-                
-                
-<p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'Grey-200 ' }}>
-  {person.name}
-</p>
-                <div className={`lg:absolute ${(year===2024 || index<5)?"lg:top-[15.5rem]":"lg:top-[33rem]"} relative left-0 w-screen bg-white p-4 rounded shadow-lg z-10 transition-opacity duration-500 ease-in-out ${(selectedDomain===index ) ? '':'hidden'} ${fadein?'opacity-100':'opacity-0'}`}>
-                 
-{person.coordinators.length > 0 && (
-  <div className="bg-blue-50 rounded-md mb-3 p-3">
-    <h3 className="text-md font-semibold text-center mb-2 text-blue-700">Coordinators</h3>
-    <div className="flex justify-center flex-wrap mb-4">
-      {person.coordinators.map((coordinator, idx) => (
-        <div
-          key={idx}
-          className="flex flex-col items-center mb-9 mx-2 w-36 h-36 md:w-48 md:h-48"
-        >
-        
-          <img
-            src={coordinator.img}
-            alt={coordinator.name}
-            className="shrink-0 rounded-full w-full h-full object-cover mb-2"
-          />
-        
-<p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
-  {coordinator.name}
-</p>
-
-          
+              <div 
+                className={`shrink-0 w-36 h-36 md:w-48 md:h-48 transition-all duration-300 ${
+                  selectedPerson === person 
+                    ? 'transform -translate-y-2 scale-105 shadow-lg bg-blue-100 rounded-full p-1' 
+                    : 'hover:scale-105'
+                }`}
+              >
+                <img
+                  src={person.img}
+                  alt={person.role}
+                  className="shrink-0 rounded-full w-full h-full object-cover"
+                />
+              </div>
+              <h2 className="text-lg font-medium text-center mt-2">
+                {person.role}
+              </h2>
+              <p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'Grey-200 ' }}>
+                {person.name}
+              </p>
+              </div>
+            );
+          })}
         </div>
-      ))}
-    </div>
-  </div>
-)}
 
-   
-   
-                    {person.volunteers.length > 0 && 
-                    <h3 className="text-md font-semibold text-center mb-2">
-                      Volunteers
-                    </h3>}
-                    <div className="flex justify-center flex-wrap">
-                      {person.volunteers.map((volunteer, idx) => (
-                        <div
-                          key={idx}
-                          className="flex flex-col items-center mb-2 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
-                        >
-                          <img
-                            src={volunteer.img}
-                            alt={volunteer.name}
-                            className="shrink-0 rounded-full w-full h-full object-cover"
-                          />
-                         
-                          <p className="text-sm" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
-  {volunteer.name}
-</p>
+        {/* Background overlay */}
+        {selectedPerson && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-40 z-40 transition-opacity duration-300"
+            onMouseEnter={() => clearHideTimer()}
+            onMouseLeave={() => hideSelectedDelayed()}
+            onClick={() => hideSelected()}
+          />
+        )}
 
+        {/* Modal for Coordinators and Volunteers */}
+        {selectedPerson && (
+          <div 
+            className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none"
+          >
+            <div 
+              id="org-popup"
+              className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto pointer-events-auto"
+              onMouseEnter={() => clearHideTimer()}
+              onMouseLeave={() => hideSelectedDelayed()}
+            >
+              <div className="p-6">
+                <div className="flex flex-col items-center mb-6">
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 border-4 border-blue-500">
+                    <img
+                      src={selectedPerson.img}
+                      alt={selectedPerson.role}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h2 className="text-2xl font-bold">{selectedPerson.role}</h2>
+                  <p className="text-lg text-gray-600">{selectedPerson.name}</p>
+                </div>
+
+                {selectedPerson.coordinators.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="text-xl font-semibold text-blue-700 mb-4 pb-2 border-b border-blue-200">Coordinators</h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                      {selectedPerson.coordinators.map((coordinator, idx) => (
+                        <div key={idx} className="flex flex-col items-center">
+                          <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-3">
+                            <img
+                              src={coordinator.img}
+                              alt={coordinator.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <p className="text-center text-base md:text-lg font-medium" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                            {coordinator.name}
+                          </p>
                         </div>
                       ))}
                     </div>
                   </div>
-                
+                )}
+
+                {selectedPerson.volunteers.length > 0 && (
+                  <div>
+                    <h3 className="text-xl font-semibold mb-4 pb-2 border-b border-gray-200">Volunteers</h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                      {selectedPerson.volunteers.map((volunteer, idx) => (
+                        <div key={idx} className="flex flex-col items-center">
+                          <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-3">
+                            <img
+                              src={volunteer.img}
+                              alt={volunteer.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <p className="text-center text-base md:text-lg font-medium" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                            {volunteer.name}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            ))}
+            </div>
           </div>
-        </>
+        )}
+      </>
     </div>
   );
 };
