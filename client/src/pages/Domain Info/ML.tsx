@@ -6,6 +6,9 @@ import KeerthikaImage from "../Domain Info/images/ML/KeerthikaGoli.jpg";
 import RoshiniImage from "../Domain Info/images/ML/KotagiriRoshini.jpg";
 import BharathImage from "../Domain Info/images/ML/BharathChandra.jpg";
 import VishwaImage from "../Domain Info/images/ML/Viswa Prateek Tummala .jpg";
+import SiddharthImg from "../Domain Info/profile_images/AIML/Aimlead.jpg";
+import KeerthikaImg from "../Domain Info/profile_images/AIML/KeerthikaGoli.jpg";
+import BharathImg from "../Domain Info/profile_images/AIML/BharathChandra.jpg";
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
@@ -20,9 +23,9 @@ function ML() {
     "https://connect.ignatiuz.com/hs-fs/hubfs/AI%20and%20Deep%20Learning.gif?width=1000&name=AI%20and%20Deep%20Learning.gif";
   const members = [
     {
-      name: "Surya Teja",
+      name: "Siddharth",
       role: "AIML Lead",
-      image: SuryaImage,
+      image: SiddharthImg,
       linkedin: "#",
       github: "#",
       instagram: "#",
@@ -76,7 +79,7 @@ function ML() {
       <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-6xl mx-auto">
         <div className="p-6">
           <h3 className="text-2xl sm:text-3xl md:text-4xl text-center font-extrabold mb-6 sm:mb-8 md:mb-10 text-yellow-600">
-            AIML
+            Artificial Intelligence and Machine Learning
           </h3>
           <div className="flex flex-col md:flex-row justify-center mb-20 items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
             <img

@@ -39,7 +39,7 @@ import praneethaimg from "./Domain Info/images/design/Praneetha.jpg";
 import chanirudhimg from "./Domain Info/images/design/Anirudh.jpg";
 import abdulraheemimg from "./Domain Info/images/design/Abdul Raheem.png";
 import abhishekimg from "./Domain Info/images/design/Abhishek Pothanagari.jpg";
-import hindusriimg from "./Domain Info/images/design/Hindu Sri Jupelli.png";
+import hindusriimg from "./Domain Info/profile_images/Design_SM/Hindu Sri Jupelli.jpg";
 import zakiimg from "./Domain Info/images/design/Md Zaki.jpg";
 import pavitraimg from "./Domain Info/images/design/Pavitra Jasti.jpg";
 import bharathsirimg from "./images/facultyCord copy.jpg";
@@ -73,13 +73,22 @@ import nishmaimg from "./Domain Info/images/Hardware/HardwareC1.jpg";
 import durgamadhavimg from "./Domain Info/images/Hardware/HardwareC2.jpg";
 import roshiniimg from "./Domain Info/images/ML/KotagiriRoshini.jpg";
 import siddharth from "./Domain Info/images/ML/Aimlead.jpg";
-import udaysagar from "./Domain Info/images/AppDev/UdaySagar.jpg";
+import udaysagar from "./Domain Info/profile_images/AppDev/Uday Sagar.jpg";
 import roshini from "./Domain Info/images/WomenInTech/roshini.jpg";
 import lakshitha from "./Domain Info/images/WEB DEV/lakshitha.jpg";
 import durgamadhav from "./Domain Info/images/Hardware/Durgamadhav.jpg";
 import vishnuvardhanimg from "./Domain Info/images/design/vishnuvardhan.png";
 import sarvani from "./Domain Info/images/MANAGEMENT/Sarvani.jpg";
+import RiteshImg from "./Domain Info/profile_images/WebDev/Sai Ritesh Domakuntla.jpg";
+import ManikantaImg from "./Domain Info/images/WEB DEV/Manikanta.jpg";
+import KruthiImg from "./Domain Info/profile_images/Sri Kruthi.jpg";
+import TanmayeeImg from "./Domain Info/profile_images/Design_SM/Tanmayee Kyram.jpg"
+import UdayImg from "./Domain Info/profile_images/CP/GUdhayYadav.jpg";
+import ShahidImg from "./Domain Info/profile_images/CS/Shahid Ameed.jpg"
+import Popover from "./Popover";
 import { set } from "date-fns";
+import { Domain } from "domain";
+import { relative } from "path";
 
 interface Person {
   role: string;
@@ -111,13 +120,13 @@ interface OrgChartData {
 
 const data2026: OrgChartData = {
   facultyAdvisor: { role: "Faculty Advisor", name: "Bharath Sir", img: bharathsirimg },
-  lead: { role: "Lead", name: "Jayasree Gondipalle", img: jayasreeimg },
+  lead: { role: "Lead", name: "Sri Kruthi", img: KruthiImg },
  
   domainLeads: [
     { 
       role: "Co Lead", 
-      name: "Sahithi Kolla", 
-      img: sahithiimg,
+      name: "Sri Manikanta", 
+      img: ManikantaImg,
       coordinators: [],
       volunteers: [],
     },
@@ -127,7 +136,8 @@ const data2026: OrgChartData = {
       img: lakshitha,
       coordinators: [
         { name: "Sri Hasnika Venigalla", img: hasnikaimg },
-        { name: "Anitej Annabattuni", img: anitejimg }
+        { name: "Anitej Annabattuni", img: anitejimg },
+        { name: "Sai Ritesh Domakuntla", img: RiteshImg }
       ],
       volunteers: [
         
@@ -136,8 +146,8 @@ const data2026: OrgChartData = {
     },
     {
       role: "CP Lead",
-      name: "Harsha Vardhan",
-      img: harshaimg,
+      name: "G Udhay Yadav",
+      img: UdayImg,
       coordinators: [
         {name:"Kanakamedala Bhanu Prakash",img:bhanuprakash},
         {name:"K Pavan Kumar",img:pavankumar}
@@ -173,7 +183,7 @@ const data2026: OrgChartData = {
       type:"technical",
     },
     {
-      role: "Design Lead",
+      role: "Design and Social Media Lead",
       name: "Vishnu Vardhan",
       img: vishnuvardhanimg,
       coordinators: [
@@ -188,22 +198,24 @@ const data2026: OrgChartData = {
       type: "nonTechnical",
     },
     {
-      role: "Social Media Lead",
-      name: "Pavanpraneetha Kunuku",
-      img: praneethaimg,
+      role: "Design and Social Media Lead",
+      name: "Tanmayee Kyram",
+      img: TanmayeeImg,
       coordinators: [
-        {name:"Ch.Anirudh",img:chanirudhimg},
-        {name:"Tanmayee Kyram",img:tanmayeeimg},
-        {name:"Arya Joshi",img:aryaimg},
-        {name:"Rishitha",img:rishithaimg}
+        { name: "Abdul Raheem", img: abdulraheemimg },
+        { name: "Abhishek Pothanagari", img: abhishekimg },
+        { name: "Hindu Sri Jupelli", img: hindusriimg },
+        {name:"Md Zaki",img:zakiimg},
+        {name:"Pavitra Jasti",img:pavitraimg}
       ],
-      volunteers: [],
+      volunteers: [
+      ],
       type: "nonTechnical",
     },
     {
       role: "Testing and Cybersecurity Lead",
-      name: "Vinay Gajula",
-      img: vinayimg,
+      name: "Shahid Ameed",
+      img: ShahidImg,
       coordinators: [
         {name:"Ashraya Yelisetty",img:ashraya},
         {name:"M INDRANEELI VARDHAN ",img:vardhan},
@@ -481,7 +493,9 @@ const OrgChart: React.FC = () => {
   const [year, setYear] = useState<number>(2026);
   const [selectedPerson, setSelectedPerson] = useState<DomainLead | null>(null);
   const [fadein, setFadein] = useState<boolean>(false);
+  const [popoverDirection, setPopoverDirection] = useState<'bottom' | 'top'>('bottom');
   const domainTypes = ["technical", "nonTechnical"];
+  const leadRef = useRef<HTMLDivElement>(null);
 
   const dataToDisplay = year === 2026 ? data2026 : year === 2025 ? data2025 : data2024;
 
@@ -504,26 +518,80 @@ const OrgChart: React.FC = () => {
     return () => clearHideTimer();
   }, []);
 
+  // const showSelected = (person: DomainLead) => {
+  //   clearHideTimer();
+  //   if (person.role !== "Co Lead" && person.coordinators && (person.coordinators.length + person.volunteers.length > 0)) {
+  //     setSelectedPerson(person);
+  //   }
+  // };
+
   const showSelected = (person: DomainLead) => {
-    clearHideTimer();
-    if (person.role !== "Co Lead" && (person.coordinators.length + person.volunteers.length > 0)) {
-      setSelectedPerson(person);
-    }
-  };
+    setSelectedPerson(person);
+  }
 
   const hideSelected = () => {
     setSelectedPerson(null);
   };
 
-  const hideSelectedDelayed = (delay = 200) => {
+  const hideSelectedDelayed = (delay = 2) => {
     clearHideTimer();
     hideTimer.current = window.setTimeout(() => {
       hideSelected();
     }, delay);
   };
 
-  const handleMouseEnter = (person: DomainLead) => showSelected(person);
-  const handleMouseLeave = () => hideSelectedDelayed();
+  const handleMouseEnter = (person: DomainLead, event: React.MouseEvent<HTMLDivElement>, index: number) => {
+    clearHideTimer();
+    setSelectedPerson(person);
+    
+    // const targetElement = event.currentTarget;
+    // const rect = targetElement.getBoundingClientRect();
+    
+    // const bottomThreshold = 300; 
+    // if (rect.bottom > window.innerHeight - bottomThreshold) {
+    //     setPopoverDirection('top');
+    // } else {
+    //     setPopoverDirection('bottom');
+    // }
+
+    if (window.innerWidth >= 768 && window.innerWidth <= 1024) {
+      if (index > 7) {
+        setPopoverDirection('top');
+      } else {
+        setPopoverDirection('bottom');
+      }
+    } else if (window.innerWidth >= 1024) {
+      if (index > 5) {
+        setPopoverDirection('top');
+      } else {
+        setPopoverDirection('bottom');
+      }
+    }
+  };
+  const handleMouseLeave = () => {
+    hideSelectedDelayed(); 
+    hideSelected();
+  };
+
+  const getPopoverPositionClasses = (index: number) => {
+    let classes = 'left-1/2 transform -translate-x-1/2';
+
+    if ((index + 1) % 4 === 0) {
+      classes += ' md:left-full md:transform md:-translate-x-full';
+    } else {
+      classes += ' md:left-0 md:transform md:translate-x-0';
+    }
+
+    if ((index + 1) % 6 === 0) {
+      classes += ' lg:left-full lg:transform lg:-translate-x-full';
+    } else if (((index + 1) % 6 === 1)) {
+      classes += ' lg:left-0 lg:transform lg:translate-x-0';
+    } else {
+      classes += ' lg:left-1/2 lg:transform lg:-translate-x-1/2';
+    }
+
+    return classes;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 relative overflow-x-hidden">
@@ -569,7 +637,7 @@ const OrgChart: React.FC = () => {
           <div className="flex flex-col items-center space-y-4 mb-6">
           <div
             className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
-            onMouseEnter={() => handleMouseEnter(dataToDisplay.facultyAdvisor as DomainLead)}
+            onMouseEnter={(e) => handleMouseEnter(dataToDisplay.facultyAdvisor as DomainLead, e, -1)}
             onMouseLeave={() => handleMouseLeave()}
           >
             <img
@@ -588,7 +656,7 @@ const OrgChart: React.FC = () => {
         <div className="flex flex-col items-center space-y-4 mb-6">
           <div
             className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
-            onMouseEnter={() => handleMouseEnter(dataToDisplay.lead as DomainLead)}
+            onMouseEnter={(e) => handleMouseEnter(dataToDisplay.lead as DomainLead, e, -1)}
             onMouseLeave={() => handleMouseLeave()}
           >
             <img
@@ -604,51 +672,62 @@ const OrgChart: React.FC = () => {
         </div>
 
         {/* Domain Leads Grid */}
-        <div className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${year === 2025 ? "xl:grid-cols-5" : "xl:grid-cols-6"} justify-around gap-y-10 relative`}>
-          {dataToDisplay.domainLeads.map((person, index) => {
+        <div className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${year === 2025 ? "xl:grid-cols-5" : "xl:grid-cols-6"} justify-around gap-y-10 relative`} style={{ columnGap: 15 }}>
+          { dataToDisplay.domainLeads.map((person, index) => {
             return (
               <div
                 key={index}
                 className="flex flex-col items-center"
-                onMouseEnter={() => handleMouseEnter(person)}
+                onMouseEnter={(e) => handleMouseEnter(person, e, index)}
                 onMouseLeave={() => handleMouseLeave()}
+                style={{ position: 'relative' }}
               >
-              <div 
-                className={`shrink-0 w-36 h-36 md:w-48 md:h-48 transition-all duration-300 ${
-                  selectedPerson === person 
-                    ? 'transform -translate-y-2 scale-105 shadow-lg bg-blue-100 rounded-full p-1' 
-                    : 'hover:scale-105'
-                }`}
-              >
-                <img
-                  src={person.img}
-                  alt={person.role}
-                  className="shrink-0 rounded-full w-full h-full object-cover"
-                />
-              </div>
-              <h2 className="text-lg font-medium text-center mt-2">
-                {person.role}
-              </h2>
-              <p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'Grey-200 ' }}>
-                {person.name}
-              </p>
+                {
+                  selectedPerson && selectedPerson?.coordinators?.length && selectedPerson === person ? (
+                    <div 
+                      className={`popover-div absolute top-60 z-50 ${getPopoverPositionClasses(index)}`}
+                    >
+                      <Popover selectedPerson={selectedPerson} direction={popoverDirection} key={index} />
+                    </div>
+                  ) : null
+                }
+
+                <div 
+                  className={`shrink-0 w-36 h-36 md:w-48 md:h-48 transition-all duration-300 ${
+                    selectedPerson === person 
+                      ? 'transform -translate-y-2 scale-105 shadow-lg bg-blue-100 rounded-full p-1' 
+                      : 'hover:scale-105'
+                  }`}
+                >
+                  <img
+                    src={person.img}
+                    alt={person.role}
+                    className="shrink-0 rounded-full w-full h-full object-cover"
+                  />
+                </div>
+                <h2 className="text-lg font-medium text-center mt-2">
+                  {person.role}
+                </h2>
+                <p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'Grey-200 ' }}>
+                  {person.name}
+                </p>
               </div>
             );
           })}
         </div>
 
         {/* Background overlay */}
-        {selectedPerson && (
+        {/* {selectedPerson && (
           <div 
-            className="fixed inset-0 bg-black bg-opacity-40 z-40 transition-opacity duration-300"
-            onMouseEnter={() => clearHideTimer()}
-            onMouseLeave={() => hideSelectedDelayed()}
-            onClick={() => hideSelected()}
+            className="fixed inset-0 bg-black bg-opacity-20 z-40 transition-opacity duration-300"
+            // onMouseEnter={() => clearHideTimer()}
+            // onMouseLeave={() => hideSelected()}
+            // onClick={() => hideSelected()}
           />
-        )}
+        )} */}
 
         {/* Modal for Coordinators and Volunteers */}
-        {selectedPerson && (
+        {/* {selectedPerson && (
           <div 
             className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none"
           >
@@ -671,7 +750,7 @@ const OrgChart: React.FC = () => {
                   <p className="text-lg text-gray-600">{selectedPerson.name}</p>
                 </div>
 
-                {selectedPerson.coordinators.length > 0 && (
+                {selectedPerson && selectedPerson.coordinators.length > 0 && (
                   <div className="mb-6">
                     <h3 className="text-xl font-semibold text-blue-700 mb-4 pb-2 border-b border-blue-200">Coordinators</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -693,7 +772,7 @@ const OrgChart: React.FC = () => {
                   </div>
                 )}
 
-                {selectedPerson.volunteers.length > 0 && (
+                {selectedPerson && selectedPerson.volunteers.length > 0 && (
                   <div>
                     <h3 className="text-xl font-semibold mb-4 pb-2 border-b border-gray-200">Volunteers</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -717,7 +796,7 @@ const OrgChart: React.FC = () => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </>
     </div>
   );
