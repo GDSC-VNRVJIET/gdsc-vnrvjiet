@@ -59,6 +59,9 @@ import FinalRoundScoring from "./pages/CampusAuto/FinalRoundScoring";
 import FinalTeamScoring from "./pages/CampusAuto/FinalTeamScoring";
 import CompleteRoundOne from "./pages/CampusAuto/CompleteRoundOne";
 import Practice from "./pages/Practice";
+import AlgoChallenge from "./pages/AlgoChallenge";
+import RoomStyleCtf from "./pages/RoomStyleCtf";
+import MLOpsWorkshop from "./pages/MLOpsWorkshop";
 
 const isAdmin = () => {
   const userObjGDSC = localStorage.getItem("userObjGDSC");
@@ -167,6 +170,9 @@ function Root() {
         <Route path="upcoming-events/:eventname" element={<Register />} />
         {/* <Route path="/upcoming-events/Solution Challenge 2025" element={<GoogleForms />} /> */}
         <Route path="/studyjamsenrollment" element={<GoogleForms />} />
+        <Route path="/algochallenge-enrollment" element={<AlgoChallenge />} />
+        <Route path="/mlops-registration" element={<MLOpsWorkshop />} />
+        <Route path="/room-style-ctf-enrollment" element={<RoomStyleCtf />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/blogs" element={<Blog />}>
