@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Banner from "../images/Convergence Banner.jpg";
 
 const RoomStyleCtf: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -10,6 +11,7 @@ const RoomStyleCtf: React.FC = () => {
   return (
     <div className="w-full min-h-screen bg-gray-50 py-4 sm:py-8">
       <div className="max-w-4xl mx-auto px-4">
+        <img src={Banner} alt="Convergence Poster" style={{ width: '100%', marginBottom: 20 }} />
         <div className="text-center mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
             Room Style CTF - Participant enrollment form
