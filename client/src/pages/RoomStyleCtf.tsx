@@ -47,7 +47,7 @@ const RoomStyleCtf: React.FC = () => {
           <p>
             Having trouble with the form?{" "}
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSf3QxAnBP6XHvhOLxn8NLxB-wLl3Fmu9aHsdR9oDKAGshGbIQ/viewform"
+              href="https://forms.gle/RHgCkeC54jZVku9T8"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline font-medium"
