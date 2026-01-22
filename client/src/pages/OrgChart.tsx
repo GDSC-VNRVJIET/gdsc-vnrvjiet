@@ -44,7 +44,6 @@ import zakiimg from "./Domain Info/images/design/Md Zaki.jpg";
 import pavitraimg from "./Domain Info/images/design/Pavitra Jasti.jpg";
 import bharathsirimg from "./images/facultyCord copy.jpg";
 import ashraya from "./Domain Info/images/TandC/Ashraya Yelisetty.jpg";
-import harshitha from "./Domain Info/images/TandC/Harshitha.jpg";
 import vardhan from "./Domain Info/images/TandC/M INDRANEELI VARDHAN .jpg";
 import mahesh from "./Domain Info/images/TandC/Mahesh Patnala.jpg";
 import akhilimg from "./Domain Info/images/AppDev/Akhil.png";
@@ -84,7 +83,8 @@ import ManikantaImg from "./Domain Info/images/WEB DEV/Manikanta.jpg";
 import KruthiImg from "./Domain Info/profile_images/Sri Kruthi.jpg";
 import TanmayeeImg from "./Domain Info/profile_images/Design_SM/Tanmayee Kyram.jpg"
 import UdayImg from "./Domain Info/profile_images/CP/GUdhayYadav.jpg";
-import ShahidImg from "./Domain Info/profile_images/CS/Shahid Ameed.jpg"
+import ShahidImg from "./Domain Info/profile_images/CS/Shahid Ameed.jpg";
+import NikhilImg from "./Domain Info/profile_images/Management/Nikhil Chanda.jpg";
 import Popover from "./Popover";
 import { set } from "date-fns";
 import { Domain } from "domain";
@@ -158,12 +158,13 @@ const data2026: OrgChartData = {
     },
     {
       role: "Management Lead",
-      name: "Sai Rakshita Narsingh",
-      img: rakshitaimg,
+      name: "Harika",
+      img: harikaimg,
       coordinators: [
         { name: "Revoori Sathwika Reddy", img: sathwikaimg },
         { name: "Sarvani", img: sarvani },
         { name: "Spoorthy Boga", img: spoorthyimg },
+        { name: "Nikhil Chanda", img: NikhilImg }
       ],
       volunteers: [
       ],
@@ -216,6 +217,18 @@ const data2026: OrgChartData = {
       role: "Testing and Cybersecurity Lead",
       name: "Shahid Ameed",
       img: ShahidImg,
+      coordinators: [
+        {name:"Ashraya Yelisetty",img:ashraya},
+        {name:"M INDRANEELI VARDHAN ",img:vardhan},
+        {name:"Mahesh Patnala",img:mahesh}
+      ],
+      volunteers: [],
+      type:"technical",
+    },
+    {
+      role: "Testing and Cybersecurity Lead",
+      name: "Harshitha Mandadi",
+      img: Harshitha,
       coordinators: [
         {name:"Ashraya Yelisetty",img:ashraya},
         {name:"M INDRANEELI VARDHAN ",img:vardhan},
@@ -526,6 +539,10 @@ const OrgChart: React.FC = () => {
   // };
 
   const showSelected = (person: DomainLead) => {
+    if (person.role === "Co Lead") {
+      return;
+    }
+
     setSelectedPerson(person);
   }
 
@@ -540,58 +557,21 @@ const OrgChart: React.FC = () => {
     }, delay);
   };
 
-  const handleMouseEnter = (person: DomainLead, event: React.MouseEvent<HTMLDivElement>, index: number) => {
-    clearHideTimer();
-    setSelectedPerson(person);
-    
-    // const targetElement = event.currentTarget;
-    // const rect = targetElement.getBoundingClientRect();
-    
-    // const bottomThreshold = 300; 
-    // if (rect.bottom > window.innerHeight - bottomThreshold) {
-    //     setPopoverDirection('top');
-    // } else {
-    //     setPopoverDirection('bottom');
-    // }
-
-    if (window.innerWidth >= 768 && window.innerWidth <= 1024) {
-      if (index > 7) {
-        setPopoverDirection('top');
-      } else {
-        setPopoverDirection('bottom');
-      }
-    } else if (window.innerWidth >= 1024) {
-      if (index > 5) {
-        setPopoverDirection('top');
-      } else {
-        setPopoverDirection('bottom');
-      }
+  const handleLeadClickEvent = (expectation: string, person: DomainLead, event: React.MouseEvent<HTMLDivElement>, index: number) => {
+    if (expectation === "open") {
+      clearHideTimer();
+      setPopoverDirection('bottom');
+      showSelected(person);
+    } else {
+      setSelectedPerson(null);
+      hideSelectedDelayed(); 
+      hideSelected();
     }
   };
   const handleMouseLeave = () => {
     hideSelectedDelayed(); 
     hideSelected();
   };
-
-  const getPopoverPositionClasses = (index: number) => {
-    let classes = 'left-1/2 transform -translate-x-1/2';
-
-    if ((index + 1) % 4 === 0) {
-      classes += ' md:left-full md:transform md:-translate-x-full';
-    } else {
-      classes += ' md:left-0 md:transform md:translate-x-0';
-    }
-
-    if ((index + 1) % 6 === 0) {
-      classes += ' lg:left-full lg:transform lg:-translate-x-full';
-    } else if (((index + 1) % 6 === 1)) {
-      classes += ' lg:left-0 lg:transform lg:translate-x-0';
-    } else {
-      classes += ' lg:left-1/2 lg:transform lg:-translate-x-1/2';
-    }
-
-    return classes;
-  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 relative overflow-x-hidden">
@@ -637,7 +617,7 @@ const OrgChart: React.FC = () => {
           <div className="flex flex-col items-center space-y-4 mb-6">
           <div
             className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
-            onMouseEnter={(e) => handleMouseEnter(dataToDisplay.facultyAdvisor as DomainLead, e, -1)}
+            onMouseEnter={(e) => handleLeadClickEvent("close", dataToDisplay.facultyAdvisor as DomainLead, e, -1)}
             onMouseLeave={() => handleMouseLeave()}
           >
             <img
@@ -656,7 +636,7 @@ const OrgChart: React.FC = () => {
         <div className="flex flex-col items-center space-y-4 mb-6">
           <div
             className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
-            onMouseEnter={(e) => handleMouseEnter(dataToDisplay.lead as DomainLead, e, -1)}
+            onMouseEnter={(e) => handleLeadClickEvent("close", dataToDisplay.lead as DomainLead, e, -1)}
             onMouseLeave={() => handleMouseLeave()}
           >
             <img
@@ -672,22 +652,34 @@ const OrgChart: React.FC = () => {
         </div>
 
         {/* Domain Leads Grid */}
-        <div className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${year === 2025 ? "xl:grid-cols-5" : "xl:grid-cols-6"} justify-around gap-y-10 relative`} style={{ columnGap: 15 }}>
+        <div className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${year === 2025 ? "xl:grid-cols-5" : "xl:grid-cols-6"} justify-around gap-y-10 relative cursor-pointer`} style={{ columnGap: 15 }}>
           { dataToDisplay.domainLeads.map((person, index) => {
             return (
               <div
                 key={index}
-                className="flex flex-col items-center"
-                onMouseEnter={(e) => handleMouseEnter(person, e, index)}
-                onMouseLeave={() => handleMouseLeave()}
-                style={{ position: 'relative' }}
+                className="mx-1 flex flex-col items-center"
+                onClick={(e) => {
+                  handleLeadClickEvent("open", person, e, index);
+                }}
               >
                 {
                   selectedPerson && selectedPerson?.coordinators?.length && selectedPerson === person ? (
                     <div 
-                      className={`popover-div absolute top-60 z-50 ${getPopoverPositionClasses(index)}`}
+                      className={`popover-div fixed top-0 left-0 right-0 bottom-0 z-50 h-dvh`}
+                      style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
+                      onClick={() => setSelectedPerson(null)}
                     >
-                      <Popover selectedPerson={selectedPerson} direction={popoverDirection} key={index} />
+                      {
+                        year === 2026 ? (
+                          <Popover domainLeads={data2026.domainLeads} selectedPerson={selectedPerson} key={index} handleLeadClickEvent={handleLeadClickEvent} setSelectedPerson={setSelectedPerson} />
+                        ) : (
+                          year === 2025 ? (
+                            <Popover domainLeads={data2025.domainLeads} selectedPerson={selectedPerson} key={index} handleLeadClickEvent={handleLeadClickEvent} setSelectedPerson={setSelectedPerson} />
+                          ) : (
+                            <Popover domainLeads={data2024.domainLeads} selectedPerson={selectedPerson} key={index} handleLeadClickEvent={handleLeadClickEvent} setSelectedPerson={setSelectedPerson} />
+                          )
+                        )
+                      }
                     </div>
                   ) : null
                 }
@@ -715,88 +707,6 @@ const OrgChart: React.FC = () => {
             );
           })}
         </div>
-
-        {/* Background overlay */}
-        {/* {selectedPerson && (
-          <div 
-            className="fixed inset-0 bg-black bg-opacity-20 z-40 transition-opacity duration-300"
-            // onMouseEnter={() => clearHideTimer()}
-            // onMouseLeave={() => hideSelected()}
-            // onClick={() => hideSelected()}
-          />
-        )} */}
-
-        {/* Modal for Coordinators and Volunteers */}
-        {/* {selectedPerson && (
-          <div 
-            className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none"
-          >
-            <div 
-              id="org-popup"
-              className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto pointer-events-auto"
-              onMouseEnter={() => clearHideTimer()}
-              onMouseLeave={() => hideSelectedDelayed()}
-            >
-              <div className="p-6">
-                <div className="flex flex-col items-center mb-6">
-                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 border-4 border-blue-500">
-                    <img
-                      src={selectedPerson.img}
-                      alt={selectedPerson.role}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <h2 className="text-2xl font-bold">{selectedPerson.role}</h2>
-                  <p className="text-lg text-gray-600">{selectedPerson.name}</p>
-                </div>
-
-                {selectedPerson && selectedPerson.coordinators.length > 0 && (
-                  <div className="mb-6">
-                    <h3 className="text-xl font-semibold text-blue-700 mb-4 pb-2 border-b border-blue-200">Coordinators</h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                      {selectedPerson.coordinators.map((coordinator, idx) => (
-                        <div key={idx} className="flex flex-col items-center">
-                          <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-3">
-                            <img
-                              src={coordinator.img}
-                              alt={coordinator.name}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                          <p className="text-center text-base md:text-lg font-medium" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                            {coordinator.name}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {selectedPerson && selectedPerson.volunteers.length > 0 && (
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4 pb-2 border-b border-gray-200">Volunteers</h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                      {selectedPerson.volunteers.map((volunteer, idx) => (
-                        <div key={idx} className="flex flex-col items-center">
-                          <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-3">
-                            <img
-                              src={volunteer.img}
-                              alt={volunteer.name}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                          <p className="text-center text-base md:text-lg font-medium" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                            {volunteer.name}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )} */}
       </>
     </div>
   );
