@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import GetUserIcon from "./GetUserIcon";
+import logo from "../home-assets/logo.png";
 import { getUserById } from "../Apis/users";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
@@ -44,7 +45,7 @@ function Navbar() {
         <NavLink to="/">
           <img
             className="gdsc_logo transition-transform duration-500 transform hover:scale-110"
-            src="https://cdn-images-1.medium.com/max/578/1*vZVM7utCuRiZ6-HDsNeYUA@2x.png"
+            src={logo}
             width="50"
             height="50"
             alt="GDGC Logo"
@@ -76,23 +77,23 @@ function Navbar() {
           isOpen ? "block" : "hidden"
         }`}
       >
-        <div className="hidden md:flex md:items-center">
+        <div className="hidden m-3 md:flex md:items-center">
           <NavLink to="/">
             <img
               className="gdsc_logo transition-transform duration-500 transform hover:scale-110"
-              src="https://cdn-images-1.medium.com/max/578/1*vZVM7utCuRiZ6-HDsNeYUA@2x.png"
+              src={logo}
               width="50"
               height="50"
               alt="GDGC Logo"
             />
           </NavLink>
         </div>
-        <NavLink to="/">
+       {/* <NavLink to="/">
           <h1 className="ms-5 flex justify-center transition-all duration-500 ease-in-out hover:tracking-wider hover:scale-110 text-xl">
             GDGC VNRVJIET
           </h1>
-        </NavLink>
-        <div className="flex flex-col md:flex-row ml-auto text-center text-slate-600 me-2">
+        </NavLink>*/}
+        <div className="flex flex-col md:flex-row mx-auto text-center text-slate-600 me-2 justify-center">
           <button
             onClick={handleNavClick}
             className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white"
