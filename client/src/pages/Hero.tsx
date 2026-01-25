@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
+import banner_2650x500 from "../home-assets/banner_2650x500.png";
 
 function Hero() {
   const heroStyle = {
-    backgroundImage: `url('https://gdsctaruc.github.io/images/homeBackground.jpg')`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    height: "500px",
-  };
+  backgroundImage: `url(${banner_2650x500})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  height: "500px",
+};
 
   const navigate = useNavigate();
 
