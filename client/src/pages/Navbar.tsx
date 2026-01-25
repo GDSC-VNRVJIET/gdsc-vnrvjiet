@@ -1,65 +1,57 @@
-import React, { useState, useEffect } from "react";
-import GetUserIcon from "./GetUserIcon";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import logo from "../home-assets/logo.png";
-import { getUserById } from "../Apis/users";
-import { NavLink, useNavigate } from "react-router-dom";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
+// underline colors
+const underlinecolor = (index: number) => {
+  const colors = ["#4285F4", "#34A853", "#F9AB00", "#EA4335"]; 
+  return colors[index % colors.length];
+};
+
+// pastel highlight for active item
+const pastel = (index: number) => {
+  const colors = ["#C3ECF6", "#CCF6C5", "#FFE7A5", "#F8D8D8"]; 
+  return colors[index % colors.length];
+};
+
+const menuItems = [
+  { name: "Home", path: "/" },
+  { name: "OrgChart", path: "/orgchart" },
+  { name: "Blogs", path: "/blogs" },
+    { name: "Events", path: "/events" },
+    { name: "Practice", path: "/practice" },
+  {name: "Join Us", path: "/https://gdg.community.dev/gdg-on-campus-vallurupalli-nageswara-rao-vignana-jyothi-institute-of-engineering-and-technology-hyderabad-india/"}
+];
+
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [showSignout, setShowSignout] = useState(false);
-  const userObjGDSC = localStorage.getItem("userObjGDSC");
-  const userId = userObjGDSC ? JSON.parse(userObjGDSC).userId : null;
-  const [user, setUser] = useState<{ name: string }>();
-  const navigate = useNavigate();
-  useEffect(() => {
-    const getData = async () => {
-      if (userId) {
-        const loggedInUser = await getUserById(userId);
-        setUser(loggedInUser.user);
-      }
-    };
-    getData();
-  }, [userId]);
-  const [users, setUsers] = useState(
-    JSON.parse(localStorage.getItem("userObjGDSC") || "null") as { role: string } | null
-  );
 
-  const handleLogOut = async () => {
-    localStorage.removeItem("userObjGDSC");
-    navigate("/");
-  };
   const handleNavClick = () => {
-    if (isOpen) {
-      setIsOpen(false);
-    }
+    if (isOpen) setIsOpen(false);
   };
 
   return (
-    <nav
-      style={{ zIndex: "10" }}
-      className="sticky top-0 bg-transparent backdrop-blur-lg bg-opacity-30 z-50 p-4 shadow-md"
-    >
-      <div className="flex items-center block md:hidden">
+    <nav className="sticky top-0 backdrop-blur-lg bg-white/70 shadow-md z-50">
+      {/* Mobile Header */}
+      <div className="flex items-center md:hidden p-4">
         <NavLink to="/">
           <img
-            className="gdsc_logo transition-transform duration-500 transform hover:scale-110"
             src={logo}
             width="50"
             height="50"
-            alt="GDGC Logo"
+            alt="Logo"
+            className="transition-transform duration-300 hover:scale-110"
           />
         </NavLink>
+
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center px-3 py-2 rounded text-black-500 hover:text-black-400 w-50 ml-auto"
+          className="ml-auto px-3 py-2"
         >
           <svg
-            className={`fill-current h-6 w-6 transition-transform duration-500 ease-in-out ${
-              isOpen ? "rotate-90" : ""
-            }`}
-            xmlns="http://www.w3.org/2000/svg"
+            className={`h-6 w-6 transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}
             viewBox="0 0 20 20"
           >
             <path
@@ -72,192 +64,75 @@ function Navbar() {
           </svg>
         </button>
       </div>
-      <div
-        className={`w-full block flex-grow md:flex md:items-center md:w-auto ${
-          isOpen ? "block" : "hidden"
-        }`}
-      >
-        <div className="hidden m-3 md:flex md:items-center">
-          <NavLink to="/">
-            <img
-              className="gdsc_logo transition-transform duration-500 transform hover:scale-110"
-              src={logo}
-              width="50"
-              height="50"
-              alt="GDGC Logo"
-            />
-          </NavLink>
-        </div>
-       {/* <NavLink to="/">
-          <h1 className="ms-5 flex justify-center transition-all duration-500 ease-in-out hover:tracking-wider hover:scale-110 text-xl">
-            GDGC VNRVJIET
-          </h1>
-        </NavLink>*/}
-        <div className="flex flex-col md:flex-row mx-auto text-center text-slate-600 me-2 justify-center">
-          <button
-            onClick={handleNavClick}
-            className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white"
-          >
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `relative z-10 block px-4 py-2 overflow-hidden rounded-full ${
-                  isActive ? "bg-blue-500 text-white" : ""
-                }`
-              }
-            >
-              <span className="absolute inset-0 group-hover:bg-blue-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
-              <span className="relative">Home</span>
+
+      {/* Desktop Menu */}
+      <div className={`w-full ${isOpen ? "block" : "hidden md:block"}`}>
+        <div className="flex items-center px-6 py-3 w-full">
+          {/* Left Logo */}
+          <div className="flex-shrink-0">
+            <NavLink to="/">
+              <img
+                src={logo}
+                width="50"
+                height="50"
+                alt="Logo"
+                className="transition-transform duration-300 hover:scale-110"
+              />
             </NavLink>
-          </button>
-          
-          <button
-            onClick={handleNavClick}
-            className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white"
-          >
-            <NavLink
-              to="/orgchart"
-              className={({ isActive }) =>
-                `relative z-10 block px-4 py-2 overflow-hidden rounded-full ${
-                  isActive ? "bg-red-500 text-white" : ""
-                }`
-              }
-            >
-              <span className="absolute inset-0 group-hover:bg-red-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
-              <span className="relative">OrgChart</span>
-            </NavLink>
-          </button>
-          
-          <button
-            onClick={handleNavClick}
-            className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white"
-          >
-            <NavLink
-              to="/blogs"
-              className={({ isActive }) =>
-                `relative z-10 block px-4 py-2 overflow-hidden rounded-full ${
-                  isActive ? "bg-yellow-500 text-white" : ""
-                }`
-              }
-            >
-              <span className="absolute inset-0 group-hover:bg-yellow-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
-              <span className="relative">Blogs</span>
-            </NavLink>
-          </button>
-          
-          <button
-            onClick={handleNavClick}
-            className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white"
-          >
-            <NavLink
-              to="/events"
-              className={({ isActive }) =>
-                `relative z-10 block px-4 py-2 overflow-hidden rounded-full ${
-                  isActive ? "bg-green-500 text-white" : ""
-                }`
-              }
-            >
-              <span className="absolute inset-0 group-hover:bg-green-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
-              <span className="relative">Events</span>
-            </NavLink>
-          </button>
-          
-          {/* New Practice Button */}
-          <button
-            onClick={handleNavClick}
-            className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white"
-          >
-            <NavLink
-              to="/practice"
-              className={({ isActive }) =>
-                `relative z-10 block px-4 py-2 overflow-hidden rounded-full ${
-                  isActive ? "bg-indigo-500 text-white" : ""
-                }`
-              }
-            >
-              <span className="absolute inset-0 group-hover:bg-blue-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
-              <span className="relative">Practice</span>
-            </NavLink>
-          </button>
-          
-          {/* The following code for Login/Logout is commented out */}
-          {/*
-          {userObjGDSC == null ? (
-            <button onClick={handleNavClick} className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white">
-              <NavLink
-                to="/login"
-                className={({ isActive }) => `relative z-10 block px-4 py-2 overflow-hidden rounded-full  ${isActive ? "bg-red-500 text-white" : ""}`}
-              >
-                <span className="absolute inset-0 group-hover:bg-red-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
-                <span className="relative">Login</span>
-              </NavLink>
-            </button>
-          ) : (
-            <div className="relative">
-              <button
-                className="flex items-center pl-5 pr-10 py-2"
-                onClick={() => setShowSignout((prevState) => !prevState)}
-              >
-                <GetUserIcon user={user} />
-                {showSignout && user && (
-                  <div className="border w-[100px] rounded-lg absolute bg-white mt-1 p-1">
-                    <div className="font-bold">{user.name}</div>
-                    <button
-                      className="bg-red-600 text-sm text-white font-bold w-fit p-1 m-1 rounded-md hover:ring ring-red-400 ring-offset-2 transition"
-                      onClick={handleLogOut}
-                    >
-                      Log Out
-                    </button>
+          </div>
+
+          {/* Center Menu */}
+          <div className="flex-1 flex justify-center items-center space-x-6">
+            {menuItems.map((item, index) => (
+              <NavLink key={item.name} to={item.path} onClick={handleNavClick}>
+                {({ isActive }) => (
+                  <div
+                    className="relative px-4 py-2 rounded-lg font-medium transition-colors duration-300 group"
+                    style={{
+                      backgroundColor: isActive ? pastel(index) : "transparent",
+                    }}
+                  >
+                    <span className="relative z-10 text-slate-700">
+                      {item.name}
+                    </span>
+
+                    {/* Hover underline */}
+                    <span
+                      className="absolute left-1/2 bottom-0 h-[3px] w-0 -translate-x-1/2 rounded-full transition-all duration-300 group-hover:w-2/3"
+                      style={{ backgroundColor: underlinecolor(index) }}
+                    />
+
+                    {/* Active underline */}
+                    {isActive && (
+                      <span
+                        className="absolute left-1/2 bottom-0 h-[3px] w-2/3 -translate-x-1/2 rounded-full"
+                        style={{ backgroundColor: underlinecolor(index) }}
+                      />
+                    )}
                   </div>
                 )}
-              </button>
-            </div>
-          )}
-          */}
-          
-          <button
-            onClick={handleNavClick}
-            className="relative mx-3 py-2 overflow-hidden rounded-lg group hover:text-white"
-          >
-            <NavLink
-              to="https://gdg.community.dev/gdg-on-campus-vallurupalli-nageswara-rao-vignana-jyothi-institute-of-engineering-and-technology-hyderabad-india/"
-              className={({ isActive }) =>
-                `relative z-10 block px-4 py-2 overflow-hidden rounded-full ${
-                  isActive ? "bg-red-500 text-white" : ""
-                }`
-              }
-            >
-              <span className="absolute inset-0 group-hover:bg-red-500 transform -translate-x-full rounded-lg transition-transform duration-500 ease-in-out group-hover:translate-x-0"></span>
-              <span className="relative">Join us</span>
-            </NavLink>
-          </button>
-          
-          <Popover className="relative mx-3 py-2">
-            <PopoverButton className="inline-flex items-center mt-2 gap-x-1 outline-none focus:outline-none">
-              <span>Explore</span>
-              <ChevronDownIcon aria-hidden="true" className="w-4 h-4" />
-            </PopoverButton>
-            <PopoverPanel
-              transition
-              className="overflow-hidden absolute left-1/2 z-10 mt-1 bg-slate-50 rounded-md w-screen lg:max-w-max -translate-x-1/2 px-4 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
-            >
-              <div className="my-4">
-                <NavLink onClick={handleNavClick} to="/gen-ai-leaderboard">
-                  LeaderBoard
-                </NavLink>
-              </div>
-              <div className="my-4">
-                <NavLink onClick={handleNavClick} to="/Forum">
-                  Forum
-                </NavLink>
-              </div>
-              <div className="my-4">
-                <NavLink onClick={handleNavClick} to="/contact-us">
-                  Contact Us
-                </NavLink>
-              </div>
-            </PopoverPanel>
-          </Popover>
+              </NavLink>
+            ))}
+
+            {/* Explore Dropdown */}
+            <Popover className="relative">
+              <PopoverButton className="inline-flex items-center gap-x-1 px-4 py-2 font-medium rounded-lg hover:bg-slate-100">
+                <span>Explore</span>
+                <ChevronDownIcon aria-hidden="true" className="w-4 h-4" />
+              </PopoverButton>
+              <PopoverPanel className="absolute left-1/2 z-10 mt-2 bg-white rounded-md shadow-md -translate-x-1/2 px-4 py-2">
+                <div className="my-2">
+                  <NavLink onClick={handleNavClick} to="/gen-ai-leaderboard">LeaderBoard</NavLink>
+                </div>
+                <div className="my-2">
+                  <NavLink onClick={handleNavClick} to="/Forum">Forum</NavLink>
+                </div>
+                <div className="my-2">
+                  <NavLink onClick={handleNavClick} to="/contact-us">Contact Us</NavLink>
+                </div>
+              </PopoverPanel>
+            </Popover>
+          </div>
         </div>
       </div>
     </nav>
