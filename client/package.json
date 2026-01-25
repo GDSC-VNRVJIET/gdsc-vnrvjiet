@@ -92,6 +92,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/aos": "^3.0.7",
     "@types/crypto-js": "^4.2.2",
     "@types/dompurify": "^3.0.5",
