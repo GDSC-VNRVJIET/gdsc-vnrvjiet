@@ -518,7 +518,6 @@ const OrgChart: React.FC = () => {
     }, 10)
   }, [selectedPerson])
 
-  // Simplified hover logic without complex mouse tracking
   const hideTimer = useRef<number | null>(null);
   const clearHideTimer = () => {
     if (hideTimer.current) {
@@ -530,13 +529,6 @@ const OrgChart: React.FC = () => {
   useEffect(() => {
     return () => clearHideTimer();
   }, []);
-
-  // const showSelected = (person: DomainLead) => {
-  //   clearHideTimer();
-  //   if (person.role !== "Co Lead" && person.coordinators && (person.coordinators.length + person.volunteers.length > 0)) {
-  //     setSelectedPerson(person);
-  //   }
-  // };
 
   const showSelected = (person: DomainLead) => {
     if (person.role === "Co Lead") {
@@ -574,8 +566,8 @@ const OrgChart: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 relative overflow-x-hidden">
-      <h1 className="text-4xl font-bold mb-6 text-center">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 relative overflow-x-hidden" style={{ fontFamily: '"Google Sans", sans-serif' }}>
+      <h1 className="text-4xl font-bold mb-6 text-center" style={{ fontFamily: '"Google Sans", sans-serif' }}>
         Organizational Chart
       </h1>
 
@@ -583,9 +575,10 @@ const OrgChart: React.FC = () => {
         <button
           className={`px-6 py-2 rounded-full font-semibold transition duration-300 ${
             year === 2026
-              ? "bg-yellow-500 text-white"
+              ? "bg-blue-500 text-white"
               : "bg-gray-200 text-gray-800"
           }`}
+          style={{ fontFamily: '"Google Sans", sans-serif' }}
           onClick={() => setYear(2026)}
         >
           2026
@@ -593,9 +586,10 @@ const OrgChart: React.FC = () => {
         <button
           className={`px-6 py-2 rounded-full font-semibold transition duration-300 ${
             year === 2025
-              ? "bg-red-500 text-white"
+              ? "bg-yellow-500 text-white"
               : "bg-gray-200 text-gray-800"
           }`}
+          style={{ fontFamily: '"Google Sans", sans-serif' }}
           onClick={() => setYear(2025)}
         >
           2025
@@ -606,6 +600,7 @@ const OrgChart: React.FC = () => {
               ? "bg-red-500 text-white"
               : "bg-gray-200 text-gray-800"
           }`}
+          style={{ fontFamily: '"Google Sans", sans-serif' }}
           onClick={() => setYear(2024)}
         >
           2024
@@ -626,8 +621,8 @@ const OrgChart: React.FC = () => {
               className="shrink-0 rounded-full w-full h-full object-cover"
             />
           </div>
-          <h2 className="text-xl font-semibold">{dataToDisplay.facultyAdvisor.role}</h2>
-          <p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
+          <h2 className="text-xl font-semibold" style={{ fontFamily: '"Google Sans", sans-serif' }}>{dataToDisplay.facultyAdvisor.role}</h2>
+          <p className="text-md" style={{ fontFamily: '"Google Sans", sans-serif', color: 'grey-200' }}>
             {dataToDisplay.facultyAdvisor.name}
           </p>
         </div>
@@ -645,8 +640,8 @@ const OrgChart: React.FC = () => {
               className="shrink-0 rounded-full w-full h-full object-cover"
             />
           </div>
-          <h2 className="text-xl font-semibold">{dataToDisplay.lead.role}</h2>
-          <p className="text-md" style={{ fontFamily: 'Roboto, sans-serif', color: 'grey-200' }}>
+          <h2 className="text-xl font-semibold" style={{ fontFamily: '"Google Sans", sans-serif' }}>{dataToDisplay.lead.role}</h2>
+          <p className="text-md" style={{ fontFamily: '"Google Sans", sans-serif', color: 'grey-200' }}>
             {dataToDisplay.lead.name}
           </p>
         </div>
@@ -697,10 +692,10 @@ const OrgChart: React.FC = () => {
                     className="shrink-0 rounded-full w-full h-full object-cover"
                   />
                 </div>
-                <h2 className="text-lg font-medium text-center mt-2">
+                <h2 className="text-lg font-medium text-center mt-2" style={{ fontFamily: '"Google Sans", sans-serif' }}>
                   {person.role}
                 </h2>
-                <p className="text-md text-center" style={{ fontFamily: 'Roboto, sans-serif', color: 'Grey-200 ' }}>
+                <p className="text-md text-center" style={{ fontFamily: '"Google Sans", sans-serif', color: 'Grey-200 ' }}>
                   {person.name}
                 </p>
               </div>
