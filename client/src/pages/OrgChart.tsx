@@ -85,6 +85,7 @@ import TanmayeeImg from "./Domain Info/profile_images/Design_SM/Tanmayee Kyram.j
 import UdayImg from "./Domain Info/profile_images/CP/GUdhayYadav.jpg";
 import ShahidImg from "./Domain Info/profile_images/CS/Shahid Ameed.jpg";
 import NikhilImg from "./Domain Info/profile_images/Management/Nikhil Chanda.jpg";
+import AbhijeetImg from "./Domain Info/profile_images/Outreach/Abhijeet Jetti.png";
 import Popover from "./Popover";
 import { set } from "date-fns";
 import { Domain } from "domain";
@@ -127,6 +128,13 @@ const data2026: OrgChartData = {
       role: "Co Lead", 
       name: "Sri Manikanta", 
       img: ManikantaImg,
+      coordinators: [],
+      volunteers: [],
+    },
+    { 
+      role: "Outreach Lead", 
+      name: "Abhijeet Jetti", 
+      img: AbhijeetImg,
       coordinators: [],
       volunteers: [],
     },
@@ -539,7 +547,7 @@ const OrgChart: React.FC = () => {
   // };
 
   const showSelected = (person: DomainLead) => {
-    if (person.role === "Co Lead") {
+    if (person.role === "Co Lead" || person.role === "Outreach Lead") {
       return;
     }
 
