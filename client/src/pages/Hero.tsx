@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
-import banner_1440X500px from "../home-assets/banner_1440X500px.png";
+//import banner_1440X500px from "../home-assets/banner_1440X500px.png";
+import banner_1440X500px from "../home-assets/grid_Banner_1440X500px.png"
 
 function Hero() {
   const heroStyle = {
@@ -32,6 +33,7 @@ function Hero() {
       <h1 className="text-gray-700 xl:text-5xl md:text-xl">
         Google Developer Groups on Campus
       </h1>
+      
       <h1
         className="text-gray-500 xl:text-lg lg:text-md mx-10 hover:underline cursor-pointer"
         onClick={() => window.open("https://vnrvjiet.ac.in/")}
@@ -39,7 +41,7 @@ function Hero() {
         Vallurupalli Nageswara Rao Vignana Jyothi Institute of Engineering
         &Technology.
       </h1>
-        
+        */}
       <div className="mt-6 flex justify-center">
         <div className="mt-6">
           <SocialIcon
@@ -52,10 +54,9 @@ function Hero() {
           />
         </div>
       </div>
-    </div> */}
-      {/* <button className="transition ease-in-out delay-70 hover:-translate-y-1 hover:scale-110 duration-300 bg-[#0F71F2] p-2 px-5 m-3 rounded ring-offset-2 ring-4 ring-[#F2A20C]" onClick={navigateLogin}>Join us.</button> */}
-    </div>
-  );
+       {/* <button className="transition ease-in-out delay-70 hover:-translate-y-1 hover:scale-110 duration-300 bg-[#0F71F2] p-2 px-5 m-3 rounded ring-offset-2 ring-4 ring-[#F2A20C]" onClick={navigateLogin}>Join us.</button> */}
+    </div> 
+  )
 }
 
 export default Hero;
