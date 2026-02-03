@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
 //import banner_1440X500px from "../home-assets/banner_1440X500px.png";
-import banner_1440X500px from "../home-assets/grid_Banner_1440X500px.png"
+import banner_1440X500px from "../home-assets/Banner_1440X500px_white.png"
 
 function Hero() {
   const heroStyle = {
@@ -20,10 +20,11 @@ function Hero() {
   };
 
   return (
-    <div
-      className="HeroSection flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat "
-      style={heroStyle}
-    >
+   <div
+  className="HeroSection flex flex-col items-center justify-center 
+             bg-cover bg-center bg-no-repeat "
+  style={heroStyle}
+>
       {/*<div className="mx-auto text-center mb-5">
         < img
           className="gdsc_logo mx-auto p-3"
