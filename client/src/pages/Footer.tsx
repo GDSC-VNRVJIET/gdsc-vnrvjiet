@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaLinkedin, FaInstagramSquare } from "react-icons/fa";
+import { BsInstagram } from "react-icons/bs";
+import { BsLinkedin } from "react-icons/bs";
 import logo from "../home-assets/logo_stacked.png";
 
 const Footer: React.FC = () => {
@@ -24,11 +26,28 @@ const Footer: React.FC = () => {
 
           <div className="flex flex-wrap justify-center gap-6 font-semibold text-sm">
             {[
-              { name: "Terms & Conditions", path: "/terms-and-conditions", color: "hover:text-green-700" },
-              { name: "Privacy Policy", path: "/privacy-policy", color: "hover:text-blue-700" },
-              { name: "Refund Policy", path: "/refund-policy", color: "hover:text-red-700" },
-              { name: "Community Guidelines", path: "/community-guidelines", color: "hover:text-yellow-700" },
-            ].map((item) => (
+  {
+    name: "Terms & Conditions",
+    path: "/terms-and-conditions",
+    color: "hover:text-[#0F71F2]",
+  },
+  {
+    name: "Privacy Policy",
+    path: "/privacy-policy",
+    color: "hover:text-[#318C07]",
+  },
+  {
+    name: "Refund Policy",
+    path: "/refund-policy",
+    color: "hover:text-[#F2A20C]",
+  },
+  {
+    name: "Community Guidelines",
+    path: "/community-guidelines",
+    color: "hover:text-[#D92929]",
+  },
+]
+.map((item) => (
               <Link
                 key={item.name}
                 to={item.path}
@@ -52,28 +71,32 @@ const Footer: React.FC = () => {
             to="/contact-us"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <button className="px-5 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105">
+            <button className="px-5 py-2 
+border-2 border-blue-600 
+text-blue-600 
+rounded-lg 
+shadow-lg hover:shadow-xl 
+transition transform hover:scale-105">
               Contact Us
             </button>
           </Link>
 
-          <div className="flex justify-center space-x-5 mt-4">
+          <div className="flex justify-center space-x-5 mt-5">
             <a
-              href="https://www.instagram.com/gdsc.vnrvjiet/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
-              <FaInstagramSquare size={26} />
-            </a>
-            <a
-              href="https://www.linkedin.com/company/gdsc-vnrvjiet/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin size={26} />
-            </a>
+                        href="https://www.instagram.com/gdgc.vnrvjiet/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <BsInstagram className="w-5 h-5 hover:scale-110 transition" />
+                      </a>
+            
+                      <a
+                        href="https://www.linkedin.com/company/gdsc-vnrvjiet/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <BsLinkedin className="w-5 h-5 hover:scale-110 transition" />
+                      </a>
           </div>
         </div>
 

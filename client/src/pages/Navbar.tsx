@@ -34,7 +34,7 @@ function Navbar() {
 
     return (
         <nav className="sticky top-0 backdrop-blur-lg bg-white/70 shadow-md z-50">
-            {/* Mobile Header */}
+           
             <div className="flex items-center md:hidden p-4">
                 <NavLink to="/">
                     <img
@@ -65,10 +65,10 @@ function Navbar() {
                 </button>
             </div>
 
-            {/* Desktop Menu */}
+          
             <div className={`w-full ${isOpen ? "block" : "hidden md:block"}`}>
                 <div className="flex items-center px-6 py-3 w-full">
-                    {/* Left Logo */}
+                   
                     <div className="flex-shrink-0">
                         <NavLink to="/">
                             <img
@@ -114,7 +114,7 @@ function Navbar() {
                             </NavLink>
                         ))}
 
-                        {/* Explore Dropdown */}
+                       
                         <Popover className="relative">
                             <PopoverButton className="inline-flex items-center gap-x-1 px-4 py-2 font-medium rounded-lg hover:bg-slate-100">
                                 <span>Explore</span>
