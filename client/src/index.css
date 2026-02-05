@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
 
 body {
@@ -6,11 +6,28 @@ body {
     font-family: "Poppins";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}*/
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+
+code{
+    font-family: "Google Sans", sans-serif;
 }
-code {
+
+body {
+  margin: 0;
+    font-family: "Google Sans";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+}*/
 
 body::-webkit-scrollbar {
   display: block;

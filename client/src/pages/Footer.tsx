@@ -1,92 +1,103 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaLinkedin } from "react-icons/fa";
-import { FaInstagramSquare } from "react-icons/fa";
+import { BsInstagram, BsLinkedin } from "react-icons/bs";
+import logo from "../home-assets/logo_stacked.png";
 
 const Footer: React.FC = () => {
   return (
-    <footer
-      style={{ scrollBehavior: "smooth" }}
-      className="bg-slate-200 text-gray-600 p-8 shadow-lg mt-8"
-    >
-      <div className="container mx-auto flex flex-wrap justify-between items-center">
-        <div className="w-full lg:w-auto text-center">
+    <footer className="text-gray-600 shadow-lg mt-4">
+      <div className="container mx-auto px-6 sm:px-10 lg:px-24 py-8 flex flex-col lg:flex-row justify-between items-center gap-10">
+
+        <div className="text-center lg:text-left">
           <img
-            src="https://cdn-images-1.medium.com/v2/resize:fit:578/1*vZVM7utCuRiZ6-HDsNeYUA@2x.png"
+            src={logo}
             alt="GDSC Logo"
-            className="w-20 h-auto mx-auto mb-3"
+            className="w-24 sm:w-28 mx-auto lg:mx-0 mb-3"
           />
-          <h1 className="bg-gradient-to-r from-black via-gray-700 to-gray-500 bg-clip-text text-transparent text-xl font-bold">
-            GDGC VNRVJIET
-          </h1>
+        </div>
 
-          <div className="flex justify-center space-x-4 mt-4">
-            <a href="https://www.instagram.com/gdsc.vnrvjiet/" target="_blank">
-              <FaInstagramSquare size={25} />
-            </a>
-            <a href="https://www.linkedin.com/company/gdsc-vnrvjiet/" target="_blank">
-            <FaLinkedin size={25}/>
-              </a>
+        <div className="text-center max-w-xl">
+          <p className="mb-2 font-medium">Join us at GDGC.</p>
+          <p className="mb-6 text-sm">
+            Discover amazing events and connect with like-minded people.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 font-semibold text-sm">
+            {[
+              {
+                name: "Terms & Conditions",
+                path: "/terms-and-conditions",
+                color: "hover:text-[#0F71F2]",
+              },
+              {
+                name: "Privacy Policy",
+                path: "/privacy-policy",
+                color: "hover:text-[#318C07]",
+              },
+              {
+                name: "Refund Policy",
+                path: "/refund-policy",
+                color: "hover:text-[#F2A20C]",
+              },
+              {
+                name: "Community Guidelines",
+                path: "/community-guidelines",
+                color: "hover:text-[#D92929]",
+              },
+            ].map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                className={`group ${item.color}`}
+              >
+                {item.name}
+                <span className="block h-[2px] w-0 bg-current transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            ))}
           </div>
         </div>
 
-        <div className="w-full lg:w-auto items-center">
-          <div className="w-full lg:w-auto flex flex-wrap justify-center space-x-6 mb-7 font-semibold">
-            <Link
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              to="/terms-and-conditions"
-              className="text-black-600 hover:text-green-800 transition duration-300 group"
-            >
-              Terms & Conditions
-              <span className="block h-[2px] w-0 bg-current transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-            <Link
-              to="/privacy-policy"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="text-black-600 hover:text-blue-800 transition duration-300 group"
-            >
-              Privacy policy
-              <span className="block h-[2px] w-0 bg-current transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-            <Link
-              to="/refund-policy"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="text-black-600 hover:text-red-800 transition duration-300 group"
-            >
-              Refund policy
-              <span className="block h-[2px] w-0 bg-current transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-            <Link
-              to="/community-guidelines"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="text-black-600 hover:text-yellow-800 transition duration-300 group"
-            >
-              Community Guidelines
-              <span className="block h-[2px] w-0 bg-current transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-          </div>
-
-          <div className="text-center">
-            <p className="mb-4">Join us at GDGC.</p>
-            <p>Discover amazing events and connect with like-minded people.</p>
-          </div>
-        </div>
-
-        <div className="w-full lg:w-auto text-center">
-          <p className="mb-4 text-black-600 text-lg font-semibold">
+        <div className="text-center">
+          <p className="mb-4 text-black font-semibold text-lg">
             Have any questions?
           </p>
-          <div className="flex justify-center items-center space-x-2">
-            <Link to="/contact-us">
-              <button
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105 hover:animate-pulse"
-              >
-                Contact Us
-              </button>
-            </Link>
+
+          <Link
+            to="/contact-us"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <button className="
+              px-5 py-2
+              border-2 border-blue-600
+              text-blue-600
+              rounded-lg
+              shadow-lg hover:shadow-xl
+              transition transform hover:scale-105
+            ">
+              Contact Us
+            </button>
+          </Link>
+
+          <div className="flex justify-center space-x-6 mt-5">
+            <a
+              href="https://www.instagram.com/gdgc.vnrvjiet/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BsInstagram className="w-5 h-5 hover:scale-110 transition" />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/company/gdsc-vnrvjiet/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BsLinkedin className="w-5 h-5 hover:scale-110 transition" />
+            </a>
           </div>
         </div>
+
       </div>
     </footer>
   );
