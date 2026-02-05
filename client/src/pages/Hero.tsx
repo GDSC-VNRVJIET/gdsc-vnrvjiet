@@ -49,7 +49,7 @@ function Hero() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BsInstagram className="w-5 h-5 md:w-8 md:h-8 hover:scale-110 transition" />
+            <BsInstagram className="w-6 h-6 sm:w-8 sm:h-8 hover:scale-110 transition" />
           </a>
 
           <a
@@ -57,7 +57,7 @@ function Hero() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BsLinkedin className="w-5 h-5 md:w-8 md:h-8 hover:scale-110 transition" />
+            <BsLinkedin className="w-6 h-6 sm:w-8 sm:h-8 hover:scale-110 transition" />
           </a>
         </div>
       </div>
