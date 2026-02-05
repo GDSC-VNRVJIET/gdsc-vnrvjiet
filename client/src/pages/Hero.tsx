@@ -1,19 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { SocialIcon } from "react-social-icons";
 import banner_1440X500px from "../home-assets/banner_1440X500px.png";
-//import banner_1440X500px from "../home-assets/Banner_1440X500px_white.png"
+import Banner_930X400px from "../home-assets/Banner_930X400px.png";
+import Banner_850X300px from "../home-assets/Banner_850X300px.jpg";
+import Banner_400X300px from "../home-assets/Banner_400X300px.png";
 import { BsInstagram } from "react-icons/bs";
 import { BsLinkedin } from "react-icons/bs";
 
 function Hero() {
-  const heroStyle = {
-    backgroundImage: `url(${banner_1440X500px})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-  };
-
   const navigate = useNavigate();
 
   const navigateLogin = () => {
@@ -21,10 +15,18 @@ function Hero() {
   };
 
   return (
-    <div
-      className="HeroSection relative flex flex-col bg-cover bg-center bg-no-repeat h-[60vh] min-h-[300px] max-h-[600px]"
-      style={heroStyle}
-    >
+    <div className="HeroSection relative h-[60vh] min-h-[300px] max-h-[600px] overflow-hidden">
+      <picture>
+        <source srcSet={banner_1440X500px} media="(min-width: 1156px)" />
+        <source srcSet={Banner_930X400px} media="(min-width: 850px)" />
+        <source srcSet={Banner_850X300px} media="(min-width: 650px)" />
+        <img
+          src={Banner_400X300px}
+          alt="Hero Banner"
+          className="w-full h-full object-cover"
+        />
+      </picture>
+
       <div
         className="
           absolute bottom-[25%]
