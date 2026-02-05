@@ -69,11 +69,11 @@ function Navbar() {
         </button>
       </div>
 
-      {/* Menu */}
+     
       <div className={`w-full ${isOpen ? "block" : "hidden"} min-[901px]:block`}>
         <div className="flex flex-col min-[901px]:flex-row items-center px-6 py-3 w-full">
 
-          {/* Desktop Logo */}
+         
           <div className="hidden min-[901px]:block flex-shrink-0">
             <NavLink to="/">
               <img
@@ -86,7 +86,7 @@ function Navbar() {
             </NavLink>
           </div>
 
-          {/* Navigation Items */}
+         
           <div
             className="
               flex-1
@@ -146,7 +146,7 @@ function Navbar() {
               </NavLink>
             ))}
 
-            {/* Explore Dropdown */}
+           
             <Popover className="relative">
               <PopoverButton
                 className="
