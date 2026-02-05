@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Hero from "./Hero";
 import "../styles/home.css";
-
 import webdeveloper from "../home-assets/webdeveloper.png";
 import programming from "../home-assets/programing.png";
 import aiml from "../home-assets/aiml.png";
@@ -12,7 +11,6 @@ import hardware from "../home-assets/hardware.png";
 import management from "../home-assets/management.png";
 import wit from "../home-assets/wit.png";
 import appdev from "../home-assets/appDev.png";
-
 import { motion, useInView, useAnimation } from "framer-motion";
 
 const cards = [
@@ -55,28 +53,28 @@ const cards = [
     image: appdev,
     title: "App Development",
     description:
-      "Students explore the art of creating mobile apps, transforming their ideas into engaging, user-friendly experiences. They focus on intuitive design, feature integration, and performance optimization.",
+      "Students explore the art of creating mobile apps, transforming their ideas into engaging, user-friendly experiences. They focus on intuitive design, feature integration, and performance optimization, equipping themselves with the skills to launch standout applications in the digital marketplace.",
     path: "/app-development",
   },
   {
     image: hardware,
     title: "Hardware",
     description:
-      "Hands-on hardware development through circuit design, microcontrollers, and component integration to build innovative real-world solutions.",
+      "The world of hardware development invites individuals to craft physical devices through hands-on projects in circuit design, microcontroller programming, and component integration. This practical approach enhances functionality and troubleshooting skills, enabling the creation of innovative hardware solutions. The immersive experience fosters creativity and problem-solving, empowering participants to drive technological innovation and meet real-world demands.",
     path: "/hardware",
   },
   {
     image: wit,
     title: "Women in tech",
     description:
-      "Empowers women in technology through mentorship, resources, and a supportive community, inspiring future leaders in STEM.",
+      "Empowers women in technology through mentorship, resources, and a supportive community, inspiring growth and innovation for future leaders in STEM.",
     path: "/women-in-tech",
   },
   {
     image: cyber,
     title: "Testing and Cybersecurity",
     description:
-      "Focuses on securing digital systems, vulnerability testing, and ensuring reliable, high-quality software solutions.",
+      "Explore the critical fields of Cybersecurity and Testing, where we work to secure digital assets and ensure software reliability. From vulnerability assessments to penetration testing and quality assurance, our focus is on developing skills to identify, mitigate, and prevent cyber threats. Join us to build a safer digital world and deliver secure, high-quality tech solutions.",
     path: "/testing-cybersecutiry",
   },
 ];
@@ -105,7 +103,7 @@ function Home() {
       if (isInView) {
         mainControls.start("visible");
       }
-    }, [isInView, mainControls]);
+    }, [isInView]);
 
     return (
       <motion.div
@@ -116,7 +114,7 @@ function Home() {
         }}
         initial="hidden"
         animate={mainControls}
-        transition={{ duration: 0.8, delay: 0.3 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
       >
         {children}
       </motion.div>
@@ -126,53 +124,53 @@ function Home() {
   return (
     <div style={{ backgroundColor: "#F0F0F0" }}>
       <Hero />
-
-      <div className="p-4 md:p-5 text-slate-800">
+      <div className="p-5 text-slate-800">
         <Reveal>
-          <div className="text-center my-6">
-            <p className="text-2xl md:text-4xl font-bold">
+          <div className="text-center m-4">
+            <p className="text-2xl md:text-4xl text-slate-800 font-bold">
               What we do, at GDGC VNRVJIET :
             </p>
           </div>
         </Reveal>
 
-        <div className="mx-4 md:mx-20 my-10">
-          {cards.map((card, index) => (
-            <Reveal key={index}>
-              <Link to={card.path}>
+        <div className="m-4 md:m-20">
+          <Reveal>
+            {cards.map((card, index) => (
+              <Link to={card.path} key={index}>
                 <div
-                  className={`flex flex-col md:flex-row ${
-                    index % 2 !== 0 ? "md:flex-row-reverse" : ""
-                  } w-full border mt-10 p-4 md:p-6 rounded-2xl`}
+                  className={`flex w-full border m-2 mt-10 p-4 rounded-2xl flex-col md:flex-row ${
+                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                  }`}
                   style={{
                     border: "2px solid",
                     borderColor: getBorderColor(index),
                     backgroundColor: "#FFFFFF",
+                    minHeight: "260px",
                   }}
                 >
-                  <div className="w-full md:w-[270px] h-[180px] md:h-[200px] flex items-center justify-center mb-4 md:mb-0">
+                  <div className="flex-shrink-0 w-[270px] h-[200px] overflow-hidden hidden md:flex items-center justify-center pt-3 pb-3">
                     <img
                       src={card.image}
-                      alt={card.title}
-                      className="max-w-full max-h-full object-contain"
+                      alt="image"
+                      className="rounded-lg max-w-full max-h-full object-contain"
                     />
                   </div>
 
-                  <div className="flex-grow md:px-6">
+                  <div className="flex-grow p-4 md:p-6 text-center md:text-left">
                     <h3
-                      className="text-2xl md:text-3xl font-extrabold mb-3"
+                      className="text-xl md:text-3xl font-extrabold m-2 md:m-4"
                       style={{ color: getTitleColor(index) }}
                     >
                       {card.title}
                     </h3>
-                    <p className="text-sm md:text-base leading-relaxed desc-text">
+                    <p className="mb-4 text-sm md:text-base desc-text">
                       {card.description}
                     </p>
                   </div>
                 </div>
               </Link>
-            </Reveal>
-          ))}
+            ))}
+          </Reveal>
         </div>
       </div>
     </div>

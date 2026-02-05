@@ -3,6 +3,7 @@ import banner_1440X500px from "../home-assets/banner_1440X500px.png";
 import Banner_930X400px from "../home-assets/Banner_930X400px.png";
 import Banner_850X300px from "../home-assets/Banner_850X300px.jpg";
 import Banner_400X300px from "../home-assets/Banner_400X300px.png";
+import Banner_1200X500px from "../home-assets/Banner_1200X500px.png";
 import { BsInstagram, BsLinkedin } from "react-icons/bs";
 
 function Hero() {
@@ -23,7 +24,8 @@ function Hero() {
     >
      
       <picture>
-        <source srcSet={banner_1440X500px} media="(min-width: 1156px)" />
+        <source srcSet={banner_1440X500px} media="(min-width: 1200px)" />
+        <source srcSet={Banner_1200X500px} media="(min-width: 930px)" />
         <source srcSet={Banner_930X400px} media="(min-width: 850px)" />
         <source srcSet={Banner_850X300px} media="(min-width: 650px)" />
         <img
