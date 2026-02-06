@@ -32,13 +32,11 @@ eventApp.get(
     let eventCollectionObject = await getDBObj("eventCollectionObject");
     let events = await eventCollectionObject.find({}).toArray();
 
-    // Filter past events
-    let pastEvents = events.filter(event => new Date(event.endDate) < new Date());
+    // Return all events (no date filtering)
+    // Sort by startDate in ascending order
+    events.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
 
-    // Sort in descending order by startDate
-    pastEvents.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-
-    response.send({ message: "Past Events", payload: pastEvents });
+    response.send({ message: "Past Events", payload: events });
   })
 );
 
@@ -64,11 +62,11 @@ eventApp.get(
     //     isPast: 0,
     //   })
     let events = await eventCollectionObject.find({}).toArray();
-let upcomingEvents = events.filter(event => new Date(event.startDate) >= new Date());
+    let upcomingEvents = events.filter(event => new Date(event.startDate) >= new Date());
 
-      // .sort({ startDate: -1 })
-      // .toArray();
-      upcomingEvents.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+    // .sort({ startDate: -1 })
+    // .toArray();
+    upcomingEvents.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
     // events.reverse();
     response.send({ message: "Upcoming Events", payload: upcomingEvents });
 
