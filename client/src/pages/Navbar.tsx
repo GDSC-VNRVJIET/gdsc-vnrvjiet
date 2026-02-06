@@ -22,7 +22,7 @@ const menuItems = [
   { name: "Practice", path: "/practice" },
   {
     name: "Join Us",
-    path: "/https://gdg.community.dev/gdg-on-campus-vallurupalli-nageswara-rao-vignana-jyothi-institute-of-engineering-and-technology-hyderabad-india/",
+    path: "https://gdg.community.dev/gdg-on-campus-vallurupalli-nageswara-rao-vignana-jyothi-institute-of-engineering-and-technology-hyderabad-india/",
   },
 ];
 
