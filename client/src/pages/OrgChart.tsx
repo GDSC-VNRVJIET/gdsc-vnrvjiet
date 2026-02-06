@@ -86,6 +86,7 @@ import UdayImg from "./Domain Info/profile_images/CP/GUdhayYadav.jpg";
 import ShahidImg from "./Domain Info/profile_images/CS/Shahid Ameed.jpg";
 import NikhilImg from "./Domain Info/profile_images/Management/Nikhil Chanda.jpg";
 import AbhijeetImg from "./Domain Info/profile_images/Outreach/Abhijeet Jetti.png";
+import akashImg from "./Domain Info/profile_images/AIML/akash.jpg";
 import Popover from "./Popover";
 import { set } from "date-fns";
 import { Domain } from "domain";
@@ -183,9 +184,10 @@ const data2026: OrgChartData = {
       name: "Siddharth",
       img: siddharth ,
       coordinators: [
-        { name: "Keerthika", img: keerthikaimg },
+        //{ name: "Keerthika", img: keerthikaimg },
         // { name: "Roshini", img: roshiniimg },
-        { name: "Bharath Chandra", img: bharathimg },
+        //{ name: "Bharath Chandra", img: bharathimg },
+        { name: "Akash", img: akashImg },
       ],
       volunteers: [
       ],
@@ -221,6 +223,20 @@ const data2026: OrgChartData = {
       ],
       type: "nonTechnical",
     },
+
+    {
+      role: "AppDev Lead",
+      name: "Uday Sagar",
+      img: udaysagar,
+      coordinators: [
+        {name:"Akhil",img:akhilimg},
+        {name:"Shiva",img:shivaimg}
+      ],
+      volunteers: [],
+      type:"technical",
+    },
+
+
     {
       role: "Testing and Cybersecurity Lead",
       name: "Shahid Ameed",
@@ -245,17 +261,7 @@ const data2026: OrgChartData = {
       volunteers: [],
       type:"technical",
     },
-    {
-      role: "AppDev Lead",
-      name: "Uday Sagar",
-      img: udaysagar,
-      coordinators: [
-        {name:"Akhil",img:akhilimg},
-        {name:"Shiva",img:shivaimg}
-      ],
-      volunteers: [],
-      type:"technical",
-    },
+  
     {
       role:"Hardware Lead",
       name:"Durga Madhav",
