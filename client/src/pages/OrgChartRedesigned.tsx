@@ -697,10 +697,11 @@ const OrgChart = () => {
               ref={(el) => {
                 imagesRef.current[index] = el;
               }}
+              className="w-[150px] lg:w-[400px] sm:w-[300px]"
               style={{
               position: 'absolute',
-              width: '400px',
-              height: '400px',
+              // width: '400px',
+              // height: '400px',
               objectFit: 'cover',
               filter: 'blur(70px)',
               opacity: 0.8,
