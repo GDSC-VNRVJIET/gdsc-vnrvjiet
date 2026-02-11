@@ -96,6 +96,7 @@ import { set } from "date-fns";
 import { Domain } from "domain";
 import { relative } from "path";
 import Popover from "./Popover";
+import GlassCard from "./GlassCard";
 
 interface Person {
   role: string;
@@ -131,9 +132,11 @@ type FloatingObject = {
   y: number;
   vx: number;
   vy: number;
+  radius: number;
   width: number;
   height: number;
 };
+
 
 const data2026: OrgChartData = {
   facultyAdvisor: { role: "Faculty Advisor", name: "Bharath Sir", img: bharathsirimg },
@@ -537,17 +540,20 @@ const OrgChart = () => {
     );
 
     const objects: FloatingObject[] = elements.map((el) => {
-      const rect = el.getBoundingClientRect();
-      return {
-        el,
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        width: rect.width,
-        height: rect.height,
-      };
-    });
+    const rect = el.getBoundingClientRect();
+    const size = rect.width; // assume square
+
+    return {
+      el,
+      x: Math.random() * (window.innerWidth - size),
+      y: Math.random() * (window.innerHeight - size),
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      width: size,
+      height: size,
+      radius: size / 2,
+    };
+  });
 
     const animate = () => {
       objects.forEach((obj) => {
@@ -577,13 +583,48 @@ const OrgChart = () => {
           obj.y = window.innerHeight - height;
           obj.vy *= -1;
         }
+      });
 
+      // Collision detection
+      for (let i = 0; i < objects.length; i++) {
+        for (let j = i + 1; j < objects.length; j++) {
+          const obj1 = objects[i];
+          const obj2 = objects[j];
+
+          const dx = (obj1.x + obj1.radius) - (obj2.x + obj2.radius);
+          const dy = (obj1.y + obj1.radius) - (obj2.y + obj2.radius);
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          const minDistance = obj1.radius + obj2.radius;
+
+          if (distance < minDistance) {
+            // Overlapping → push apart
+            const angle = Math.atan2(dy, dx);
+            const overlap = minDistance - distance;
+
+            obj1.x += Math.cos(angle) * (overlap / 2);
+            obj1.y += Math.sin(angle) * (overlap / 2);
+            obj2.x -= Math.cos(angle) * (overlap / 2);
+            obj2.y -= Math.sin(angle) * (overlap / 2);
+
+            // Optional: bounce effect
+            const tempVx = obj1.vx;
+            const tempVy = obj1.vy;
+
+            obj1.vx = obj2.vx;
+            obj1.vy = obj2.vy;
+            obj2.vx = tempVx;
+            obj2.vy = tempVy;
+          }
+        }
+      }
+
+      objects.forEach((obj) => {
         obj.el.style.transform = `translate(${obj.x}px, ${obj.y}px)`;
       });
 
       animationRef.current = requestAnimationFrame(animate);
     };
-
 
     animate();
 
@@ -697,7 +738,7 @@ const OrgChart = () => {
               ref={(el) => {
                 imagesRef.current[index] = el;
               }}
-              className="w-[150px] lg:w-[400px] sm:w-[300px]"
+              className="w-[150px] lg:w-[350px] sm:w-[250px]"
               style={{
               position: 'absolute',
               // width: '400px',
@@ -713,7 +754,7 @@ const OrgChart = () => {
         )}
       </div>
 
-      <div className="min-h-screen bg-transparent z-40 flex flex-col items-center py-10 relative overflow-x-hidden" style={{ fontFamily: '"Google Sans", sans-serif' }}>
+      <div className="min-h-screen bg-transparent z-40 p-[100px] flex flex-col items-center py-10 relative overflow-x-hidden" style={{ fontFamily: '"Google Sans", sans-serif' }}>
         <h1 className="text-4xl font-bold mb-6 text-center" style={{ fontFamily: '"Google Sans", sans-serif' }}>
           Organizational Chart
         </h1>
@@ -756,12 +797,15 @@ const OrgChart = () => {
 
         <>
           {/* Faculty Advisor */}
-            <div className="flex flex-col items-center space-y-4 mb-6">
+
+            {/* <div className="flex flex-col items-center space-y-4 mb-6">
             <div
-              className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
+              className="shrink-0 overflow-hidden"
               onMouseEnter={(e) => handleLeadClickEvent("close", dataToDisplay.facultyAdvisor as DomainLead, e, -1)}
               onMouseLeave={() => handleMouseLeave()}
             >
+              <GlassCard profileImage={dataToDisplay.facultyAdvisor.img} personRole={dataToDisplay.facultyAdvisor.role} personName={dataToDisplay.facultyAdvisor.name} />
+
               <img
                 src={dataToDisplay.facultyAdvisor.img}
                 alt={dataToDisplay.facultyAdvisor.role}
@@ -772,12 +816,16 @@ const OrgChart = () => {
             <p className="text-md" style={{ fontFamily: '"Google Sans", sans-serif', color: 'grey-200' }}>
               {dataToDisplay.facultyAdvisor.name}
             </p>
+          </div> */}
+
+          <div className="mx-1 flex flex-col items-center w-2/3 mb-5">
+            <GlassCard profileImage={dataToDisplay.facultyAdvisor.img} personRole={dataToDisplay.facultyAdvisor.role} personName={dataToDisplay.facultyAdvisor.name} />
           </div>
 
           {/* Lead */}
-          <div className="flex flex-col items-center space-y-4 mb-6">
+          {/* <div className="flex flex-col items-center space-y-4 mb-6">
             <div
-              className="shrink-0 w-36 h-36 md:w-48 md:h-48 overflow-hidden"
+              className="shrink-0 w-1/3 overflow-hidden"
               onMouseEnter={(e) => handleLeadClickEvent("close", dataToDisplay.lead as DomainLead, e, -1)}
               onMouseLeave={() => handleMouseLeave()}
             >
@@ -786,15 +834,29 @@ const OrgChart = () => {
                 alt={dataToDisplay.lead.role}
                 className="shrink-0 rounded-full w-full h-full object-cover"
               />
+              <GlassCard profileImage={dataToDisplay.lead.img} personRole={dataToDisplay.lead.role} personName={dataToDisplay.lead.name} />
             </div>
             <h2 className="text-xl font-semibold" style={{ fontFamily: '"Google Sans", sans-serif' }}>{dataToDisplay.lead.role}</h2>
             <p className="text-md" style={{ fontFamily: '"Google Sans", sans-serif', color: 'grey-200' }}>
               {dataToDisplay.lead.name}
             </p>
+          </div> */}
+
+          <div className="chapter-lead">
+            <h2 className="text-2xl font-bold mb-6">Chapter's Lead</h2>
+          </div>
+
+          <div className="mx-1 flex flex-col items-center w-1/3 mb-5">
+            <GlassCard profileImage={dataToDisplay.lead.img} personRole={dataToDisplay.lead.role} personName={dataToDisplay.lead.name} />
+          </div>
+
+          <div style={{ borderBottom: '4px solid red' }} className="domain-leads text-center my-5">
+            <p className="">Meet our specialized units</p>
+            <h1 className="text-5xl font-bold">Domain Leads</h1>
           </div>
 
           {/* Domain Leads Grid */}
-          <div className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${year === 2025 ? "xl:grid-cols-5" : "xl:grid-cols-6"} justify-around gap-y-10 relative cursor-pointer`} style={{ columnGap: 15 }}>
+          <div className={`mt-5 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${year === 2025 ? "xl:grid-cols-3" : "xl:grid-cols-3"} justify-around gap-y-10 relative cursor-pointer`} style={{ columnGap: 15 }}>
             { dataToDisplay.domainLeads.map((person, index) => {
               return (
                 <div
@@ -826,7 +888,9 @@ const OrgChart = () => {
                     ) : null
                   }
 
-                  <div 
+                  <GlassCard profileImage={person.img} personRole={person.role} personName={person.name} />
+
+                  {/* <div 
                     className={`shrink-0 w-36 h-36 md:w-48 md:h-48 transition-all duration-300 ${
                       selectedPerson === person 
                         ? 'transform -translate-y-2 scale-105 shadow-lg bg-blue-100 rounded-full p-1' 
@@ -844,7 +908,7 @@ const OrgChart = () => {
                   </h2>
                   <p className="text-md text-center" style={{ fontFamily: '"Google Sans", sans-serif', color: 'Grey-200 ' }}>
                     {person.name}
-                  </p>
+                  </p> */}
                 </div>
               );
             })}

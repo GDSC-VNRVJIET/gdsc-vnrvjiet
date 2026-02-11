@@ -222,7 +222,7 @@ function Root() {
       {showScrollToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-4 right-4 p-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 focus:outline-none"
+          className="fixed bottom-4 right-4 p-3 z-500 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 focus:outline-none"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
