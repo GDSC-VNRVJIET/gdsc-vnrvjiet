@@ -21,7 +21,7 @@ import PastEvents from "./pages/Events/PastEvents";
 import Login from "./pages/Login";
 import Forum from "./pages/Forum";
 import Team from "./pages/Team";
-import OrgChart from "./pages/OrgChart";
+import OrgChart from "./pages/OrgChartRedesigned";
 import UpcomingEvents from "./pages/Events/UpcomingEvents";
 import SolutionChallenge from "./pages/SolutionChallenge";
 import CommunityGuidelines from "./pages/CommunityGuidelines";

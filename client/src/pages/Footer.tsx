@@ -5,7 +5,7 @@ import logo from "../home-assets/logo_stacked.png";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="text-gray-600 shadow-lg mt-4">
+    <footer className="text-gray-600 shadow-lg mt-4 bg-white z-50">
       <div className="container mx-auto px-6 sm:px-10 lg:px-24 py-8 flex flex-col lg:flex-row justify-between items-center gap-10">
 
         <div className="text-center lg:text-left">

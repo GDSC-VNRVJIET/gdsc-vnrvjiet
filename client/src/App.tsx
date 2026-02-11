@@ -20,7 +20,9 @@ function App() {
         <Root />
       </main>
       <Toaster />
-      <Footer />
+      <div className="footer z-50">
+        <Footer />
+      </div>
     </div>
   );
 }
