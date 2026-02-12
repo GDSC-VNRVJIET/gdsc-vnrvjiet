@@ -754,7 +754,7 @@ const OrgChart = () => {
         )}
       </div>
 
-      <div className="min-h-screen bg-transparent z-40 p-[100px] flex flex-col items-center py-10 relative overflow-x-hidden" style={{ fontFamily: '"Google Sans", sans-serif' }}>
+      <div className="min-h-screen bg-transparent z-40 p-[150px] flex flex-col items-center py-10 relative overflow-x-hidden" style={{ fontFamily: '"Google Sans", sans-serif' }}>
         <h1 className="text-4xl font-bold mb-6 text-center" style={{ fontFamily: '"Google Sans", sans-serif' }}>
           Organizational Chart
         </h1>

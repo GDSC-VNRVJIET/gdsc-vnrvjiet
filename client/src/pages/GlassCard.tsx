@@ -42,7 +42,7 @@ function GlassCard({ profileImage, personRole, personName }: any) {
             </div>
           </div>
         ) : (
-          <div className="bg-white/50 backdrop-blur-lg rounded-xl p-6 border border-white/30 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 w-full">
+          <div className="bg-white/[.4] backdrop-blur-lg rounded-xl px-0 py-[40px] border border-white/30 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 w-full">
             <div className="text-black text-center">
               <img
                 src={profileImage}
@@ -50,11 +50,11 @@ function GlassCard({ profileImage, personRole, personName }: any) {
                 className="shrink-0 rounded-full w-2/3 h-2/3 object-cover m-auto"
               />
 
-              <h2 className="text-lg font-medium text-center mt-2" style={{ fontFamily: '"Google Sans", sans-serif' }}>
-                {personRole}
+              <h2 className="text-xl font-medium text-center mt-2" style={{ fontFamily: '"Google Sans", sans-serif' }}>
+                {personName}
               </h2>
               <p className="text-md text-center" style={{ fontFamily: '"Google Sans", sans-serif', color: 'Grey-200 ' }}>
-                {personName}
+                {personRole}
               </p>
               
               <div className="socials grid mt-5 grid-cols-2 w-1/4 m-auto">
