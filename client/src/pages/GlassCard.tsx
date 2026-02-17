@@ -42,13 +42,22 @@ function GlassCard({ profileImage, personRole, personName }: any) {
             </div>
           </div>
         ) : (
-          <div className="bg-white/[.4] backdrop-blur-lg rounded-xl px-0 py-[40px] border border-white/30 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 w-full">
+          <div className="bg-white/30 backdrop-blur-xl rounded-3xl 
+                border border-white/40 shadow-2xl
+                transition-all duration-300 hover:scale-105
+                w-full max-w-[420px] h-[470px]
+                flex flex-col items-center justify-start
+                pt-8 pb-2 px-8">
             <div className="text-black text-center">
-              <img
-                src={profileImage}
-                alt={personRole}
-                className="shrink-0 rounded-full w-2/3 h-2/3 object-cover m-auto"
-              />
+              <div className="w-[260px] h-[260px] rounded-full 
+                border-[6px] border-black 
+                overflow-hidden shadow-xl">
+                  <img
+                    src={profileImage}
+                     alt={personRole}
+                      className="w-full h-full object-cover"
+                     />
+          </div> 
 
               <h2 className="text-xl font-medium text-center mt-2" style={{ fontFamily: '"Google Sans", sans-serif' }}>
                 {personName}
@@ -57,14 +66,9 @@ function GlassCard({ profileImage, personRole, personName }: any) {
                 {personRole}
               </p>
               
-              <div className="socials grid mt-5 grid-cols-2 w-1/4 m-auto">
-                <div className="socials  text-center m-auto h-[20px]">
-                  <FaGithub size={20} />
-                </div>
-
-                <div className="socials  text-center m-auto h-[20px]">
-                  <FaLinkedin size={20} />
-                </div>
+             <div className="flex justify-center items-center gap-8 mt-4 w-full">
+               <FaGithub size={24} className="cursor-pointer hover:scale-110 transition" />
+               <FaLinkedin size={24} className="cursor-pointer hover:scale-110 transition" />
               </div>
             </div>
           </div>
