@@ -88,28 +88,44 @@ import AbhijeetImg from "./Domain Info/profile_images/Outreach/Abhijeet Jetti.pn
 import akashImg from "./Domain Info/profile_images/AIML/akash.jpg";
 import Popover from "./Popover";
 import GlassCard from "./GlassCard";
+import star from "../orgchart/star.png"
+import { BsInstagram, BsLinkedin } from "react-icons/bs";
+import "../styles/org.css";
+import slants from "../orgchart/slants.png";
 
-interface Person { role: string; name: string; img: string }
+interface Person {
+  role: string
+  name: string
+  img: string
+  description?: string
+  linkedin?: string
+}
 interface Coordinator { name: string; img: string }
 interface Volunteer { name: string; img: string }
 interface DomainLead extends Person { coordinators: Coordinator[]; volunteers: Volunteer[]; type?: string }
 interface OrgChartData { facultyAdvisor: Person; lead: Person; domainLeads: DomainLead[] }
 
 const data2026: OrgChartData = {
-  facultyAdvisor: { role: "Faculty Advisor", name: "Bharath Sir", img: bharathsirimg },
+  facultyAdvisor: {
+    role: "Faculty Advisor",
+    name: "Bharath Sir",
+    img: bharathsirimg,
+    description: "Dr. Bharath Kumar Chowdary is the faculty advisor of the Google Developer Groups chapter at VNRVJIET. He mentors students in building technical communities and encourages innovation through collaborative projects.",
+    linkedin: "https://www.linkedin.com/in/bharath-kumar-chowdary"
+  },
   lead: { role: "Lead", name: "Sri Kruthi", img: KruthiImg },
- 
+
   domainLeads: [
-    { 
-      role: "Co Lead", 
-      name: "Sri Manikanta", 
+    {
+      role: "Co Lead",
+      name: "Sri Manikanta",
       img: ManikantaImg,
       coordinators: [],
       volunteers: [],
     },
-    { 
-      role: "Outreach Lead", 
-      name: "Abhijeet Jetti", 
+    {
+      role: "Outreach Lead",
+      name: "Abhijeet Jetti",
       img: AbhijeetImg,
       coordinators: [],
       volunteers: [],
@@ -124,21 +140,21 @@ const data2026: OrgChartData = {
         { name: "Sai Ritesh Domakuntla", img: RiteshImg }
       ],
       volunteers: [
-        
+
       ],
-      type:"technical",
+      type: "technical",
     },
     {
       role: "CP Lead",
       name: "G Udhay Yadav",
       img: UdayImg,
       coordinators: [
-        {name:"Kanakamedala Bhanu Prakash",img:bhanuprakash},
-        {name:"K Pavan Kumar",img:pavankumar}
+        { name: "Kanakamedala Bhanu Prakash", img: bhanuprakash },
+        { name: "K Pavan Kumar", img: pavankumar }
       ],
       volunteers: [
       ],
-      type:"technical",
+      type: "technical",
     },
     {
       role: "Management Lead",
@@ -157,7 +173,7 @@ const data2026: OrgChartData = {
     {
       role: "AIML Lead",
       name: "Siddharth",
-      img: siddharth ,
+      img: siddharth,
       coordinators: [
         //{ name: "Keerthika", img: keerthikaimg },
         // { name: "Roshini", img: roshiniimg },
@@ -166,7 +182,7 @@ const data2026: OrgChartData = {
       ],
       volunteers: [
       ],
-      type:"technical",
+      type: "technical",
     },
     {
       role: "Design and Social Media Lead",
@@ -176,8 +192,8 @@ const data2026: OrgChartData = {
         { name: "Abdul Raheem", img: abdulraheemimg },
         { name: "Abhishek Pothanagari", img: abhishekimg },
         { name: "Hindu Sri Jupelli", img: hindusriimg },
-        {name:"Md Zaki",img:zakiimg},
-        {name:"Pavitra Jasti",img:pavitraimg}
+        { name: "Md Zaki", img: zakiimg },
+        { name: "Pavitra Jasti", img: pavitraimg }
       ],
       volunteers: [
       ],
@@ -191,8 +207,8 @@ const data2026: OrgChartData = {
         { name: "Abdul Raheem", img: abdulraheemimg },
         { name: "Abhishek Pothanagari", img: abhishekimg },
         { name: "Hindu Sri Jupelli", img: hindusriimg },
-        {name:"Md Zaki",img:zakiimg},
-        {name:"Pavitra Jasti",img:pavitraimg}
+        { name: "Md Zaki", img: zakiimg },
+        { name: "Pavitra Jasti", img: pavitraimg }
       ],
       volunteers: [
       ],
@@ -204,11 +220,11 @@ const data2026: OrgChartData = {
       name: "Uday Sagar",
       img: udaysagar,
       coordinators: [
-        {name:"Akhil",img:akhilimg},
-        {name:"Shiva",img:shivaimg}
+        { name: "Akhil", img: akhilimg },
+        { name: "Shiva", img: shivaimg }
       ],
       volunteers: [],
-      type:"technical",
+      type: "technical",
     },
 
 
@@ -217,58 +233,58 @@ const data2026: OrgChartData = {
       name: "Shahid Ameed",
       img: ShahidImg,
       coordinators: [
-        {name:"Ashraya Yelisetty",img:ashraya},
-        {name:"M INDRANEELI VARDHAN ",img:vardhan},
-        {name:"Mahesh Patnala",img:mahesh}
+        { name: "Ashraya Yelisetty", img: ashraya },
+        { name: "M INDRANEELI VARDHAN ", img: vardhan },
+        { name: "Mahesh Patnala", img: mahesh }
       ],
       volunteers: [],
-      type:"technical",
+      type: "technical",
     },
     {
       role: "Testing and Cybersecurity Lead",
       name: "Harshitha Mandadi",
       img: Harshitha,
       coordinators: [
-        {name:"Ashraya Yelisetty",img:ashraya},
-        {name:"M INDRANEELI VARDHAN ",img:vardhan},
-        {name:"Mahesh Patnala",img:mahesh}
+        { name: "Ashraya Yelisetty", img: ashraya },
+        { name: "M INDRANEELI VARDHAN ", img: vardhan },
+        { name: "Mahesh Patnala", img: mahesh }
       ],
       volunteers: [],
-      type:"technical",
+      type: "technical",
     },
-  
+
     {
-      role:"Hardware Lead",
-      name:"Durga Madhav",
-      img:durgamadhav,
-      coordinators:[
-        {name:"Emani Venkata Gaurav",img:venkatagauravimg},
-        {name:"Sri Harshitha Yalla",img:harshithaimg}
+      role: "Hardware Lead",
+      name: "Durga Madhav",
+      img: durgamadhav,
+      coordinators: [
+        { name: "Emani Venkata Gaurav", img: venkatagauravimg },
+        { name: "Sri Harshitha Yalla", img: harshithaimg }
       ],
-      volunteers:[],
-      type:"non technical"
+      volunteers: [],
+      type: "non technical"
     },
     {
       role: "Women In Tech Lead",
       name: "Roshini Kotagiri",
       img: roshini,
       coordinators: [
-        {name:"Yasaswini Devi",img:yasaswiniimg}
+        { name: "Yasaswini Devi", img: yasaswiniimg }
       ],
       volunteers: [],
-      type:"technical",
+      type: "technical",
     },
-    
+
   ],
 };
 const data2025: OrgChartData = {
   facultyAdvisor: { role: "Faculty Advisor", name: "Bharath Sir", img: bharathsirimg },
   lead: { role: "Lead", name: "Jayasree Gondipalle", img: jayasreeimg },
- 
+
   domainLeads: [
-    { 
-      role: "Co Lead", 
-      name: "Sahithi Kolla", 
+    {
+      role: "Co Lead",
+      name: "Sahithi Kolla",
       img: sahithiimg,
       coordinators: [],
       volunteers: [],
@@ -283,22 +299,22 @@ const data2025: OrgChartData = {
         { name: "Lakshita", img: lakshitaimg },
       ],
       volunteers: [
-        
+
       ],
-      type:"technical",
+      type: "technical",
     },
     {
       role: "CP Lead",
       name: "Harsha Vardhan",
       img: harshaimg,
       coordinators: [
-        {name:"Sai Lokesh",img:sailokesh},
-        {name:"N Vishnu Vardhan",img:vishnuvardhan},
-        {name:"G Udhay Yadav",img:udayyadav}
+        { name: "Sai Lokesh", img: sailokesh },
+        { name: "N Vishnu Vardhan", img: vishnuvardhan },
+        { name: "G Udhay Yadav", img: udayyadav }
       ],
       volunteers: [
       ],
-      type:"technical",
+      type: "technical",
     },
     {
       role: "Management Lead",
@@ -316,7 +332,7 @@ const data2025: OrgChartData = {
     {
       role: "AIML Lead",
       name: "Surya Teja Chittiprolu",
-      img: suryaimg ,
+      img: suryaimg,
       coordinators: [
         { name: "Keerthika", img: keerthikaimg },
         // { name: "Roshini", img: roshiniimg },
@@ -324,7 +340,7 @@ const data2025: OrgChartData = {
       ],
       volunteers: [
       ],
-      type:"technical",
+      type: "technical",
     },
     {
       role: "Design Lead",
@@ -333,8 +349,8 @@ const data2025: OrgChartData = {
       coordinators: [
         { name: "Ch. Anirudh", img: chanirudhimg },
         { name: "Arya Joshi", img: aryaimg },
-        {name:"Rishitha",img:rishithaimg},
-        {name:"Tanmayee Kyram",img:tanmayeeimg}
+        { name: "Rishitha", img: rishithaimg },
+        { name: "Tanmayee Kyram", img: tanmayeeimg }
       ],
       volunteers: [
       ],
@@ -345,10 +361,10 @@ const data2025: OrgChartData = {
       name: "Pavanpraneetha Kunuku",
       img: praneethaimg,
       coordinators: [
-        {name:"Ch.Anirudh",img:chanirudhimg},
-        {name:"Tanmayee Kyram",img:tanmayeeimg},
-        {name:"Arya Joshi",img:aryaimg},
-        {name:"Rishitha",img:rishithaimg}
+        { name: "Ch.Anirudh", img: chanirudhimg },
+        { name: "Tanmayee Kyram", img: tanmayeeimg },
+        { name: "Arya Joshi", img: aryaimg },
+        { name: "Rishitha", img: rishithaimg }
       ],
       volunteers: [],
       type: "nonTechnical",
@@ -358,46 +374,46 @@ const data2025: OrgChartData = {
       name: "Vinay Gajula",
       img: vinayimg,
       coordinators: [
-        {name:"Harshitha Mandadi",img:Harshitha},
-        {name:"Shahid",img:Shahid},
+        { name: "Harshitha Mandadi", img: Harshitha },
+        { name: "Shahid", img: Shahid },
       ],
       volunteers: [],
-      type:"technical",
+      type: "technical",
     },
     {
       role: "AppDev Lead",
       name: "Jahnavi Reddy",
       img: jahnavireddyimg,
       coordinators: [
-        {name:"Uday Sagar",img:UdaySagar},
-        {name:"Vinay Kumar",img:VinayKumar}
+        { name: "Uday Sagar", img: UdaySagar },
+        { name: "Vinay Kumar", img: VinayKumar }
       ],
       volunteers: [],
-      type:"technical",
+      type: "technical",
     },
     {
-      role:"Hardware Lead",
-      name:"Avaneesh",
-      img:hardwarelead,
-      coordinators:[
-        {name:"Nishma Reddy",img:nishmaimg},
-        {name:"Durga Madhav",img:durgamadhavimg},
-        {name:"Dhruva",img:Dhruva}
+      role: "Hardware Lead",
+      name: "Avaneesh",
+      img: hardwarelead,
+      coordinators: [
+        { name: "Nishma Reddy", img: nishmaimg },
+        { name: "Durga Madhav", img: durgamadhavimg },
+        { name: "Dhruva", img: Dhruva }
       ],
-      volunteers:[],
-      type:"non technical"
+      volunteers: [],
+      type: "non technical"
     },
     {
       role: "Women In Tech Lead",
       name: "Nikhita Kashyap D",
       img: nikhitaimg,
       coordinators: [
-        {name:"Roshini Kotagiri",img:roshiniimg}
+        { name: "Roshini Kotagiri", img: roshiniimg }
       ],
       volunteers: [],
-      type:"technical",
+      type: "technical",
     },
-    
+
   ],
 };
 const data2024: OrgChartData = {
@@ -456,7 +472,7 @@ const data2024: OrgChartData = {
     {
       role: "ML Lead",
       name: "Akhil",
-      img: mllead ,
+      img: mllead,
       coordinators: [
         { name: "Nikhita Kashyap", img: nikhitaimg },
         { name: "Surya Teja", img: suryaimg },
@@ -483,7 +499,7 @@ const data2024: OrgChartData = {
         { name: "Rishitha", img: rishithaimg },
       ],
     },
-   
+
   ],
 };
 
@@ -524,47 +540,124 @@ const OrgChart = () => {
     }
   }
 
+  const cardColors = [
+    "#FFE8A5",
+    "#CCF6C6",
+    "#E8F0FE",
+    "#f8d8d8"
+  ];
+
   return (
     <div className="orgchart">
-      <div className="min-h-screen bg-white z-40 px-6 py-16 md:px-20 flex flex-col items-center relative overflow-x-hidden">
-        <h1 className="text-4xl font-bold mb-6 text-center">Organizational Chart</h1>
+      <div className="min-h-screen z-40 py-20 md:py-20 flex flex-col items-center relative overflow-x-hidden" style={{ background: "#FFFFFF" }}>
+        <h1 className="text-4xl md:text-5xl font-medium mb-10 text-center tracking-wide flex items-center justify-center gap-4">
 
-        <div className="flex space-x-4 mb-8">
-          <button className={`px-6 py-2 rounded-full font-semibold ${year === 2026 ? "bg-blue-500 text-white" : "bg-gray-200"}`} onClick={() => setYear(2026)}>2026</button>
-          <button className={`px-6 py-2 rounded-full font-semibold ${year === 2025 ? "bg-yellow-500 text-white" : "bg-gray-200"}`} onClick={() => setYear(2025)}>2025</button>
-          <button className={`px-6 py-2 rounded-full font-semibold ${year === 2024 ? "bg-red-500 text-white" : "bg-gray-200"}`} onClick={() => setYear(2024)}>2024</button>
-        </div>
+          <span className="animate-spin [animation-duration:6s]">
+            <img src={star} alt="star" className="w-9 h-9" />
+          </span>
 
-        <div className="mx-1 flex flex-col items-center w-2/3 mb-5">
-          <GlassCard profileImage={dataToDisplay.facultyAdvisor.img} personRole={dataToDisplay.facultyAdvisor.role} personName={dataToDisplay.facultyAdvisor.name} />
-        </div>
+          Organizational Chart
+          <span className="animate-[spin_6s_linear_infinite_reverse]">
+            <img src={star} alt="star" className="w-9 h-9" />
+          </span>
 
-        <h2 className="text-2xl font-bold mb-6">Chapter's Lead</h2>
+        </h1>
 
-        <div className="mx-1 flex flex-col items-center w-1/3 mb-5">
-          <GlassCard profileImage={dataToDisplay.lead.img} personRole={dataToDisplay.lead.role} personName={dataToDisplay.lead.name} />
-        </div>
 
-        <div className="border-b-4 border-red-500 text-center my-5">
-          <p>Meet our specialized units</p>
-          <h1 className="text-5xl font-bold">Domain Leads</h1>
-        </div>
+        <div className="w-full py-20 flex justify-center px-2" style={{ background: "#E8F0FE" }}>
+          <div className="max-w-7xl w-full flex flex-col md:flex-row items-center gap-16">
 
-        <div className="mt-5 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-3 gap-y-10">
-          {dataToDisplay.domainLeads.map((person, index) => (
-            <div key={index} className="flex flex-col items-center" onClick={() => handleLeadClickEvent("open", person)}>
-              {selectedPerson && selectedPerson.coordinators.length && selectedPerson === person && (
-                <div className="fixed inset-0 z-50 bg-black/60" onClick={() => setSelectedPerson(null)}>
-                  <Popover
-                    domainLeads={dataToDisplay.domainLeads}
-                    selectedPerson={selectedPerson}
-                    handleLeadClickEvent={handleLeadClickEvent}
-                    setSelectedPerson={setSelectedPerson}
-                  />
-                </div>
-              )}
-              <GlassCard profileImage={person.img} personRole={person.role} personName={person.name} />
+
+            <div className="flex-shrink-0 w-56 h-56 rounded-full border-4 border-[#8AB4F8] overflow-hidden">
+              <img
+                src={dataToDisplay.facultyAdvisor.img}
+                alt={dataToDisplay.facultyAdvisor.name}
+                className="w-full h-full object-cover"
+              />
             </div>
+
+
+            <div className="text-center md:text-left">
+
+              <p className="text-sm text-gray-500 tracking-wide mb-2 desc ">
+                Faculty Advisor
+              </p>
+
+              <h2 className="text-3xl font-bold mb-4">
+                {dataToDisplay.facultyAdvisor.name}
+              </h2>
+
+              <p className="text-[18px] font-normal leading-[32px] text-[#202124] mb-6 max-w-2xl">
+                {dataToDisplay.facultyAdvisor.description}
+              </p>
+
+              <a
+                href={dataToDisplay.facultyAdvisor.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-medium hover:underline"
+              >
+                <BsLinkedin className="w-5 h-5 sm:w-4 sm:h-4 hover:scale-110 transition" />
+                LinkedIn
+              </a>
+
+            </div>
+            <img
+              src={slants}
+              className="w-40 h-40 object-cover"
+            />
+          </div>
+        </div>
+
+        <div className="flex gap-2 mb-12 mt-12 p-1 rounded-full w-fit" style={{ background: "#E8F0FE" }}>
+          {[2026, 2025, 2024].map((y) => (
+            <button
+              key={y}
+              onClick={() => setYear(y)}
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200
+      ${year === y
+                  ? " shadow-md"
+                  : "hover:bg-white"
+                }`}
+              style={year === y ? { backgroundColor: "#8AB4F8" } : {}}
+            >
+              {y}
+            </button>
+          ))}
+        </div>
+
+
+        <h2 className="text-3xl md:text-4xl font-normal mt-10 mb-8 tracking-tight 
+bg-yellow-400 border-2 border-black px-8 py-4 inline-block rounded-2xl">
+          Chapter's Lead
+        </h2>
+
+        <div className="flex justify-center w-full mb-14 ">
+          <div className="w-full max-w-[320px]">
+            <GlassCard profileImage={dataToDisplay.lead.img} personRole={dataToDisplay.lead.role} personName={dataToDisplay.lead.name} />
+          </div>
+        </div>
+
+        <div className="text-center mt-20 mb-20">
+          <p className="text-gray-500 text-md desc">
+            meet our specialized units
+          </p>
+
+          <h2 className="text-3xl md:text-3xl font-normal mt-2 ">
+            Domain Leads
+          </h2>
+
+        </div>
+
+        <div className="mt-5 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 max-w-6xl mx-auto">
+          {dataToDisplay.domainLeads.map((person, index) => (
+            <GlassCard
+              key={index}
+              profileImage={person.img}
+              personRole={person.role}
+              personName={person.name}
+          
+            />
           ))}
         </div>
       </div>

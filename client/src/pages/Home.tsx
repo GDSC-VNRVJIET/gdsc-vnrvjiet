@@ -138,9 +138,8 @@ function Home() {
             {cards.map((card, index) => (
               <Link to={card.path} key={index}>
                 <div
-                  className={`flex w-full border m-2 mt-10 p-4 rounded-2xl flex-col md:flex-row ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
+                  className={`flex w-full border m-2 mt-10 p-4 rounded-2xl flex-col md:flex-row ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                    }`}
                   style={{
                     border: "2px solid",
                     borderColor: getBorderColor(index),
