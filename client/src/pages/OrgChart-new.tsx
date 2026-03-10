@@ -50,48 +50,50 @@ import shivaimg from "./Domain Info/images/AppDev/Shiva.jpg";
 import venkatagauravimg from "./Domain Info/images/Hardware/Emani Venkata Gaurav.jpg";
 import harshithaimg from "./Domain Info/images/Hardware/Sri Harshitha Yalla.jpg";
 import hardwarelead from "./Domain Info/images/Hardware/Hardwarelead.jpg";
-import tanmayeeimg from "./Domain Info/images/design/Tanmayee_kyram.jpg";
+import tanmayeeimg from "./Domain Info/images/design/tanmayee_lead.png";
 import aryaimg from "./Domain Info/images/design/Arya Joshi.jpg";
 import rishithaimg from "./Domain Info/images/design/Rishitha.jpg";
 import srikruthiimg from "./Domain Info/images/MANAGEMENT/SriKruthi.jpg";
 import abhijeetimg from "./Domain Info/images/MANAGEMENT/Abhijeet.png";
-import lakshitaimg from "./Domain Info/images/WEB DEV/Lakshita Goyal.jpg";
-import manikantaimg from "./Domain Info/images/WEB DEV/Manikanta.jpg";
+import lakshitaimg from "./Domain Info/images/WEB DEV/lakshita.png";
+import manikantaimg from "./Domain Info/images/WEB DEV/manikanta.png";
 import karthikimg from "./Domain Info/images/WEB DEV/Karthik.jpg";
 import sailokesh from "./Domain Info/images/CP/CP1.jpeg";
 import vishnuvardhan from "./Domain Info/images/CP/CP2.jpg";
-import udayyadav from "./Domain Info/images/CP/GUdhayYadav.jpg";
-import harikaimg from "./Domain Info/images/MANAGEMENT/Harika.jpg";
-import UdaySagar from "./Domain Info/images/AppDev/UdaySagar.jpeg";
+import udayyadav from "./Domain Info/images/CP/cp_lead.png";
+import harikaimg from "./Domain Info/images/MANAGEMENT/Management_lead.png";
+import UdaySagar from "./Domain Info/images/AppDev/uday_appLead.png";
 import VinayKumar from "./Domain Info/images/AppDev/VinayKumarKajjapu.jpg";
-import Harshitha from "./Domain Info/images/TandC/Harshithamandadi.jpg";
-import Shahid from "./Domain Info/images/TandC/Shahid.jpg";
+import Harshitha from "./Domain Info/images/TandC/harshitha_lead.png";
+import Shahid from "./Domain Info/images/TandC/shahidHameed-lead.png";
 import Dhruva from "./Domain Info/images/Hardware/Dhruva.jpeg";
 import nishmaimg from "./Domain Info/images/Hardware/HardwareC1.jpg";
-import durgamadhavimg from "./Domain Info/images/Hardware/HardwareC2.jpg";
-import roshiniimg from "./Domain Info/images/ML/KotagiriRoshini.jpg";
-import siddharth from "./Domain Info/images/ML/Aimlead.jpg";
-import udaysagar from "./Domain Info/profile_images/AppDev/Uday Sagar.jpg";
-import roshini from "./Domain Info/images/WomenInTech/roshini.jpg";
-import lakshitha from "./Domain Info/images/WEB DEV/lakshitha.jpg";
-import durgamadhav from "./Domain Info/images/Hardware/Durgamadhav.jpg";
+import durgamadhavimg from "./Domain Info/images/Hardware/hardware_lead.png";
+import roshiniimg from "./Domain Info/images/WomenInTech/roshini_lead.png";
+import siddharth from "./Domain Info/images/ML/siddharth.png";
+import udaysagar from "./Domain Info/profile_images/AppDev/uday_appLead.png";
+import roshini from "./Domain Info/images/WomenInTech/roshini_lead.png";
+import lakshitha from "./Domain Info/images/WEB DEV/lakshita.png";
+import durgamadhav from "./Domain Info/images/Hardware/hardware_lead.png";
 import vishnuvardhanimg from "./Domain Info/images/design/vishnuvardhan.png";
 import sarvani from "./Domain Info/images/MANAGEMENT/Sarvani.jpg";
 import RiteshImg from "./Domain Info/profile_images/WebDev/Sai Ritesh Domakuntla.jpg";
-import ManikantaImg from "./Domain Info/images/WEB DEV/Manikanta.jpg";
-import KruthiImg from "./Domain Info/profile_images/Sri Kruthi.jpg";
-import TanmayeeImg from "./Domain Info/profile_images/Design_SM/Tanmayee Kyram.jpg";
-import UdayImg from "./Domain Info/profile_images/CP/GUdhayYadav.jpg";
-import ShahidImg from "./Domain Info/profile_images/CS/Shahid Ameed.jpg";
+import ManikantaImg from "./Domain Info/images/WEB DEV/manikanta.png";
+import KruthiImg from "./Domain Info/profile_images/Sri Kruthi.png";
+import TanmayeeImg from "./Domain Info/profile_images/Design_SM/tanmayee_lead.png";
+import UdayImg from "./Domain Info/images/CP/cp_lead.png";
+import ShahidImg from "./Domain Info/profile_images/CS/shahidHameed-lead.png";
 import NikhilImg from "./Domain Info/profile_images/Management/Nikhil Chanda.jpg";
 import AbhijeetImg from "./Domain Info/profile_images/Outreach/Abhijeet Jetti.png";
-import akashImg from "./Domain Info/profile_images/AIML/akash.jpg";
+import akashImg from "./Domain Info/profile_images/AIML/akash.png";
 import Popover from "./Popover";
 import GlassCard from "./GlassCard";
 import star from "../orgchart/star.png"
 import { BsInstagram, BsLinkedin } from "react-icons/bs";
 import "../styles/org.css";
 import slants from "../orgchart/slants.png";
+import brackets from "../orgchart/brackets.png"
+import arrow from "../orgchart/arrow.png"
 
 interface Person {
   role: string
@@ -507,6 +509,7 @@ const OrgChart = () => {
   useEffect(() => { window.scrollTo(0, 0) }, [])
   const [year, setYear] = useState<number>(2026)
   const [selectedPerson, setSelectedPerson] = useState<DomainLead | null>(null)
+  const [currentCoordinator, setCurrentCoordinator] = useState(0);
   const dataToDisplay = year === 2026 ? data2026 : year === 2025 ? data2025 : data2024
 
   const hideTimer = useRef<number | null>(null)
@@ -550,7 +553,7 @@ const OrgChart = () => {
   return (
     <div className="orgchart">
       <div className="min-h-screen z-40 py-20 md:py-20 flex flex-col items-center relative overflow-x-hidden" style={{ background: "#FFFFFF" }}>
-        <h1 className="text-4xl md:text-5xl font-medium mb-10 text-center tracking-wide flex items-center justify-center gap-4">
+        <h1 className="text-4xl md:text-5xl font-normal mb-4 text-center tracking-wide flex items-center justify-center gap-4">
 
           <span className="animate-spin [animation-duration:6s]">
             <img src={star} alt="star" className="w-9 h-9" />
@@ -564,6 +567,22 @@ const OrgChart = () => {
         </h1>
 
 
+        <div className="flex gap-2 mb-12 mt-7 p-1 rounded-full w-fit" style={{ background: "#E8F0FE" }}>
+          {[2026, 2025, 2024].map((y) => (
+            <button
+              key={y}
+              onClick={() => setYear(y)}
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200
+      ${year === y
+                  ? " shadow-md"
+                  : "hover:bg-white"
+                }`}
+              style={year === y ? { backgroundColor: "#8AB4F8" } : {}}
+            >
+              {y}
+            </button>
+          ))}
+        </div>
         <div className="w-full py-20 flex justify-center px-2" style={{ background: "#E8F0FE" }}>
           <div className="max-w-7xl w-full flex flex-col md:flex-row items-center gap-16">
 
@@ -609,32 +628,81 @@ const OrgChart = () => {
           </div>
         </div>
 
-        <div className="flex gap-2 mb-12 mt-12 p-1 rounded-full w-fit" style={{ background: "#E8F0FE" }}>
-          {[2026, 2025, 2024].map((y) => (
-            <button
-              key={y}
-              onClick={() => setYear(y)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200
-      ${year === y
-                  ? " shadow-md"
-                  : "hover:bg-white"
-                }`}
-              style={year === y ? { backgroundColor: "#8AB4F8" } : {}}
+
+        <div
+          className="w-full pt-5 pb-16 flex flex-col items-center px-2 relative"
+          style={{ background: "#FFE8A5" }}
+        >
+
+
+          <img
+            src={arrow}
+            alt="arrow"
+            className="absolute left-[25%] top-[68px] h-16 w-auto"
+          />
+
+          <div className="flex items-center gap-3 mt-10 mb-8">
+            <img src={brackets} alt="bracket" className="h-16 w-auto" />
+
+            <h2
+              className="text-3xl md:text-4xl font-normal tracking-tight 
+      bg-yellow-400 border-2 border-black px-8 py-4 rounded-2xl"
             >
-              {y}
-            </button>
-          ))}
-        </div>
+              Chapter's Lead
+            </h2>
+
+            <img src={brackets} alt="bracket" className="h-16 w-auto scale-x-[-1]" />
+          </div>
+
+          <div className="w-full max-w-[320px] flex justify-center">
+            <div
+              className="border-2 relative border-gray-400
+      transition-all duration-300 hover:-translate-y-1 hover:shadow-sm
+      w-full max-w-[300px]
+      flex flex-col items-center
+      py-8 px-6"
+              style={{ background: "#FFE8A5" }}
+            >
+              <div className="text-black text-center">
+                <img
+                  src={dataToDisplay.lead.img}
+                  alt={dataToDisplay.lead.role}
+                  className="w-[170px] h-[170px] object-cover"
+                />
+
+                <h2
+                  className="text-lg font-semibold mt-4"
+                  style={{ fontFamily: '"Google Sans", sans-serif' }}
+                >
+                  {dataToDisplay.lead.name}
+                </h2>
+
+                <p
+                  className="text-sm text-gray-500"
+                  style={{ fontFamily: '"Google Sans", sans-serif' }}
+                >
+                  {dataToDisplay.lead.role}
+                </p>
+              </div>
 
 
-        <h2 className="text-3xl md:text-4xl font-normal mt-10 mb-8 tracking-tight 
-bg-yellow-400 border-2 border-black px-8 py-4 inline-block rounded-2xl">
-          Chapter's Lead
-        </h2>
+              <svg className="absolute h-6 w-6 -top-3 -left-3 text-black" viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
 
-        <div className="flex justify-center w-full mb-14 ">
-          <div className="w-full max-w-[320px]">
-            <GlassCard profileImage={dataToDisplay.lead.img} personRole={dataToDisplay.lead.role} personName={dataToDisplay.lead.name} />
+              <svg className="absolute h-6 w-6 -bottom-3 -left-3 text-black" viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+
+              <svg className="absolute h-6 w-6 -top-3 -right-3 text-black" viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+
+              <svg className="absolute h-6 w-6 -bottom-3 -right-3 text-black" viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+
+            </div>
           </div>
         </div>
 
@@ -651,15 +719,110 @@ bg-yellow-400 border-2 border-black px-8 py-4 inline-block rounded-2xl">
 
         <div className="mt-5 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 max-w-6xl mx-auto">
           {dataToDisplay.domainLeads.map((person, index) => (
-            <GlassCard
+            <div
               key={index}
-              profileImage={person.img}
-              personRole={person.role}
-              personName={person.name}
-          
-            />
+              onClick={() => {
+                if (person.coordinators.length > 0) {
+                  setSelectedPerson(person);
+                  setCurrentCoordinator(0);
+                }
+              }}
+              className={person.coordinators.length > 0 ? "cursor-pointer" : ""}
+            >
+              <GlassCard
+                profileImage={person.img}
+                personRole={person.role}
+                personName={person.name}
+              />
+            </div>
           ))}
         </div>
+
+
+        {/* Modal */}
+        {selectedPerson && selectedPerson.coordinators.length > 0 && (
+          <div
+            className="fixed inset-0 flex items-center justify-center z-50"
+            onClick={() => setSelectedPerson(null)}
+          >
+            <div
+              className="bg-white rounded-2xl w-[420px] shadow-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+
+              {/* Header */}
+              <div className="flex items-center justify-between px-6 py-4 border-b">
+                <h2 className="text-lg font-semibold">
+                  {selectedPerson.role}
+                </h2>
+
+                <button
+                  onClick={() => setSelectedPerson(null)}
+                  className="text-xl hover:scale-110 transition"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Coordinator Viewer */}
+              <div className="flex items-center justify-between px-8 py-10">
+
+                {/* Left Arrow */}
+                <button
+                  onClick={() =>
+                    setCurrentCoordinator((prev) =>
+                      prev === 0
+                        ? selectedPerson.coordinators.length - 1
+                        : prev - 1
+                    )
+                  }
+                  className="text-3xl font-light hover:scale-110 transition"
+                >
+                  ‹
+                </button>
+
+                {/* Coordinator */}
+                <div className="flex flex-col items-center text-center">
+
+                  <img
+                    src={
+                      selectedPerson.coordinators[currentCoordinator].img
+                    }
+                    className="w-28 h-28 object-cover mb-4"
+                  />
+
+                  <h3 className="text-lg font-semibold">
+                    {selectedPerson.coordinators[currentCoordinator].name}
+                  </h3>
+
+                  <p className="text-sm text-gray-500">
+                    Coordinator
+                  </p>
+
+                  <span className="text-sm font-mono text-gray-400 mt-1">
+                    {"</>"}
+                  </span>
+
+                </div>
+
+                {/* Right Arrow */}
+                <button
+                  onClick={() =>
+                    setCurrentCoordinator((prev) =>
+                      prev === selectedPerson.coordinators.length - 1
+                        ? 0
+                        : prev + 1
+                    )
+                  }
+                  className="text-3xl font-light hover:scale-110 transition"
+                >
+                  ›
+                </button>
+
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
