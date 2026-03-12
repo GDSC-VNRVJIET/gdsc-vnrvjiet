@@ -8,7 +8,7 @@ function GlassCard({ profileImage, personRole, personName, bgColor }: any) {
       w-full max-w-[300px]
       flex flex-col items-center
       py-8 px-6"
-      style={{ backgroundColor: bgColor }}
+      style={{ backgroundColor: "#FFFFFF" }}
     >
       <div className="text-black text-center">
 

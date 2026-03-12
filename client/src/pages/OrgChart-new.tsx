@@ -94,6 +94,8 @@ import "../styles/org.css";
 import slants from "../orgchart/slants.png";
 import brackets from "../orgchart/brackets.png"
 import arrow from "../orgchart/arrow.png"
+import doodles from "../orgchart/doodles.png"
+import arc from "../orgchart/arc.png"
 
 interface Person {
   role: string
@@ -633,12 +635,10 @@ const OrgChart = () => {
           className="w-full pt-5 pb-16 flex flex-col items-center px-2 relative"
           style={{ background: "#FFE8A5" }}
         >
-
-
           <img
             src={arrow}
             alt="arrow"
-            className="absolute left-[25%] top-[68px] h-16 w-auto"
+            className="absolute left-[25%] top-[68px] h-20 w-auto"
           />
 
           <div className="flex items-center gap-3 mt-10 mb-8">
@@ -652,6 +652,11 @@ const OrgChart = () => {
             </h2>
 
             <img src={brackets} alt="bracket" className="h-16 w-auto scale-x-[-1]" />
+            <img
+              src={arc}
+              alt="arc"
+              className="absolute right-[25%] bottom-[38px] h-48 w-auto"
+            />
           </div>
 
           <div className="w-full max-w-[320px] flex justify-center">
@@ -717,29 +722,42 @@ const OrgChart = () => {
 
         </div>
 
-        <div className="mt-5 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 max-w-6xl mx-auto">
-          {dataToDisplay.domainLeads.map((person, index) => (
-            <div
-              key={index}
-              onClick={() => {
-                if (person.coordinators.length > 0) {
-                  setSelectedPerson(person);
-                  setCurrentCoordinator(0);
-                }
-              }}
-              className={person.coordinators.length > 0 ? "cursor-pointer" : ""}
-            >
-              <GlassCard
-                profileImage={person.img}
-                personRole={person.role}
-                personName={person.name}
-              />
+        <div
+          className="w-full"
+          style={{
+            backgroundImage: `url(${doodles})`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "800px"
+          }}
+        >
+
+          <div className="max-w-6xl mx-auto bg-white px-10 py-10">
+
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+              {dataToDisplay.domainLeads.map((person, index) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    if (person.coordinators.length > 0) {
+                      setSelectedPerson(person);
+                      setCurrentCoordinator(0);
+                    }
+                  }}
+                  className={person.coordinators.length > 0 ? "cursor-pointer" : ""}
+                >
+                  <GlassCard
+                    profileImage={person.img}
+                    personRole={person.role}
+                    personName={person.name}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
+
+          </div>
+
         </div>
 
-
-        {/* Modal */}
         {selectedPerson && selectedPerson.coordinators.length > 0 && (
           <div
             className="fixed inset-0 flex items-center justify-center z-50"
@@ -750,7 +768,6 @@ const OrgChart = () => {
               onClick={(e) => e.stopPropagation()}
             >
 
-              {/* Header */}
               <div className="flex items-center justify-between px-6 py-4 border-b">
                 <h2 className="text-lg font-semibold">
                   {selectedPerson.role}
@@ -764,10 +781,8 @@ const OrgChart = () => {
                 </button>
               </div>
 
-              {/* Coordinator Viewer */}
               <div className="flex items-center justify-between px-8 py-10">
 
-                {/* Left Arrow */}
                 <button
                   onClick={() =>
                     setCurrentCoordinator((prev) =>
@@ -781,7 +796,6 @@ const OrgChart = () => {
                   ‹
                 </button>
 
-                {/* Coordinator */}
                 <div className="flex flex-col items-center text-center">
 
                   <img
@@ -805,7 +819,6 @@ const OrgChart = () => {
 
                 </div>
 
-                {/* Right Arrow */}
                 <button
                   onClick={() =>
                     setCurrentCoordinator((prev) =>
