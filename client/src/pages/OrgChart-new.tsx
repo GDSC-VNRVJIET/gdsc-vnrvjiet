@@ -203,6 +203,19 @@ const data2026: OrgChartData = {
       ],
       type: "nonTechnical",
     },
+    
+
+    {
+      role: "AppDev Lead",
+      name: "Uday Sagar",
+      img: udaysagar,
+      coordinators: [
+        { name: "Akhil", img: akhilimg },
+        { name: "Shiva", img: shivaimg }
+      ],
+      volunteers: [],
+      type: "technical",
+    },
     {
       role: "Design and Social Media Lead",
       name: "Tanmayee Kyram",
@@ -218,20 +231,6 @@ const data2026: OrgChartData = {
       ],
       type: "nonTechnical",
     },
-
-    {
-      role: "AppDev Lead",
-      name: "Uday Sagar",
-      img: udaysagar,
-      coordinators: [
-        { name: "Akhil", img: akhilimg },
-        { name: "Shiva", img: shivaimg }
-      ],
-      volunteers: [],
-      type: "technical",
-    },
-
-
     {
       role: "Testing and Cybersecurity Lead",
       name: "Shahid Ameed",
@@ -244,18 +243,7 @@ const data2026: OrgChartData = {
       volunteers: [],
       type: "technical",
     },
-    {
-      role: "Testing and Cybersecurity Lead",
-      name: "Harshitha Mandadi",
-      img: Harshitha,
-      coordinators: [
-        { name: "Ashraya Yelisetty", img: ashraya },
-        { name: "M INDRANEELI VARDHAN ", img: vardhan },
-        { name: "Mahesh Patnala", img: mahesh }
-      ],
-      volunteers: [],
-      type: "technical",
-    },
+    
 
     {
       role: "Hardware Lead",
@@ -267,6 +255,18 @@ const data2026: OrgChartData = {
       ],
       volunteers: [],
       type: "non technical"
+    },
+    {
+      role: "Testing and Cybersecurity Lead",
+      name: "Harshitha Mandadi",
+      img: Harshitha,
+      coordinators: [
+        { name: "Ashraya Yelisetty", img: ashraya },
+        { name: "M INDRANEELI VARDHAN ", img: vardhan },
+        { name: "Mahesh Patnala", img: mahesh }
+      ],
+      volunteers: [],
+      type: "technical",
     },
     {
       role: "Women In Tech Lead",
@@ -589,7 +589,7 @@ const OrgChart = () => {
           <div className="max-w-7xl w-full flex flex-col md:flex-row items-center gap-16">
 
 
-            <div className="flex-shrink-0 w-56 h-56 rounded-full border-4 border-[#8AB4F8] overflow-hidden">
+            <div className="flex-shrink-0 w-56 h-56 rounded-full overflow-hidden">
               <img
                 src={dataToDisplay.facultyAdvisor.img}
                 alt={dataToDisplay.facultyAdvisor.name}
@@ -638,7 +638,7 @@ const OrgChart = () => {
           <img
             src={arrow}
             alt="arrow"
-            className="absolute left-[25%] top-[68px] h-20 w-auto"
+            className="absolute left-[25%] top-[64px] h-20 w-auto"
           />
 
           <div className="flex items-center gap-3 mt-10 mb-8">
@@ -648,7 +648,7 @@ const OrgChart = () => {
               className="text-3xl md:text-4xl font-normal tracking-tight 
       bg-yellow-400 border-2 border-black px-8 py-4 rounded-2xl"
             >
-              Chapter's Lead
+              Chapter's Organizer
             </h2>
 
             <img src={brackets} alt="bracket" className="h-16 w-auto scale-x-[-1]" />
@@ -721,17 +721,15 @@ const OrgChart = () => {
           </h2>
 
         </div>
-
         <div
-          className="w-full"
+          className="w-full animate-floatbg"
           style={{
             backgroundImage: `url(${doodles})`,
             backgroundRepeat: "repeat",
-            backgroundSize: "800px"
+            backgroundSize: "750px",
           }}
         >
-
-          <div className="max-w-6xl mx-auto bg-white px-10 py-10">
+          <div className="max-w-[1000px] mx-auto bg-white py-10">
 
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
               {dataToDisplay.domainLeads.map((person, index) => (
