@@ -203,7 +203,7 @@ const data2026: OrgChartData = {
       ],
       type: "nonTechnical",
     },
-    
+
 
     {
       role: "AppDev Lead",
@@ -243,7 +243,7 @@ const data2026: OrgChartData = {
       volunteers: [],
       type: "technical",
     },
-    
+
 
     {
       role: "Hardware Lead",
@@ -512,6 +512,7 @@ const OrgChart = () => {
   const [year, setYear] = useState<number>(2026)
   const [selectedPerson, setSelectedPerson] = useState<DomainLead | null>(null)
   const [currentCoordinator, setCurrentCoordinator] = useState(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
   const dataToDisplay = year === 2026 ? data2026 : year === 2025 ? data2025 : data2024
 
   const hideTimer = useRef<number | null>(null)
@@ -551,6 +552,13 @@ const OrgChart = () => {
     "#E8F0FE",
     "#f8d8d8"
   ];
+
+  const columns = 3
+
+  const rows = []
+  for (let i = 0; i < dataToDisplay.domainLeads.length; i += columns) {
+    rows.push(dataToDisplay.domainLeads.slice(i, i + columns))
+  }
 
   return (
     <div className="orgchart">
@@ -731,109 +739,111 @@ const OrgChart = () => {
         >
           <div className="max-w-[1000px] mx-auto bg-white py-10">
 
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
-              {dataToDisplay.domainLeads.map((person, index) => (
-                <div
-                  key={index}
-                  onClick={() => {
-                    if (person.coordinators.length > 0) {
-                      setSelectedPerson(person);
-                      setCurrentCoordinator(0);
-                    }
-                  }}
-                  className={person.coordinators.length > 0 ? "cursor-pointer" : ""}
-                >
-                  <GlassCard
-                    profileImage={person.img}
-                    personRole={person.role}
-                    personName={person.name}
-                  />
-                </div>
-              ))}
+            <div className="w-full">
+              {rows.map((row, rowIndex) => {
+
+                const startIndex = rowIndex * columns
+                const endIndex = startIndex + row.length - 1
+
+                const isOpenInRow =
+                  openIndex !== null &&
+                  openIndex >= startIndex &&
+                  openIndex <= endIndex
+
+                const person =
+                  isOpenInRow ? dataToDisplay.domainLeads[openIndex!] : null
+
+                return (
+                  <React.Fragment key={rowIndex}>
+                    <div className="mb-16">
+
+                      {/* Cards Row */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+
+                        {row.map((person, i) => {
+
+                          const index = startIndex + i
+
+                          return (
+                            <div
+                              key={index}
+                              onClick={() => {
+                                if (person.coordinators.length === 0) return
+
+                                if (openIndex === index) {
+                                  setOpenIndex(null)
+                                } else {
+                                  setOpenIndex(index)
+                                  setSelectedPerson(person)
+                                }
+                              }}
+                              className="cursor-pointer"
+                            >
+                              <GlassCard
+                                profileImage={person.img}
+                                personRole={person.role}
+                                personName={person.name}
+                              />
+                            </div>
+                          )
+                        })}
+
+                      </div>
+
+                      {/* Coordinator Panel */}
+                      {isOpenInRow && person && (
+                        <div className="border border-black bg-white mt-10 transition-all duration-300">
+
+                          <div className="flex justify-between items-center px-6 py-4 border-b border-black">
+
+                            <h2 className="text-lg font-semibold">
+                               Coordinators
+                            </h2>
+
+                            <button
+                              onClick={() => setOpenIndex(null)}
+                              className="text-lg"
+                            >
+                              ✕
+                            </button>
+
+                          </div>
+
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 p-8">
+
+                            {person.coordinators.map((coord, i) => (
+                              <div key={i} className="flex flex-col items-center">
+
+                                <img
+                                  src={coord.img}
+                                  className="w-[150px] h-[150px] object-cover mb-3"
+                                />
+
+                                <h3 className="font-semibold text-sm">
+                                  {coord.name}
+                                </h3>
+
+                                <p className="text-xs text-gray-500">
+                                  Coordinator
+                                </p>
+
+                              </div>
+                            ))}
+
+                          </div>
+
+                        </div>
+                      )}
+
+                    </div>
+                  </React.Fragment>
+                )
+              })}
             </div>
 
           </div>
 
         </div>
-
-        {selectedPerson && selectedPerson.coordinators.length > 0 && (
-          <div
-            className="fixed inset-0 flex items-center justify-center z-50"
-            onClick={() => setSelectedPerson(null)}
-          >
-            <div
-              className="bg-white rounded-2xl w-[420px] shadow-xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-
-              <div className="flex items-center justify-between px-6 py-4 border-b">
-                <h2 className="text-lg font-semibold">
-                  {selectedPerson.role}
-                </h2>
-
-                <button
-                  onClick={() => setSelectedPerson(null)}
-                  className="text-xl hover:scale-110 transition"
-                >
-                  ✕
-                </button>
-              </div>
-
-              <div className="flex items-center justify-between px-8 py-10">
-
-                <button
-                  onClick={() =>
-                    setCurrentCoordinator((prev) =>
-                      prev === 0
-                        ? selectedPerson.coordinators.length - 1
-                        : prev - 1
-                    )
-                  }
-                  className="text-3xl font-light hover:scale-110 transition"
-                >
-                  ‹
-                </button>
-
-                <div className="flex flex-col items-center text-center">
-
-                  <img
-                    src={
-                      selectedPerson.coordinators[currentCoordinator].img
-                    }
-                    className="w-28 h-28 object-cover mb-4"
-                  />
-
-                  <h3 className="text-lg font-semibold">
-                    {selectedPerson.coordinators[currentCoordinator].name}
-                  </h3>
-
-                  <p className="text-sm text-gray-500">
-                    Coordinator
-                  </p>
-
-                  <span className="text-sm font-mono text-gray-400 mt-1">
-                    {"</>"}
-                  </span>
-
-                </div>
-
-                <button
-                  onClick={() =>
-                    setCurrentCoordinator((prev) =>
-                      prev === selectedPerson.coordinators.length - 1
-                        ? 0
-                        : prev + 1
-                    )
-                  }
-                  className="text-3xl font-light hover:scale-110 transition"
-                >
-                  ›
-                </button>
-
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   )
