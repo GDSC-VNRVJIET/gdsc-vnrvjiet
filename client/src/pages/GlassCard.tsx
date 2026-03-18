@@ -29,7 +29,7 @@ function GlassCard({ profileImage, personRole, personName, bgColor }: any) {
           className="text-sm text-gray-500"
           style={{ fontFamily: '"Google Sans", sans-serif' }}
         >
-          {personRole}
+          {personRole} Lead
         </p>
 
       </div>
