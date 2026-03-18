@@ -23,7 +23,7 @@ import vinayimg from "./Domain Info/images/TandC/GVK.jpg";
 import jahnavireddyimg from "./Domain Info/images/MANAGEMENT/Jahnavi Reddy.png";
 import rakshitaimg from "./Domain Info/images/MANAGEMENT/Sai Rakshita Narsingh.jpg";
 import sadhikimg from "./Domain Info/images/MANAGEMENT/Sadhik.jpg";
-import sathwikaimg from "./Domain Info/images/MANAGEMENT/Management_lead.png";
+import sathwikaimg from "./Domain Info/images/MANAGEMENT/sathwika.png";
 import spoorthyimg from "./Domain Info/images/MANAGEMENT/spoorthy.png";
 import nikhitaimg from "./Domain Info/images/ML/nikitha.jpg";
 import suryaimg from "./Domain Info/images/ML/Chittiprolu Suryateja.jpg";
@@ -507,6 +507,9 @@ const data2024: OrgChartData = {
   ],
 };
 
+const headerColors = ["#FED201", "#01DE5D", "#E8F0FE", "#FFD6E0"];
+const bodyColors = ["#FFE69C", "#C1F8BF", "#F5F9FF", "#FFF0F5"];
+
 const OrgChart = () => {
   useEffect(() => { window.scrollTo(0, 0) }, [])
   const [year, setYear] = useState<number>(2026)
@@ -656,7 +659,7 @@ const OrgChart = () => {
               className="text-3xl md:text-4xl font-normal tracking-tight 
       bg-yellow-400 border-2 border-black px-8 py-4 rounded-2xl"
             >
-              Chapter's Organizer
+               Chapter's Organizer
             </h2>
 
             <img src={brackets} alt="bracket" className="h-16 w-auto scale-x-[-1]" />
@@ -756,8 +759,6 @@ const OrgChart = () => {
                 return (
                   <React.Fragment key={rowIndex}>
                     <div className="mb-16">
-
-                      {/* Cards Row */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
 
                         {row.map((person, i) => {
@@ -790,50 +791,71 @@ const OrgChart = () => {
 
                       </div>
 
-                      {/* Coordinator Panel */}
-                      {isOpenInRow && person && (
-                        <div className="border border-black bg-white mt-10 transition-all duration-300">
+                      {isOpenInRow && person && (() => {
 
-                          <div className="flex justify-between items-center px-6 py-4 border-b border-black">
+                        const count = person.coordinators.length
 
-                            <h2 className="text-lg font-semibold">
-                               Coordinators
-                            </h2>
+                        let gridCols = "grid-cols-2"
+                        if (count === 1) gridCols = "grid-cols-1"
+                        else if (count === 2) gridCols = "grid-cols-2"
+                        else if (count === 3) gridCols = "grid-cols-3"
+                        else gridCols = "grid-cols-4"
 
-                            <button
-                              onClick={() => setOpenIndex(null)}
-                              className="text-lg"
-                            >
-                              ✕
-                            </button>
+                        const imageSize =
+                          count <= 2
+                            ? "w-44 h-44"
+                            : count === 3
+                              ? "w-40 h-40"
+                              : "w-32 h-32"
+
+                        return (
+                          <div className="border border-black bg-white mt-10 transition-all duration-300">
+
+                            <div className="flex justify-between items-center px-6 py-4 border-b border-black">
+
+                              <h2 className="text-lg font-semibold">
+                                Coordinators
+                              </h2>
+
+                              <button
+                                onClick={() => setOpenIndex(null)}
+                                className="text-lg"
+                              >
+                                ✕
+                              </button>
+
+                            </div>
+
+                            <div className={`grid ${gridCols} gap-8 p-8 justify-items-center`}>
+
+                              {person.coordinators.map((coord, i) => (
+                                <div
+                                  key={i}
+                                  className="flex flex-col items-center text-center hover:-translate-y-1 transition"
+                                >
+
+                                  <img
+                                    src={coord.img}
+                                    className={`${imageSize} object-cover mb-3`}
+                                  />
+
+                                  <h3 className="font-semibold text-sm">
+                                    {coord.name}
+                                  </h3>
+
+                                  <p className="text-xs text-gray-500">
+                                    Coordinator
+                                  </p>
+
+                                </div>
+                              ))}
+
+                            </div>
 
                           </div>
+                        )
 
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 p-8">
-
-                            {person.coordinators.map((coord, i) => (
-                              <div key={i} className="flex flex-col items-center">
-
-                                <img
-                                  src={coord.img}
-                                  className="w-[150px] h-[150px] object-cover mb-3"
-                                />
-
-                                <h3 className="font-semibold text-sm">
-                                  {coord.name}
-                                </h3>
-
-                                <p className="text-xs text-gray-500">
-                                  Coordinator
-                                </p>
-
-                              </div>
-                            ))}
-
-                          </div>
-
-                        </div>
-                      )}
+                      })()}
 
                     </div>
                   </React.Fragment>
