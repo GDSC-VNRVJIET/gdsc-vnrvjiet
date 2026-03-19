@@ -24,18 +24,25 @@ import vinayimg from "./Domain Info/images/TandC/vinayg.png";
 import jahnavireddyimg from "./Domain Info/images/AppDev/jahnavi.png";
 import rakshitaimg from "./Domain Info/images/MANAGEMENT/sairakshita.png";
 import sadhikimg from "./Domain Info/images/MANAGEMENT/Sadhik.jpg";
+import harikaG from "./Domain Info/images/MANAGEMENT/harika-g.png";
 import sathwikaimg from "./Domain Info/images/MANAGEMENT/sathwika.png";
 import spoorthyimg from "./Domain Info/images/MANAGEMENT/spoorthy.png";
 import nikhitaimg from "./Domain Info/images/WomenInTech/nikhita.png";
 import suryaimg from "./Domain Info/images/ML/suryateja.png";
 import sharanimg from "./Domain Info/images/ML/SRI SHARAN TEJ.jpg";
 import keerthikaimg from "./Domain Info/images/ML/keerthika.png";
+import nikhithaR from "./Domain Info/images/ML/nikhitha-r.png";
 import yasaswiniimg from "./Domain Info/images/WomenInTech/yasaswini devi.png";
 import bharathimg from "./Domain Info/images/ML/bharathchandra.png";
 import vishwaimg from "./Domain Info/images/ML/Viswa Prateek Tummala .jpg";
 import poojaimg from "./Domain Info/images/design/pooja.png";
+import rishithaY from "./Domain Info/images/design/rishitha-y.png";
+import anirudhY from "./Domain Info/images/design/anirudh-y.png";
+import aryaY from "./Domain Info/images/design/arya-y.png";
+import tanmayeeY from "./Domain Info/images/design/tanmayee-y.png";
 import siddeshwariimg from "./Domain Info/images/design/siddeshwari.png";
 import praneethaimg from "./Domain Info/images/design/praneetha.png";
+import praneethaY from "./Domain Info/images/design/praneetha-y.png";
 import chanirudhimg from "./Domain Info/images/design/anirudh.png";
 import abdulraheemimg from "./Domain Info/images/design/Abdul Raheem.png";
 import abhishekimg from "./Domain Info/images/design/abhishek.png";
@@ -60,21 +67,29 @@ import lakshitaimg from "./Domain Info/images/WEB DEV/lakshita.png";
 import manikantaimg from "./Domain Info/images/WEB DEV/manikanta.png";
 import karthikimg from "./Domain Info/images/WEB DEV/karthik.png";
 import sailokesh from "./Domain Info/images/CP/lokesh.png";
+import udhayB from "./Domain Info/images/CP/udhay-b.png";
 import vishnuvardhan from "./Domain Info/images/CP/vishnuvardhan.png";
 import udayyadav from "./Domain Info/images/CP/cp_lead.png";
 import harikaimg from "./Domain Info/images/MANAGEMENT/Management_lead.png";
+import jahnaviG from "./Domain Info/images/MANAGEMENT/jahnavi-g.png";
+import sahithiG from "./Domain Info/images/MANAGEMENT/sahithi-g.png";
 import UdaySagar from "./Domain Info/images/AppDev/uday_appLead.png";
 import VinayKumar from "./Domain Info/images/AppDev/vinaykumar.png";
 import Harshitha from "./Domain Info/images/TandC/harshitha_lead.png";
 import Shahid from "./Domain Info/images/TandC/shahidHameed-lead.png";
+import harshithaG from "./Domain Info/images/TandC/harshitha-g.png";
+import shahidG from "./Domain Info/images/TandC/shahid-g.png";
 import Dhruva from "./Domain Info/images/Hardware/dhruva.png";
 import nishmaimg from "./Domain Info/images/Hardware/nishma.png";
 import durgamadhavimg from "./Domain Info/images/Hardware/durga.png";
 import roshiniimg from "./Domain Info/images/WomenInTech/roshini_lead.png";
 import siddharth from "./Domain Info/images/ML/siddharth.png";
 import udaysagar from "./Domain Info/profile_images/AppDev/uday_appLead.png";
+import udayB from "./Domain Info/images/AppDev/uday-b.png";
 import roshini from "./Domain Info/images/WomenInTech/roshini_lead.png";
+import roshiniY from "./Domain Info/images/WomenInTech/roshini-y.png";
 import lakshitha from "./Domain Info/images/WEB DEV/lakshita.png";
+import jayasreeG from "./Domain Info/images/WEB DEV/jayasree-g.png";
 import durgamadhav from "./Domain Info/images/Hardware/hardware_lead.png";
 import vishnuvardhanimg from "./Domain Info/images/design/vishnuvardhan.png";
 import sarvani from "./Domain Info/images/MANAGEMENT/sarvani.png";
@@ -323,7 +338,7 @@ const data2025: OrgChartData = {
       coordinators: [
         { name: "Sai Lokesh", img: sailokesh },
         { name: "N Vishnu Vardhan", img: vishnuvardhan },
-        { name: "G Udhay Yadav", img: udayyadav }
+        { name: "G Udhay Yadav", img: udhayB }
       ],
       volunteers: [
       ],
@@ -336,7 +351,7 @@ const data2025: OrgChartData = {
       coordinators: [
         { name: "Sri Kruthi", img: srikruthiimg },
         { name: "Abhijeet", img: abhijeetimg },
-        { name: "Harika", img: harikaimg },
+        { name: "Harika", img: harikaG },
       ],
       volunteers: [
       ],
@@ -360,10 +375,10 @@ const data2025: OrgChartData = {
       name: "Siddeshwari A",
       img: siddeshwariimg,
       coordinators: [
-        { name: "Ch. Anirudh", img: chanirudhimg },
-        { name: "Arya Joshi", img: aryaimg },
-        { name: "Rishitha", img: rishithaimg },
-        { name: "Tanmayee Kyram", img: tanmayeeimg }
+        { name: "Ch. Anirudh", img: anirudhY },
+        { name: "Arya Joshi", img: aryaY },
+        { name: "Rishitha", img: rishithaY },
+        { name: "Tanmayee Kyram", img: tanmayeeY }
       ],
       volunteers: [
       ],
@@ -387,8 +402,8 @@ const data2025: OrgChartData = {
       name: "Vinay Gajula",
       img: vinayimg,
       coordinators: [
-        { name: "Harshitha Mandadi", img: Harshitha },
-        { name: "Shahid", img: Shahid },
+        { name: "Harshitha Mandadi", img: harshithaG },
+        { name: "Shahid", img: shahidG },
       ],
       volunteers: [],
       type: "technical",
@@ -398,7 +413,7 @@ const data2025: OrgChartData = {
       name: "Jahnavi Reddy",
       img: jahnavireddyimg,
       coordinators: [
-        { name: "Uday Sagar", img: UdaySagar },
+        { name: "Uday Sagar", img: udayB },
         { name: "Vinay Kumar", img: VinayKumar }
       ],
       volunteers: [],
@@ -421,7 +436,7 @@ const data2025: OrgChartData = {
       name: "Nikhita Kashyap D",
       img: nikhitaimg,
       coordinators: [
-        { name: "Roshini Kotagiri", img: roshiniimg }
+        { name: "Roshini Kotagiri", img: roshiniY }
       ],
       volunteers: [],
       type: "technical",
@@ -451,7 +466,7 @@ const data2024: OrgChartData = {
       name: "Manideep",
       img: weblead,
       coordinators: [
-        { name: "Jayasree", img: jayasreeimg },
+        { name: "Jayasree", img: jayasreeG },
         { name: "Sai Jahnavi", img: jahnaviimg },
       ],
       volunteers: [
@@ -477,9 +492,9 @@ const data2024: OrgChartData = {
       name: "Shivesh",
       img: managelead,
       coordinators: [
-        { name: "Sahithi", img: sahithiimg },
+        { name: "Sahithi", img: sahithiG },
         { name: "Vinay Kalyan", img: vinayimg },
-        { name: "Jahnavi Reddy", img: jahnavireddyimg },
+        { name: "Jahnavi Reddy", img: jahnaviG },
         { name: "Sai Rakshitha", img: rakshitaimg },
       ],
       volunteers: [
@@ -493,7 +508,7 @@ const data2024: OrgChartData = {
       name: "Akhil",
       img: mllead,
       coordinators: [
-        { name: "Nikhita Kashyap", img: nikhitaimg },
+        { name: "Nikhita Kashyap", img: nikhithaR },
         { name: "Surya Teja", img: suryaimg },
       ],
       volunteers: [
@@ -510,7 +525,7 @@ const data2024: OrgChartData = {
       coordinators: [
         { name: "Pooja Siri", img: poojaimg },
         { name: "Siddeshwari", img: siddeshwariimg },
-        { name: "Pavan Praneetha", img: praneethaimg },
+        { name: "Pavan Praneetha", img: praneethaY },
       ],
       volunteers: [
         { name: "Ch. Anirudh", img: chanirudhimg },
@@ -574,16 +589,16 @@ const OrgChart = () => {
   }
 
   useEffect(() => {
-  if (openIndex !== null && panelRef.current) {
-    setTimeout(() => {
-      panelRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "center", 
-      });
-    }, 200); 
-  }
+    if (openIndex !== null && panelRef.current) {
+      setTimeout(() => {
+        panelRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 200);
+    }
   }, [openIndex]);
-  
+
   return (
     <div className="orgchart">
       <div className="min-h-screen z-40 py-20 md:py-20 flex flex-col items-center relative overflow-x-hidden" style={{ background: "#FFFFFF" }}>
