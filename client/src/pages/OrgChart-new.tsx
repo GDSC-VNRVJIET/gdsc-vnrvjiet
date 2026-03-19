@@ -862,7 +862,7 @@ const OrgChart = () => {
 
                               <motion.button
                                 onClick={() => setOpenIndex(null)}
-                                className="absolute right-4 sm:right-6 text-lg"
+                                className="absolute ml-2 right-4 sm:right-6 text-lg"
                                 whileHover={{ scale: 1.2, rotate: 90 }}
                                 whileTap={{ scale: 0.9 }}
                               >

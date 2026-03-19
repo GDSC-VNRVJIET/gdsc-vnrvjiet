@@ -3,13 +3,12 @@ import React from "react";
 function GlassCard({ profileImage, personRole, personName, bgColor }: any) {
   return (
     <div
-      className="border-2 relative
-      transition-all duration-300 hover:-translate-y-1 hover:shadow-sm
-      w-full max-w-[300px]
-      flex flex-col items-center
-      py-8 px-6"
-      style={{ backgroundColor: "#FFFFFF" }}
-    >
+  className="border-2 relative
+  transition-all duration-300 hover:-translate-y-1 hover:shadow-md
+  w-full max-w-[260px] sm:max-w-[280px] md:max-w-[300px] mx-auto
+  flex flex-col items-center
+  py-8 px-6 bg-white"
+  >
       <div className="text-black text-center">
 
         <img
