@@ -1,11 +1,11 @@
     import React, { useState, useEffect, useRef } from "react";
-    import leadimg from "./images/lead.png";
-    import colead from "./images/colead.png";
-    import weblead from "./images/webdevlead.png";
-    import managelead from "./images/managementlead.png";
-    import designlead from "./images/creativelead.png";
-    import cplead from "./images/jayachandra_thelukuntla.webp";
-    import mllead from "./images/corolead.png";
+    import leadimg from "./images/dushyanth.png";
+    import colead from "./images/rishab.png";
+    import weblead from "./images/rishabh.png";
+    import managelead from "./images/shivesh.png";
+    import designlead from "./images/vinay.png";
+    import cplead from "./images/jayachandra.png";
+    import mllead from "./images/akhil.png";
     import jayasreeimg from "./Domain Info/images/WEB DEV/Jayasree Gondipalle.png";
     import jahnaviimg from "./Domain Info/images/WEB DEV/sai jahnavi.png";
     import hasnikaimg from "./Domain Info/images/WEB DEV/hasnika.png";
@@ -32,7 +32,7 @@
     import yasaswiniimg from "./Domain Info/images/WomenInTech/yasaswini devi.png";
     import bharathimg from "./Domain Info/images/ML/bharathchandra.png";
     import vishwaimg from "./Domain Info/images/ML/Viswa Prateek Tummala .jpg";
-    import poojaimg from "./Domain Info/images/design/Poojasiri.jpg.jpg";
+    import poojaimg from "./Domain Info/images/design/pooja.png";
     import siddeshwariimg from "./Domain Info/images/design/siddeshwari.png";
     import praneethaimg from "./Domain Info/images/design/praneetha.png";
     import chanirudhimg from "./Domain Info/images/design/anirudh.png";
