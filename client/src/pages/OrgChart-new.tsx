@@ -882,7 +882,7 @@ const OrgChart = () => {
                             >
                               {person.coordinators.map((coord, i) => (
                                 <motion.div
-                                  key={coord.name} // 🔥 better key
+                                  key={coord.name} 
                                   className="flex flex-col items-center text-center"
                                   initial={{ opacity: 0, scale: 0.85 }}
                                   animate={{ opacity: 1, scale: 1 }}
