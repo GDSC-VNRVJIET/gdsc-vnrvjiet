@@ -570,6 +570,7 @@ const OrgChart = () => {
     hideTimer.current = window.setTimeout(() => hideSelected(), delay)
   }
 
+  const AP = AnimatePresence as React.FC<any>;
   const handleLeadClickEvent = (expectation: string, person: DomainLead) => {
     if (expectation === "open") showSelected(person)
     else {
@@ -840,89 +841,73 @@ const OrgChart = () => {
 
                       </div>
 
-                      <AnimatePresence>
-                        {isOpenInRow && person && (
+                      <AP mode="wait">
+                        {isOpenInRow && person ? (
                           <motion.div
-                            key="coordinator-panel"
+                            key={person.name}
                             ref={panelRef}
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.4 }}
+                            transition={{ duration: 0.35, ease: "easeInOut" }}
                             className="border border-black mt-10 overflow-hidden shadow-sm"
                           >
-                            {(() => {
-                              const count = person.coordinators.length;
+                            <div
+                              className="relative flex items-center px-6 py-4 border-b border-black"
+                              style={{ backgroundColor: headerColors[colorIndex] }}
+                            >
+                              <h2 className="text-base sm:text-lg font-semibold text-center w-full">
+                                {person.role} Coordinators
+                              </h2>
 
-                              let gridCols = "grid-cols-1";
-                              if (count === 2) gridCols = "grid-cols-1 sm:grid-cols-2";
-                              else if (count === 3) gridCols = "grid-cols-1 sm:grid-cols-2 md:grid-cols-3";
-                              else if (count >= 4) gridCols = "grid-cols-2 sm:grid-cols-3 md:grid-cols-4";
+                              <motion.button
+                                onClick={() => setOpenIndex(null)}
+                                className="absolute right-4 sm:right-6 text-lg"
+                                whileHover={{ scale: 1.2, rotate: 90 }}
+                                whileTap={{ scale: 0.9 }}
+                              >
+                                ✕
+                              </motion.button>
+                            </div>
 
-                              const imageSize =
-                                count <= 2
-                                  ? "w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44"
-                                  : count === 3
-                                    ? "w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
-                                    : "w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32";
+                            <div
+                              className={`grid ${person.coordinators.length === 2
+                                  ? "grid-cols-1 sm:grid-cols-2"
+                                  : person.coordinators.length === 3
+                                    ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+                                    : person.coordinators.length >= 4
+                                      ? "grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
+                                      : "grid-cols-1"
+                                } gap-6 sm:gap-8 px-4 sm:px-6 md:px-8 py-6 justify-items-center`}
+                            >
+                              {person.coordinators.map((coord, i) => (
+                                <motion.div
+                                  key={coord.name} // 🔥 better key
+                                  className="flex flex-col items-center text-center"
+                                  initial={{ opacity: 0, scale: 0.85 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ delay: i * 0.08 }}
+                                  whileHover={{ scale: 1.05 }}
+                                >
+                                  <img
+                                    src={coord.img}
+                                    alt={coord.name}
+                                    className={`${person.coordinators.length <= 2
+                                        ? "w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44"
+                                        : person.coordinators.length === 3
+                                          ? "w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
+                                          : "w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32"
+                                      } object-cover mb-3`}
+                                  />
 
-                              return (
-                                <>
-                                  <div
-                                    className="relative flex items-center px-6 py-4 border-b border-black"
-                                    style={{
-                                      backgroundColor: headerColors[colorIndex],
-                                    }}
-                                  >
-                                    <h2 className="text-base sm:text-lg font-semibold text-center w-full">
-                                      {person.role} Coordinators
-                                    </h2>
-
-                                    <motion.button
-                                      onClick={() => setOpenIndex(null)}
-                                      className="absolute right-4 sm:right-6 text-lg"
-                                      whileHover={{ scale: 1.2, rotate: 90 }}
-                                      whileTap={{ scale: 0.9 }}
-                                      initial={{ opacity: 0 }}
-                                      animate={{ opacity: 1 }}
-                                      exit={{ opacity: 0 }}
-                                    >
-                                      ✕
-                                    </motion.button>
-                                  </div>
-
-                                  <div className={`grid ${gridCols} gap-6 sm:gap-8 px-4 sm:px-6 md:px-8 py-6 justify-items-center`}>
-                                    {person.coordinators.map((coord, i) => (
-                                      <motion.div
-                                        key={i}
-                                        className="flex flex-col items-center text-center"
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ delay: i * 0.1 }}
-                                        whileHover={{ scale: 1.08 }}
-                                      >
-                                        <img
-                                          src={coord.img}
-                                          className={`${imageSize} object-cover mb-3`}
-                                        />
-
-                                        <h3 className="font-semibold text-sm">
-                                          {coord.name}
-                                        </h3>
-
-                                        <p className="text-xs text-gray-500">
-                                          Coordinator
-                                        </p>
-                                      </motion.div>
-                                    ))}
-                                  </div>
-                                </>
-                              );
-                            })()}
+                                  <h3 className="font-semibold text-sm">{coord.name}</h3>
+                                  <p className="text-xs text-gray-500">Coordinator</p>
+                                </motion.div>
+                              ))}
+                            </div>
                           </motion.div>
-                        )}
-                      </AnimatePresence>
-
+                        ) : null}
+                      </AP>
                     </div>
                   </React.Fragment>
                 )
