@@ -62,7 +62,7 @@ import tanmayeeimg from "./Domain Info/images/design/tanmayee_lead.png";
 import aryaimg from "./Domain Info/images/design/aryajoshi.png";
 import rishithaimg from "./Domain Info/images/design/rishitha.png";
 import srikruthiimg from "./Domain Info/images/MANAGEMENT/srikruthi.png";
-import abhijeetimg from "./Domain Info/images/MANAGEMENT/abhijeet.png";
+import abhijeetimg from "./Domain Info/images/MANAGEMENT/Abhijeet.png";
 import lakshitaimg from "./Domain Info/images/WEB DEV/lakshita.png";
 import manikantaimg from "./Domain Info/images/WEB DEV/manikanta.png";
 import karthikimg from "./Domain Info/images/WEB DEV/karthik.png";
