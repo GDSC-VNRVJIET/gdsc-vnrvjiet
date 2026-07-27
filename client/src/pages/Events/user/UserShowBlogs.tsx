@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import axios from "axios";
-import Loader from "../../Loader";
+import BlogSkeleton from "../BlogSkeleton";
 import CarouselBlog from "../CarouselBlog";
 import { motion } from "framer-motion";
 
@@ -82,7 +82,7 @@ const UserShowBlogs: React.FC = () => {
   };
 
   return displayLoader ? (
-    <Loader />
+    <BlogSkeleton />
   ) : (
     <div>
       {/* <div className="bg-gray-100 p-4 flex items-center justify-between">

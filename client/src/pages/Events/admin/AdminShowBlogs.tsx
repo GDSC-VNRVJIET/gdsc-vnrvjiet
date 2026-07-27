@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CurrentBlogs from "./CurrentBlogs";
-import Loader from "../../Loader";
+import BlogSkeleton from "../BlogSkeleton";
 
 interface Blog {
   author?: string;
@@ -160,7 +160,7 @@ const AdminShowBlogs: React.FC = () => {
     }
   };
   return displayLoader ? (
-    <Loader />
+    <BlogSkeleton />
   ) : (
     <div>
       <div className="bg-gray-100 p-4 flex items-center justify-end">
