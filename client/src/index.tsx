@@ -3,36 +3,21 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import "./axiosConfig";
 import App from "./App";
-import Loader from "./pages/Loader";
+import IntroLoader from "./pages/IntroLoader";
 import { BrowserRouter as Router } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
 const Index = () => {
-  const [isAnimationCompleted, setIsAnimationCompleted] = useState(false);
-
-  const handleAnimationComplete = () => {
-    setIsAnimationCompleted(true);
-  };
+  // The intro plays once per page load. The app renders underneath it from the
+  // start, so the hero is laid out and the intro can land its logo onto it.
+  const [showIntro, setShowIntro] = useState(true);
 
   return (
     <>
-      {!isAnimationCompleted && (
-        <Loader
-          handleAnimationComplete={handleAnimationComplete}
-          loop={false}
-        />
-      )}
-      <div
-        className={`transition-opacity duration-500 ${
-          isAnimationCompleted ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        {isAnimationCompleted && (
-          <Router>
-            <App />
-          </Router>
-        )}
-      </div>
+      <Router>
+        <App />
+      </Router>
+      {showIntro && <IntroLoader onDone={() => setShowIntro(false)} />}
     </>
   );
 };
