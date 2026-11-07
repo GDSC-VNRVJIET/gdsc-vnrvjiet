@@ -14,11 +14,13 @@ import React, { forwardRef } from "react";
 const OUTER = 123; // full pill width including outline
 const INNER = 103; // coloured fill width (outline ≈ 10px)
 const OUTLINE = "#0F0F0F";
+// Listed in paint order; `wave` sets the draw-in order (red + yellow first,
+// then green + blue on top).
 const PILLS = [
-  { color: "#EA4335", from: [61.5, 149], to: [183, 62] }, // red (under blue)
-  { color: "#4285F4", from: [61.5, 149], to: [183, 236] }, // blue
-  { color: "#F9AB00", from: [477, 149], to: [355.4, 236] }, // yellow (under green)
-  { color: "#34A853", from: [477, 149], to: [355.4, 62] }, // green
+  { color: "#EA4335", from: [61.5, 149], to: [183, 62], wave: 0 }, // red (under blue)
+  { color: "#4285F4", from: [61.5, 149], to: [183, 236], wave: 1 }, // blue
+  { color: "#F9AB00", from: [477, 149], to: [355.4, 236], wave: 0 }, // yellow (under green)
+  { color: "#34A853", from: [477, 149], to: [355.4, 62], wave: 1 }, // green
 ];
 
 // --- Lockup layout (in 1558x344 artwork space) ---
@@ -35,14 +37,14 @@ const INK = { x: 12, y: 3, w: 1505, h: 267 };
 // --- Intro animation timing ---
 export const CYCLE = 3.2; // seconds for the intro animation
 const DRAW = 0.55; // seconds for a single pill to draw in
-const STAGGER = 0.22; // delay between pills
-const LOGO_DONE = (PILLS.length - 1) * STAGGER + DRAW;
+const WAVE_GAP = 0.45; // delay between the red/yellow and green/blue pairs
+const LOGO_DONE = Math.max(...PILLS.map((p) => p.wave)) * WAVE_GAP + DRAW;
 
 const pct = (s: number) => `${((s / CYCLE) * 100).toFixed(2)}%`;
 
 const KEYFRAMES = `
-  ${PILLS.map((_, i) => {
-    const start = i * STAGGER;
+  ${PILLS.map(({ wave }, i) => {
+    const start = wave * WAVE_GAP;
     return `
       @keyframes gdg-pill-${i} {
         0%, ${pct(start)} { stroke-dashoffset: 1; opacity: 0; }
