@@ -59,5 +59,10 @@ app.use((error, request, response, next) => {
   response.send({ message: "Error occurred", reason: `${error.message}` });
 });
 
-// Start the server
-app.listen(4000, () => console.log("Server running on port 4000..."));
+// Start the server locally. On Vercel the exported `app` is used as the
+// serverless handler and this listen() call is skipped.
+if (require.main === module) {
+  app.listen(4000, () => console.log("Server running on port 4000..."));
+}
+
+module.exports = app;
