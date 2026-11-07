@@ -29,11 +29,15 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-transporter.verify((error, success) => {
-  if (error) {
-    console.log(error);
-  }
-});
+if (process.env.USER && process.env.PASS) {
+  transporter.verify((error) => {
+    if (error) {
+      console.warn(`Mail transporter not ready: ${error.message}`);
+    }
+  });
+} else {
+  console.warn("Mail disabled: USER/PASS not set in .env (mail routes won't send).");
+}
 
 const sendNormalEmailsWithData = async (data,cnt) => {
   try {
