@@ -2,6 +2,7 @@ const exp = require("express");
 const eventApp = exp.Router();
 const expressAsyncHandler = require("express-async-handler");
 const getDBObj = require("./DBConnection");
+const verifyAdmin = require("../Middlewares/VerifyAdmin");
 
 require("dotenv").config();
 
@@ -96,6 +97,7 @@ eventApp.get(
  */
 eventApp.post(
   "/create",
+  verifyAdmin,
   expressAsyncHandler(async (request, response) => {
     let eventCollectionObject = await getDBObj("eventCollectionObject");
     let neweventObj = request.body;

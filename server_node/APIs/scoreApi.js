@@ -2,6 +2,7 @@ const exp = require("express");
 const scoreApp = exp.Router();
 const expressAsyncHandler = require("express-async-handler");
 const getDBObj = require("./DBConnection");
+const verifyToken = require("../Middlewares/VerifyToken");
 
 require("dotenv").config();
 
@@ -47,7 +48,7 @@ scoreApp.use(exp.json());
  *       '500':
  *         description: Internal Server Error
  */
-scoreApp.post("/post-score", async (request, response) => {
+scoreApp.post("/post-score", verifyToken, async (request, response) => {
   try {
     const { juryId, teamId, scores } = request.body;
 
@@ -114,7 +115,7 @@ scoreApp.post("/post-score", async (request, response) => {
  *       '500':
  *         description: Internal Server Error
  */
-scoreApp.post("/post-multiple-scores", async (request, response) => {
+scoreApp.post("/post-multiple-scores", verifyToken, async (request, response) => {
   try {
     const scoreData = request.body;
 

@@ -4,6 +4,7 @@ const campusApp = exp.Router();
 const expressAsyncHandler = require("express-async-handler");
 const getDBObj = require("./DBConnection");
 const { ObjectId } = require('mongodb');
+const verifyToken = require("../Middlewares/VerifyToken");
 
 require("dotenv").config();
 
@@ -59,7 +60,7 @@ campusApp.get("/team/:teamId", expressAsyncHandler(async (req, res) => {
 }));
 
 
-campusApp.post("/submit-score/:teamId", expressAsyncHandler(async (req, res) => {
+campusApp.post("/submit-score/:teamId", verifyToken, expressAsyncHandler(async (req, res) => {
     const { teamId } = req.params;
     const { 
         totalScore,
@@ -103,7 +104,7 @@ campusApp.post("/submit-score/:teamId", expressAsyncHandler(async (req, res) => 
 }));
 
 
-campusApp.post("/complete-round-one", expressAsyncHandler(async (req, res) => {
+campusApp.post("/complete-round-one", verifyToken, expressAsyncHandler(async (req, res) => {
     let campusCollection = await getDBObj("campusCollectionObject");
     
     try {
@@ -162,7 +163,7 @@ campusApp.post("/complete-round-one", expressAsyncHandler(async (req, res) => {
 }));
 
 // Final round score submission
-campusApp.post("/submit-final-score/:teamId", expressAsyncHandler(async (req, res) => {
+campusApp.post("/submit-final-score/:teamId", verifyToken, expressAsyncHandler(async (req, res) => {
     const { teamId } = req.params;
     const { 
         totalScore,

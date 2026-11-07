@@ -4,6 +4,8 @@ const expressAsyncHandler = require("express-async-handler");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const getDBObj = require("./DBConnection");
+const verifyAdmin = require("../Middlewares/VerifyAdmin");
+const verifyToken = require("../Middlewares/VerifyToken");
 const nodemailer = require("nodemailer");
 
 require("dotenv").config();
@@ -46,6 +48,7 @@ const getNextSequenceValue = async (sequenceName) => {
  */
 userApp.get(
   "/getusers",
+  verifyAdmin,
   expressAsyncHandler(async (request, response) => {
     let userCollectionObject = await getDBObj("userCollectionObject");
     let users = await userCollectionObject.find().toArray();
@@ -76,6 +79,7 @@ userApp.get(
  */
 userApp.get(
   "/get-user/:userId",
+  verifyToken,
   expressAsyncHandler(async (request, response) => {
     const userId = request.params.userId;
 
@@ -240,6 +244,7 @@ userApp.post(
  */
 userApp.post(
   "/create-many",
+  verifyAdmin,
   expressAsyncHandler(async (request, response) => {
     try {
       const userCollectionObject = await getDBObj("userCollectionObject");

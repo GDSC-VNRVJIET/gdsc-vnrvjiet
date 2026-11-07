@@ -4,6 +4,7 @@ const blogApp = exp.Router();
 const expressAsyncHandler = require("express-async-handler");
 const getDBObj = require("./DBConnection");
 const { ObjectId } = require('mongodb');
+const verifyAdmin = require("../Middlewares/VerifyAdmin");
 
 require("dotenv").config();
 
@@ -11,7 +12,7 @@ blogApp.use(exp.json());
 blogApp.use(cors());
 
 
-blogApp.post('/add',expressAsyncHandler(async(req,res)=>{
+blogApp.post('/add',verifyAdmin,expressAsyncHandler(async(req,res)=>{
     let blog = req.body;
     let blogCollection = await getDBObj("blogCollectionObject");
     try {
@@ -61,7 +62,7 @@ blogApp.get('/getblog/:id', expressAsyncHandler( async (req, res) => {
     }
 }));
 
-blogApp.put('/updateblog/:id', expressAsyncHandler( async (req, res, next) => {
+blogApp.put('/updateblog/:id', verifyAdmin, expressAsyncHandler( async (req, res, next) => {
   try {
       const blogId = req.params.id;
       const updatedBlog = req.body;
@@ -113,7 +114,7 @@ blogApp.post("/getAccessdata", expressAsyncHandler( async (req, res) => {
   }
 }));
 
-blogApp.put("/change/:id", expressAsyncHandler(async (req, res) => {
+blogApp.put("/change/:id", verifyAdmin, expressAsyncHandler(async (req, res) => {
     try {
       let blogCollection = await getDBObj("blogCollectionObject");
       const blogId = req.params.id;
@@ -137,7 +138,7 @@ blogApp.put("/change/:id", expressAsyncHandler(async (req, res) => {
   }));
 
 // api for deleting a particular blog using its MongoId
-blogApp.delete("/delete/:id", expressAsyncHandler(async (req, res) => {
+blogApp.delete("/delete/:id", verifyAdmin, expressAsyncHandler(async (req, res) => {
   try {
     let blogCollection = await getDBObj("blogCollectionObject");
     const blogId = req.params.id;

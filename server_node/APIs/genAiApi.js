@@ -2,12 +2,13 @@ const exp = require("express");
 const genAiApp = exp.Router();
 const expressAsyncHandler = require("express-async-handler");
 const getDBObj = require("./DBConnection");
+const verifyAdmin = require("../Middlewares/VerifyAdmin");
 
 require("dotenv").config();
 
 genAiApp.use(exp.json());
 
-genAiApp.post("/add-data", expressAsyncHandler(async (request, response) => {
+genAiApp.post("/add-data", verifyAdmin, expressAsyncHandler(async (request, response) => {
     
     const genAIdata=request.body.data;
     let genAiCollectionObject = await getDBObj("genAiCollectionObject");
@@ -35,7 +36,7 @@ genAiApp.get("/get-data", expressAsyncHandler(async (request, response) => {
     }
 }));
 
-genAiApp.put("/update-data", expressAsyncHandler(async (request, response) => {
+genAiApp.put("/update-data", verifyAdmin, expressAsyncHandler(async (request, response) => {
     const updatedDataArray = request.body.data;
 
     let genAiCollectionObject = await getDBObj("genAiCollectionObject");

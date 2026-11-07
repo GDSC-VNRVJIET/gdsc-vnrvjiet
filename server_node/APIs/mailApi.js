@@ -14,6 +14,7 @@ const bodyParser = require("body-parser");
 const QRCode = require("qrcode");
 const cors = require("cors");
 const creds = require("../config");
+const verifyAdmin = require("../Middlewares/VerifyAdmin");
 
 mailApp.use(exp.urlencoded({ extended: false }));
 mailApp.use(bodyParser.json({ limit: "10mb", extended: true }));
@@ -561,7 +562,7 @@ mailApp.post(
 );
 
 
-mailApp.post("/send-many-mails", async (req, res) => {
+mailApp.post("/send-many-mails", verifyAdmin, async (req, res) => {
   try {
     if (!req.body || !Array.isArray(req.body.data)) {
       // console.log(req.body)
@@ -615,7 +616,7 @@ mailApp.post("/send-many-mails", async (req, res) => {
   }
 });
 
-mailApp.post("/resend-mail/:eventName", async (req, res) => {
+mailApp.post("/resend-mail/:eventName", verifyAdmin, async (req, res) => {
   try {
     
     let scannerCollection = await getDBObj("scannerCollection");

@@ -2,6 +2,7 @@ const exp = require("express");
 const teamApp = exp.Router();
 const expressAsyncHandler = require("express-async-handler");
 const getDBObj = require("./DBConnection");
+const verifyAdmin = require("../Middlewares/VerifyAdmin");
 
 require("dotenv").config();
 
@@ -43,6 +44,7 @@ teamApp.use(exp.json());
  */
 teamApp.post(
   "/create",
+  verifyAdmin,
   expressAsyncHandler(async (request, response) => {
     try {
       let teamCollectionObject = await getDBObj("teamCollectionObject");
@@ -113,6 +115,7 @@ teamApp.post(
  */
 teamApp.post(
   "/create-many",
+  verifyAdmin,
   expressAsyncHandler(async (request, response) => {
     try {
       let teamCollectionObject = await getDBObj("teamCollectionObject");

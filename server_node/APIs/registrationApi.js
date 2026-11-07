@@ -4,13 +4,14 @@ const expressAsyncHandler = require("express-async-handler");
 const getDBObj = require("./DBConnection");
 // const { Parser } = require("json2csv");
 const verifyAdmin = require("../Middlewares/VerifyAdmin");
+const verifyToken = require("../Middlewares/VerifyToken");
 
 require("dotenv").config();
 
 registrationApp.use(exp.json());
 
 
-registrationApp.put('/register',expressAsyncHandler(async(req,res)=>{
+registrationApp.put('/register',verifyToken,expressAsyncHandler(async(req,res)=>{
     let scannercollection = await getDBObj("scannerCollection");
     const newRegister = req.body;
     const dbuser = await scannercollection.findOne({razorpay_order_id:newRegister.order_id});

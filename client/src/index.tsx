@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "./axiosConfig";
 import App from "./App";
 import Loader from "./pages/Loader";
 import { BrowserRouter as Router } from "react-router-dom";

@@ -3,6 +3,8 @@ const questionApp = exp.Router();
 const expressAsyncHandler = require("express-async-handler");
 const getDBObj = require("./DBConnection");
 const { ObjectId } = require("mongodb");
+const verifyAdmin = require("../Middlewares/VerifyAdmin");
+const verifyToken = require("../Middlewares/VerifyToken");
 
 require("dotenv").config();
 
@@ -106,6 +108,7 @@ questionApp.get(
  */
 questionApp.post(
   "/create",
+  verifyToken,
   expressAsyncHandler(async (request, response) => {
     let questionCollectionObject = await getDBObj("questionCollectionObject");
     let newQuestionObj = request.body;
@@ -191,6 +194,7 @@ questionApp.get(
  */
 questionApp.put(
   "/update-answer/:questionId",
+  verifyAdmin,
   expressAsyncHandler(async (request, response) => {
     try {
       const questionId = new ObjectId(request.params.questionId);
@@ -241,6 +245,7 @@ questionApp.put(
  */
 questionApp.put(
   "/update-approval/:questionId",
+  verifyAdmin,
   expressAsyncHandler(async (request, response) => {
     try {
       const questionId = new ObjectId(request.params.questionId);
@@ -299,6 +304,7 @@ questionApp.put(
  */
 questionApp.delete(
   "/delete-question/:questionId",
+  verifyAdmin,
   expressAsyncHandler(async (request, response) => {
     try {
       const questionId = new ObjectId(request.params.questionId);
