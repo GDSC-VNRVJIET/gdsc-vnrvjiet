@@ -52,12 +52,16 @@ genAiApp.get(
       const memberToTeam = {};
       clusters.forEach((cluster) => {
         (cluster.members || []).forEach((member) => {
-          memberToTeam[normName(member)] = { mentor: cluster.mentor, cluster: cluster.cluster };
+          const raw = String(member || "").trim();
+          const key = raw.includes("@") ? raw.toLowerCase() : normName(raw);
+          memberToTeam[key] = { mentor: cluster.mentor, cluster: cluster.cluster };
         });
       });
 
       const data = docs.map((doc) => {
-        const team = memberToTeam[normName(doc.name)];
+        const team =
+          memberToTeam[String(doc.email || "").trim().toLowerCase()] ||
+          memberToTeam[normName(doc.name)];
         return {
           ...doc,
           mentor: team ? team.mentor : null,
