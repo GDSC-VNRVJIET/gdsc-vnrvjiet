@@ -72,6 +72,17 @@ body::-webkit-scrollbar-thumb {
 .lb-hold, .lb-hold * { animation-play-state: paused !important }
 .lb-row:hover { background: #F7F8FA }
 .lb-input::placeholder { color: #6B7078 }
-.lb-focus:focus-visible { outline: 3px solid #5383EC; outline-offset: 2px }
+.lb-focus:focus-visible { outline: 3px solid #1E1E1E; outline-offset: 2px }
+.lb-input:focus, .lb-input:focus-visible { outline: none; border-color: #1E1E1E; box-shadow: 0 0 0 3px rgba(30, 30, 30, 0.12) }
 
 @media (prefers-reduced-motion: reduce) { .lb-anim * { animation: none !important } }
+
+.lb-legend { position: absolute; right: 28px; bottom: 20px; z-index: 2 }
+
+@media (max-width: 900px) {
+  .lb-legend { position: static; margin: 0 auto 20px }
+}
+
+@media (min-width: 1000px) {
+  .lb-climb-body { padding-right: 250px !important }
+}

@@ -31,7 +31,6 @@ const LINE = "#E3E5EA";
 const MUTED = "#4B5057";
 const DIM = "#3C4043";
 const GREEN = "#D3F5CC";
-const PINK = "#f8d8d8";
 const BLUE = "#5383EC";
 const YELLOW = "#F8D74F";
 const DISP = "'Google Sans', system-ui, sans-serif";
@@ -348,7 +347,6 @@ function GenAi() {
   const [view, setView] = useState<"players" | "teams">("players");
   const [q, setQ] = useState("");
   const [tq, setTq] = useState("");
-  const [open, setOpen] = useState<Record<string, boolean>>({});
   const [topen, setTopen] = useState<Record<string, boolean>>({});
   const [page, setPage] = useState(1);
   const [excelFile, setExcelFile] = useState<ArrayBuffer | null>(null);
@@ -453,18 +451,9 @@ function GenAi() {
   }, [participants]);
 
   const count = participants.length;
-  const started = participants.filter((p) => p.badges > 0).length;
-  const sumBadges = participants.reduce((s, p) => s + p.badges, 0);
   const reached = MS.map((m) => participants.filter((p) => p.badges >= m.need).length);
 
   const isTeams = view === "teams";
-
-  const statCards = [
-    { value: Math.round(count * t), label: "Participants", bg: "#FFFFFF" },
-    { value: Math.round(started * t), label: "Earned a badge", bg: PINK },
-    { value: Math.round(sumBadges * t), label: "Skill badges earned", bg: "#FCE8B2" },
-    { value: Math.round(reached[2] * t), label: "Finished Milestone 3", bg: "#CBEAFB" },
-  ];
 
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
@@ -541,14 +530,6 @@ function GenAi() {
   };
 
   const isAdmin = user && user.role === process.env.REACT_APP_ADMIN_ROLE;
-
-  const cardStyle = (bg: string): React.CSSProperties => ({
-    background: bg,
-    border: `2.5px solid ${INK}`,
-    borderRadius: 24,
-    padding: "22px 24px",
-    boxSizing: "border-box",
-  });
 
   const headerCell: React.CSSProperties = {
     padding: "12px 28px",
@@ -688,18 +669,6 @@ function GenAi() {
           </div>
         </div>
 
-        {!isTeams && (
-        <Reveal>
-        <section aria-label="Totals" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
-          {statCards.map((s, i) => (
-            <div key={s.label} className="lb-pop" style={{ ...cardStyle(s.bg), animationDelay: `${0.1 + i * 0.08}s` }}>
-              <div style={{ fontFamily: DISP, fontWeight: 700, fontSize: 48, lineHeight: 1 }}>{s.value}</div>
-              <div style={{ fontSize: 15, fontWeight: 600, marginTop: 8 }}>{s.label}</div>
-            </div>
-          ))}
-        </section>
-        </Reveal>
-        )}
 
         {data === null ? (
           <div style={{ padding: "60px 0", textAlign: "center", color: MUTED }}>Loading leaderboard…</div>
@@ -708,7 +677,29 @@ function GenAi() {
             <Reveal>
             <section style={{ position: "relative", background: PANEL, border: `2.5px solid ${INK}`, borderRadius: 36, overflow: "hidden" }}>
               <SectionHead title="the climb to milestone 3" />
-              <div style={{ position: "relative", padding: "48px 28px 0", minHeight: 520, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+              <div className="lb-climb-body" style={{ position: "relative", padding: "48px 28px 0", minHeight: 520, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+                <ul
+                  className="lb-legend"
+                  style={{
+                    listStyle: "none",
+                    margin: 0,
+                    padding: "10px 13px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 7,
+                    background: "#FFFFFF",
+                    border: `1.5px solid ${INK}`,
+                    borderRadius: 12,
+                    width: "fit-content",
+                  }}
+                >
+                  {MS.map((m) => (
+                    <li key={m.n} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, fontWeight: 600, color: DIM, whiteSpace: "nowrap" }}>
+                      <span style={{ width: 13, height: 13, borderRadius: 4, background: m.fill, border: `1.5px solid ${INK}`, boxSizing: "border-box", flex: "none" }} />
+                      Milestone {m.n} · earn {m.need} badges
+                    </li>
+                  ))}
+                </ul>
                 <Reveal>
                 <div style={{ position: "relative", display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "clamp(10px, 2vw, 20px)", alignItems: "end", maxWidth: 720, width: "100%", margin: "0 auto" }}>
                   {MS.map((m, i) => (
@@ -740,7 +731,6 @@ function GenAi() {
                         }}
                       >
                         <span style={{ fontFamily: DISP, fontWeight: 700, fontSize: "clamp(18px, 2.4vw, 26px)" }}>Milestone {m.n}</span>
-                        <span style={{ fontSize: 14, fontWeight: 600 }}>{m.need} badges</span>
                       </div>
                     </div>
                   ))}
@@ -782,7 +772,6 @@ function GenAi() {
                   {rows.map((p, i) => {
                     const rank = startIndex + i + 1;
                     const info = msFor(p.badges);
-                    const isOpen = !!open[p.email];
                     const top3 = rank <= 3;
                     return (
                       <div key={p.email || p.name + i} className="lb-row" style={{ borderTop: `1px solid ${LINE}` }}>
@@ -798,7 +787,7 @@ function GenAi() {
                               fontFamily: DISP,
                               fontWeight: 700,
                               fontSize: 17,
-                              background: top3 ? YELLOW : "transparent",
+                              background: top3 ? GREEN : "transparent",
                               border: top3 ? `2px solid ${INK}` : "none",
                               boxSizing: "border-box",
                             }}
@@ -806,13 +795,7 @@ function GenAi() {
                             {rank}
                           </span>
 
-                          <button
-                            type="button"
-                            onClick={() => setOpen((prev) => ({ ...prev, [p.email]: !prev[p.email] }))}
-                            aria-expanded={isOpen}
-                            className="lb-focus"
-                            style={{ display: "flex", alignItems: "center", gap: 12, minWidth: 0, minHeight: 44, background: "none", border: 0, padding: 0, font: "inherit", color: "inherit", textAlign: "left", cursor: "pointer" }}
-                          >
+                          <div style={{ display: "flex", alignItems: "center", gap: 12, minWidth: 0, minHeight: 44 }}>
                             <span
                               style={{
                                 width: 40,
@@ -832,13 +815,8 @@ function GenAi() {
                             >
                               {initialsOf(p.name)}
                             </span>
-                            <span style={{ minWidth: 0 }}>
-                              <span style={{ display: "block", fontWeight: 700, fontSize: 15 }}>{p.name}</span>
-                              <span style={{ display: "block", fontSize: 13, color: MUTED }}>
-                                {isOpen ? "Hide badges" : p.badges ? "Show badges" : "No badges yet"}
-                              </span>
-                            </span>
-                          </button>
+                            <span style={{ minWidth: 0, fontWeight: 700, fontSize: 15 }}>{p.name}</span>
+                          </div>
 
                           <div style={{ display: "flex", gap: 3 }} role="img" aria-label={`${p.badges} of ${BADGE_TOTAL} badges`}>
                             {Array.from({ length: BADGE_TOTAL }).map((_, k) => {
@@ -877,7 +855,7 @@ function GenAi() {
                               background: info ? info.soft : PANEL,
                             }}
                           >
-                            {info ? `Milestone ${info.n}` : "Not yet"}
+                            {info ? `Milestone ${info.n}` : p.badges > 0 ? "On the way" : "Getting started"}
                           </span>
 
                           <span style={{ fontSize: 14, fontWeight: 600 }}>
@@ -891,21 +869,6 @@ function GenAi() {
                           </span>
                         </div>
 
-                        {isOpen && (
-                          <div style={{ padding: "0 28px 18px 108px", display: "flex", flexWrap: "wrap", gap: 8 }}>
-                            {p.badgeNames && p.badgeNames.length > 0 ? (
-                              p.badgeNames.map((b) => (
-                                <span key={b} style={{ fontSize: 13, fontWeight: 600, background: GREEN, border: `1.5px solid ${INK}`, borderRadius: 999, padding: "6px 12px" }}>
-                                  {b}
-                                </span>
-                              ))
-                            ) : (
-                              <span style={{ fontSize: 14, color: MUTED }}>
-                                No skill badges yet. Start with The Basics of Google Cloud Compute.
-                              </span>
-                            )}
-                          </div>
-                        )}
                       </div>
                     );
                   })}
@@ -989,7 +952,6 @@ function GenAi() {
                       <div key={team.key} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, minWidth: 0 }}>
                         <div className="lb-pop" style={{ textAlign: "center", animationDelay: `${0.6 + delay}s` }}>
                           <div style={{ fontFamily: DISP, fontWeight: 700, fontSize: "clamp(20px, 2.6vw, 28px)", lineHeight: 1.1 }}>{team.name}</div>
-                          <div style={{ fontSize: 14, fontWeight: 600, color: DIM, marginTop: 4 }}>{team.size} members</div>
                         </div>
                         <div
                           className="lb-rise"
@@ -1067,7 +1029,7 @@ function GenAi() {
                               fontFamily: DISP,
                               fontWeight: 700,
                               fontSize: 17,
-                              background: top3 ? POD[rank].fill : "transparent",
+                              background: top3 ? GREEN : "transparent",
                               border: top3 ? `2px solid ${INK}` : "none",
                               boxSizing: "border-box",
                             }}
@@ -1083,7 +1045,7 @@ function GenAi() {
                             style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center", minHeight: 44, background: "none", border: 0, padding: 0, font: "inherit", color: "inherit", textAlign: "left", cursor: "pointer" }}
                           >
                             <span style={{ fontFamily: DISP, fontWeight: 700, fontSize: 17 }}>{team.name}</span>
-                            <span style={{ fontSize: 13, color: MUTED }}>{isOpen ? "Hide members" : `${team.size} members`}</span>
+                            <span style={{ fontSize: 13, color: MUTED }}>{isOpen ? "Hide members" : "Show members"}</span>
                           </button>
 
                           <div style={{ display: "flex", alignItems: "center" }}>
