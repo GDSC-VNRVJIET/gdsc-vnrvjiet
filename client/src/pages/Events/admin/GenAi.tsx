@@ -12,7 +12,6 @@ interface Participant {
   badgeNames: string[];
   mentor: string | null;
   cluster: string | null;
-  enrolled?: boolean;
 }
 
 interface Team {
@@ -24,15 +23,6 @@ interface Team {
   finished: number;
   size: number;
 }
-
-interface Cluster {
-  cluster: string;
-  mentor: string;
-  members: string[];
-}
-
-const normKey = (v: string) =>
-  String(v || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
 const INK = "#1E1E1E";
 const PAGE_BG = "#F0F0F0";
@@ -354,7 +344,6 @@ function SectionHead({ title }: { title: string }) {
 
 function GenAi() {
   const [data, setData] = useState<Participant[] | null>(null);
-  const [clusters, setClusters] = useState<Cluster[]>([]);
   const [view, setView] = useState<"players" | "teams">("players");
   const [q, setQ] = useState("");
   const [tq, setTq] = useState("");
@@ -427,18 +416,6 @@ function GenAi() {
     fetchData();
   }, [triggerUpdate]);
 
-  useEffect(() => {
-    const fetchClusters = async () => {
-      try {
-        const res = await axios.get(`${process.env.REACT_APP_BACK_URL}/genAi/clusters`);
-        setClusters(Array.isArray(res.data.data) ? res.data.data : []);
-      } catch (error) {
-        setClusters([]);
-      }
-    };
-    fetchClusters();
-  }, [triggerUpdate]);
-
   const participants = useMemo(() => {
     const list = (data || []).slice();
     list.sort((a, b) => b.badges - a.badges || String(a.name).localeCompare(String(b.name)));
@@ -467,51 +444,11 @@ function GenAi() {
       if (p.badges > 0) team.started += 1;
       if (p.badges >= BADGE_TOTAL) team.finished += 1;
     });
-    const resolved = new Set<string>();
-    participants.forEach((p) => {
-      if (!p.cluster) return;
-      resolved.add(normKey(p.name));
-      if (p.email) resolved.add(String(p.email).trim().toLowerCase());
-    });
-
-    clusters.forEach((c) => {
-      (c.members || []).forEach((member) => {
-        const raw = String(member || "").trim();
-        if (!raw) return;
-        const key = raw.includes("@") ? raw.toLowerCase() : normKey(raw);
-        if (resolved.has(key)) return;
-        if (!map[c.cluster]) {
-          map[c.cluster] = {
-            key: c.cluster,
-            name: c.mentor || "Unassigned",
-            members: [],
-            score: 0,
-            started: 0,
-            finished: 0,
-            size: 0,
-          };
-        }
-        map[c.cluster].members.push({
-          name: raw,
-          email: "",
-          profileUrl: "",
-          profileStatus: "",
-          milestone: 0,
-          badges: 0,
-          badgeNames: [],
-          mentor: c.mentor,
-          cluster: c.cluster,
-          enrolled: false,
-        });
-        map[c.cluster].size += 1;
-      });
-    });
-
     const list = Object.values(map);
     list.forEach((team) => team.members.sort((a, b) => b.badges - a.badges));
     list.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
     return list;
-  }, [participants, clusters]);
+  }, [participants]);
 
   const count = participants.length;
   const reached = MS.map((m) => participants.filter((p) => p.badges >= m.need).length);
@@ -604,8 +541,6 @@ function GenAi() {
     color: DIM,
   };
 
-  const pCols = "64px minmax(220px, 2.2fr) minmax(180px, 1.6fr) 80px 130px 90px";
-  const tCols = "64px minmax(220px, 2fr) minmax(230px, 2fr) 100px 100px";
 
   const pageBtn: React.CSSProperties = {
     minHeight: 40,
@@ -632,7 +567,7 @@ function GenAi() {
 
   return (
     <div
-      className={animate ? "lb-anim" : "lb-anim lb-hold"}
+      className={animate ? "lb-anim ga-page" : "lb-anim lb-hold ga-page"}
       style={{
         minHeight: "100vh",
         background: PAGE_BG,
@@ -648,7 +583,7 @@ function GenAi() {
         {bodyReady && (
           <>
         {isAdmin && (
-          <section style={{ background: "#FFFFFF", border: `2.5px solid ${INK}`, borderRadius: 28, padding: "22px 28px" }}>
+          <section className="ga-sec" style={{ background: "#FFFFFF", border: `2.5px solid ${INK}`, borderRadius: 28, padding: "22px 28px" }}>
             <h2 style={{ margin: 0, fontFamily: DISP, fontWeight: 700, fontSize: 20 }}>Upload Skills export</h2>
             <p style={{ margin: "4px 0 14px", fontSize: 14, color: MUTED }}>
               Admin only. Upload the Learn with Communities export (.csv or .xlsx).
@@ -740,7 +675,7 @@ function GenAi() {
             <Reveal>
             <section style={{ position: "relative", background: PANEL, border: `2.5px solid ${INK}`, borderRadius: 36, overflow: "hidden" }}>
               <SectionHead title="the climb to milestone 3" />
-              <div className="lb-climb-body" style={{ position: "relative", padding: "48px 28px 0", minHeight: 520, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+              <div className="lb-climb-body ga-climb" style={{ position: "relative", padding: "48px 28px 0", minHeight: 520, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
                 <ul
                   className="lb-legend"
                   style={{
@@ -827,9 +762,9 @@ function GenAi() {
               </div>
 
               <div style={{ overflowX: "auto" }}>
-                <div style={{ minWidth: 960 }}>
-                  <div style={{ display: "grid", gridTemplateColumns: pCols, gap: 16, alignItems: "center", ...headerCell }}>
-                    <span>Rank</span><span>Participant</span><span>Badges</span><span>Count</span><span>Milestone</span><span>Profile</span>
+                <div style={{ minWidth: "var(--ga-pmin)" }}>
+                  <div className="ga-cell" style={{ display: "grid", gridTemplateColumns: "var(--ga-pc)", gap: 16, alignItems: "center", ...headerCell }}>
+                    <span>Rank</span><span>Participant</span><span className="ga-hide-sm">Badges</span><span>Count</span><span className="ga-hide-sm">Milestone</span><span>Profile</span>
                   </div>
 
                   {rows.map((p, i) => {
@@ -838,7 +773,7 @@ function GenAi() {
                     const top3 = rank <= 3;
                     return (
                       <div key={p.email || p.name + i} className="lb-row" style={{ borderTop: `1px solid ${LINE}` }}>
-                        <div style={{ display: "grid", gridTemplateColumns: pCols, gap: 16, alignItems: "center", padding: "12px 28px" }}>
+                        <div className="ga-cell" style={{ display: "grid", gridTemplateColumns: "var(--ga-pc)", gap: 16, alignItems: "center", padding: "12px 28px" }}>
                           <span
                             style={{
                               display: "inline-flex",
@@ -881,7 +816,7 @@ function GenAi() {
                             <span style={{ minWidth: 0, fontWeight: 700, fontSize: 15 }}>{p.name}</span>
                           </div>
 
-                          <div style={{ display: "flex", gap: 3 }} role="img" aria-label={`${p.badges} of ${BADGE_TOTAL} badges`}>
+                          <div className="ga-hide-sm" style={{ display: "flex", gap: 3 }} role="img" aria-label={`${p.badges} of ${BADGE_TOTAL} badges`}>
                             {Array.from({ length: BADGE_TOTAL }).map((_, k) => {
                               const on = k < p.badges;
                               return (
@@ -908,6 +843,7 @@ function GenAi() {
                           </span>
 
                           <span
+                            className="ga-hide-sm"
                             style={{
                               justifySelf: "start",
                               fontSize: 13,
@@ -1004,7 +940,7 @@ function GenAi() {
             <Reveal>
             <section style={{ position: "relative", background: PANEL, border: `2.5px solid ${INK}`, borderRadius: 36, overflow: "hidden" }}>
               <SectionHead title="Top teams" />
-              <div style={{ padding: "48px 28px 0", minHeight: 560, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+              <div className="ga-climb" style={{ padding: "48px 28px 0", minHeight: 560, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
                 <Reveal>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "clamp(10px, 2vw, 20px)", alignItems: "end", maxWidth: 760, width: "100%", margin: "0 auto" }}>
                   {podium.map((team, i) => {
@@ -1069,9 +1005,9 @@ function GenAi() {
               </div>
 
               <div style={{ overflowX: "auto" }}>
-                <div style={{ minWidth: 720 }}>
-                  <div style={{ display: "grid", gridTemplateColumns: tCols, gap: 16, alignItems: "center", ...headerCell }}>
-                    <span>Rank</span><span>Team</span><span>Members</span><span>Badges</span><span>Finished</span>
+                <div style={{ minWidth: "var(--ga-tmin)" }}>
+                  <div className="ga-cell" style={{ display: "grid", gridTemplateColumns: "var(--ga-tc)", gap: 16, alignItems: "center", ...headerCell }}>
+                    <span>Rank</span><span>Team</span><span className="ga-hide-sm">Members</span><span>Badges</span><span>Finished</span>
                   </div>
 
                   {filteredTeams.map((team) => {
@@ -1080,7 +1016,7 @@ function GenAi() {
                     const top3 = rank <= 3;
                     return (
                       <div key={team.key} className="lb-row" style={{ borderTop: `1px solid ${LINE}` }}>
-                        <div style={{ display: "grid", gridTemplateColumns: tCols, gap: 16, alignItems: "center", padding: "12px 28px" }}>
+                        <div className="ga-cell" style={{ display: "grid", gridTemplateColumns: "var(--ga-tc)", gap: 16, alignItems: "center", padding: "12px 28px" }}>
                           <span
                             style={{
                               display: "inline-flex",
@@ -1111,21 +1047,20 @@ function GenAi() {
                             <span style={{ fontSize: 13, color: MUTED }}>{isOpen ? "Hide members" : "Show members"}</span>
                           </button>
 
-                          <div style={{ display: "flex", alignItems: "center" }}>
+                          <div className="ga-hide-sm" style={{ display: "flex", alignItems: "center" }}>
                             {team.members.slice(0, 7).map((m, k) => {
                               const info = msFor(m.badges);
                               return (
                                 <span
                                   key={m.email || m.name + k}
-                                  title={m.enrolled === false ? `${m.name} · not enrolled` : m.name}
+                                  title={m.name}
                                   style={{
                                     width: 34,
                                     height: 34,
                                     flex: "none",
                                     borderRadius: "50%",
-                                    background: m.enrolled === false ? "#FFFFFF" : m.badges ? (info ? info.fill : GREEN) : "#F2F3F5",
-                                    border: m.enrolled === false ? `2px dashed ${MUTED}` : `2px solid ${INK}`,
-                                    color: m.enrolled === false ? MUTED : INK,
+                                    background: m.badges ? (info ? info.fill : GREEN) : "#F2F3F5",
+                                    border: `2px solid ${INK}`,
                                     boxSizing: "border-box",
                                     display: "flex",
                                     alignItems: "center",
@@ -1161,7 +1096,7 @@ function GenAi() {
                         </div>
 
                         {isOpen && (
-                          <div style={{ padding: "0 28px 18px 108px", display: "flex", flexWrap: "wrap", gap: 8 }}>
+                          <div className="ga-members" style={{ padding: "0 28px 18px 108px", display: "flex", flexWrap: "wrap", gap: 8 }}>
                             {team.members.map((m, k) => {
                               const info = msFor(m.badges);
                               return (
@@ -1172,12 +1107,11 @@ function GenAi() {
                                     fontWeight: 600,
                                     borderRadius: 999,
                                     padding: "6px 12px",
-                                    border: m.enrolled === false ? `1.5px dashed ${MUTED}` : `1.5px solid ${INK}`,
-                                    background: m.enrolled === false ? "#FFFFFF" : info ? info.soft : m.badges ? GREEN : "#FFFFFF",
-                                    color: m.enrolled === false ? MUTED : INK,
+                                    border: `1.5px solid ${INK}`,
+                                    background: info ? info.soft : m.badges ? GREEN : "#FFFFFF",
                                   }}
                                 >
-                                  {m.name} · {m.enrolled === false ? "not enrolled" : `${m.badges} badge${m.badges === 1 ? "" : "s"}`}
+                                  {m.name} · {m.badges} badge{m.badges === 1 ? "" : "s"}
                                 </span>
                               );
                             })}

@@ -86,3 +86,34 @@ body::-webkit-scrollbar-thumb {
 @media (min-width: 1000px) {
   .lb-climb-body { padding-right: 250px !important }
 }
+
+.ga-page {
+  --ga-pc: 64px minmax(220px, 2.2fr) minmax(180px, 1.6fr) 80px 130px 90px;
+  --ga-tc: 64px minmax(220px, 2fr) minmax(230px, 2fr) 100px 100px;
+  --ga-pmin: 960px;
+  --ga-tmin: 720px;
+}
+
+@media (max-width: 1024px) {
+  .ga-page { --ga-pmin: 860px; --ga-tmin: 680px }
+}
+
+@media (max-width: 760px) {
+  .ga-page {
+    --ga-pc: 38px minmax(0, 1fr) 54px 68px;
+    --ga-tc: 38px minmax(0, 1fr) 58px 66px;
+    --ga-pmin: 0px;
+    --ga-tmin: 0px;
+    padding: 24px 14px 56px !important;
+  }
+  .ga-hide-sm { display: none !important }
+  .ga-sec { padding: 18px 16px !important; border-radius: 20px !important }
+  .ga-cell { padding-left: 14px !important; padding-right: 14px !important }
+  .ga-climb { padding-left: 14px !important; padding-right: 14px !important; min-height: 420px !important }
+  .ga-members { padding: 0 14px 16px 52px !important }
+}
+
+@media (max-width: 420px) {
+  .ga-page { --ga-pc: 32px minmax(0, 1fr) 46px 58px; --ga-tc: 32px minmax(0, 1fr) 50px 56px }
+  .ga-members { padding-left: 14px !important }
+}
