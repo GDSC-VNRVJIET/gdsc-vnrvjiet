@@ -8,7 +8,7 @@ require("dotenv").config();
 
 genAiApp.use(exp.json());
 
-const YEAR = 2026;
+const YEAR = Number(process.env.GENAI_YEAR) || 2026;
 
 const normName = (value) =>
   String(value || "")
@@ -59,11 +59,14 @@ genAiApp.get(
       });
 
       const data = docs.map((doc) => {
+        const display = String(doc.displayName || doc.name || "").trim();
         const team =
           memberToTeam[String(doc.email || "").trim().toLowerCase()] ||
+          memberToTeam[normName(display)] ||
           memberToTeam[normName(doc.name)];
         return {
           ...doc,
+          name: display,
           mentor: team ? team.mentor : null,
           cluster: team ? team.cluster : null,
         };

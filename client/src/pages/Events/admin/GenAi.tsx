@@ -12,6 +12,7 @@ interface Participant {
   badgeNames: string[];
   mentor: string | null;
   cluster: string | null;
+  enrolled?: boolean;
 }
 
 interface Team {
@@ -23,6 +24,15 @@ interface Team {
   finished: number;
   size: number;
 }
+
+interface Cluster {
+  cluster: string;
+  mentor: string;
+  members: string[];
+}
+
+const normKey = (v: string) =>
+  String(v || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
 const INK = "#1E1E1E";
 const PAGE_BG = "#F0F0F0";
@@ -344,6 +354,7 @@ function SectionHead({ title }: { title: string }) {
 
 function GenAi() {
   const [data, setData] = useState<Participant[] | null>(null);
+  const [clusters, setClusters] = useState<Cluster[]>([]);
   const [view, setView] = useState<"players" | "teams">("players");
   const [q, setQ] = useState("");
   const [tq, setTq] = useState("");
@@ -416,6 +427,18 @@ function GenAi() {
     fetchData();
   }, [triggerUpdate]);
 
+  useEffect(() => {
+    const fetchClusters = async () => {
+      try {
+        const res = await axios.get(`${process.env.REACT_APP_BACK_URL}/genAi/clusters`);
+        setClusters(Array.isArray(res.data.data) ? res.data.data : []);
+      } catch (error) {
+        setClusters([]);
+      }
+    };
+    fetchClusters();
+  }, [triggerUpdate]);
+
   const participants = useMemo(() => {
     const list = (data || []).slice();
     list.sort((a, b) => b.badges - a.badges || String(a.name).localeCompare(String(b.name)));
@@ -444,11 +467,51 @@ function GenAi() {
       if (p.badges > 0) team.started += 1;
       if (p.badges >= BADGE_TOTAL) team.finished += 1;
     });
+    const resolved = new Set<string>();
+    participants.forEach((p) => {
+      if (!p.cluster) return;
+      resolved.add(normKey(p.name));
+      if (p.email) resolved.add(String(p.email).trim().toLowerCase());
+    });
+
+    clusters.forEach((c) => {
+      (c.members || []).forEach((member) => {
+        const raw = String(member || "").trim();
+        if (!raw) return;
+        const key = raw.includes("@") ? raw.toLowerCase() : normKey(raw);
+        if (resolved.has(key)) return;
+        if (!map[c.cluster]) {
+          map[c.cluster] = {
+            key: c.cluster,
+            name: c.mentor || "Unassigned",
+            members: [],
+            score: 0,
+            started: 0,
+            finished: 0,
+            size: 0,
+          };
+        }
+        map[c.cluster].members.push({
+          name: raw,
+          email: "",
+          profileUrl: "",
+          profileStatus: "",
+          milestone: 0,
+          badges: 0,
+          badgeNames: [],
+          mentor: c.mentor,
+          cluster: c.cluster,
+          enrolled: false,
+        });
+        map[c.cluster].size += 1;
+      });
+    });
+
     const list = Object.values(map);
     list.forEach((team) => team.members.sort((a, b) => b.badges - a.badges));
     list.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
     return list;
-  }, [participants]);
+  }, [participants, clusters]);
 
   const count = participants.length;
   const reached = MS.map((m) => participants.filter((p) => p.badges >= m.need).length);
@@ -1054,14 +1117,15 @@ function GenAi() {
                               return (
                                 <span
                                   key={m.email || m.name + k}
-                                  title={m.name}
+                                  title={m.enrolled === false ? `${m.name} · not enrolled` : m.name}
                                   style={{
                                     width: 34,
                                     height: 34,
                                     flex: "none",
                                     borderRadius: "50%",
-                                    background: m.badges ? (info ? info.fill : GREEN) : "#F2F3F5",
-                                    border: `2px solid ${INK}`,
+                                    background: m.enrolled === false ? "#FFFFFF" : m.badges ? (info ? info.fill : GREEN) : "#F2F3F5",
+                                    border: m.enrolled === false ? `2px dashed ${MUTED}` : `2px solid ${INK}`,
+                                    color: m.enrolled === false ? MUTED : INK,
                                     boxSizing: "border-box",
                                     display: "flex",
                                     alignItems: "center",
@@ -1108,11 +1172,12 @@ function GenAi() {
                                     fontWeight: 600,
                                     borderRadius: 999,
                                     padding: "6px 12px",
-                                    border: `1.5px solid ${INK}`,
-                                    background: info ? info.soft : m.badges ? GREEN : "#FFFFFF",
+                                    border: m.enrolled === false ? `1.5px dashed ${MUTED}` : `1.5px solid ${INK}`,
+                                    background: m.enrolled === false ? "#FFFFFF" : info ? info.soft : m.badges ? GREEN : "#FFFFFF",
+                                    color: m.enrolled === false ? MUTED : INK,
                                   }}
                                 >
-                                  {m.name} · {m.badges} badge{m.badges === 1 ? "" : "s"}
+                                  {m.name} · {m.enrolled === false ? "not enrolled" : `${m.badges} badge${m.badges === 1 ? "" : "s"}`}
                                 </span>
                               );
                             })}
