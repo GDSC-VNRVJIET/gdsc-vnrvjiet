@@ -2,16 +2,10 @@ import React from "react";
 import { BsInstagram, BsLinkedin } from "react-icons/bs";
 import GdgLockup from "./GdgLockup";
 
-/*
- * Hero banner, redrawn as vector art (previously raster banner images, which
- * looked soft when scaled). Shapes and colours are traced from the original
- * 1440x500 banner; coordinates below are in that banner's pixel space.
- */
+
 
 const INK = "#1E1E1E";
 
-// Cloud outline, traced from the banner (the part hidden under the plus is a
-// fitted arc). Closed off-canvas on the left so only the scalloped edge shows.
 const CLOUD =
   "M41 -12 C42 -8.3 45.4 3 47 10 C48.6 17 49.6 23.3 50.5 30 C51.4 36.7 52.3 43.3 52.5 50 " +
   "C52.7 56.7 52.1 63.3 51.5 70 C50.9 76.7 50.2 83.3 49 90 C47.8 96.7 46.2 103.3 44 110 " +
@@ -25,20 +19,16 @@ const CLOUD =
   "C212.7 462.6 219.5 464.6 226 467 C232.5 469.4 238.8 472.4 245 475.5 C251.2 478.6 257.2 481.8 263 485.5 " +
   "C268.8 489.2 274.5 493.6 280 498 C285.5 502.4 293.3 509.7 296 512 L-20 520 L-20 -20 Z";
 
-/** Plus/cross outline centred on the origin (arm half-length l, half-width a). */
 const cross = (l: number, a: number) =>
   `M${-a} ${-l} H${a} V${-a} H${l} V${a} H${a} V${l} H${-a} V${a} H${-l} V${-a} H${-a} Z`;
 
-/** Notched "chip" outline centred on the origin. */
 const chip = (o: number, c: number, n: number) =>
   `M${-c} ${-o} H${-n} V${-c} H${n} V${-o} H${c} V${-c} H${o} V${-n} H${c} V${n} H${o} V${c} ` +
   `H${c} V${o} H${n} V${c} H${-n} V${o} H${-c} V${c} H${-o} V${n} H${-c} V${-n} H${-o} V${-c} H${-c} Z`;
 
-/** Half-ring (arch) sitting on a baseline. */
 const arch = (cx: number, base: number, R: number, r: number) =>
   `M${cx - R} ${base} A${R} ${R} 0 0 1 ${cx + R} ${base} H${cx + r} A${r} ${r} 0 0 0 ${cx - r} ${base} Z`;
 
-/** Cloud + 3D plus, anchored to the hero's left edge. */
 const LeftArt = () => (
   <svg viewBox="0 0 300 500" className="h-full w-auto" style={{ aspectRatio: "300 / 500" }} aria-hidden="true">
     <path d={CLOUD} fill="#C3E6F6" stroke={INK} strokeWidth={8} strokeLinejoin="round" />
@@ -49,11 +39,9 @@ const LeftArt = () => (
   </svg>
 );
 
-/** Globe chip + dots and asterisk + arch, anchored to the hero's right edge. */
 const RightArt = () => (
   <svg viewBox="1240 0 200 500" className="h-full w-auto" style={{ aspectRatio: "200 / 500" }} aria-hidden="true">
     <g stroke={INK} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round">
-      {/* Globe chip */}
       <g transform="translate(1317.5 97.5)">
         <path d={chip(44.3, 31.8, 6.2)} fill="#34A853" />
         <g fill="none">
@@ -63,17 +51,14 @@ const RightArt = () => (
         </g>
         <rect x={-5.5} y={-5.5} width={11} height={11} fill="#FFFFFF" />
       </g>
-      {/* Dots */}
       <circle cx={1288.75} cy={169} r={11.25} fill="#34A853" />
       <circle cx={1317.5} cy={169} r={11.25} fill="#5CDB6D" />
       <circle cx={1346.25} cy={169} r={11.25} fill="#CCF6C5" />
-      {/* Asterisk */}
       <g transform="translate(1317 335)">
         {[0, 45, 90, 135].map((deg) => (
           <path key={deg} d="M-23 0 H23" transform={`rotate(${deg})`} />
         ))}
       </g>
-      {/* 3D arch */}
       <path d={arch(1315.5, 430, 58, 34)} fill="#FFE7A5" strokeWidth={2.5} />
       <path d={arch(1326.5, 430, 58, 34)} fill="#F6AA00" strokeWidth={2.5} />
     </g>
@@ -96,11 +81,9 @@ function Hero() {
         overflow-hidden
         bg-white
       "
-      // Container units let the side art keep clear of the centred lockup.
       style={{ containerType: "size" }}
     >
-      {/* Side art: scales with the hero's height; slides partly off-screen when
-          the hero is narrow so it never runs into the lockup. */}
+     
       <div
         className="absolute inset-y-0 hidden sm:block"
         style={{ left: "min(0px, calc(20cqw - 43cqh))" }}
@@ -114,7 +97,6 @@ function Hero() {
         <RightArt />
       </div>
 
-      {/* Lockup — the intro animation lands on this element. */}
       <div className="absolute left-1/2 top-[34%] -translate-x-1/2 -translate-y-1/2 w-[69%] sm:w-[60%] md:w-[51.6%] max-w-[820px]">
         <GdgLockup data-hero-lockup className="block w-full h-auto" />
       </div>

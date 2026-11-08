@@ -43,3 +43,35 @@ body::-webkit-scrollbar-thumb {
   font-weight: 400;
   font-size: 1.75rem;
 }
+@keyframes lbRise { 0% { transform: scaleY(0) } 70% { transform: scaleY(1.06) } 85% { transform: scaleY(.98) } 100% { transform: scaleY(1) } }
+@keyframes lbPop { 0% { opacity: 0; transform: translateY(24px) scale(.94) } 100% { opacity: 1; transform: none } }
+@keyframes lbBob { 0%, 100% { transform: translateY(0) rotate(0) } 50% { transform: translateY(-14px) rotate(6deg) } }
+@keyframes lbFill { 0% { transform: scaleX(0) } 100% { transform: scaleX(1) } }
+@keyframes lbCard { 0% { opacity: 0; transform: translateY(-70px) scale(.97) } 100% { opacity: 1; transform: none } }
+@keyframes lbType { 0% { clip-path: inset(-20% 100% -20% 0) } 100% { clip-path: inset(-20% 0 -20% 0) } }
+@keyframes lbStar { 0% { transform: rotate(-180deg) scale(0) } 100% { transform: none } }
+@keyframes lbPillIn { 0% { transform: scale(0) } 100% { transform: none } }
+@keyframes lbDotIn { 0% { opacity: 0; transform: translateX(60px) } 100% { opacity: 1; transform: none } }
+@keyframes lbBraceL { 0% { opacity: 0; transform: translateX(30px) } 100% { opacity: 1; transform: none } }
+@keyframes lbBraceR { 0% { opacity: 0; transform: translateX(-30px) } 100% { opacity: 1; transform: none } }
+@keyframes lbSideTab { 0% { transform: scaleY(0) } 100% { transform: none } }
+
+.lb-anim .lb-rise { transform-origin: bottom center; animation: lbRise .9s cubic-bezier(.3, 1.4, .5, 1) both }
+.lb-anim .lb-pop { animation: lbPop .6s cubic-bezier(.2, .9, .3, 1.2) both }
+.lb-anim .lb-bob { animation: lbBob 5s ease-in-out infinite }
+.lb-anim .lb-pip-on { transform-origin: left center; animation: lbFill .4s ease-out both }
+.lb-anim .lb-card { animation: lbCard 1s cubic-bezier(.3, 1.2, .5, 1) both }
+.lb-anim .lb-type { animation: lbType 1.3s steps(22, end) 1.1s both }
+.lb-anim .lb-star { animation: lbStar .7s cubic-bezier(.3, 1.4, .5, 1) .9s both }
+.lb-anim .lb-pill { animation: lbPillIn .4s cubic-bezier(.3, 1.6, .5, 1) both }
+.lb-anim .lb-dotin { animation: lbDotIn .6s cubic-bezier(.3, 1.4, .5, 1) both }
+.lb-anim .lb-brace-l { animation: lbBraceL .6s cubic-bezier(.3, 1.4, .5, 1) .8s both }
+.lb-anim .lb-brace-r { animation: lbBraceR .6s cubic-bezier(.3, 1.4, .5, 1) .8s both }
+.lb-anim .lb-sidetab { animation: lbSideTab .5s cubic-bezier(.3, 1.4, .5, 1) 1s both }
+
+.lb-hold, .lb-hold * { animation-play-state: paused !important }
+.lb-row:hover { background: #F7F8FA }
+.lb-input::placeholder { color: #6B7078 }
+.lb-focus:focus-visible { outline: 3px solid #5383EC; outline-offset: 2px }
+
+@media (prefers-reduced-motion: reduce) { .lb-anim * { animation: none !important } }

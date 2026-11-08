@@ -7,6 +7,8 @@ import IntroLoader from "./pages/IntroLoader";
 import { BrowserRouter as Router } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
+(window as unknown as { __introDone?: boolean }).__introDone = false;
+
 const Index = () => {
   // The intro plays once per page load. The app renders underneath it from the
   // start, so the hero is laid out and the intro can land its logo onto it.
@@ -17,7 +19,15 @@ const Index = () => {
       <Router>
         <App />
       </Router>
-      {showIntro && <IntroLoader onDone={() => setShowIntro(false)} />}
+      {showIntro && (
+        <IntroLoader
+          onDone={() => {
+            (window as unknown as { __introDone?: boolean }).__introDone = true;
+            window.dispatchEvent(new Event("intro-done"));
+            setShowIntro(false);
+          }}
+        />
+      )}
     </>
   );
 };
