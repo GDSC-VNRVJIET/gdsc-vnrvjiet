@@ -117,3 +117,24 @@ body::-webkit-scrollbar-thumb {
   .ga-page { --ga-pc: 32px minmax(0, 1fr) 46px 58px; --ga-tc: 32px minmax(0, 1fr) 50px 56px }
   .ga-members { padding-left: 14px !important }
 }
+
+@media (max-width: 760px) {
+  .ga-hd-title { white-space: normal !important; font-size: clamp(19px, 6.4vw, 34px) !important }
+  .ga-hd-type { flex-wrap: wrap !important; justify-content: center !important }
+  .ga-hd-brace { display: none !important }
+  .ga-hd-tab { padding: 0 12px !important; gap: 6px !important }
+  .ga-hd-pill { width: 22px !important; height: 11px !important }
+}
+
+@media (max-width: 420px) {
+  .ga-hd-card { padding-top: 48px !important }
+  .ga-hd-tab { padding: 0 10px !important; gap: 5px !important }
+  .ga-hd-pill { width: 17px !important; height: 9px !important }
+}
+
+@media (max-width: 760px) {
+  .ga-hd-dots { display: none !important }
+  .ga-pagernav { padding: 14px !important; justify-content: center !important; gap: 10px !important }
+  .ga-pager { justify-content: center !important; row-gap: 6px !important }
+  .ga-pager > button { min-height: 36px !important; min-width: 36px !important; padding: 0 9px !important; font-size: 13px !important }
+}

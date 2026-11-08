@@ -115,7 +115,7 @@ function HeaderCard() {
   const pills = ["#ff7daf", "#57caff", "#5cdb6d", "#ffd427"];
   return (
     <header style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", gap: "clamp(16px, 2.4vw, 32px)" }}>
-      <div className="lb-card" style={{ position: "relative", flex: "1 1 620px", minWidth: 0, paddingTop: 56 }}>
+      <div className="lb-card ga-hd-card" style={{ position: "relative", flex: "1 1 620px", minWidth: 0, paddingTop: 56 }}>
         <svg
           className="lb-star"
           width="54"
@@ -132,6 +132,7 @@ function HeaderCard() {
         </svg>
 
         <div
+          className="ga-hd-tab"
           style={{
             position: "absolute",
             top: 0,
@@ -154,7 +155,7 @@ function HeaderCard() {
           {pills.map((c, i) => (
             <span
               key={c}
-              className="lb-pill"
+              className="lb-pill ga-hd-pill"
               style={{
                 width: 34,
                 height: 14,
@@ -193,7 +194,7 @@ function HeaderCard() {
           }}
         >
           <svg
-            className="lb-brace-l"
+            className="lb-brace-l ga-hd-brace"
             viewBox="0 0 36 170"
             fill="none"
             stroke={INK}
@@ -210,6 +211,7 @@ function HeaderCard() {
             </span>
             <h1
               aria-label="Learn with Communities"
+              className="ga-hd-title"
               style={{
                 margin: 0,
                 fontFamily: DISP,
@@ -220,7 +222,7 @@ function HeaderCard() {
                 whiteSpace: "nowrap",
               }}
             >
-              <span className="lb-type" aria-hidden="true" style={{ display: "inline-flex", alignItems: "center", gap: "0.25em" }}>
+              <span className="lb-type ga-hd-type" aria-hidden="true" style={{ display: "inline-flex", alignItems: "center", gap: "0.25em" }}>
                 <span>Learn with</span>
                 <span style={{ whiteSpace: "nowrap" }}>
                   C
@@ -232,7 +234,7 @@ function HeaderCard() {
           </div>
 
           <svg
-            className="lb-brace-r"
+            className="lb-brace-r ga-hd-brace"
             viewBox="0 0 36 170"
             fill="none"
             stroke={INK}
@@ -262,7 +264,7 @@ function HeaderCard() {
         </div>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 6 }} aria-hidden="true">
+      <div className="ga-hd-dots" style={{ display: "flex", flexDirection: "column", gap: 6 }} aria-hidden="true">
         {[0.5, 0.62, 0.74].map((d) => (
           <span
             key={d}
@@ -883,12 +885,13 @@ function GenAi() {
               {filtered.length > 0 && (
                 <nav
                   aria-label="Participant pages"
+                  className="ga-pagernav"
                   style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 12, padding: "16px 28px", borderTop: `1px solid ${LINE}` }}
                 >
                   <span style={{ fontSize: 13, color: MUTED }}>
                     {startIndex + 1}–{Math.min(startIndex + PAGE_SIZE, filtered.length)} of {filtered.length}
                   </span>
-                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                  <div className="ga-pager" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 6 }}>
                     <button
                       type="button"
                       onClick={() => setPage(safePage - 1)}
