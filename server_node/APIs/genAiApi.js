@@ -27,6 +27,19 @@ const toBadgeNames = (value) =>
     .map((item) => item.trim())
     .filter(Boolean);
 
+const badgeTime = (doc) => {
+  const value = doc && doc.lastBadgeAt ? new Date(doc.lastBadgeAt).getTime() : NaN;
+  return Number.isNaN(value) ? Infinity : value;
+};
+
+const byRank = (a, b) => {
+  if (b.badges !== a.badges) return b.badges - a.badges;
+  const first = badgeTime(a);
+  const second = badgeTime(b);
+  if (first !== second) return first - second;
+  return String(a.name).localeCompare(String(b.name));
+};
+
 const normalizeRow = (row) => ({
   name: String(row["User Name"] || "").trim(),
   email: String(row["User Email"] || "").trim().toLowerCase(),
@@ -72,7 +85,7 @@ genAiApp.get(
         };
       });
 
-      data.sort((a, b) => b.badges - a.badges || String(a.name).localeCompare(String(b.name)));
+      data.sort(byRank);
 
       response.json({ status: "Data fetched successfully", year: YEAR, data });
     } catch (error) {
@@ -91,22 +104,41 @@ genAiApp.put(
     try {
       const participants = await getDBObj("genAiCollectionObject");
 
-      const operations = rows
-        .map(normalizeRow)
-        .filter((doc) => doc.email)
-        .map((doc) => ({
-          updateOne: {
-            filter: { email: doc.email, year: YEAR },
-            update: { $set: doc },
-            upsert: true,
-          },
-        }));
+      const incoming = rows.map(normalizeRow).filter((doc) => doc.email);
 
-      if (operations.length === 0) {
+      if (incoming.length === 0) {
         return response
           .status(400)
           .json({ status: "No valid rows", error: "No rows with a User Email were found" });
       }
+
+      const existing = await participants
+        .find({ year: YEAR, email: { $in: incoming.map((doc) => doc.email) } })
+        .project({ email: 1, badges: 1, lastBadgeAt: 1 })
+        .toArray();
+
+      const previous = {};
+      existing.forEach((doc) => {
+        previous[doc.email] = doc;
+      });
+
+      const now = new Date();
+
+      const operations = incoming.map((doc) => {
+        const before = previous[doc.email];
+        const beforeBadges = before ? Number(before.badges) || 0 : 0;
+        const beforeTime = before && before.lastBadgeAt ? new Date(before.lastBadgeAt) : null;
+        const lastBadgeAt =
+          doc.badges === 0 ? null : doc.badges > beforeBadges ? now : beforeTime;
+
+        return {
+          updateOne: {
+            filter: { email: doc.email, year: YEAR },
+            update: { $set: { ...doc, lastBadgeAt } },
+            upsert: true,
+          },
+        };
+      });
 
       const result = await participants.bulkWrite(operations);
       response.json({

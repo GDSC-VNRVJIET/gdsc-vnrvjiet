@@ -10,6 +10,7 @@ interface Participant {
   milestone: number;
   badges: number;
   badgeNames: string[];
+  lastBadgeAt: string | null;
   mentor: string | null;
   cluster: string | null;
 }
@@ -57,6 +58,19 @@ const initialsOf = (name: string) =>
     .join("")
     .slice(0, 2)
     .toUpperCase();
+
+const badgeTime = (p: Participant) => {
+  const value = p.lastBadgeAt ? new Date(p.lastBadgeAt).getTime() : NaN;
+  return Number.isNaN(value) ? Infinity : value;
+};
+
+const byRank = (a: Participant, b: Participant) => {
+  if (b.badges !== a.badges) return b.badges - a.badges;
+  const first = badgeTime(a);
+  const second = badgeTime(b);
+  if (first !== second) return first - second;
+  return String(a.name).localeCompare(String(b.name));
+};
 
 const msFor = (badges: number) => {
   let hit = null as (typeof MS)[number] | null;
@@ -406,6 +420,7 @@ function GenAi() {
             milestone: Number(row.milestone) || 0,
             badges: Number(row.badges) || 0,
             badgeNames: Array.isArray(row.badgeNames) ? row.badgeNames : [],
+            lastBadgeAt: row.lastBadgeAt || null,
             mentor: row.mentor || null,
             cluster: row.cluster || null,
           }))
@@ -420,7 +435,7 @@ function GenAi() {
 
   const participants = useMemo(() => {
     const list = (data || []).slice();
-    list.sort((a, b) => b.badges - a.badges || String(a.name).localeCompare(String(b.name)));
+    list.sort(byRank);
     return list;
   }, [data]);
 
@@ -447,7 +462,7 @@ function GenAi() {
       if (p.badges >= BADGE_TOTAL) team.finished += 1;
     });
     const list = Object.values(map);
-    list.forEach((team) => team.members.sort((a, b) => b.badges - a.badges));
+    list.forEach((team) => team.members.sort(byRank));
     list.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
     return list;
   }, [participants]);
