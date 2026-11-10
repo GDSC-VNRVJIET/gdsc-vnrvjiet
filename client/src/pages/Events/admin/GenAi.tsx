@@ -691,7 +691,7 @@ function GenAi() {
           <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
             <Reveal>
             <section style={{ position: "relative", background: PANEL, border: `2.5px solid ${INK}`, borderRadius: 36, overflow: "hidden" }}>
-              <SectionHead title="the climb to milestone 3" />
+              <SectionHead title="The Climb to Milestone 3" />
               <div className="lb-climb-body ga-climb" style={{ position: "relative", padding: "48px 28px 0", minHeight: 520, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
                 <ul
                   className="lb-legend"
@@ -711,7 +711,7 @@ function GenAi() {
                   {MS.map((m) => (
                     <li key={m.n} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, fontWeight: 600, color: DIM, whiteSpace: "nowrap" }}>
                       <span style={{ width: 13, height: 13, borderRadius: 4, background: m.fill, border: `1.5px solid ${INK}`, boxSizing: "border-box", flex: "none" }} />
-                      Milestone {m.n} · earn {m.need} badges
+                      {m.need} badges
                     </li>
                   ))}
                 </ul>
@@ -1006,7 +1006,7 @@ function GenAi() {
             <section style={{ background: "#FFFFFF", border: `2.5px solid ${INK}`, borderRadius: 28, overflow: "hidden" }}>
               <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 16, padding: "24px 28px", borderBottom: `2px solid ${INK}` }}>
                 <div>
-                  <h2 style={{ margin: 0, fontFamily: DISP, fontWeight: 700, fontSize: 30 }}>All teams</h2>
+                  <h2 style={{ margin: 0, fontFamily: DISP, fontWeight: 700, fontSize: 30 }}>All Teams</h2>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6, flex: "0 1 320px" }}>
                   <label htmlFor="lb-tsearch" style={{ fontSize: 13, fontWeight: 700 }}>Search teams</label>
@@ -1034,7 +1034,11 @@ function GenAi() {
                     const top3 = rank <= 3;
                     return (
                       <div key={team.key} className="lb-row" style={{ borderTop: `1px solid ${LINE}` }}>
-                        <div className="ga-cell" style={{ display: "grid", gridTemplateColumns: "var(--ga-tc)", gap: 16, alignItems: "center", padding: "12px 28px" }}>
+                        <div
+                          className="ga-cell"
+                          onClick={() => setTopen((prev) => ({ ...prev, [team.key]: !prev[team.key] }))}
+                          style={{ display: "grid", gridTemplateColumns: "var(--ga-tc)", gap: 16, alignItems: "center", padding: "12px 28px", cursor: "pointer" }}
+                        >
                           <span
                             style={{
                               display: "inline-flex",
@@ -1056,7 +1060,6 @@ function GenAi() {
 
                           <button
                             type="button"
-                            onClick={() => setTopen((prev) => ({ ...prev, [team.key]: !prev[team.key] }))}
                             aria-expanded={isOpen}
                             className="lb-focus"
                             style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center", minHeight: 44, background: "none", border: 0, padding: 0, font: "inherit", color: "inherit", textAlign: "left", cursor: "pointer" }}
@@ -1117,19 +1120,31 @@ function GenAi() {
                           <div className="ga-members" style={{ padding: "0 28px 18px 108px", display: "flex", flexWrap: "wrap", gap: 8 }}>
                             {team.members.map((m, k) => {
                               const info = msFor(m.badges);
-                              return (
-                                <span
+                              const pillStyle: React.CSSProperties = {
+                                fontSize: 13,
+                                fontWeight: 600,
+                                borderRadius: 999,
+                                padding: "6px 12px",
+                                border: `1.5px solid ${INK}`,
+                                background: info ? info.soft : m.badges ? GREEN : "#FFFFFF",
+                                color: INK,
+                                textDecoration: "none",
+                              };
+                              const label = `${m.name} · ${m.badges} badge${m.badges === 1 ? "" : "s"}`;
+                              return m.profileUrl ? (
+                                <a
                                   key={m.email || m.name + k}
-                                  style={{
-                                    fontSize: 13,
-                                    fontWeight: 600,
-                                    borderRadius: 999,
-                                    padding: "6px 12px",
-                                    border: `1.5px solid ${INK}`,
-                                    background: info ? info.soft : m.badges ? GREEN : "#FFFFFF",
-                                  }}
+                                  href={m.profileUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="lb-focus"
+                                  style={pillStyle}
                                 >
-                                  {m.name} · {m.badges} badge{m.badges === 1 ? "" : "s"}
+                                  {label}
+                                </a>
+                              ) : (
+                                <span key={m.email || m.name + k} style={pillStyle}>
+                                  {label}
                                 </span>
                               );
                             })}
