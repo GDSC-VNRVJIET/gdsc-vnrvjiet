@@ -27,8 +27,16 @@ const toBadgeNames = (value) =>
     .map((item) => item.trim())
     .filter(Boolean);
 
+const effectiveBadgeDate = (doc) => {
+  if (!doc) return null;
+  if (doc.lastBadgeAt) return new Date(doc.lastBadgeAt);
+  if (doc._id && typeof doc._id.getTimestamp === "function") return doc._id.getTimestamp();
+  return null;
+};
+
 const badgeTime = (doc) => {
-  const value = doc && doc.lastBadgeAt ? new Date(doc.lastBadgeAt).getTime() : NaN;
+  const date = effectiveBadgeDate(doc);
+  const value = date ? date.getTime() : NaN;
   return Number.isNaN(value) ? Infinity : value;
 };
 
@@ -114,7 +122,7 @@ genAiApp.put(
 
       const existing = await participants
         .find({ year: YEAR, email: { $in: incoming.map((doc) => doc.email) } })
-        .project({ email: 1, badges: 1, lastBadgeAt: 1 })
+        .project({ _id: 1, email: 1, badges: 1, lastBadgeAt: 1 })
         .toArray();
 
       const previous = {};
@@ -127,7 +135,7 @@ genAiApp.put(
       const operations = incoming.map((doc) => {
         const before = previous[doc.email];
         const beforeBadges = before ? Number(before.badges) || 0 : 0;
-        const beforeTime = before && before.lastBadgeAt ? new Date(before.lastBadgeAt) : null;
+        const beforeTime = effectiveBadgeDate(before);
         const lastBadgeAt =
           doc.badges === 0 ? null : doc.badges > beforeBadges ? now : beforeTime;
 
