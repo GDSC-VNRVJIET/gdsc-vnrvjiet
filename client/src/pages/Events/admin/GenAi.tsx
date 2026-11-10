@@ -785,7 +785,7 @@ function GenAi() {
                   </div>
 
                   {rows.map((p, i) => {
-                    const rank = startIndex + i + 1;
+                    const rank = participants.indexOf(p) + 1;
                     const info = msFor(p.badges);
                     const top3 = rank <= 3;
                     return (
