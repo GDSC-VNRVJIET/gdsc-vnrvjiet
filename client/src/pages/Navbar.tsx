@@ -167,7 +167,7 @@ function Navbar() {
 
               <PopoverPanel className="absolute left-1/2 z-10 mt-2 bg-white rounded-md shadow-md -translate-x-1/2 px-4 py-2">
                 <div className="my-2">
-                  <NavLink onClick={handleNavClick} to="/gen-ai-leaderboard">
+                  <NavLink onClick={handleNavClick} to="/google-cloud-leaderboard">
                     LeaderBoard
                   </NavLink>
                 </div>
