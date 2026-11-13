@@ -212,7 +212,7 @@ function Root() {
         <Route path="/viewregistrations/:eventname" element={<ProtectedRoute element={<CheckRegistrations />} path="/viewregistrations" />} />
         <Route path="/leaderboard" element={<ProtectedRoute element={<Leaderboard />} path="/leaderboard" />} />
         <Route path="/analysis" element={<ProtectedRoute element={<Analysis />} path="/analysis" />} />
-        <Route path="/gen-ai-leaderboard" element={<GenAiLeaderboard />} />
+        <Route path="/google-cloud-leaderboard" element={<GenAiLeaderboard />} />
         <Route path="/enter" element={<ProtectedRoute element={<Enter />} path="/enter" />} />
         <Route path="/score" element={<ProtectedRoute element={<Score />} path="/score" />} />
         <Route path="/checkuser" element={<ProtectedRoute element={<CheckUsers />} path="/checkuser" />} />
